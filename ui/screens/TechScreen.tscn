@@ -1,0 +1,14 @@
+TechScreen (Inherits BaseScreen.tscn)
+└── MarginContainer (Provides padding around the screen)
+    └── MainVBox (VBoxContainer, stacks header and content)
+        ├── HeaderPanel (PanelContainer for top info)
+        │   └── HBoxContainer
+        │       └── ResearchLabel (Label, e.g., "Research: 120 RP")
+        └── Content (The part that will adapt)
+            ├── LandscapeLayout (HBoxContainer, for wide screens)
+            └── PortraitLayout (VBoxContainer, for tall screens)
+            
+# These two panels will be created but not parented to a layout yet
+# Our script will place them in the correct layout at runtime.
+TechListPanel (PanelContainer, will hold the list of techs)
+TechDetailsPanel (PanelContainer, will show info for one tech)
