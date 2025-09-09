@@ -1,33 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://bc7slbpy2hut7"]
+[gd_scene load_steps=4 format=3 uid="uid://bc7slbpy2hut7"]
 
 [ext_resource type="Script" uid="uid://s2hf4w14bjkc" path="res://scenes/starmap/starmap.gd" id="1_37d0i"]
-[ext_resource type="Script" uid="uid://5wuxjcg2ocj" path="res://scenes/starmap/main_menu.gd" id="1_r5g87"]
+[ext_resource type="PackedScene" uid="uid://bwgvfoy47annx" path="res://scenes/starmap_objects/star_system_view.tscn" id="2_j6u13"]
+[ext_resource type="PackedScene" uid="uid://du7c5bjjqivt5" path="res://scenes/starmap_objects/ship_view.tscn" id="3_cj5cr"]
 
 [node name="Starmap" type="Node2D"]
 script = ExtResource("1_37d0i")
-zoom_speed = null
-min_zoom = null
-max_zoom = null
+star_system_view_scene = ExtResource("2_j6u13")
+ship_view_scene = ExtResource("3_cj5cr")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="MainMenu" type="Control" parent="Camera2D"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("1_r5g87")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Camera2D/MainMenu"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Label" type="Label" parent="Camera2D/MainMenu/VBoxContainer"]
-layout_mode = 2
-text = "Project Antares"
-horizontal_alignment = 1
-
-[node name="NewGameButton" type="Button" parent="Camera2D/MainMenu/VBoxContainer"]
-layout_mode = 2
-text = "New Game"

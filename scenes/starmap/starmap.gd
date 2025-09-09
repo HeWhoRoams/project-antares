@@ -20,7 +20,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		_select_ship(clicked_object if clicked_object is ShipView else null)
 	
 	# Right-click to issue move order
-	if event.is_action_pressed("ui_right_click"):
+	if event.is_action_pressed("ui_right"):
 		if selected_ship_view:
 			var clicked_object = _get_object_at_position(get_global_mouse_position())
 			# We can only issue move orders to StarSystemViews

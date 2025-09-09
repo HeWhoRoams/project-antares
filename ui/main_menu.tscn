@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bbkyup0oqp8ca"]
 
-[ext_resource type="Script" uid="uid://5wuxjcg2ocj" path="res://scenes/starmap/main_menu.gd" id="1_t7e0r"]
+[ext_resource type="Script" uid="uid://5wuxjcg2ocj" path="res://ui/main_menu.gd" id="1_t7e0r"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -30,3 +30,5 @@ text = "Project Antares"
 layout_mode = 2
 size_flags_horizontal = 4
 text = "New Game"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]

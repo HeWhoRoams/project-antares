@@ -50,7 +50,7 @@ func set_ship_destination(ship_id: StringName, target_system_id: StringName):
 	ship_data.destination_system_id = target_system_id
 	ship_data.turns_to_arrival = turns_required
 
-func _on_turn_ended(new_turn_number: int) -> void:
+func _on_turn_ended(_new_turn_number: int) -> void:
 	research_points += research_per_turn
 	_process_ship_movement()
 
