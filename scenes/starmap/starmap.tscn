@@ -1,8 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://bc7slbpy2hut7"]
+[gd_scene load_steps=3 format=3 uid="uid://bc7slbpy2hut7"]
 
+[ext_resource type="Script" uid="uid://s2hf4w14bjkc" path="res://scenes/starmap/starmap.gd" id="1_37d0i"]
 [ext_resource type="Script" uid="uid://5wuxjcg2ocj" path="res://scenes/starmap/main_menu.gd" id="1_r5g87"]
 
 [node name="Starmap" type="Node2D"]
+script = ExtResource("1_37d0i")
+zoom_speed = null
+min_zoom = null
+max_zoom = null
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
