@@ -11,12 +11,18 @@ config_version=5
 [application]
 
 config/name="project antarees"
+run/main_scene="uid://cfdy3y58jbf5k"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
 
 [autoload]
 
 DataManager="*res://scripts/managers/DataManager.gd"
+Galaxymanager="*res://scripts/managers/galaxymanager.gd"
+TurnManager="*res://scripts/managers/turn_manager.gd"
+PlayerManager="*res://scripts/managers/player_manager.gd"
+SceneManager="*res://scripts/managers/SceneManager.gd"
+GameManager="*res://scripts/managers/GameManager.gd"
 
 [input]
 

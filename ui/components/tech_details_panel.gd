@@ -11,11 +11,9 @@ extends PanelContainer
 var _current_technology: Technology
 
 func _ready() -> void:
-	# Start with the panel hidden until a technology is selected.
 	hide()
 	research_button.pressed.connect(_on_research_button_pressed)
 
-## This is the public function the TechScreen will call.
 func display_technology(tech_resource: Technology) -> void:
 	if not tech_resource:
 		hide()
@@ -27,14 +25,23 @@ func display_technology(tech_resource: Technology) -> void:
 	cost_label.text = "Cost: %s RP" % _current_technology.research_cost
 	description_label.text = _current_technology.description
 	
-	# (Future) Add logic here to enable/disable the button
-	# based on if the tech is already researched or prerequisites are met.
-	research_button.disabled = false
+	# Update button state based on new PlayerManager logic.
+	if PlayerManager.unlocked_techs.has(_current_technology.id):
+		research_button.text = "Researched"
+		research_button.disabled = true
+	elif PlayerManager.can_research(_current_technology):
+		research_button.text = "Research"
+		research_button.disabled = false
+	else:
+		# Not researched, but can't afford it.
+		research_button.text = "Research"
+		research_button.disabled = true
 	
 	show()
 
 func _on_research_button_pressed() -> void:
 	if _current_technology:
-		print("Researching technology: %s" % _current_technology.display_name)
-		# (Future) Add logic to spend research points and unlock the tech.
-		research_button.disabled = true
+		var success = PlayerManager.unlock_technology(_current_technology)
+		# If research was successful, refresh this panel to show the new state.
+		if success:
+			display_technology(_current_technology)

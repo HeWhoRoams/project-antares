@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://c5hmwkubkauqc"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_right = 1149.0
+offset_bottom = 656.0
+
+[node name="Label" type="Label" parent="CenterContainer"]
+layout_mode = 2
+text = "You Win!"

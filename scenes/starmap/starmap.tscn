@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://bc7slbpy2hut7"]
+
+[ext_resource type="Script" uid="uid://5wuxjcg2ocj" path="res://scenes/starmap/main_menu.gd" id="1_r5g87"]
+
+[node name="Starmap" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="MainMenu" type="Control" parent="Camera2D"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_r5g87")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Camera2D/MainMenu"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Camera2D/MainMenu/VBoxContainer"]
+layout_mode = 2
+text = "Project Antares"
+horizontal_alignment = 1
+
+[node name="NewGameButton" type="Button" parent="Camera2D/MainMenu/VBoxContainer"]
+layout_mode = 2
+text = "New Game"

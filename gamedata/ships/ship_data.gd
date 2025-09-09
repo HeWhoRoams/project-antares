@@ -12,5 +12,8 @@ extends Resource
 ## The ID of the star system where the ship is currently located.
 @export var current_system_id: StringName
 
-## (Future) The ID of the system the ship is traveling to.
-# @export var destination_system_id: StringName
+## If the ship is traveling, this is the ID of its destination.
+@export var destination_system_id: StringName = &""
+
+## The number of turns remaining until the ship arrives at its destination.
+@export var turns_to_arrival: int = 0
