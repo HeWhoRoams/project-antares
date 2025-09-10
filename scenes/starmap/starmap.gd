@@ -11,7 +11,7 @@ func _ready() -> void:
 	# Connect to the PlayerManager's signal to know when a ship arrives.
 	PlayerManager.ship_arrived.connect(_on_ship_arrived)
 	_draw_galaxy()
-	_draw_player_ships()
+	_draw_all_ships() # Changed from _draw_player_ships
 
 func _unhandled_input(event: InputEvent) -> void:
 	# Left-click to select
@@ -62,20 +62,34 @@ func _draw_galaxy() -> void:
 		printerr("Starmap: StarSystemView scene is not set!")
 		return
 	for system_data in GalaxyManager.star_systems.values():
-		var new_system_view = star_system_view_scene.instantiate()
+		var new_system_view: StarSystemView = star_system_view_scene.instantiate()
 		new_system_view.position = system_data.position
-		# This part is still future work, but we need to pass the data for right-clicks.
 		new_system_view.star_system_data = system_data 
 		add_child(new_system_view)
 
-func _draw_player_ships() -> void:
+## --- NEW AND UPDATED FUNCTIONS --- ##
+
+# This function now draws ships from all factions.
+func _draw_all_ships() -> void:
 	if not ship_view_scene:
 		printerr("Starmap: ShipView scene is not set!")
 		return
+		
+	# Draw Player Ships
 	for ship_data in PlayerManager.owned_ships.values():
-		var current_system = GalaxyManager.star_systems.get(ship_data.current_system_id)
-		if current_system:
-			var new_ship_view = ship_view_scene.instantiate()
-			new_ship_view.set_ship_data(ship_data)
-			new_ship_view.position = current_system.position
-			add_child(new_ship_view)
+		_spawn_ship_view(ship_data, Color.CYAN) # Player ships are CYAN
+
+	# Draw AI Ships
+	# In the future, we will loop through all AI factions. For now, just the one.
+	for ship_data in AIManager.owned_ships.values():
+		_spawn_ship_view(ship_data, Color.RED) # AI ships are RED
+
+# This is a new helper function to avoid duplicating code.
+func _spawn_ship_view(ship_data: ShipData, color: Color) -> void:
+	var current_system = GalaxyManager.star_systems.get(ship_data.current_system_id)
+	if current_system:
+		var new_ship_view: ShipView = ship_view_scene.instantiate()
+		new_ship_view.modulate = color
+		new_ship_view.set_ship_data(ship_data)
+		new_ship_view.position = current_system.position
+		add_child(new_ship_view)
