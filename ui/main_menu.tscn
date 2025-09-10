@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bbkyup0oqp8ca"]
+[gd_scene load_steps=3 format=3 uid="uid://bbkyup0oqp8ca"]
 
 [ext_resource type="Script" uid="uid://5wuxjcg2ocj" path="res://ui/main_menu.gd" id="1_t7e0r"]
+[ext_resource type="Texture2D" uid="uid://dqoe132k0t31f" path="res://assets/images/backgrounds/main_menu_bckgrnd.png" id="2_0dkrt"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -30,5 +31,15 @@ text = "Project Antares"
 layout_mode = 2
 size_flags_horizontal = 4
 text = "New Game"
+
+[node name="BackgroundTexture" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_0dkrt")
+stretch_mode = 6
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
