@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bwgvfoy47annx"]
+[gd_scene load_steps=5 format=3 uid="uid://bwgvfoy47annx"]
 
+[ext_resource type="Texture2D" uid="uid://cegs3se1s40od" path="res://assets/images/backgrounds/starscape.png" id="2_i0krt"]
 [ext_resource type="Texture2D" uid="uid://etn6f7bbddl6" path="res://icon.svg" id="2_qwwc0"]
 
 [sub_resource type="GDScript" id="GDScript_momj2"]
@@ -31,3 +32,7 @@ offset_bottom = 23.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_a6nro")
+
+[node name="BackgroundSprite" type="Sprite2D" parent="."]
+z_index = -10
+texture = ExtResource("2_i0krt")

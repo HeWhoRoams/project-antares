@@ -8,10 +8,15 @@ extends Node2D
 var selected_ship_view: ShipView = null
 
 func _ready() -> void:
+	# --- DIAGNOSTIC LINE ---
+	# This will print the entire node structure of the running game.
+	get_tree().get_root().print_tree()
+	# -----------------------
+
 	# Connect to the PlayerManager's signal to know when a ship arrives.
 	PlayerManager.ship_arrived.connect(_on_ship_arrived)
 	_draw_galaxy()
-	_draw_all_ships() # Changed from _draw_player_ships
+	_draw_all_ships()
 
 func _unhandled_input(event: InputEvent) -> void:
 	# Left-click to select
@@ -47,12 +52,10 @@ func _select_ship(ship_to_select: ShipView):
 	if selected_ship_view:
 		selected_ship_view.select()
 
-## Called when the PlayerManager emits the ship_arrived signal.
 func _on_ship_arrived(ship_data: ShipData) -> void:
 	var ship_view: ShipView = find_child(ship_data.id, true, false)
 	var new_system_location = GalaxyManager.star_systems.get(ship_data.current_system_id).position
 	
-	# Animate the ship moving to its new location.
 	if ship_view:
 		var tween = create_tween()
 		tween.tween_property(ship_view, "position", new_system_location, 0.5).set_trans(Tween.TRANS_SINE)
@@ -67,24 +70,17 @@ func _draw_galaxy() -> void:
 		new_system_view.star_system_data = system_data 
 		add_child(new_system_view)
 
-## --- NEW AND UPDATED FUNCTIONS --- ##
-
-# This function now draws ships from all factions.
 func _draw_all_ships() -> void:
 	if not ship_view_scene:
 		printerr("Starmap: ShipView scene is not set!")
 		return
 		
-	# Draw Player Ships
 	for ship_data in PlayerManager.owned_ships.values():
-		_spawn_ship_view(ship_data, Color.CYAN) # Player ships are CYAN
+		_spawn_ship_view(ship_data, Color.CYAN)
 
-	# Draw AI Ships
-	# In the future, we will loop through all AI factions. For now, just the one.
 	for ship_data in AIManager.owned_ships.values():
-		_spawn_ship_view(ship_data, Color.RED) # AI ships are RED
+		_spawn_ship_view(ship_data, Color.RED)
 
-# This is a new helper function to avoid duplicating code.
 func _spawn_ship_view(ship_data: ShipData, color: Color) -> void:
 	var current_system = GalaxyManager.star_systems.get(ship_data.current_system_id)
 	if current_system:
