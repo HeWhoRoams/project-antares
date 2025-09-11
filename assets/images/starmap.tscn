@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfikyvmoxrbjb"]
+
+[ext_resource type="Script" uid="uid://x3rsdmfk26cv" path="res://scenes/starmap/starmap_camera.gd" id="1_1ieim"]
+[ext_resource type="Texture2D" uid="uid://cegs3se1s40od" path="res://assets/images/backgrounds/starscape.png" id="2_wmyda"]
+
+[node name="Starmap" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("1_1ieim")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -10
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_wmyda")

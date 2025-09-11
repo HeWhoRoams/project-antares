@@ -1,5 +1,4 @@
 # /scenes/starmap/starmap.gd
-# Main controller for the starmap view.
 extends Node2D
 
 @export var star_system_view_scene: PackedScene
@@ -8,27 +7,18 @@ extends Node2D
 var selected_ship_view: ShipView = null
 
 func _ready() -> void:
-	# --- DIAGNOSTIC LINE ---
-	# This will print the entire node structure of the running game.
-	get_tree().get_root().print_tree()
-	# -----------------------
-
-	# Connect to the PlayerManager's signal to know when a ship arrives.
 	PlayerManager.ship_arrived.connect(_on_ship_arrived)
 	_draw_galaxy()
 	_draw_all_ships()
 
 func _unhandled_input(event: InputEvent) -> void:
-	# Left-click to select
 	if event.is_action_pressed("ui_accept"):
 		var clicked_object = _get_object_at_position(get_global_mouse_position())
 		_select_ship(clicked_object if clicked_object is ShipView else null)
 	
-	# Right-click to issue move order
 	if event.is_action_pressed("ui_right"):
 		if selected_ship_view:
 			var clicked_object = _get_object_at_position(get_global_mouse_position())
-			# We can only issue move orders to StarSystemViews
 			if clicked_object is StarSystemView:
 				PlayerManager.set_ship_destination(
 					selected_ship_view.ship_data.id, 
