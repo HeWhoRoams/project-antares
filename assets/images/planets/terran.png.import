@@ -2,12 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ck7fi7bhchc60"
-valid=false
+uid="uid://moeso51rqmdk"
+path="res://.godot/imported/terran.png-89e0b3f0a767dfcaba71bd00bc464fbc.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://assets/images/planets/terran.png"
+dest_files=["res://.godot/imported/terran.png-89e0b3f0a767dfcaba71bd00bc464fbc.ctex"]
 
 [params]
 

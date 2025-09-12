@@ -24,6 +24,7 @@ PlayerManager="*res://scripts/managers/player_manager.gd"
 SceneManager="*res://scripts/managers/SceneManager.gd"
 GameManager="*res://scripts/managers/GameManager.gd"
 AIManager="*res://scripts/managers/AIManager.gd"
+DebugManager="*res://scripts/managers/DebugManager.gd"
 
 [input]
 

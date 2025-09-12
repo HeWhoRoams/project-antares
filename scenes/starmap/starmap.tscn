@@ -1,15 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://d4a1jpuf15do"]
+[gd_scene load_steps=7 format=3 uid="uid://d4a1jpuf15do"]
 
 [ext_resource type="Script" uid="uid://byefjmal0djpd" path="res://scenes/starmap/starmap.gd" id="1_r5g87"]
 [ext_resource type="Texture2D" uid="uid://cegs3se1s40od" path="res://assets/images/backgrounds/starscape.png" id="2_37d0i"]
 [ext_resource type="PackedScene" uid="uid://bwgvfoy47annx" path="res://scenes/starmap_objects/star_system_view.tscn" id="2_cj5cr"]
 [ext_resource type="PackedScene" uid="uid://du7c5bjjqivt5" path="res://scenes/starmap_objects/ship_view.tscn" id="3_i4ucb"]
+[ext_resource type="PackedScene" uid="uid://7kjyb01iu0j1" path="res://ui/popups/system_info_popup.tscn" id="4_dbbx8"]
 [ext_resource type="Script" uid="uid://x3rsdmfk26cv" path="res://scenes/starmap/starmap_camera.gd" id="4_k68vw"]
 
 [node name="Starmap" type="Node2D"]
 script = ExtResource("1_r5g87")
 star_system_view_scene = ExtResource("2_cj5cr")
 ship_view_scene = ExtResource("3_i4ucb")
+system_info_popup_scene = ExtResource("4_dbbx8")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("4_k68vw")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://d36qjclwh8v11"]
+[gd_scene load_steps=2 format=3 uid="uid://bass3h0pi3gnd"]
 
 [ext_resource type="Script" uid="uid://wwwr3pkslnql" path="res://ui/popups/system_view_popup.gd" id="1_rdb5g"]
 
@@ -30,6 +30,8 @@ layout_mode = 2
 
 [node name="StarSprite" type="TextureRect" parent="VBoxContainer/Body"]
 layout_mode = 2
+
+[node name="OrbitsContainer" type="Node2D" parent="VBoxContainer/Body"]
 
 [node name="Footer" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2

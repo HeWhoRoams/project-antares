@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://7kjyb01iu0j1"]
+
+[ext_resource type="Texture2D" uid="uid://moeso51rqmdk" path="res://assets/images/planets/terran.png" id="1_iixx1"]
+[ext_resource type="Texture2D" uid="uid://b6lu61nte8x52" path="res://assets/images/planets/desert.png" id="2_er3ec"]
+[ext_resource type="Texture2D" uid="uid://dq4dbv0nkq341" path="res://assets/images/planets/ice.png" id="3_gwhew"]
+
+[node name="SystemInfoPopup" type="CanvasLayer"]
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Terran" type="TextureRect" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("1_iixx1")
+stretch_mode = 5
+
+[node name="Desert" type="TextureRect" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("2_er3ec")
+stretch_mode = 5
+
+[node name="Ice" type="TextureRect" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("3_gwhew")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
