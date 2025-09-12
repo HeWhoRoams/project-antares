@@ -7,7 +7,7 @@ const ORBIT_BASE_RADIUS = 150.0
 const ORBIT_RADIUS_STEP = 60.0
 const ORBIT_COLOR = Color(1, 1, 1, 0.3)
 const ORBIT_LINE_WIDTH = 2.0
-const ICON_BUFFER = 100 
+const ICON_BUFFER = 100
 
 @onready var main_panel: PanelContainer = %MainPanel
 @onready var header_panel: PanelContainer = %Header
@@ -47,7 +47,8 @@ func _ready() -> void:
 		orbits_container.draw.connect(_on_orbits_container_draw)
 
 func populate_system_data(system_data: StarSystem, star_texture: Texture2D) -> void:
-	if system_name_label: system_name_label.text = system_data.display_name
+	# UPDATED: Prepended "Star System" to the display name
+	if system_name_label: system_name_label.text = "Star System %s" % system_data.display_name
 	if star_sprite: star_sprite.texture = star_texture
 
 	for child in orbits_container.get_children():

@@ -1,14 +1,17 @@
 # /scenes/system_view_objects/planet_view.gd
 extends Control
 
-@onready var sprite: Sprite2D = $Sprite2D
-@onready var label: Label = $Label
+# UPDATED: Corrected the node paths to find the nodes inside the VBoxContainer
+@onready var sprite: Sprite2D = $VBoxContainer/Sprite2D
+@onready var label: Label = $VBoxContainer/Label
 
 # --- Textures ---
 const PLANET_TEXTURES = {
+	PlanetData.PlanetType.OCEAN: preload("res://assets/images/planets/ocean.png"),
 	PlanetData.PlanetType.TERRAN: preload("res://assets/images/planets/terran.png"),
 	PlanetData.PlanetType.DESERT: preload("res://assets/images/planets/desert.png"),
-	PlanetData.PlanetType.ICE: preload("res://assets/images/planets/ice.png")
+	PlanetData.PlanetType.ICE: preload("res://assets/images/planets/ice.png"),
+	PlanetData.PlanetType.BARREN: preload("res://assets/images/planets/barren.png")
 }
 
 const BODY_TEXTURES = {
@@ -18,9 +21,11 @@ const BODY_TEXTURES = {
 
 # --- Target pixel sizes for each body type ---
 const PLANET_SIZES = {
+	PlanetData.PlanetType.OCEAN: Vector2(80, 80),
 	PlanetData.PlanetType.TERRAN: Vector2(80, 80),
 	PlanetData.PlanetType.DESERT: Vector2(80, 80),
-	PlanetData.PlanetType.ICE: Vector2(80, 80)
+	PlanetData.PlanetType.ICE: Vector2(80, 80),
+	PlanetData.PlanetType.BARREN: Vector2(80, 80)
 }
 
 const GENERAL_BODY_SIZES = {
@@ -31,7 +36,6 @@ const GENERAL_BODY_SIZES = {
 # Helper for the new naming convention
 const ROMAN_NUMERALS = ["I", "II", "III", "IV", "V", "VI", "VII"]
 
-# UPDATED: The function now requires the system_name to build the label
 func set_body_data(body_data: CelestialBodyData, system_name: String) -> void:
 	var body_type_string: String
 	var target_size := Vector2(100, 100)
@@ -48,7 +52,6 @@ func set_body_data(body_data: CelestialBodyData, system_name: String) -> void:
 		sprite.texture = BODY_TEXTURES.get(body_data.body_type)
 		target_size = GENERAL_BODY_SIZES.get(body_data.body_type, Vector2(100, 100))
 		
-	# NEW: Build the label with the System Name + Roman Numeral
 	var roman_numeral = ""
 	if body_data.orbital_slot < ROMAN_NUMERALS.size():
 		roman_numeral = ROMAN_NUMERALS[body_data.orbital_slot]

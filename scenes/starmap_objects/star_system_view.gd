@@ -29,7 +29,6 @@ func _open_system_view() -> void:
 
 	var popup = system_popup_scene.instantiate()
 	popup.add_to_group("system_popup")
-	# FIX: Add the popup to the main scene tree to ensure it renders on its own layer.
 	get_tree().current_scene.add_child(popup)
 	popup.populate_system_data(star_system_data, sprite.texture)
 
