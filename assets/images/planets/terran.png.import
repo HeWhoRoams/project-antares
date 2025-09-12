@@ -2,16 +2,12 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cotm30l7h51dc"
-path="res://.godot/imported/desert.png-5afae5010e62289c4209aa6b34ebd4f5.ctex"
-metadata={
-"vram_texture": false
-}
+uid="uid://ck7fi7bhchc60"
+valid=false
 
 [deps]
 
-source_file="res://assets/images/desert.png"
-dest_files=["res://.godot/imported/desert.png-5afae5010e62289c4209aa6b34ebd4f5.ctex"]
+source_file="res://assets/images/planets/terran.png"
 
 [params]
 

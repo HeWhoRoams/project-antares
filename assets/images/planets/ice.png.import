@@ -2,12 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ck7fi7bhchc60"
-valid=false
+uid="uid://dfc18ud7uve3w"
+path="res://.godot/imported/ice.png-713f155c71abff8ca96dba756ff57b98.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
-source_file="res://assets/images/terran.png"
+source_file="res://assets/images/planets/ice.png"
+dest_files=["res://.godot/imported/ice.png-713f155c71abff8ca96dba756ff57b98.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfc18ud7uve3w"
-path="res://.godot/imported/ice.png-fcd66e4a6a452c1470d6375463000b7d.ctex"
+uid="uid://cotm30l7h51dc"
+path="res://.godot/imported/desert.png-77e92509fb54219a0674548b83438508.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/ice.png"
-dest_files=["res://.godot/imported/ice.png-fcd66e4a6a452c1470d6375463000b7d.ctex"]
+source_file="res://assets/images/planets/desert.png"
+dest_files=["res://.godot/imported/desert.png-77e92509fb54219a0674548b83438508.ctex"]
 
 [params]
 
