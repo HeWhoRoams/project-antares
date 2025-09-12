@@ -7,12 +7,13 @@ extends Node
 
 var star_systems: Dictionary = {}
 var _system_name_generator: SystemNameGenerator
-var _celestial_body_generator: CelestialBodyGenerator # Add this line
+var _celestial_body_generator: CelestialBodyGenerator
 
 func _ready() -> void:
-	var name_data = load("res://gamedata/systems/system_name_data.tres")
+	# Corrected the filename in this line
+	var name_data = load("res://gamedata/systems/system_names.tres")
 	_system_name_generator = SystemNameGenerator.new(name_data)
-	_celestial_body_generator = CelestialBodyGenerator.new() # Add this line
+	_celestial_body_generator = CelestialBodyGenerator.new()
 	
 	generate_procedural_galaxy()
 

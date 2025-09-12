@@ -5,7 +5,7 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a6nro"]
 
-[node name="StarSystemView" type="Node2D"]
+[node name="StarSystemView" type="Node2D" groups=["hud"]]
 script = ExtResource("1_qwwc0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

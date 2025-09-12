@@ -13,25 +13,20 @@ func _ready() -> void:
 		label.text = star_system_data.display_name
 
 func _on_area_2d_mouse_entered() -> void:
-	# Create a new tooltip instance when the mouse enters.
+	# Get the UI layer only when the mouse enters.
+	# This ensures the node is definitely in the scene tree.
+	var ui_layer = get_tree().get_first_node_in_group("hud")
+	if not ui_layer:
+		printerr("StarSystemView: Could not find UI layer node (did you add the HUD to the 'hud' group?).")
+		return
+
 	if not _tooltip_instance:
 		_tooltip_instance = _tooltip_scene.instantiate()
-		# Add it to a high-level UI layer to ensure it draws on top.
-		get_tree().get_first_node_in_group("ui_layer").add_child(_tooltip_instance)
+		ui_layer.add_child(_tooltip_instance)
 		_tooltip_instance.update_data(star_system_data)
-		# Position the tooltip next to the mouse cursor.
 		_tooltip_instance.global_position = get_global_mouse_position() + Vector2(20, 20)
 
 func _on_area_2d_mouse_exited() -> void:
-	# Destroy the tooltip when the mouse leaves.
 	if _tooltip_instance:
 		_tooltip_instance.queue_free()
 		_tooltip_instance = null
-
-# We need a UI layer group to add the tooltip to.
-# Let's add the HUD to this group.
-func _notification(what):
-	if what == NOTIFICATION_PARENTED:
-		var hud = get_tree().get_first_node_in_group("hud")
-		if hud:
-			hud.add_to_group("ui_layer")
