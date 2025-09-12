@@ -6,29 +6,35 @@ extends Node
 # --- General Diplomacy Logic ---
 
 func offer_alliance(proposing_faction_id: int, target_faction_id: int) -> bool:
-	var proposing_ai: FactionAI = player_manager.get_faction_ai(proposing_faction_id)
-	var target_ai: FactionAI = player_manager.get_faction_ai(target_faction_id)
+	# This function needs access to the PlayerManager to fetch FactionAI instances.
+	# For now, this code is a placeholder as PlayerManager doesn't have `get_faction_ai` yet.
+	# var proposing_ai: FactionAI = PlayerManager.get_faction_ai(proposing_faction_id)
+	# var target_ai: FactionAI = PlayerManager.get_faction_ai(target_faction_id)
 
-	if not proposing_ai or not target_ai: return false
+	# if not proposing_ai or not target_ai: return false
+	
+	# # Target AI considers the offer based on its attributes
+	# var accepted = target_ai.consider_alliance_offer(proposing_ai)
 
-	# Target AI considers the offer based on its attributes
-	var accepted = target_ai.consider_alliance_offer(proposing_ai)
+	# if accepted:
+	# 	# Create actual alliance in game state
+	# 	print("%s accepted alliance with %s!" % [target_ai.race_preset.race_name, proposing_ai.race_preset.race_name])
+	# else:
+	# 	print("%s rejected alliance with %s." % [target_ai.race_preset.race_name, proposing_ai.race_preset.race_name])
 
-	if accepted:
-		# Create actual alliance in game state
-		print("%s accepted alliance with %s!" % [target_ai.race_preset.race_name, proposing_ai.race_preset.race_name])
-	else:
-		print("%s rejected alliance with %s." % [target_ai.race_preset.race_name, proposing_ai.race_preset.race_name])
-
-	# Generate dialog for response
-	var response_dialog = target_ai.generate_dialog("ALLIANCE_RESPONSE", proposing_ai)
-	print("Response: %s" % response_dialog)
-
-	return accepted
+	# # Generate dialog for response
+	# var response_dialog = target_ai.generate_dialog("ALLIANCE_RESPONSE", proposing_ai)
+	# print("Response: %s" % response_dialog)
+	
+	# return accepted
+	return false # Placeholder return
 
 func check_forgiveness(betrayer_faction: FactionAI, betrayed_faction: FactionAI) -> bool:
 	var vindictiveness_score = betrayed_faction.get_attribute_value("VINDICTIVENESS")
-	var turns_since_betrayal = get_turns_since_event(betrayer_faction, betrayed_faction, "betrayal") # Assumes game history log
+	
+	# Placeholder for event history. This function will need a way to get this data.
+	# var turns_since_betrayal = get_turns_since_event(betrayer_faction, betrayed_faction, "betrayal")
+	var turns_since_betrayal = 10 # Dummy value
 
 	# Lower vindictiveness, quicker forgiveness
 	# Higher vindictiveness, longer it takes
