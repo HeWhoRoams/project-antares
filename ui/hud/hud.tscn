@@ -1,3 +1,28 @@
-[gd_scene format=3 uid="uid://dj2er4mtmij4o"]
+[gd_scene load_steps=2 format=3 uid="uid://dj2er4mtmij4o"]
 
-[node name="Hud" type="Node2D"]
+[ext_resource type="Script" uid="uid://dpppiwcei6fg3" path="res://ui/hud/hud.gd" id="1_xmswo"]
+
+[node name="Hud" type="Node2D" groups=["hud"]]
+script = ExtResource("1_xmswo")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="TurnLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Turn 1"
+
+[node name="ResearchLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Research: 50"
+
+[node name="EndTurnButton" type="Button" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "End Turn"

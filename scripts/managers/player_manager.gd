@@ -4,6 +4,7 @@ extends Node
 signal ship_arrived(ship_data: ShipData)
 ## Emitted when the player researches the final technology.
 signal player_won_game
+signal research_points_changed(new_points: int)
 
 var research_points: int = 50
 var research_per_turn: int = 10

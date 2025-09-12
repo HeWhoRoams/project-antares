@@ -1,7 +1,7 @@
 # /gamedata/systems/star_system.gd
-# Defines the data for a single star system.
 @tool
-class_name StarSystem extends Resource
+class_name StarSystem
+extends Resource
 
 ## The unique identifier for this system (e.g., "sol").
 @export var id: StringName
@@ -12,5 +12,5 @@ class_name StarSystem extends Resource
 ## The system's location in 2D galaxy coordinates.
 @export var position: Vector2
 
-## (Future) An array of planets within this system.
-# @export var planets: Array[Planet]
+## An array of celestial bodies within this system.
+@export var celestial_bodies: Array[CelestialBodyData] = []

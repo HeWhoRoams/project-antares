@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bwgvfoy47annx"]
+[gd_scene load_steps=4 format=3 uid="uid://bwgvfoy47annx"]
 
 [ext_resource type="Script" uid="uid://c0ps5hcqy40bb" path="res://scenes/starmap_objects/star_system_view.gd" id="1_qwwc0"]
-[ext_resource type="Texture2D" uid="uid://cegs3se1s40od" path="res://assets/images/backgrounds/starscape.png" id="2_i0krt"]
-[ext_resource type="Texture2D" uid="uid://etn6f7bbddl6" path="res://icon.svg" id="2_qwwc0"]
+[ext_resource type="Texture2D" uid="uid://d22ru34kmjuxv" path="res://assets/images/RedGiant_Star_Icon.png" id="2_qwwc0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a6nro"]
 
@@ -11,17 +10,27 @@ script = ExtResource("1_qwwc0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.970888, 0.970481, 2.31028e-06, 1)
+scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_qwwc0")
 
 [node name="Label" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.5
+offset_top = 23.0
+offset_right = 0.5
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 0
+horizontal_alignment = 1
+vertical_alignment = 2
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_a6nro")
 
-[node name="BackgroundSprite" type="Sprite2D" parent="."]
-z_index = -10
-texture = ExtResource("2_i0krt")
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

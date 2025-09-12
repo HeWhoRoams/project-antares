@@ -1,8 +1,10 @@
 # /scenes/starmap/starmap.gd
+# Main controller for the starmap view.
 extends Node2D
 
 @export var star_system_view_scene: PackedScene
 @export var ship_view_scene: PackedScene
+@export var ship_offset: Vector2 = Vector2(40, -40) # Tweak this offset in the Inspector
 
 var selected_ship_view: ShipView = null
 
@@ -44,7 +46,8 @@ func _select_ship(ship_to_select: ShipView):
 
 func _on_ship_arrived(ship_data: ShipData) -> void:
 	var ship_view: ShipView = find_child(ship_data.id, true, false)
-	var new_system_location = GalaxyManager.star_systems.get(ship_data.current_system_id).position
+	# When a ship arrives, it should also use the offset.
+	var new_system_location = GalaxyManager.star_systems.get(ship_data.current_system_id).position + ship_offset
 	
 	if ship_view:
 		var tween = create_tween()
@@ -77,5 +80,6 @@ func _spawn_ship_view(ship_data: ShipData, color: Color) -> void:
 		var new_ship_view: ShipView = ship_view_scene.instantiate()
 		new_ship_view.modulate = color
 		new_ship_view.set_ship_data(ship_data)
-		new_ship_view.position = current_system.position
+		# Add the offset to the system's position
+		new_ship_view.position = current_system.position + ship_offset
 		add_child(new_ship_view)
