@@ -18,6 +18,10 @@ func _ready() -> void:
 	_setup_colony_list()
 	_populate_colony_list()
 	_update_bottom_panels(null) # Start with empty panels
+	
+	# Set the global variables panel once, as it's not affected by selection.
+	global_variables_label.text = "Credits: 250 BC\nFood: 15\nResearch: 59 RP"
+
 
 func _setup_colony_list() -> void:
 	colony_list_tree.set_columns(5)
@@ -48,18 +52,16 @@ func _on_colony_list_item_selected() -> void:
 	var selected_data = selected_item.get_metadata(0)
 	_update_bottom_panels(selected_data)
 
-func _update_bottom_panels(data: Dictionary) -> void:
+func _update_bottom_panels(data) -> void:
 	if data:
 		planet_details_label.text = "Details for:\n%s" % data.name
 		population_output_label.text = "Farmers: %s\nWorkers: %s\nScientists: %s" % [data.farmers, data.workers, data.scientists]
 		mini_starmap_label.text = "Showing location for:\n%s" % data.name
 	else:
-		planet_details_label.text = "Select a Planet"
+		# When nothing is selected, the panels are blank.
+		planet_details_label.text = ""
 		population_output_label.text = ""
 		mini_starmap_label.text = ""
-	
-	# This panel will eventually get live data from the managers
-	global_variables_label.text = "Credits: 250 BC\nFood: 15\nResearch: 59 RP"
 
 func _on_return_button_pressed():
 	SceneManager.change_scene("res://scenes/starmap/starmap.tscn")
