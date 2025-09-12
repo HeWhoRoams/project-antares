@@ -71,53 +71,83 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="CreditsPanel" type="PanelContainer" parent="MainContainer/RightSidebar/MarginContainer/VBoxContainer"]
+[node name="CreditsButton" type="Button" parent="MainContainer/RightSidebar/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+flat = true
 
-[node name="CreditsLabel" type="Label" parent="MainContainer/RightSidebar/MarginContainer/VBoxContainer/CreditsPanel"]
+[node name="CreditsLabel" type="Label" parent="MainContainer/RightSidebar/MarginContainer/VBoxContainer/CreditsButton"]
 unique_name_in_owner = true
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="FleetPanel" type="PanelContainer" parent="MainContainer/RightSidebar/MarginContainer/VBoxContainer"]
+[node name="FleetButton" type="Button" parent="MainContainer/RightSidebar/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+flat = true
 
-[node name="FleetLabel" type="Label" parent="MainContainer/RightSidebar/MarginContainer/VBoxContainer/FleetPanel"]
+[node name="FleetLabel" type="Label" parent="MainContainer/RightSidebar/MarginContainer/VBoxContainer/FleetButton"]
 unique_name_in_owner = true
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="FoodPanel" type="PanelContainer" parent="MainContainer/RightSidebar/MarginContainer/VBoxContainer"]
+[node name="FoodButton" type="Button" parent="MainContainer/RightSidebar/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+flat = true
 
-[node name="FoodLabel" type="Label" parent="MainContainer/RightSidebar/MarginContainer/VBoxContainer/FoodPanel"]
+[node name="FoodLabel" type="Label" parent="MainContainer/RightSidebar/MarginContainer/VBoxContainer/FoodButton"]
 unique_name_in_owner = true
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="FreightersPanel" type="PanelContainer" parent="MainContainer/RightSidebar/MarginContainer/VBoxContainer"]
+[node name="FreightersButton" type="Button" parent="MainContainer/RightSidebar/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+flat = true
 
-[node name="FreightersLabel" type="Label" parent="MainContainer/RightSidebar/MarginContainer/VBoxContainer/FreightersPanel"]
+[node name="FreightersLabel" type="Label" parent="MainContainer/RightSidebar/MarginContainer/VBoxContainer/FreightersButton"]
 unique_name_in_owner = true
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ResearchEtaPanel" type="PanelContainer" parent="MainContainer/RightSidebar/MarginContainer/VBoxContainer"]
+[node name="ResearchButton" type="Button" parent="MainContainer/RightSidebar/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+flat = true
 
-[node name="ResearchEtaLabel" type="Label" parent="MainContainer/RightSidebar/MarginContainer/VBoxContainer/ResearchEtaPanel"]
+[node name="ResearchEtaLabel" type="Label" parent="MainContainer/RightSidebar/MarginContainer/VBoxContainer/ResearchButton"]
 unique_name_in_owner = true
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -172,6 +202,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Settings"
 
+[connection signal="pressed" from="MainContainer/RightSidebar/MarginContainer/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="MainContainer/RightSidebar/MarginContainer/VBoxContainer/FleetButton" to="." method="_on_fleet_button_pressed"]
+[connection signal="pressed" from="MainContainer/RightSidebar/MarginContainer/VBoxContainer/FoodButton" to="." method="_on_food_button_pressed"]
+[connection signal="pressed" from="MainContainer/RightSidebar/MarginContainer/VBoxContainer/FreightersButton" to="." method="_on_freighters_button_pressed"]
+[connection signal="pressed" from="MainContainer/RightSidebar/MarginContainer/VBoxContainer/ResearchButton" to="." method="_on_research_button_pressed"]
 [connection signal="pressed" from="MainContainer/BottomBar/MarginContainer/HBoxContainer/ColoniesButton" to="." method="_on_colonies_button_pressed"]
 [connection signal="pressed" from="MainContainer/BottomBar/MarginContainer/HBoxContainer/PlanetsButton" to="." method="_on_planets_button_pressed"]
 [connection signal="pressed" from="MainContainer/BottomBar/MarginContainer/HBoxContainer/ShipsButton" to="." method="_on_ships_button_pressed"]

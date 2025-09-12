@@ -64,3 +64,21 @@ func _on_diplomacy_button_pressed():
 
 func _on_settings_button_pressed():
 	SceneManager.change_scene("res://ui/screens/settings_screen.tscn")
+
+# --- Signal Handlers for Right Sidebar Navigation ---
+
+func _on_credits_button_pressed():
+	SceneManager.change_scene("res://ui/screens/credits_screen.tscn")
+
+func _on_fleet_button_pressed():
+	SceneManager.change_scene("res://ui/screens/ships_screen.tscn")
+
+func _on_food_button_pressed():
+	SceneManager.change_scene("res://ui/screens/food_screen.tscn")
+
+func _on_freighters_button_pressed():
+	SceneManager.change_scene("res://ui/screens/freighters_screen.tscn")
+
+func _on_research_button_pressed():
+	# For now this goes to the placeholder, later it will go to the tech tree
+	SceneManager.change_scene("res://ui/screens/research_screen.tscn")
