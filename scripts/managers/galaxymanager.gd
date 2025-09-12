@@ -10,7 +10,7 @@ var _system_name_generator: SystemNameGenerator
 var _celestial_body_generator: CelestialBodyGenerator
 
 func _ready() -> void:
-	# Corrected the filename in this line
+	# Corrected the filename in this line from "system_name_data.tres" to "system_names.tres"
 	var name_data = load("res://gamedata/systems/system_names.tres")
 	_system_name_generator = SystemNameGenerator.new(name_data)
 	_celestial_body_generator = CelestialBodyGenerator.new()

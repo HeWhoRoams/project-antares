@@ -1,0 +1,45 @@
+[gd_scene load_steps=2 format=3 uid="uid://d36qjclwh8v11"]
+
+[ext_resource type="Script" uid="uid://wwwr3pkslnql" path="res://ui/popups/system_view_popup.gd" id="1_rdb5g"]
+
+[node name="SystemViewPopup" type="PanelContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rdb5g")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="SystemNameLabel" type="Label" parent="VBoxContainer/Header"]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="VBoxContainer/Header"]
+layout_mode = 2
+text = "X"
+
+[node name="Body" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="StarSprite" type="TextureRect" parent="VBoxContainer/Body"]
+layout_mode = 2
+
+[node name="Footer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Footer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Footer/VBoxContainer"]
+layout_mode = 2
+text = "Ships in System"
+
+[node name="ShipList" type="VBoxContainer" parent="VBoxContainer/Footer/VBoxContainer"]
+layout_mode = 2

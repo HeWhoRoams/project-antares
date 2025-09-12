@@ -1,9 +1,9 @@
 # /ui/components/system_summary_tooltip.gd
 extends PanelContainer
 
-@onready var system_name_label: Label = %SystemNameLabel
-@onready var celestial_bodies_label: Label = %CelestialBodiesLabel
-@onready var inhabited_label: Label = %InhabitedLabel
+@onready var system_name_label: Label = $VBoxContainer/SystemNameLabel
+@onready var celestial_bodies_label: Label = $VBoxContainer/CelestialBodiesLabel
+@onready var inhabited_label: Label = $VBoxContainer/InhabitedLabel
 
 func update_data(system_data: StarSystem) -> void:
 	system_name_label.text = system_data.display_name
