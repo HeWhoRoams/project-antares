@@ -4,32 +4,24 @@
 [ext_resource type="Texture2D" uid="uid://d22ru34kmjuxv" path="res://assets/images/RedGiant_Star_Icon.png" id="2_texture"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a6nro"]
+radius = 20.0
 
 [node name="StarSystemView" type="Node2D"]
 script = ExtResource("1_qwwc0")
 
-# The script's "@onready var sprite" needs this exact node as a direct child.
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_texture")
 
-# The script's "@onready var label" needs this exact node as a direct child.
 [node name="Label" type="Label" parent="."]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
 offset_left = -75.0
-offset_top = 14.0
+offset_top = 25.0
 offset_right = 75.0
-offset_bottom = 37.0
+offset_bottom = 48.0
 grow_horizontal = 2
-grow_vertical = 0
 horizontal_alignment = 1
 
 [node name="Area2D" type="Area2D" parent="."]
-monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_a6nro")
