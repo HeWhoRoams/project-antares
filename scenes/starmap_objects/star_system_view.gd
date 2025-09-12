@@ -3,7 +3,7 @@ class_name StarSystemView
 extends Node2D
 
 @onready var label: Label = $Label
-@onready var sprite: Sprite2D = $Sprite2D # --- NEW: Reference to the star sprite
+@onready var sprite: Sprite2D = $Sprite2D
 
 var star_system_data: StarSystem
 
@@ -27,15 +27,10 @@ func _open_system_view() -> void:
 	if get_tree().get_first_node_in_group("system_popup"):
 		return
 
-	var ui_layer = get_tree().get_first_node_in_group("hud")
-	if not ui_layer:
-		printerr("StarSystemView: Could not find UI layer node.")
-		return
-
 	var popup = system_popup_scene.instantiate()
 	popup.add_to_group("system_popup")
-	ui_layer.add_child(popup)
-	# --- UPDATED: Pass the sprite's texture to the popup ---
+	# FIX: Add the popup to the main scene tree to ensure it renders on its own layer.
+	get_tree().current_scene.add_child(popup)
 	popup.populate_system_data(star_system_data, sprite.texture)
 
 

@@ -1,44 +1,55 @@
-[gd_scene load_steps=2 format=3 uid="uid://bass3h0pi3gnd"]
+[gd_scene load_steps=3 format=3 uid="uid://bass3h0pi3gnd"]
 
-[ext_resource type="Script" uid="uid://wwwr3pkslnql" path="res://ui/popups/system_view_popup.gd" id="1_rdb5g"]
+[ext_resource type="Script" path="res://ui/popups/system_view_popup.gd" id="1_rdb5g"]
+[ext_resource type="Texture2D" path="res://assets/images/backgrounds/starscape.png" id="2_starscape"]
 
-[node name="SystemViewPopup" type="CenterContainer"]
+[node name="SystemViewPopup" type="CanvasLayer"]
+layer = 10
+script = ExtResource("1_rdb5g")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_rdb5g")
 
-# CRITICAL: This node must be named "MainPanel" and have unique_name_in_owner set to true.
-[node name="MainPanel" type="PanelContainer" parent="."]
+[node name="MainPanel" type="PanelContainer" parent="CenterContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel"]
+[node name="Background" type="TextureRect" parent="CenterContainer/MainPanel"]
+layout_mode = 2
+texture = ExtResource("2_starscape")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MainPanel"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Header" type="HBoxContainer" parent="MainPanel/VBoxContainer"]
+[node name="Header" type="PanelContainer" parent="CenterContainer/MainPanel/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="SystemNameLabel" type="Label" parent="MainPanel/VBoxContainer/Header"]
+[node name="SystemNameLabel" type="Label" parent="CenterContainer/MainPanel/VBoxContainer/Header"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "System Name"
 
-[node name="CloseButton" type="Button" parent="MainPanel/VBoxContainer/Header"]
+[node name="CloseButton" type="Button" parent="CenterContainer/MainPanel/VBoxContainer/Header"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "X"
 
-[node name="Body" type="PanelContainer" parent="MainPanel/VBoxContainer"]
+[node name="Body" type="PanelContainer" parent="CenterContainer/MainPanel/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_styles/panel = null
 
-[node name="OrbitsContainer" type="Control" parent="MainPanel/VBoxContainer/Body"]
+[node name="OrbitsContainer" type="Control" parent="CenterContainer/MainPanel/VBoxContainer/Body"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -48,7 +59,7 @@ grow_horizontal = 2
 grow_vertical = 2
 clip_contents = true
 
-[node name="StarSprite" type="TextureRect" parent="MainPanel/VBoxContainer/Body/OrbitsContainer"]
+[node name="StarSprite" type="TextureRect" parent="CenterContainer/MainPanel/VBoxContainer/Body/OrbitsContainer"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
@@ -65,17 +76,18 @@ grow_vertical = 2
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Footer" type="PanelContainer" parent="MainPanel/VBoxContainer"]
+[node name="Footer" type="PanelContainer" parent="CenterContainer/MainPanel/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/VBoxContainer/Footer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MainPanel/VBoxContainer/Footer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MainPanel/VBoxContainer/Footer/VBoxContainer"]
+[node name="Label" type="Label" parent="CenterContainer/MainPanel/VBoxContainer/Footer/VBoxContainer"]
 layout_mode = 2
 text = "Ships in System"
 horizontal_alignment = 1
 
-[node name="ShipList" type="VBoxContainer" parent="MainPanel/VBoxContainer/Footer/VBoxContainer"]
+[node name="ShipList" type="VBoxContainer" parent="CenterContainer/MainPanel/VBoxContainer/Footer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
