@@ -6,9 +6,13 @@ extends Node2D
 @export var ship_view_scene: PackedScene
 @export var system_info_popup_scene: PackedScene
 
+var hud_scene: PackedScene = preload("res://ui/hud/hud.tscn")
 var selected_ship_view: ShipView = null
 
 func _ready() -> void:
+	var hud_instance = hud_scene.instantiate()
+	add_child(hud_instance)
+	
 	PlayerManager.ship_arrived.connect(_on_ship_arrived)
 	_draw_galaxy()
 	_draw_all_ships()
@@ -21,7 +25,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		if clicked_object is ShipView:
 			_select_ship(clicked_object)
 		elif clicked_object is StarSystemView:
-			_show_system_info_popup(clicked_object.star_system_data)
+			# For now, we open the detailed view on click. This can be changed later.
+			clicked_object._open_system_view()
 		else:
 			_select_ship(null) # Deselect if clicking empty space
 	
@@ -34,17 +39,6 @@ func _unhandled_input(event: InputEvent) -> void:
 					selected_ship_view.ship_data.id, 
 					clicked_object.star_system_data.id
 				)
-
-func _show_system_info_popup(system_data: StarSystem) -> void:
-	if not system_info_popup_scene:
-		printerr("System Info Popup scene is not set in the Starmap inspector!")
-		return
-	
-	var popup = system_info_popup_scene.instantiate()
-	add_child(popup)
-	
-	if popup.has_method("set_system_data"):
-		popup.set_system_data(system_data)
 
 func _get_object_at_position(screen_position: Vector2):
 	var space_state = get_world_2d().direct_space_state
@@ -64,11 +58,9 @@ func _select_ship(ship_to_select: ShipView):
 		selected_ship_view.select()
 
 func _on_ship_arrived(ship_data: ShipData) -> void:
-	var ship_view: ShipView = find_child(ship_data.id, true, false)
-	if ship_view:
-		var new_system_location = GalaxyManager.star_systems.get(ship_data.current_system_id).position
-		var tween = create_tween()
-		tween.tween_property(ship_view, "position", new_system_location, 0.5).set_trans(Tween.TRANS_SINE)
+	# This function needs a full rewrite to handle the new drawing logic
+	# For now, we'll just redraw all ships. A more optimized approach can be added later.
+	_redraw_all_ships()
 
 func _draw_galaxy() -> void:
 	if not star_system_view_scene:
@@ -80,20 +72,58 @@ func _draw_galaxy() -> void:
 		new_system_view.star_system_data = system_data 
 		add_child(new_system_view)
 
+func _redraw_all_ships() -> void:
+	# Helper function to clear existing ships before redrawing
+	for child in get_children():
+		if child is ShipView:
+			child.queue_free()
+	_draw_all_ships()
+
 func _draw_all_ships() -> void:
 	if not ship_view_scene:
 		printerr("Starmap: ShipView scene is not set!")
 		return
-	for ship_data in PlayerManager.owned_ships.values():
-		_spawn_ship_view(ship_data, Color.CYAN)
-	for ship_data in AIManager.owned_ships.values():
-		_spawn_ship_view(ship_data, Color.RED)
+	
+	# 1. Group all ships by their current system
+	var ships_by_system: Dictionary = {}
+	var all_ships = PlayerManager.owned_ships.values() + AIManager.owned_ships.values()
+	
+	for ship_data in all_ships:
+		var system_id = ship_data.current_system_id
+		if not ships_by_system.has(system_id):
+			ships_by_system[system_id] = []
+		ships_by_system[system_id].append(ship_data)
 
-func _spawn_ship_view(ship_data: ShipData, color: Color) -> void:
-	var current_system = GalaxyManager.star_systems.get(ship_data.current_system_id)
-	if current_system:
-		var new_system_view: ShipView = ship_view_scene.instantiate()
-		new_system_view.modulate = color
-		new_system_view.set_ship_data(ship_data)
-		new_system_view.position = current_system.position
-		add_child(new_system_view)
+	# 2. Draw the grouped ships for each system
+	for system_id in ships_by_system.keys():
+		_draw_ships_for_system(system_id, ships_by_system[system_id])
+
+
+# UPDATED: Removed the '[ShipData]' type hint from the 'ships' argument to fix the error.
+func _draw_ships_for_system(system_id: StringName, ships: Array) -> void:
+	var system_node = GalaxyManager.star_systems.get(system_id)
+	if not system_node: return
+
+	# Sort ships to ensure the player's ship (owner_id 1) is always first
+	ships.sort_custom(func(a, b): return a.owner_id < b.owner_id)
+
+	var base_position = system_node.position
+	var top_right_offset = Vector2(30, -30)
+	var stacking_offset = Vector2(0, 30)
+	var max_ships_to_show = 3
+
+	for i in range(min(ships.size(), max_ships_to_show)):
+		var ship_data = ships[i]
+		var new_ship_view: ShipView = ship_view_scene.instantiate()
+		
+		# Calculate position
+		new_ship_view.position = base_position + top_right_offset + (stacking_offset * i)
+		
+		# Set data and color
+		new_ship_view.set_ship_data(ship_data)
+		if ship_data.owner_id == 1:
+			new_ship_view.modulate = Color.CYAN
+		else:
+			new_ship_view.modulate = Color.RED
+			
+		add_child(new_ship_view)

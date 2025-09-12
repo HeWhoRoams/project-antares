@@ -5,142 +5,176 @@
 [node name="Hud" type="CanvasLayer" groups=["hud"]]
 script = ExtResource("1_xmswo")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MainContainer" type="Control" parent="."]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+
+[node name="TopBar" type="PanelContainer" parent="MainContainer"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MainContainer/TopBar"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/TopBar/MarginContainer"]
+layout_mode = 2
+
+[node name="TurnLabel" type="Label" parent="MainContainer/TopBar/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Turn 1"
+
+[node name="ResearchLabel" type="Label" parent="MainContainer/TopBar/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Research: 50"
+
+[node name="EndTurnButton" type="Button" parent="MainContainer/TopBar/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "End Turn"
+
+[node name="RightSidebar" type="PanelContainer" parent="MainContainer"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -230.0
+offset_top = -250.0
+offset_right = -10.0
+offset_bottom = 250.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MainContainer/RightSidebar"]
+layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="TopBar" type="HBoxContainer" parent="MarginContainer"]
-layout_mode = 2
-size_flags_vertical = 0
-
-[node name="TurnLabel" type="Label" parent="MarginContainer/TopBar"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Turn 1"
-
-[node name="ResearchLabel" type="Label" parent="MarginContainer/TopBar"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Research: 50"
-
-[node name="EndTurnButton" type="Button" parent="MarginContainer/TopBar"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "End Turn"
-
-[node name="RightSidebar" type="PanelContainer" parent="MarginContainer"]
-layout_mode = 2
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -220.0
-offset_top = -250.0
-offset_right = 0.0
-offset_bottom = 250.0
-grow_horizontal = 0
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/RightSidebar"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContainer/RightSidebar/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="CreditsPanel" type="PanelContainer" parent="MarginContainer/RightSidebar/VBoxContainer"]
+[node name="CreditsPanel" type="PanelContainer" parent="MainContainer/RightSidebar/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="CreditsLabel" type="Label" parent="MarginContainer/RightSidebar/VBoxContainer/CreditsPanel"]
+[node name="CreditsLabel" type="Label" parent="MainContainer/RightSidebar/MarginContainer/VBoxContainer/CreditsPanel"]
 unique_name_in_owner = true
 layout_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="FleetPanel" type="PanelContainer" parent="MarginContainer/RightSidebar/VBoxContainer"]
+[node name="FleetPanel" type="PanelContainer" parent="MainContainer/RightSidebar/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="FleetLabel" type="Label" parent="MarginContainer/RightSidebar/VBoxContainer/FleetPanel"]
+[node name="FleetLabel" type="Label" parent="MainContainer/RightSidebar/MarginContainer/VBoxContainer/FleetPanel"]
 unique_name_in_owner = true
 layout_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="FoodPanel" type="PanelContainer" parent="MarginContainer/RightSidebar/VBoxContainer"]
+[node name="FoodPanel" type="PanelContainer" parent="MainContainer/RightSidebar/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="FoodLabel" type="Label" parent="MarginContainer/RightSidebar/VBoxContainer/FoodPanel"]
+[node name="FoodLabel" type="Label" parent="MainContainer/RightSidebar/MarginContainer/VBoxContainer/FoodPanel"]
 unique_name_in_owner = true
 layout_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="FreightersPanel" type="PanelContainer" parent="MarginContainer/RightSidebar/VBoxContainer"]
+[node name="FreightersPanel" type="PanelContainer" parent="MainContainer/RightSidebar/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="FreightersLabel" type="Label" parent="MarginContainer/RightSidebar/VBoxContainer/FreightersPanel"]
+[node name="FreightersLabel" type="Label" parent="MainContainer/RightSidebar/MarginContainer/VBoxContainer/FreightersPanel"]
 unique_name_in_owner = true
 layout_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ResearchEtaPanel" type="PanelContainer" parent="MarginContainer/RightSidebar/VBoxContainer"]
+[node name="ResearchEtaPanel" type="PanelContainer" parent="MainContainer/RightSidebar/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ResearchEtaLabel" type="Label" parent="MarginContainer/RightSidebar/VBoxContainer/ResearchEtaPanel"]
+[node name="ResearchEtaLabel" type="Label" parent="MainContainer/RightSidebar/MarginContainer/VBoxContainer/ResearchEtaPanel"]
 unique_name_in_owner = true
 layout_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BottomBar" type="PanelContainer" parent="MarginContainer"]
-layout_mode = 2
+[node name="BottomBar" type="PanelContainer" parent="MainContainer"]
+layout_mode = 1
+anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -40.0
+offset_top = -50.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/BottomBar"]
+[node name="MarginContainer" type="MarginContainer" parent="MainContainer/BottomBar"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/BottomBar/MarginContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="ColoniesButton" type="Button" parent="MarginContainer/BottomBar/HBoxContainer"]
+[node name="ColoniesButton" type="Button" parent="MainContainer/BottomBar/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Colonies"
 
-[node name="PlanetsButton" type="Button" parent="MarginContainer/BottomBar/HBoxContainer"]
+[node name="PlanetsButton" type="Button" parent="MainContainer/BottomBar/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Planets"
 
-[node name="ShipsButton" type="Button" parent="MarginContainer/BottomBar/HBoxContainer"]
+[node name="ShipsButton" type="Button" parent="MainContainer/BottomBar/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Ships"
 
-[node name="NpcsButton" type="Button" parent="MarginContainer/BottomBar/HBoxContainer"]
+[node name="NpcsButton" type="Button" parent="MainContainer/BottomBar/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "NPCs"
 
-[node name="DiplomacyButton" type="Button" parent="MarginContainer/BottomBar/HBoxContainer"]
+[node name="DiplomacyButton" type="Button" parent="MainContainer/BottomBar/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Diplomacy"
 
-[node name="InfoButton" type="Button" parent="MarginContainer/BottomBar/HBoxContainer"]
+[node name="SettingsButton" type="Button" parent="MainContainer/BottomBar/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Info"
+text = "Settings"
+
+[connection signal="pressed" from="MainContainer/BottomBar/MarginContainer/HBoxContainer/ColoniesButton" to="." method="_on_colonies_button_pressed"]
+[connection signal="pressed" from="MainContainer/BottomBar/MarginContainer/HBoxContainer/PlanetsButton" to="." method="_on_planets_button_pressed"]
+[connection signal="pressed" from="MainContainer/BottomBar/MarginContainer/HBoxContainer/ShipsButton" to="." method="_on_ships_button_pressed"]
+[connection signal="pressed" from="MainContainer/BottomBar/MarginContainer/HBoxContainer/NpcsButton" to="." method="_on_npcs_button_pressed"]
+[connection signal="pressed" from="MainContainer/BottomBar/MarginContainer/HBoxContainer/DiplomacyButton" to="." method="_on_diplomacy_button_pressed"]
+[connection signal="pressed" from="MainContainer/BottomBar/MarginContainer/HBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]

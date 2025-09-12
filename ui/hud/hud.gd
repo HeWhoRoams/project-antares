@@ -31,6 +31,8 @@ func _update_sidebar_dummy_data() -> void:
 	freighters_label.text = "Freighters:\n0 / 10"
 	research_eta_label.text = "Research: 59 RP\nETA: 10 turns"
 
+# --- Signal Handlers for UI Updates ---
+
 func _on_turn_ended(new_turn_number: int) -> void:
 	_update_turn_label(new_turn_number)
 
@@ -42,3 +44,23 @@ func _update_turn_label(turn: int) -> void:
 
 func _update_research_label(points: int) -> void:
 	research_label.text = "Research: %s" % points
+
+# --- Signal Handlers for Bottom Bar Navigation ---
+
+func _on_colonies_button_pressed():
+	SceneManager.change_scene("res://ui/screens/colonies_screen.tscn")
+
+func _on_planets_button_pressed():
+	SceneManager.change_scene("res://ui/screens/planets_screen.tscn")
+
+func _on_ships_button_pressed():
+	SceneManager.change_scene("res://ui/screens/ships_screen.tscn")
+
+func _on_npcs_button_pressed():
+	SceneManager.change_scene("res://ui/screens/npcs_screen.tscn")
+
+func _on_diplomacy_button_pressed():
+	SceneManager.change_scene("res://ui/screens/diplomacy_screen.tscn")
+
+func _on_settings_button_pressed():
+	SceneManager.change_scene("res://ui/screens/settings_screen.tscn")
