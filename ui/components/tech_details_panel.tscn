@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=3 uid="uid://ca7m37tohird5"]
+
+[ext_resource type="Script" uid="uid://b61n4q3d8tc0s" path="res://ui/components/tech_details_panel.gd" id="1_details_script"]
+
+[node name="TechDetailsPanel" type="PanelContainer"]
+script = ExtResource("1_details_script")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Header" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/Header"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Name" type="Label" parent="MarginContainer/VBoxContainer/Header/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Technology Name"
+autowrap_mode = 3
+
+[node name="Cost" type="Label" parent="MarginContainer/VBoxContainer/Header/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Cost: 100 RP"
+
+[node name="Description" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "This is the detailed description of the technology and what it unlocks. It can be multiple lines long."
+autowrap_mode = 3
+
+[node name="ResearchButton" type="Button" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Research"

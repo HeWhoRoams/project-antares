@@ -10,7 +10,7 @@ func _ready():
 	# For simplicity here, imagine DataManager has a method like `get_all_dialog_phrase_pools()`
 	# self.phrase_pools = data_manager.get_all_dialog_phrase_pools_structured()
 	# For now, manually load one for demonstration
-	var eloquence_war_pool: DialogPhrasePool = load("res://data/dialog/dialog_eloquence_declare_war.tres")
+	# var eloquence_war_pool: DialogPhrasePool = load("res://data/dialog/dialog_eloquence_declare_war.tres")
 	if not phrase_pools.has(eloquence_war_pool.dialog_type_id):
 		phrase_pools[eloquence_war_pool.dialog_type_id] = {}
 	phrase_pools[eloquence_war_pool.dialog_type_id][eloquence_war_pool.attribute_id] = eloquence_war_pool

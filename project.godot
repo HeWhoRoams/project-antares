@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="project antarees"
+config/name="Project Antarees"
 run/main_scene="uid://bbkyup0oqp8ca"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"

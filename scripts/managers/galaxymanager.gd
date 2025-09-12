@@ -34,13 +34,32 @@ func generate_procedural_galaxy() -> void:
 	star_systems[sol.id] = sol
 	_system_name_generator.add_used_name(sol.display_name)
 
+	# --- FIX: Create a guaranteed home system for the AI faction ---
+	var sirius = StarSystem.new()
+	sirius.id = "sirius"
+	sirius.display_name = "Sirius"
+	sirius.position = Vector2(galaxy_radius * 0.75, 0) # Place it somewhere consistently
+	sirius.celestial_bodies = _celestial_body_generator.generate_bodies_for_system()
+	star_systems[sirius.id] = sirius
+	_system_name_generator.add_used_name(sirius.display_name)
+
 	# 2. Generate the rest of the systems randomly.
-	for i in range(number_of_systems):
+	# Adjusted loop to account for the two pre-made systems.
+	for i in range(number_of_systems - 2):
 		var new_system = StarSystem.new()
 		var system_id = "system_%s" % i
 		new_system.id = system_id
 		new_system.display_name = _system_name_generator.generate_unique_name()
-		new_system.position = Vector2(randf_range(-galaxy_radius, galaxy_radius), randf_range(-galaxy_radius, galaxy_radius))
+		
+		# Simple loop to avoid placing systems too close to each other or the center.
+		var is_position_valid = false
+		while not is_position_valid:
+			new_system.position = Vector2(randf_range(-galaxy_radius, galaxy_radius), randf_range(-galaxy_radius, galaxy_radius))
+			is_position_valid = true
+			for existing_system in star_systems.values():
+				if new_system.position.distance_to(existing_system.position) < min_system_distance:
+					is_position_valid = false
+					break
 		
 		# --- Use the new generator to add planets ---
 		new_system.celestial_bodies = _celestial_body_generator.generate_bodies_for_system()

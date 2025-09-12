@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cegs3se1s40od" path="res://assets/images/backgrounds/starscape.png" id="2_37d0i"]
 [ext_resource type="PackedScene" uid="uid://bwgvfoy47annx" path="res://scenes/starmap_objects/star_system_view.tscn" id="2_cj5cr"]
 [ext_resource type="PackedScene" uid="uid://du7c5bjjqivt5" path="res://scenes/starmap_objects/ship_view.tscn" id="3_i4ucb"]
-[ext_resource type="PackedScene" uid="uid://7kjyb01iu0j1" path="res://ui/popups/system_info_popup.tscn" id="4_dbbx8"]
+[ext_resource type="PackedScene" uid="uid://uw0p26mbbfym" path="res://ui/screens/system_info_popup.tscn" id="4_dbbx8"]
 [ext_resource type="Script" uid="uid://x3rsdmfk26cv" path="res://scenes/starmap/starmap_camera.gd" id="4_k68vw"]
 
 [node name="Starmap" type="Node2D"]

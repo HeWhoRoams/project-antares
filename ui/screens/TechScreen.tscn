@@ -1,14 +1,72 @@
-TechScreen (Inherits BaseScreen.tscn)
-└── MarginContainer (Provides padding around the screen)
-    └── MainVBox (VBoxContainer, stacks header and content)
-        ├── HeaderPanel (PanelContainer for top info)
-        │   └── HBoxContainer
-        │       └── ResearchLabel (Label, e.g., "Research: 120 RP")
-        └── Content (The part that will adapt)
-            ├── LandscapeLayout (HBoxContainer, for wide screens)
-            └── PortraitLayout (VBoxContainer, for tall screens)
-            
-# These two panels will be created but not parented to a layout yet
-# Our script will place them in the correct layout at runtime.
-TechListPanel (PanelContainer, will hold the list of techs)
-TechDetailsPanel (PanelContainer, will show info for one tech)
+[gd_scene load_steps=2 format=3 uid="uid://df5ygaeecbj48"]
+
+[ext_resource type="Script" uid="uid://dgmdvg1qcv7p1" path="res://ui/screens/tech_screen.gd" id="1_tech_screen"]
+
+[node name="TechScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tech_screen")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="MainVBox" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="HeaderPanel" type="PanelContainer" parent="MarginContainer/MainVBox"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MainVBox/HeaderPanel"]
+layout_mode = 2
+
+[node name="ResearchLabel" type="Label" parent="MarginContainer/MainVBox/HeaderPanel/HBoxContainer"]
+layout_mode = 2
+text = "Research: 120 RP"
+
+[node name="Content" type="Control" parent="MarginContainer/MainVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LandscapeLayout" type="HBoxContainer" parent="MarginContainer/MainVBox/Content"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PortraitLayout" type="VBoxContainer" parent="MarginContainer/MainVBox/Content"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="TechListPanel" type="PanelContainer" parent="MarginContainer/MainVBox/Content"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/MainVBox/Content/TechListPanel"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="TechListContainer" type="VBoxContainer" parent="MarginContainer/MainVBox/Content/TechListPanel/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
