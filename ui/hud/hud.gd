@@ -5,16 +5,31 @@ extends CanvasLayer
 @onready var research_label: Label = %ResearchLabel
 @onready var end_turn_button: Button = %EndTurnButton
 
+# References to the new right sidebar labels
+@onready var credits_label: Label = %CreditsLabel
+@onready var fleet_label: Label = %FleetLabel
+@onready var food_label: Label = %FoodLabel
+@onready var freighters_label: Label = %FreightersLabel
+@onready var research_eta_label: Label = %ResearchEtaLabel
+
 func _ready() -> void:
 	# Connect button press to the TurnManager's function
 	end_turn_button.pressed.connect(TurnManager.end_turn)
 	# Connect this script to signals from managers to receive updates
 	TurnManager.turn_ended.connect(_on_turn_ended)
-	PlayerManager.research_points_changed.connect(_on_research_points_changed) # We will add this signal next
+	PlayerManager.research_points_changed.connect(_on_research_points_changed)
 	
 	# Set initial values
 	_update_turn_label(TurnManager.current_turn)
 	_update_research_label(PlayerManager.research_points)
+	_update_sidebar_dummy_data()
+
+func _update_sidebar_dummy_data() -> void:
+	credits_label.text = "Credits: 250 BC\n(+25 BC/turn)"
+	fleet_label.text = "Fleet Strength:\n1 Scout"
+	food_label.text = "Food: 15\nSurplus: +2"
+	freighters_label.text = "Freighters:\n0 / 10"
+	research_eta_label.text = "Research: 59 RP\nETA: 10 turns"
 
 func _on_turn_ended(new_turn_number: int) -> void:
 	_update_turn_label(new_turn_number)
