@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://bwgvfoy47annx"]
+[gd_scene load_steps=5 format=3 uid="uid://bwgvfoy47annx"]
 
 [ext_resource type="Script" uid="uid://c0ps5hcqy40bb" path="res://scenes/starmap_objects/star_system_view.gd" id="1_qwwc0"]
-[ext_resource type="Texture2D" uid="uid://d22ru34kmjuxv" path="res://assets/images/RedGiant_Star_Icon.png" id="2_texture"]
+[ext_resource type="Texture2D" uid="uid://cne2k7g41w2qg" path="res://assets/images/stars/star_base.png" id="2_texture"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_star_glow"]
+blend_mode = 1
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a6nro"]
 radius = 20.0
@@ -10,6 +13,7 @@ radius = 20.0
 script = ExtResource("1_qwwc0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_star_glow")
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_texture")
 

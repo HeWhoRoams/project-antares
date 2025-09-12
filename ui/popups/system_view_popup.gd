@@ -7,14 +7,13 @@ const ORBIT_BASE_RADIUS = 150.0
 const ORBIT_RADIUS_STEP = 60.0
 const ORBIT_COLOR = Color(1, 1, 1, 0.3)
 const ORBIT_LINE_WIDTH = 2.0
-const ICON_BUFFER = 100
+const ICON_BUFFER = 100 
 
 @onready var main_panel: PanelContainer = %MainPanel
 @onready var header_panel: PanelContainer = %Header
 @onready var body_panel: PanelContainer = %Body
 @onready var footer_panel: PanelContainer = %Footer
 @onready var system_name_label: Label = %SystemNameLabel
-@onready var close_button: Button = %CloseButton
 @onready var orbits_container: Control = %OrbitsContainer
 @onready var ship_list: VBoxContainer = %ShipList
 @onready var star_sprite: TextureRect = %StarSprite
@@ -27,19 +26,18 @@ func _ready() -> void:
 	var dimension = min(screen_size.x, screen_size.y) * 0.9
 	main_panel.custom_minimum_size = Vector2(dimension, dimension)
 	
-	# Create a fully opaque style for the UI panels.
 	var panel_style = StyleBoxFlat.new()
-	panel_style.bg_color = Color("#222630") # A dark, solid color
+	panel_style.bg_color = Color("#222630")
 	
-	# Apply the style to the header and footer.
 	header_panel.add_theme_stylebox_override("panel", panel_style)
 	footer_panel.add_theme_stylebox_override("panel", panel_style)
 	
-	# Make the main and body panel backgrounds transparent so the starfield TextureRect shows through.
 	var transparent_style = StyleBoxEmpty.new()
 	main_panel.add_theme_stylebox_override("panel", transparent_style)
 	body_panel.add_theme_stylebox_override("panel", transparent_style)
 
+	# The close button is now in the footer, so we get it from there.
+	var close_button = footer_panel.get_node("HBoxContainer/CloseButton")
 	if close_button:
 		close_button.pressed.connect(queue_free)
 	
@@ -47,7 +45,6 @@ func _ready() -> void:
 		orbits_container.draw.connect(_on_orbits_container_draw)
 
 func populate_system_data(system_data: StarSystem, star_texture: Texture2D) -> void:
-	# UPDATED: Prepended "Star System" to the display name
 	if system_name_label: system_name_label.text = "Star System %s" % system_data.display_name
 	if star_sprite: star_sprite.texture = star_texture
 
@@ -92,7 +89,9 @@ func populate_system_data(system_data: StarSystem, star_texture: Texture2D) -> v
 			var display_radius = (ORBIT_BASE_RADIUS + (body.orbital_slot * ORBIT_RADIUS_STEP)) * _content_scale_factor
 			var body_pos = center + Vector2.from_angle(current_angle) * display_radius
 			
-			planet_view.position = body_pos - (planet_view.size / 2.0)
+			# UPDATED: Simplified the position calculation.
+			planet_view.position = body_pos
+			
 			planet_view.set_body_data(body, system_data.display_name)
 			
 			current_angle += angle_step

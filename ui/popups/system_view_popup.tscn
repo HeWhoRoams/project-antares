@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bass3h0pi3gnd"]
+[gd_scene load_steps=7 format=3 uid="uid://bass3h0pi3gnd"]
 
 [ext_resource type="Script" path="res://ui/popups/system_view_popup.gd" id="1_rdb5g"]
 [ext_resource type="Texture2D" path="res://assets/images/backgrounds/starscape.png" id="2_starscape"]
-[ext_resource type="Texture2D" uid="uid://d22ru34kmjuxv" path="res://assets/images/RedGiant_Star_Icon.png" id="3_star_icon"]
+[ext_resource type="Texture2D" uid="uid://cne2k7g41w2qg" path="res://assets/images/stars/star_base.png" id="3_star_icon"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_glow"]
+blend_mode = 1
 
 [sub_resource type="Animation" id="Animation_pulse"]
 resource_name = "Pulse"
@@ -98,6 +101,7 @@ grow_vertical = 2
 clip_contents = true
 
 [node name="StarGlow" type="TextureRect" parent="CenterContainer/MainPanel/VBoxContainer/Body/OrbitsContainer"]
+material = SubResource("CanvasItemMaterial_glow")
 self_modulate = Color(1, 0.8, 0.5, 1)
 layout_mode = 1
 anchors_preset = 8
@@ -119,6 +123,7 @@ stretch_mode = 5
 
 [node name="StarSprite" type="TextureRect" parent="CenterContainer/MainPanel/VBoxContainer/Body/OrbitsContainer"]
 unique_name_in_owner = true
+material = SubResource("CanvasItemMaterial_glow")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

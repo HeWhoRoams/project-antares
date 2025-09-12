@@ -18,19 +18,16 @@ func _ready() -> void:
 	_draw_all_ships()
 
 func _unhandled_input(event: InputEvent) -> void:
-	# Left-click logic to select ships or show system info
 	if event.is_action_pressed("ui_accept"):
 		var clicked_object = _get_object_at_position(get_global_mouse_position())
 		
 		if clicked_object is ShipView:
 			_select_ship(clicked_object)
 		elif clicked_object is StarSystemView:
-			# For now, we open the detailed view on click. This can be changed later.
 			clicked_object._open_system_view()
 		else:
-			_select_ship(null) # Deselect if clicking empty space
+			_select_ship(null)
 	
-	# Right-click to issue move order
 	if event.is_action_pressed("ui_right"):
 		if selected_ship_view:
 			var clicked_object = _get_object_at_position(get_global_mouse_position())
@@ -58,8 +55,6 @@ func _select_ship(ship_to_select: ShipView):
 		selected_ship_view.select()
 
 func _on_ship_arrived(ship_data: ShipData) -> void:
-	# This function needs a full rewrite to handle the new drawing logic
-	# For now, we'll just redraw all ships. A more optimized approach can be added later.
 	_redraw_all_ships()
 
 func _draw_galaxy() -> void:
@@ -69,11 +64,15 @@ func _draw_galaxy() -> void:
 	for system_data in GalaxyManager.star_systems.values():
 		var new_system_view: StarSystemView = star_system_view_scene.instantiate()
 		new_system_view.position = system_data.position
-		new_system_view.star_system_data = system_data 
+		new_system_view.star_system_data = system_data
+		
+		# Apply the star color
+		var star_color = GalaxyManager.get_star_color(system_data.celestial_bodies.size())
+		new_system_view.get_node("Sprite2D").modulate = star_color
+		
 		add_child(new_system_view)
 
 func _redraw_all_ships() -> void:
-	# Helper function to clear existing ships before redrawing
 	for child in get_children():
 		if child is ShipView:
 			child.queue_free()
@@ -84,7 +83,6 @@ func _draw_all_ships() -> void:
 		printerr("Starmap: ShipView scene is not set!")
 		return
 	
-	# 1. Group all ships by their current system
 	var ships_by_system: Dictionary = {}
 	var all_ships = PlayerManager.owned_ships.values() + AIManager.owned_ships.values()
 	
@@ -94,20 +92,16 @@ func _draw_all_ships() -> void:
 			ships_by_system[system_id] = []
 		ships_by_system[system_id].append(ship_data)
 
-	# 2. Draw the grouped ships for each system
 	for system_id in ships_by_system.keys():
 		_draw_ships_for_system(system_id, ships_by_system[system_id])
 
-
-# UPDATED: Removed the '[ShipData]' type hint from the 'ships' argument to fix the error.
 func _draw_ships_for_system(system_id: StringName, ships: Array) -> void:
-	var system_node = GalaxyManager.star_systems.get(system_id)
-	if not system_node: return
+	var system_data = GalaxyManager.star_systems.get(system_id)
+	if not system_data: return
 
-	# Sort ships to ensure the player's ship (owner_id 1) is always first
 	ships.sort_custom(func(a, b): return a.owner_id < b.owner_id)
 
-	var base_position = system_node.position
+	var base_position = system_data.position
 	var top_right_offset = Vector2(30, -30)
 	var stacking_offset = Vector2(0, 30)
 	var max_ships_to_show = 3
@@ -116,10 +110,7 @@ func _draw_ships_for_system(system_id: StringName, ships: Array) -> void:
 		var ship_data = ships[i]
 		var new_ship_view: ShipView = ship_view_scene.instantiate()
 		
-		# Calculate position
 		new_ship_view.position = base_position + top_right_offset + (stacking_offset * i)
-		
-		# Set data and color
 		new_ship_view.set_ship_data(ship_data)
 		if ship_data.owner_id == 1:
 			new_ship_view.modulate = Color.CYAN

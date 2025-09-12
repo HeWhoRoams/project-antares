@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d22ru34kmjuxv"
-path="res://.godot/imported/RedGiant_Star_Icon.png-37b236fbad0ebe8f304bffbe29837f30.ctex"
+uid="uid://ceyylck6cymwv"
+path="res://.godot/imported/star_base.png-c4054b78387cf423840f6774a78f3937.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/RedGiant_Star_Icon.png"
-dest_files=["res://.godot/imported/RedGiant_Star_Icon.png-37b236fbad0ebe8f304bffbe29837f30.ctex"]
+source_file="res://assets/images/stars/star_base.png"
+dest_files=["res://.godot/imported/star_base.png-c4054b78387cf423840f6774a78f3937.ctex"]
 
 [params]
 
