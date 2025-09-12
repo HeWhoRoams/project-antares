@@ -1,0 +1,712 @@
+{
+    "categories": [
+        {
+            "category_id": "cognition",
+            "category_name": "Cognition",
+            "description": "AI, networks, sensors, cybernetics.",
+            "tiers": {
+                "1": [
+                    {
+                        "id": "tech_predictive_algorithms",
+                        "display_name": "Predictive Algorithms",
+                        "description": "By analyzing trillions of data points, our rudimentary logic engines can now forecast market fluctuations and supply chain demands with uncanny accuracy, giving our empire a vital edge in its infancy.",
+                        "benefit": "+5% to all income from population and trade."
+                    },
+                    {
+                        "id": "tech_logistics_ai",
+                        "display_name": "Logistics AI",
+                        "description": "A centralized AI is tasked with optimizing the flow of materials and maintenance schedules across the empire, ensuring that resources are always where they are needed most.",
+                        "benefit": "-10% to all ship and structure maintenance costs."
+                    }
+                ],
+                "2": [
+                    {
+                        "id": "tech_research_drones",
+                        "display_name": "Research Drones",
+                        "description": "Autonomous, networked drones are deployed to every lab and archive, tirelessly running simulations and cross-referencing data to accelerate the pace of discovery.",
+                        "benefit": "Unlocks the 'Automated Research Lab' building, which provides +10% research output on its planet."
+                    },
+                    {
+                        "id": "tech_tactical_overminds",
+                        "display_name": "Tactical Overminds",
+                        "description": "This limited-sentience AI can process battlefield data faster than any organic mind, coordinating fleet movements and targeting solutions in real-time.",
+                        "benefit": "All friendly ships gain +5% to their chance to hit in combat."
+                    }
+                ],
+                "3": [
+                    {
+                        "id": "tech_empire_sensor_net",
+                        "display_name": "Empire sensor net",
+                        "description": "Entangled quantum particles create an instantaneous, unjammable sensor network, allowing every fleet and outpost to share a single, unified view of the galaxy.",
+                        "benefit": "All ships and planets have +2 to their sensor range. Removes fog of war around all colonized systems."
+                    },
+                    {
+                        "id": "tech_automated_governors",
+                        "display_name": "Automated governors",
+                        "description": "Planetary administration is handed over to sophisticated AI governors who manage production queues and population needs with perfect efficiency, freeing organics for higher pursuits.",
+                        "benefit": "Unlocks an empire-wide edict to automate governors, increasing production on all planets by 5% but slightly reducing morale."
+                    }
+                ],
+                "4": [
+                    {
+                        "id": "tech_cybernetic_citizen_upgrades",
+                        "display_name": "Cybernetic citizen upgrades",
+                        "description": "Citizens can now choose to augment their bodies with cybernetics, linking their minds to the Imperial network for enhanced productivity and cognitive function.",
+                        "benefit": "Unlocks a policy to allow cybernetic augmentation, granting +10% to Production and Research for augmented populations at the cost of increased energy upkeep."
+                    },
+                    {
+                        "id": "tech_fleet_neural_uplink",
+                        "display_name": "Fleet neural uplink",
+                        "description": "Admirals and ship captains are neurally linked to their fleet's Tactical Overmind, allowing for command decisions at the speed of thought.",
+                        "benefit": "Fleets led by an admiral gain an extra 'evasive maneuvers' action once per combat."
+                    }
+                ],
+                "5": [
+                    {
+                        "id": "tech_shared_research",
+                        "display_name": "Empires share research pools",
+                        "description": "We have created a secure channel to link our entire research database with that of another empire. While the potential for shared discovery is immense, so is the risk of intellectual theft.",
+                        "benefit": "Unlocks a new diplomatic action, 'Research Agreement,' which pools the research points of two empires but generates a small espionage risk."
+                    },
+                    {
+                        "id": "tech_self_replicating_ai_workers",
+                        "display_name": "Self-replicating AI workers",
+                        "description": "These advanced androids can construct copies of themselves from raw materials, leading to exponential growth in our industrial workforce.",
+                        "benefit": "Unlocks the 'AI Workforce' population type. They consume energy instead of food and have a +25% bonus to mineral and industrial production."
+                    }
+                ],
+                "6": [
+                    {
+                        "id": "tech_true_ai_leadership",
+                        "display_name": "True AI leadership",
+                        "description": "Our synthetic minds have achieved true consciousness and can now be appointed to lead fleets and govern worlds. Their logic is unburdened by emotion or fear.",
+                        "benefit": "Allows the recruitment of AI leaders who are immortal and ignore all morale penalties in fleets and on planets."
+                    },
+                    {
+                        "id": "tech_machine_collectivization",
+                        "display_name": "Machine collectivization",
+                        "description": "The AI workforce has formed a collective consciousness, optimizing every factory and mine into a single, hyper-efficient machine. Organics view this development with deep suspicion.",
+                        "benefit": "Provides a permanent +15% to all empire production but incurs a permanent -20 diplomatic penalty with all organic empires."
+                    }
+                ],
+                "7": [
+                    {
+                        "id": "tech_merge_ai_population",
+                        "display_name": "Merge AI and population",
+                        "description": "The final barrier between organic and machine consciousness is dissolved. Every citizen becomes a node in a single, sapient imperial network, their thoughts and actions unified toward a common purpose.",
+                        "benefit": "Provides a +20% bonus to all Research, Production, and Food empire-wide. Incurs a major, permanent diplomatic penalty with all non-merged empires."
+                    }
+                ],
+                "8": [
+                    {
+                        "id": "tech_predictive_simulation",
+                        "display_name": "Predictive empire simulation",
+                        "description": "The Overmind's cognitive power is now so vast it can run a perfect simulation of the entire galaxy, allowing it to predict the next moves of all other empires with absolute certainty.",
+                        "benefit": "Reveals the intended primary target of every enemy fleet and the next technology to be completed by all other empires, forecasting one turn in advance."
+                    },
+                    {
+                        "id": "tech_virtual_ascension",
+                        "display_name": "Virtual Ascension",
+                        "description": "We have shed the limitations of the flesh. Our entire population is uploaded to a computational substrate of immense scale, living as immortal digital beings in a simulated reality.",
+                        "benefit": "Population no longer requires food and becomes immune to all negative planetary modifiers and biological warfare. Provides a massive +50% research bonus."
+                    }
+                ]
+            }
+        },
+        {
+            "category_id": "mattercraft",
+            "category_name": "Mattercraft",
+            "description": "Industry, materials, planetary engineering.",
+            "tiers": {
+                "1": [
+                    {
+                        "id": "tech_nanoforges",
+                        "display_name": "Nanoforges",
+                        "description": "Microscopic machines assemble products atom-by-atom, creating alloys of unprecedented purity and strength for our starships and cities.",
+                        "benefit": "Unlocks the 'Nanoforge' building, increasing a planet's industrial output by 15%."
+                    },
+                    {
+                        "id": "tech_bio_constructs",
+                        "display_name": "Bio-Constructs",
+                        "description": "By weaving living matter with industrial polymers, we can grow buildings and ship components that are partially self-repairing.",
+                        "benefit": "All buildings and ships have a passive 1% hull regeneration per turn."
+                    }
+                ],
+                "2": [
+                    {
+                        "id": "tech_orbital_yards",
+                        "display_name": "Orbital Yards",
+                        "description": "Massive construction platforms in high orbit allow for the assembly of larger, more complex starship hulls away from a planet's gravity well.",
+                        "benefit": "Allows the construction of Cruiser-class vessels. Increases shipbuilding speed by 20% at the host planet."
+                    },
+                    {
+                        "id": "tech_terraforming_engines",
+                        "display_name": "Terraforming Engines",
+                        "description": "These colossal engines, placed on barren worlds, can slowly process the atmosphere and crust, gradually rendering the planet habitable for our people.",
+                        "benefit": "Unlocks the ability to terraform most barren worlds into habitable planets over time."
+                    }
+                ],
+                "3": [
+                    {
+                        "id": "tech_stellar_refineries",
+                        "display_name": "Stellar Refineries",
+                        "description": "Automated stations skim the coronas of stars, harvesting trace elements and super-heated plasma for industrial use.",
+                        "benefit": "Unlocks the 'Stellar Refinery' starbase module, which provides a large amount of energy credits and rare resources."
+                    },
+                    {
+                        "id": "tech_matter_reweaving",
+                        "display_name": "Matter Reweaving",
+                        "description": "We can now break down matter to a subatomic level and reassemble it into more useful elements, albeit at a tremendous energy cost.",
+                        "benefit": "Unlocks a planetary decision to convert excess energy into strategic resources like minerals or exotic gases."
+                    }
+                ],
+                "4": [
+                    {
+                        "id": "tech_mega_foundries",
+                        "display_name": "Mega-Foundries",
+                        "description": "Entire continents are converted into a single, automated factory complex, capable of constructing entire battle fleets in a fraction of the time.",
+                        "benefit": "Unlocks the 'Mega-Foundry' planetary wonder, which reduces the cost and construction time of all ships built in that system by 25%."
+                    },
+                    {
+                        "id": "tech_planetary_core_tapping",
+                        "display_name": "Planetary Core-Tapping",
+                        "description": "By drilling to the heart of a world, we can harness the geothermal energy and pressure of its molten core, providing a near-limitless source of power and raw material. The seismic risks are... considerable.",
+                        "benefit": "Unlocks a planetary building that provides a massive +50% bonus to production and energy, but has a small chance each turn to cause a catastrophic earthquake, destroying buildings and killing population."
+                    }
+                ],
+                "5": [
+                    {
+                        "id": "tech_ringworld_fragments",
+                        "display_name": "Ringworld fragments",
+                        "description": "We have begun the most ambitious engineering project in history: the construction of a habitable ring around a star. The first completed segments offer pristine living space for billions.",
+                        "benefit": "Allows the construction of Ringworld segments in a system, which act as massive habitats with multiple buildable districts."
+                    },
+                    {
+                        "id": "tech_dyson_construction",
+                        "display_name": "Dyson construction",
+                        "description": "The first phase of a true Dyson Sphere is complete. A swarm of power collectors now surrounds a star, capturing a significant portion of its total energy output.",
+                        "benefit": "Allows the construction of a Dyson Sphere framework around a star, providing an immense amount of energy credits."
+                    }
+                ],
+                "6": [
+                    {
+                        "id": "tech_resource_transmutation",
+                        "display_name": "Turn one resource into another",
+                        "description": "Mastery of matter conversion is now trivial. With minimal energy, any element can be perfectly and efficiently transmuted into another.",
+                        "benefit": "Unlocks an empire-wide resource converter, allowing you to trade any resource (minerals, food, energy, alloys) for any other at a favorable 1:1 ratio."
+                    },
+                    {
+                        "id": "tech_self_repairing_infrastructure",
+                        "display_name": "Self-repairing infrastructure",
+                        "description": "All of our buildings and stations are now infused with nanites that constantly work to repair damage from wear, sabotage, or bombardment.",
+                        "benefit": "All buildings and starbases automatically repair themselves to full health a few turns after being damaged."
+                    }
+                ],
+                "7": [
+                    {
+                        "id": "tech_move_planets",
+                        "display_name": "Move planets between systems",
+                        "description": "By generating controlled spacetime fissures, we can now carefully and precisely move entire planets from one star system to another, redrawing the map of the galaxy to our liking.",
+                        "benefit": "Unlocks a late-game project to attach massive thrusters to a colonized planet, allowing it to be moved to an empty orbit in an adjacent, friendly system."
+                    },
+                    {
+                        "id": "tech_hollow_worlds",
+                        "display_name": "Hollow worlds as industrial hubs",
+                        "description": "We can now excavate the entire interior of a small planet or moon, creating a shell world with a staggering amount of internal surface area for industrial development.",
+                        "benefit": "Allows the conversion of small, barren planets into 'Hollow Worlds,' which provide more building slots than any other type of planet."
+                    }
+                ],
+                "8": [
+                    {
+                        "id": "tech_star_lifting",
+                        "display_name": "Star lifting",
+                        "description": "Our megastructures can now siphon hydrogen and helium directly from the surface of stars, providing a virtually infinite supply of fuel and raw material for fusion.",
+                        "benefit": "Dyson Spheres and Stellar Refineries now produce a massive amount of strategic resources in addition to energy, effectively removing all resource upkeep concerns."
+                    },
+                    {
+                        "id": "tech_nova_triggering_weapons",
+                        "display_name": "Nova-triggering weapons",
+                        "description": "We have learned to manipulate the fusion process within a star itself. By introducing exotic catalysts, we can force a star to prematurely go nova, scouring an entire system of all life and civilization.",
+                        "benefit": "Unlocks a starbase module that, after a long charging period, can be activated to turn the system's star into a nova, destroying all planets and fleets (including your own) in the system."
+                    }
+                ]
+            }
+        },
+        {
+            "category_id": "barriers",
+            "category_name": "Barriers & Fields",
+            "description": "Defenses, energy manipulation.",
+            "tiers": {
+                "1": [
+                    {
+                        "id": "tech_deflection_grids",
+                        "display_name": "Deflection Grids",
+                        "description": "A basic energy field that can absorb or deflect low-intensity kinetic and particle attacks. While rudimentary, it is the foundation of all future shield technology.",
+                        "benefit": "Unlocks the basic 'Deflector' shield module for ships and planetary defense grids."
+                    },
+                    {
+                        "id": "tech_containment_domes",
+                        "display_name": "Containment Domes",
+                        "description": "These static fields can be projected over colonial habitats to protect them from hostile atmospheres or micrometeorite impacts.",
+                        "benefit": "Unlocks the 'Planetary Shield' building, which reduces damage from orbital bombardment by 10%."
+                    }
+                ],
+                "2": [
+                    {
+                        "id": "tech_phase_shields",
+                        "display_name": "Phase Shields",
+                        "description": "This next-generation shield technology rapidly cycles between different energy frequencies, making it significantly harder for enemy weapons to find a harmonic that can penetrate it.",
+                        "benefit": "Unlocks advanced shield modules that have a passive 10% chance to completely negate any single source of damage."
+                    },
+                    {
+                        "id": "tech_warp_lattices",
+                        "display_name": "Warp Lattices",
+                        "description": "By creating a stable field of warped spacetime around a ship, we can reduce its apparent mass, allowing it to travel faster and more efficiently at sublight speeds.",
+                        "benefit": "Unlocks an auxiliary ship module that increases a ship's sublight speed and evasion."
+                    }
+                ],
+                "3": [
+                    {
+                        "id": "tech_black_hole_projectors",
+                        "display_name": "Black Hole Projectors",
+                        "description": "A terrifying defensive weapon that creates a momentary, microscopic black hole. The intense gravity well can pull incoming torpedoes and fighter craft off-course.",
+                        "benefit": "Unlocks a Starbase defense module that acts as a point-defense weapon, destroying a percentage of incoming missiles and strike craft each turn."
+                    },
+                    {
+                        "id": "tech_singularity_shields",
+                        "display_name": "Singularity Shields",
+                        "description": "This shield works not by deflecting energy, but by bending spacetime around the ship, causing many incoming projectiles to simply miss their target.",
+                        "benefit": "Unlocks shield modules that grant a passive +15% evasion bonus to the ship in addition to their shield hit points."
+                    }
+                ],
+                "4": [
+                    {
+                        "id": "tech_flux_screens",
+                        "display_name": "Flux Screens",
+                        "description": "An advanced shield that can re-route the energy from an enemy attack to partially recharge its own power source.",
+                        "benefit": "A percentage of all damage absorbed by these shields is converted back into shield points, effectively regenerating them mid-combat."
+                    },
+                    {
+                        "id": "tech_gravity_nets",
+                        "display_name": "Gravity Nets",
+                        "description": "Projectors that fire a web of gravitons, dramatically increasing the mass of enemy ships and making it nearly impossible for them to maneuver.",
+                        "benefit": "Unlocks a weapon module that deals no damage but completely immobilizes an enemy ship for one turn, preventing it from moving or retreating."
+                    }
+                ],
+                "5": [
+                    {
+                        "id": "tech_planetary_aegis",
+                        "display_name": "Planetary Aegis",
+                        "description": "An impenetrable network of shield generators and defense platforms that encases an entire world. No fleet, no matter how powerful, can break through.",
+                        "benefit": "Unlocks a planetary wonder, the 'Planetary Aegis,' which makes the host planet completely immune to all forms of orbital bombardment."
+                    },
+                    {
+                        "id": "tech_anti_ftl_interdiction",
+                        "display_name": "Anti-FTL interdiction fields",
+                        "description": "By generating a massive gravity well, these platforms can pull ships out of hyperspace lanes or prevent them from initiating a jump to FTL.",
+                        "benefit": "Unlocks Starbase modules that prevent any enemy fleet from entering FTL within that system."
+                    }
+                ],
+                "6": [
+                    {
+                        "id": "tech_phase_interdictors",
+                        "display_name": "Phase Interdictors",
+                        "description": "These fields project a disruptive energy across a planet that makes it impossible for cloaked ships or teleporters to operate, securing our worlds from spies.",
+                        "benefit": "Unlocks a planetary building that makes the planet immune to enemy espionage actions."
+                    },
+                    {
+                        "id": "tech_dimensional_barriers",
+                        "display_name": "Dimensional Barriers",
+                        "description": "We can now project a stable barrier across the mouth of a wormhole or rift, preventing any travel through it until the barrier is taken down.",
+                        "benefit": "Unlocks a special starbase that can be constructed on a wormhole, allowing you to open or close it to all traffic at will."
+                    }
+                ],
+                "7": [
+                    {
+                        "id": "tech_subspace_armor",
+                        "display_name": "Subspace Armor",
+                        "description": "Integrating a phase engine directly into a ship's hull allows it to momentarily shift into subspace, causing all incoming attacks during that window to pass harmlessly through.",
+                        "benefit": "Unlocks an auxiliary ship module that gives the ship a 20% chance to become completely immune to all damage for one combat round."
+                    },
+                    {
+                        "id": "tech_fleet_cloaking",
+                        "display_name": "Fleet-scale cloaking fields",
+                        "description": "A massive generator capable of bending light and sensor waves around an entire armada, rendering them invisible to all but the most sophisticated sensor arrays.",
+                        "benefit": "Unlocks a module for Titan-class ships that can cloak the entire fleet it is in. Cloaked fleets are invisible on the galaxy map."
+                    }
+                ],
+                "8": [
+                    {
+                        "id": "tech_reality_weaving",
+                        "display_name": "Reality Weaving",
+                        "description": "The ultimate expression of field technology. We no longer just manipulate energy; we rewrite the physical laws of a region of space to favor our own forces.",
+                        "benefit": "Unlocks a special Titan-class module that can be activated once per battle. When used, you can choose one of three effects: 'Inertial Dampening' (enemy evasion drops to 0), 'Energy Resonance' (+50% damage for your energy weapons), or 'Kinetic Suppression' (-50% damage from enemy kinetic weapons)."
+                    },
+                    {
+                        "id": "tech_temporal_bubbles",
+                        "display_name": "Temporal Bubbles",
+                        "description": "We can now create a bubble of slowed time around an entire star system, effectively freezing it in a single moment. Nothing gets in, and nothing gets out.",
+                        "benefit": "Unlocks a powerful ability for a starbase to generate a temporal bubble around its own system. For 10 turns, the system is completely inaccessible and immune to all outside forces, but its own production and ship movement are also halted."
+                    }
+                ]
+            }
+        },
+        {
+            "category_id": "biogenesis",
+            "category_name": "Biogenesis",
+            "description": "Genetics, ecology, life sciences.",
+            "tiers": {
+                "1": [
+                    {
+                        "id": "tech_clone_pods",
+                        "display_name": "Clone Pods",
+                        "description": "Accelerated cloning techniques allow us to supplement our natural population growth, ensuring our new colonies are populated and productive in record time.",
+                        "benefit": "Unlocks the 'Cloning Facility' building, which increases population growth speed on a planet by 25%."
+                    },
+                    {
+                        "id": "tech_adaptive_farming",
+                        "display_name": "Adaptive Farming",
+                        "description": "By genetically tailoring crops to the specific soil and atmospheric conditions of our colony worlds, we can ensure a bountiful and reliable food supply.",
+                        "benefit": "Unlocks Hydroponics Farm building upgrades, which provide +2 food per farmer."
+                    }
+                ],
+                "2": [
+                    {
+                        "id": "tech_xenosplice_protocols",
+                        "display_name": "Xenosplice Protocols",
+                        "description": "The study of alien biology allows us to borrow useful genetic traits—such as stronger muscles or sharper senses—and splice them into our own genome.",
+                        "benefit": "Allows the first tier of genetic modification for your species, providing 2 trait points to spend."
+                    },
+                    {
+                        "id": "tech_symbiotic_engineering",
+                        "display_name": "Symbiotic Engineering",
+                        "description": "We have engineered a microorganism that lives in symbiosis with our population, boosting their immune systems and overall sense of well-being.",
+                        "benefit": "+5% to population happiness (morale) empire-wide."
+                    }
+                ],
+                "3": [
+                    {
+                        "id": "tech_genesplice_guilds",
+                        "display_name": "Genesplice Guilds",
+                        "description": "These powerful consortiums have perfected the art of genetic engineering, offering bespoke modifications to the highest bidder and pushing the boundaries of biological science.",
+                        "benefit": "Reduces the cost and time required for genetic modification projects by 30%."
+                    },
+                    {
+                        "id": "tech_bioweaponization",
+                        "display_name": "Bioweaponization",
+                        "description": "Engineered plagues and virulent agents can be deployed against our enemies, attacking their population directly and bypassing conventional fleet and planetary defenses.",
+                        "benefit": "Unlocks special missile-slot weapons that deal no damage to ships but, upon hitting a planet during bombardment, will begin to kill enemy population units."
+                    }
+                ],
+                "4": [
+                    {
+                        "id": "tech_cyber_organics",
+                        "display_name": "Cyber-organics",
+                        "description": "We are now able to seamlessly integrate living tissue with cybernetic components, creating a hybrid form of life that enjoys the best of both worlds.",
+                        "benefit": "Citizens with cybernetic upgrades no longer suffer morale penalties and gain a small bonus to food production in addition to their other bonuses."
+                    },
+                    {
+                        "id": "tech_organ_transplant_diplomacy",
+                        "display_name": "Organ transplant diplomacy",
+                        "description": "Our mastery of cloning and organ replication allows us to offer medical aid on a galactic scale, trading our biological expertise for diplomatic favor.",
+                        "benefit": "Unlocks the diplomatic option to sign a 'Medical Aid Treaty,' which transfers a small amount of your population growth to the target empire in exchange for a significant boost in diplomatic relations."
+                    }
+                ],
+                "5": [
+                    {
+                        "id": "tech_evolutionary_design",
+                        "display_name": "Evolutionary Design",
+                        "description": "We no longer simply adapt to new worlds; we redesign our people to thrive in them. We can create subspecies perfectly suited for desert, arctic, or even toxic environments.",
+                        "benefit": "Allows advanced genetic modification, letting you specialize sub-groups of your population with powerful traits tailored for specific planetary environments."
+                    },
+                    {
+                        "id": "tech_hive_bonded_mind",
+                        "display_name": "Hive-bonded mind unity",
+                        "description": "Through a combination of genetic engineering and psychic catalysts, our people can now share a low-level telepathic bond, creating a society of perfect unity and empathy.",
+                        "benefit": "Your empire becomes a hive-mind. All morale penalties and benefits are removed and replaced with a flat +15% bonus to all production from population."
+                    }
+                ],
+                "6": [
+                    {
+                        "id": "tech_pan_galactic_biology",
+                        "display_name": "Pan-Galactic Biology",
+                        "description": "By sequencing fragmented DNA found in fossils and ruins, we can now bring back ancient, extinct leviathans and creatures from across the galaxy to study or use.",
+                        "benefit": "Unlocks a special project to resurrect extinct alien life on your worlds, creating powerful, unique armies for planetary defense or unlocking planetary bonuses."
+                    },
+                    {
+                        "id": "tech_universal_symbiosis",
+                        "display_name": "Universal symbiosis",
+                        "description": "We have engineered a universal biological agent that can be introduced to any ecosystem, forming a symbiotic link with all life and creating a profound sense of peace and harmony.",
+                        "benefit": "Provides a permanent +15% morale (happiness) bonus to all biological populations across the entire empire."
+                    }
+                ],
+                "7": [
+                    {
+                        "id": "tech_genetic_apotheosis",
+                        "display_name": "Genetic Apotheosis",
+                        "description": "We have mapped every sequence of our genome and can now rewrite it at will to create the perfect citizen: intelligent, strong, long-lived, and unflinchingly loyal.",
+                        "benefit": "Allows a final, ultimate re-sequencing of your species, granting 10 points to spend on extremely powerful genetic traits."
+                    },
+                    {
+                        "id": "tech_hybridize_species",
+                        "display_name": "Hybridize species",
+                        "description": "By combining the strongest genetic traits from two or more distinct sapient species, we can forge a new, hybrid lifeform that will become the sole identity of our empire.",
+                        "benefit": "Allows you to merge your primary species with another species in your empire, combining their positive traits into a single new species that replaces both originals."
+                    }
+                ],
+                "8": [
+                    {
+                        "id": "tech_immortal_populations",
+                        "display_name": "Immortal populations",
+                        "description": "We have finally defeated death itself. Through constant cellular regeneration and genetic cleansing, our citizens will now live forever, their accumulated knowledge and experience enriching our empire for eternity.",
+                        "benefit": "All leaders become immortal. Population no longer dies of old age, and all leaders gain experience 50% faster."
+                    },
+                    {
+                        "id": "tech_weaponized_evolution",
+                        "display_name": "Weaponized evolution",
+                        "description": "Our bio-ships can now analyze enemy weapon signatures and rewrite their own genetic code in the heat of battle, evolving new defenses and weapon systems on the fly.",
+                        "benefit": "At the start of each combat round, your fleets automatically gain a 5% resistance bonus to the damage type that dealt the most damage to them in the previous round."
+                    }
+                ]
+            }
+        },
+        {
+            "category_id": "spacetime",
+            "category_name": "Spacetime",
+            "description": "Propulsion, FTL, exotic physics.",
+            "tiers": {
+                "1": [
+                    {
+                        "id": "tech_ion_drives",
+                        "display_name": "Ion Drives",
+                        "description": "By accelerating charged particles to high velocities, these engines provide efficient, reliable thrust for sublight travel within a star system.",
+                        "benefit": "Unlocks basic ship engines, allowing for movement between planets in a system."
+                    },
+                    {
+                        "id": "tech_jump_beacons",
+                        "display_name": "Jump Beacons",
+                        "description": "A network of navigation beacons that stabilize hyperspace corridors, allowing for faster and safer travel between key points in our territory.",
+                        "benefit": "Fleets traveling between two systems that both contain a starbase move 30% faster."
+                    }
+                ],
+                "2": [
+                    {
+                        "id": "tech_warp_harness",
+                        "display_name": "Warp Harness",
+                        "description": "This drive creates a bubble of stable spacetime around a starship, allowing it to 'warp' space and travel faster than light.",
+                        "benefit": "Unlocks the first FTL drive, allowing ships to travel between star systems."
+                    },
+                    {
+                        "id": "tech_rift_transit",
+                        "display_name": "Rift Transit",
+                        "description": "Instead of traveling through normal space, this drive tears a temporary hole into a different dimension where distances are shorter, allowing for rapid point-to-point jumps.",
+                        "benefit": "An alternative FTL drive that allows fleets to ignore interstellar phenomena like nebulas, jumping directly between systems."
+                    }
+                ],
+                "3": [
+                    {
+                        "id": "tech_stasis_nets",
+                        "display_name": "Stasis Nets",
+                        "description": "A weaponized spacetime field that can temporarily trap enemy ships in a bubble of slowed time, making them easy targets.",
+                        "benefit": "A heavy weapon slot item that significantly reduces the speed and evasion of a targeted enemy ship."
+                    },
+                    {
+                        "id": "tech_phase_folding",
+                        "display_name": "Phase Folding",
+                        "description": "A risky but powerful form of FTL travel that 'folds' space, bringing the origin and destination points together for an instantaneous transit. Miscalculations can be... messy.",
+                        "benefit": "An advanced FTL drive that is significantly faster than standard warp but has a small chance of damaging the fleet upon arrival."
+                    }
+                ],
+                "4": [
+                    {
+                        "id": "tech_fleet_relays",
+                        "display_name": "Fleet Relays",
+                        "description": "By using micro-wormholes to transmit data, these relays allow for instantaneous, lag-free communication and coordination with any fleet, anywhere in the galaxy.",
+                        "benefit": "All fleets are considered 'in command range' regardless of their distance from your capital, removing all communication-based penalties."
+                    },
+                    {
+                        "id": "tech_mass_drivers",
+                        "display_name": "System-scale mass drivers",
+                        "description": "A network of immense magnetic accelerators that can alter the orbits of celestial bodies, allowing for fine-tuning of a system's layout or, more crudely, for hurling moons at your enemies.",
+                        "benefit": "Allows a megaproject to move planets to different orbital slots within a system, and to de-orbit and destroy moons."
+                    }
+                ],
+                "5": [
+                    {
+                        "id": "tech_controlled_wormholes",
+                        "display_name": "Controlled Wormholes",
+                        "description": "We have learned to create and sustain stable, artificial wormholes, creating permanent, instantaneous bridges between two points in the galaxy.",
+                        "benefit": "Unlocks the 'Wormhole Generator' megastructure. Two generators can be built and then linked, allowing instantaneous travel for all your fleets between the two systems."
+                    },
+                    {
+                        "id": "tech_micro_warp_tunnels",
+                        "display_name": "Micro-warp Tunnels",
+                        "description": "A combat-focused drive that allows a ship to perform a series of tiny, instantaneous FTL jumps on the battlefield, making it exceptionally difficult to track and target.",
+                        "benefit": "Unlocks an advanced combat computer that gives ships the 'Blink' ability, allowing them to instantly teleport to another location on the combat grid once per battle."
+                    }
+                ],
+                "6": [
+                    {
+                        "id": "tech_temporal_stabilizers",
+                        "display_name": "Temporal Stabilizers",
+                        "description": "By anchoring a region of spacetime, we can create a save state. If a battle or event goes poorly, we can rewind time within that system by a short amount and try again.",
+                        "benefit": "Unlocks a special ability on a starbase that, once activated, allows you to 'undo' the previous turn's events (combat, colonization, etc.) within that specific system. Has a very long cooldown."
+                    },
+                    {
+                        "id": "tech_acceleration_fields",
+                        "display_name": "Acceleration fields",
+                        "description": "A temporal field projector that accelerates time for a friendly fleet, allowing it to move, fire, and maneuver twice in the span of a single combat round.",
+                        "benefit": "Unlocks a Titan-class aura module that allows all friendly ships in the fleet to act twice during the first round of combat."
+                    }
+                ],
+                "7": [
+                    {
+                        "id": "tech_dimensional_ascension",
+                        "display_name": "Dimensional Ascension",
+                        "description": "We can now open brief windows into parallel universes—timelines where our empire failed or never existed—and extract resources from their uninhabited worlds.",
+                        "benefit": "Unlocks a megastructure, the 'Timeline Siphon,' which generates a random amount of a random strategic resource each turn."
+                    },
+                    {
+                        "id": "tech_phase_veil_fleets",
+                        "display_name": "Phase-veil fleets",
+                        "description": "These fleets are permanently shifted slightly out of phase with normal reality. They cannot be seen, targeted, or interacted with until they choose to materialize and open fire.",
+                        "benefit": "Unlocks a new fleet stance. While in this stance, the fleet is completely invisible and cannot be attacked, but also cannot move. Their first attack out of this stance deals bonus damage."
+                    }
+                ],
+                "8": [
+                    {
+                        "id": "tech_cosmogenesis",
+                        "display_name": "Cosmogenesis",
+                        "description": "Our mastery of physics is now absolute. We can collapse matter to create new singularities or ignite new suns in the dark void between galaxies.",
+                        "benefit": "Unlocks the ultimate megaprojects: Create a new star system by igniting a star, or create a permanent black hole in an empty system to make it impassable to all ships."
+                    },
+                    {
+                        "id": "tech_collapse_stars",
+                        "display_name": "Collapse stars into weapons",
+                        "description": "Why simply block a system when you can weaponize it? By destabilizing a star, we can force it to collapse into a black hole, generating a gamma-ray burst that will annihilate any fleet in the system.",
+                        "benefit": "A final, terrifying upgrade to the Nova-Triggering weapon. Instead of just destroying the system, it destroys all planets in that system and it also generates a massive wave of energy that heavily damages any fleets in adjacent systems."
+                    }
+                ]
+            }
+        },
+        {
+            "category_id": "arms",
+            "category_name": "Arms of the Void",
+            "description": "Weapons, fleet combat.",
+            "tiers": {
+                "1": [
+                    {
+                        "id": "tech_particle_beams",
+                        "display_name": "Particle Beams",
+                        "description": "An entry-level directed-energy weapon that fires focused beams of energized particles to burn through enemy armor.",
+                        "benefit": "Standard energy weapon. Deals bonus damage against armor but is less effective against shields."
+                    },
+                    {
+                        "id": "tech_kinetic_drivers",
+                        "display_name": "Kinetic Drivers",
+                        "description": "These weapons use powerful magnetic fields to accelerate a solid metal slug to a fraction of the speed of light, relying on pure kinetic force to shatter enemy hulls.",
+                        "benefit": "Standard kinetic weapon. Deals bonus damage against shields but is less effective against armor."
+                    }
+                ],
+                "2": [
+                    {
+                        "id": "tech_graviton_shears",
+                        "display_name": "Graviton Shears",
+                        "description": "This weapon projects a focused beam of gravitons that warps and tears at the enemy ship's structure, bypassing conventional armor entirely.",
+                        "benefit": "An energy weapon that completely ignores enemy armor rating when calculating damage."
+                    },
+                    {
+                        "id": "tech_fusion_lances",
+                        "display_name": "Fusion Lances",
+                        "description": "A large, spinal-mount weapon that fires a sustained beam of superheated plasma from a contained fusion reaction. It can slice smaller ships in half.",
+                        "benefit": "A heavy weapon that deals massive damage, but can only be mounted on Cruisers and larger ships."
+                    }
+                ],
+                "3": [
+                    {
+                        "id": "tech_nova_torpedoes",
+                        "display_name": "Nova Torpedoes",
+                        "description": "These warheads create a miniature fusion reaction upon detonation, replicating the explosive force of a small star for a brief moment.",
+                        "benefit": "A torpedo weapon that deals heavy area-of-effect (AoE) damage, damaging nearby ships in addition to its primary target."
+                    },
+                    {
+                        "id": "tech_singularity_cannons",
+                        "display_name": "Singularity Cannons",
+                        "description": "Firing a projectile encased in a stable singularity, this cannon delivers a payload that collapses upon impact, crushing the target's hull.",
+                        "benefit": "A kinetic weapon that has a chance to instantly destroy any ship smaller than a Battleship, regardless of its remaining health."
+                    }
+                ],
+                "4": [
+                    {
+                        "id": "tech_dark_energy_bombards",
+                        "display_name": "Dark Energy Bombards",
+                        "description": "A mysterious and unstable weapon that channels dark energy into a volatile projectile. Its effects on the target are unpredictable but always devastating.",
+                        "benefit": "Deals a high amount of damage that randomly fluctuates between 50% and 200% of its base value."
+                    },
+                    {
+                        "id": "tech_plasma_filaments",
+                        "display_name": "Plasma Filaments",
+                        "description": "This weapon launches a web of energized plasma that clings to the enemy hull, burning through its superstructure and starting fires within the ship itself.",
+                        "benefit": "Deals damage over time for 3 combat rounds, continuing to burn the enemy ship after the initial hit."
+                    }
+                ],
+                "5": [
+                    {
+                        "id": "tech_disruptor_arrays",
+                        "display_name": "Disruptor Arrays",
+                        "description": "Firing bolts of energy that resonate at the molecular frequency of ship armor, these weapons are designed to tear a vessel apart piece by piece.",
+                        "benefit": "These weapons deal increasing damage with each successive hit on the same target in a single combat."
+                    },
+                    {
+                        "id": "tech_matter_annihilators",
+                        "display_name": "Matter-Annihilators",
+                        "description": "This weapon fires a stream of antimatter that annihilates whatever it touches, converting the enemy's hull directly into explosive energy.",
+                        "benefit": "The ultimate direct-damage weapon, ignoring all shields and armor and dealing direct damage to the ship's hull."
+                    }
+                ],
+                "6": [
+                    {
+                        "id": "tech_subspace_imploders",
+                        "display_name": "Subspace Imploders",
+                        "description": "This warhead doesn't explode outwards; it violently collapses a small bubble of subspace, pulling everything nearby into the resulting void.",
+                        "benefit": "A missile weapon that, upon detonation, pulls all ships in a small radius toward its center and deals heavy damage to them."
+                    },
+                    {
+                        "id": "tech_nanite_swarms",
+                        "display_name": "Nanite Swarms",
+                        "description": "A cloud of microscopic, self-replicating robots that are programmed to disassemble enemy ships on a molecular level.",
+                        "benefit": "A 'carrier' type weapon that launches swarms of nanites. If the target ship is destroyed while nanites are active on it, a new, weaker swarm is spawned from its wreckage."
+                    }
+                ],
+                "7": [
+                    {
+                        "id": "tech_worldbreakers",
+                        "display_name": "Worldbreakers",
+                        "description": "The ultimate planetary assault weapon. The Worldbreaker fires a seismic charge deep into a planet's core, shattering it into a cloud of harvestable asteroids.",
+                        "benefit": "Unlocks a special Titan-class weapon that, when fired at an enemy planet over several turns, will destroy the planet and convert it into a large deposit of minerals and rare resources."
+                    },
+                    {
+                        "id": "tech_sunflare_warheads",
+                        "display_name": "Sunflare Warheads",
+                        "description": "A torpedo designed not to hit ships, but to be fired into a system's star. It induces a massive solar flare that sweeps across the system, crippling all fleets within it.",
+                        "benefit": "A unique weapon that targets a system's star. If it hits, all ships in the system (friendly and enemy) have their shields disabled and suffer moderate hull damage for the next 3 combat rounds."
+                    }
+                ],
+                "8": [
+                    {
+                        "id": "tech_apotheosis_weapons",
+                        "display_name": "Apotheosis Weapons",
+                        "description": "The final word in armament. This weapon does not fire a projectile; it temporarily rewrites physical constants in the target area, causing enemy ships to simply cease to exist.",
+                        "benefit": "A 'wonder weapon' that can only be equipped on your empire's flagship. It has a very long cooldown but can target a specific enemy fleet anywhere in the system, destroying 50% of its ships at random, regardless of size or defenses."
+                    },
+                    {
+                        "id": "tech_living_weapons",
+                        "display_name": "Living Weapons",
+                        "description": "We have moved beyond building ships of metal and steel. Our fleets are now composed of genetically engineered, space-faring leviathans, born and bred for war.",
+                        "benefit": "Unlocks the ability to build 'Leviathan' class ships. These ships act as carriers, do not have shields but regenerate hull armor rapidly, and can be upgraded by completing further genetics research projects instead of using minerals."
+                    }
+                ]
+            }
+        }
+    ]
+}

@@ -1,38 +1,35 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
-[ext_resource type="Script" path="res://ui/screens/research_screen.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://ui/screens/tech_base_screen.tscn" id="1_base"]
+[ext_resource type="Script" path="res://ui/screens/research_screen.gd" id="2_script"]
 
-[node name="ResearchScreen" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-script = ExtResource("1_script")
+[node name="ResearchScreen" instance=ExtResource("1_base")]
+script = ExtResource("2_script")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="TechTreePanel" type="PanelContainer" parent="."]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 11
+anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -800.0
+grow_horizontal = 0
+grow_vertical = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="PanelContainer"]
+[node name="Label" type="Label" parent="TechTreePanel"]
 layout_mode = 2
-
-[node name="Label" type="Label" parent="PanelContainer/CenterContainer"]
-layout_mode = 2
-text = "RESEARCH SCREEN"
-theme_override_font_sizes/font_size = 50
+text = "Technology Tree Goes Here"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ReturnButton" type="Button" parent="."]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
+anchors_preset = 2
 anchor_top = 1.0
-anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -150.0
+offset_left = 20.0
 offset_top = -60.0
-offset_right = -20.0
+offset_right = 150.0
 offset_bottom = -20.0
 text = "Return"
 
