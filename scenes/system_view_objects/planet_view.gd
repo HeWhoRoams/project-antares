@@ -3,10 +3,10 @@ extends Control
 
 @onready var sprite: Sprite2D = $VBoxContainer/Sprite2D
 @onready var label: Label = $VBoxContainer/Label
+@onready var hover_frame: ColorRect = %HoverFrame
 
-var _planet_data: PlanetData
+var _body_data: CelestialBodyData
 
-# --- Textures ---
 const PLANET_TEXTURES = {
 	PlanetData.PlanetType.OCEAN: preload("res://assets/images/planets/ocean.png"),
 	PlanetData.PlanetType.TERRAN: preload("res://assets/images/planets/terran.png"),
@@ -20,7 +20,6 @@ const BODY_TEXTURES = {
 	CelestialBodyData.BodyType.ASTEROID_BELT: preload("res://assets/images/planets/asteroid_belt.png")
 }
 
-# --- Target pixel sizes ---
 const PLANET_SIZES = {
 	PlanetData.PlanetType.OCEAN: Vector2(80, 80),
 	PlanetData.PlanetType.TERRAN: Vector2(80, 80),
@@ -36,11 +35,12 @@ const GENERAL_BODY_SIZES = {
 
 const ROMAN_NUMERALS = ["I", "II", "III", "IV", "V", "VI", "VII"]
 
-func set_body_data(body_data: CelestialBodyData, system_name: String) -> void:
-	# Store the data for use in the input handler
-	if body_data is PlanetData:
-		_planet_data = body_data
+func _ready() -> void:
+	mouse_entered.connect(_on_mouse_entered)
+	mouse_exited.connect(_on_mouse_exited)
 
+func set_body_data(body_data: CelestialBodyData, system_name: String) -> void:
+	_body_data = body_data
 	var body_type_string: String
 	var target_size := Vector2(100, 100)
 
@@ -69,8 +69,12 @@ func set_body_data(body_data: CelestialBodyData, system_name: String) -> void:
 
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
-		# Check if this is a planet and if it's owned by the player
-		if _planet_data and _planet_data.owner_id == PlayerManager.player_empire.id:
+		if _body_data is PlanetData and _body_data.owner_id == PlayerManager.player_empire.id:
 			AudioManager.play_sfx("confirm")
-			# Navigate to the Colonies screen, passing this planet's data as context
-			SceneManager.change_scene("res://ui/screens/colonies_screen.tscn", _planet_data)
+			SceneManager.change_scene("res://ui/screens/colonies_screen.tscn", _body_data)
+
+func _on_mouse_entered() -> void:
+	hover_frame.show()
+
+func _on_mouse_exited() -> void:
+	hover_frame.hide()
