@@ -3,6 +3,10 @@ extends Node
 
 @export var number_of_systems: int = 20
 
+# ADDED: Re-introducing the constants needed for positioning.
+const GALAXY_SIZE_X = 1000.0
+const GALAXY_SIZE_Y = 1000.0
+
 var star_systems: Dictionary = {}
 var _celestial_body_generator: CelestialBodyGenerator
 var _galaxy_builder: GalaxyBuilder

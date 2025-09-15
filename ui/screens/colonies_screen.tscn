@@ -11,87 +11,131 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="TopBar" type="PanelContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
-[node name="ColonyList" type="Tree" parent="MarginContainer/VBoxContainer"]
+[node name="ColonyNameLabel" type="Label" parent="VBoxContainer/TopBar"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Colony of Draconis II"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PopulationLabel" type="Label" parent="VBoxContainer/TopBar"]
+unique_name_in_owner = true
+layout_mode = 2
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_right = -10.0
+grow_horizontal = 0
+text = "Pop 8/12 (+73k)"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="MainPanel" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MainHBox" type="HBoxContainer" parent="VBoxContainer/MainPanel"]
+layout_mode = 2
+
+[node name="SystemPlanetList" type="VBoxContainer" parent="VBoxContainer/MainPanel/MainHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="CenterPanel" type="VBoxContainer" parent="VBoxContainer/MainPanel/MainHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ResourceDisplay" type="GridContainer" parent="VBoxContainer/MainPanel/MainHBox/CenterPanel"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
-hide_root = true
+columns = 4
 
-[node name="BottomPanel" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 250)
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/BottomPanel"]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="PlanetDetailsPanel" type="PanelContainer" parent="MarginContainer/VBoxContainer/BottomPanel/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="PlanetDetailsLabel" type="Label" parent="MarginContainer/VBoxContainer/BottomPanel/HBoxContainer/PlanetDetailsPanel"]
+[node name="PopulationAllocation" type="GridContainer" parent="VBoxContainer/MainPanel/MainHBox/CenterPanel"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Planet Details"
-horizontal_alignment = 1
+size_flags_vertical = 3
+columns = 12
 
-[node name="PopulationOutputPanel" type="PanelContainer" parent="MarginContainer/VBoxContainer/BottomPanel/HBoxContainer"]
+[node name="ConstructionDisplay" type="PanelContainer" parent="VBoxContainer/MainPanel/MainHBox"]
+custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
-size_flags_horizontal = 3
 
-[node name="PopulationOutputLabel" type="Label" parent="MarginContainer/VBoxContainer/BottomPanel/HBoxContainer/PopulationOutputPanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MainPanel/MainHBox/ConstructionDisplay"]
+layout_mode = 2
+
+[node name="ConstructionLabel" type="Label" parent="VBoxContainer/MainPanel/MainHBox/ConstructionDisplay/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Population Output"
+text = "Trade Goods"
 horizontal_alignment = 1
 
-[node name="MiniStarmapPanel" type="PanelContainer" parent="MarginContainer/VBoxContainer/BottomPanel/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="MiniStarmapLabel" type="Label" parent="MarginContainer/VBoxContainer/BottomPanel/HBoxContainer/MiniStarmapPanel"]
+[node name="ConstructionProgress" type="ProgressBar" parent="VBoxContainer/MainPanel/MainHBox/ConstructionDisplay/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Mini Starmap"
-horizontal_alignment = 1
+value = 50.0
+show_percentage = false
 
-[node name="GlobalVariablesPanel" type="PanelContainer" parent="MarginContainer/VBoxContainer/BottomPanel/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MainPanel/MainHBox/ConstructionDisplay/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
+alignment = 1
 
-[node name="GlobalVariablesLabel" type="Label" parent="MarginContainer/VBoxContainer/BottomPanel/HBoxContainer/GlobalVariablesPanel"]
+[node name="ChangeButton" type="Button" parent="VBoxContainer/MainPanel/MainHBox/ConstructionDisplay/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Change"
+
+[node name="BuyButton" type="Button" parent="VBoxContainer/MainPanel/MainHBox/ConstructionDisplay/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Buy"
+
+[node name="PlanetSurface" type="PanelContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+
+[node name="Background" type="TextureRect" parent="VBoxContainer/PlanetSurface"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Global Variables"
-horizontal_alignment = 1
+expand_mode = 1
+stretch_mode = 6
 
-[node name="ReturnButton" type="Button" parent="."]
+[node name="BuildingsContainer" type="Control" parent="VBoxContainer/PlanetSurface"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="FooterButtons" type="HBoxContainer" parent="VBoxContainer/PlanetSurface"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -150.0
+offset_left = -300.0
 offset_top = -60.0
-offset_right = -20.0
-offset_bottom = -20.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+alignment = 2
+
+[node name="NPCsButton" type="Button" parent="VBoxContainer/PlanetSurface/FooterButtons"]
+layout_mode = 2
+text = "NPCs"
+
+[node name="ReturnButton" type="Button" parent="VBoxContainer/PlanetSurface/FooterButtons"]
+layout_mode = 2
 text = "Return"
 
-[connection signal="item_selected" from="MarginContainer/VBoxContainer/ColonyList" to="." method="_on_colony_list_item_selected"]
-[connection signal="pressed" from="ReturnButton" to="." method="_on_return_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/PlanetSurface/FooterButtons/ReturnButton" to="." method="_on_return_button_pressed"]

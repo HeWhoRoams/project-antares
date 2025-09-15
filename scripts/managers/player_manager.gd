@@ -47,8 +47,10 @@ func _colonize_home_planet() -> void:
 			if body is PlanetData and body.planet_type == PlanetData.PlanetType.TERRAN:
 				body.owner_id = player_empire.id
 				body.current_population = 10
-				body.workers = 10 # Start with all population as workers
-				print("PlayerManager: Home planet Sol III colonized.")
+				body.workers = 10 # Start with all 10 population as workers
+				body.farmers = 0
+				body.scientists = 0
+				print("PlayerManager: Home planet Sol III colonized with 10 population.")
 				return
 
 func can_research(tech_data: Technology) -> bool:
@@ -92,5 +94,19 @@ func _process_ship_movement() -> void:
 				ship_arrived.emit(ship_data)
 
 func _on_save_data_loaded(data: Dictionary) -> void:
-	# This function will also need to be updated to handle new save data format
-	pass
+	owned_ships.clear()
+	var player_data = data.get("player", {})
+	research_points = player_data.get("research_points", 50)
+	unlocked_techs = player_data.get("unlocked_techs", {})
+	
+	var loaded_ships = player_data.get("owned_ships", {})
+	for ship_id in loaded_ships:
+		var ship_data = loaded_ships[ship_id]
+		var new_ship = ShipData.new()
+		new_ship.id = ship_data.id
+		new_ship.owner_id = ship_data.owner_id
+		new_ship.current_system_id = ship_data.current_system_id
+		new_ship.destination_system_id = ship_data.destination_system_id
+		new_ship.turns_to_arrival = ship_data.turns_to_arrival
+		owned_ships[ship_id] = new_ship
+	print("PlayerManager: Loaded player state from save.")

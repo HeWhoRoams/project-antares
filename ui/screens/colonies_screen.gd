@@ -1,67 +1,96 @@
 extends Control
 
-@onready var colony_list_tree: Tree = %ColonyList
-@onready var planet_details_label: Label = %PlanetDetailsLabel
-@onready var population_output_label: Label = %PopulationOutputLabel
-@onready var mini_starmap_label: Label = %MiniStarmapLabel
-@onready var global_variables_label: Label = %GlobalVariablesLabel
+# References to UI sections
+@onready var colony_name_label: Label = %ColonyNameLabel
+@onready var population_label: Label = %PopulationLabel
+@onready var system_planet_list: VBoxContainer = %SystemPlanetList
+@onready var resource_display: GridContainer = %ResourceDisplay
+@onready var pop_allocation_display: GridContainer = %PopulationAllocation
+@onready var construction_label: Label = %ConstructionLabel
+@onready var construction_progress: ProgressBar = %ConstructionProgress
+@onready var surface_background: TextureRect = %Background
+@onready var buildings_container: Control = %BuildingsContainer
 
-# Dummy data for demonstration purposes
-var _colonies_data = [
-	{ "name": "Sol III", "farmers": 5, "workers": 3, "scientists": 2, "building": "Nanoforge", "eta": 5 },
-	{ "name": "Sirius II", "farmers": 2, "workers": 8, "scientists": 1, "building": "Orbital Yard", "eta": 12 },
-	{ "name": "Alpha Centauri IV", "farmers": 3, "workers": 3, "scientists": 8, "building": "Research Lab", "eta": 3 },
-	{ "name": "Epsilon Draconis I", "farmers": 7, "workers": 2, "scientists": 1, "building": "Cloning Facility", "eta": 8 },
-]
+# The PlanetData resource for the currently viewed colony
+var _current_planet: PlanetData
+
+# Preload textures for backgrounds
+const SURFACE_BACKGROUNDS = {
+	PlanetData.PlanetType.TERRAN: preload("res://assets/images/planet_surfaces/terran_surface.png"),
+	PlanetData.PlanetType.DESERT: preload("res://assets/images/planet_surfaces/desert_surface.png"),
+	# Add other surface backgrounds here
+}
 
 func _ready() -> void:
-	_setup_colony_list()
-	_populate_colony_list()
-	_update_bottom_panels(null) # Start with empty panels
-	
-	# Set the global variables panel once, as it's not affected by selection.
-	global_variables_label.text = "Credits: 250 BC\nFood: 15\nResearch: 59 RP"
+	# Get the planet data that was passed from the previous scene
+	if SceneManager.next_scene_context is PlanetData:
+		_current_planet = SceneManager.next_scene_context
+		_update_all_displays()
+	else:
+		printerr("ColoniesScreen: No valid PlanetData provided. Returning to starmap.")
+		SceneManager.change_scene("res://scenes/starmap/starmap.tscn")
+		return
 
-
-func _setup_colony_list() -> void:
-	colony_list_tree.set_columns(5)
-	colony_list_tree.set_column_titles_visible(true)
-	colony_list_tree.set_column_title(0, "Planet")
-	colony_list_tree.set_column_title(1, "Cultivators")
-	colony_list_tree.set_column_title(2, "Contributors")
-	colony_list_tree.set_column_title(3, "Researchers")
-	colony_list_tree.set_column_title(4, "Active Build")
-
-func _populate_colony_list() -> void:
-	var root = colony_list_tree.create_item()
-	for colony_data in _colonies_data:
-		var item = colony_list_tree.create_item(root)
-		item.set_text(0, colony_data.name)
-		item.set_text(1, str(colony_data.farmers))
-		item.set_text(2, str(colony_data.workers))
-		item.set_text(3, str(colony_data.scientists))
-		item.set_text(4, "%s (%s turns)" % [colony_data.building, colony_data.eta])
-		# Store the raw data in the item for later use
-		item.set_metadata(0, colony_data)
-
-func _on_colony_list_item_selected() -> void:
-	var selected_item = colony_list_tree.get_selected()
-	if not selected_item:
+func _update_all_displays() -> void:
+	if not is_instance_valid(_current_planet):
 		return
 	
-	var selected_data = selected_item.get_metadata(0)
-	_update_bottom_panels(selected_data)
+	# 1. Update Top Bar
+	colony_name_label.text = "Colony of %s" % _current_planet.name # Assuming planet has a name property
+	population_label.text = "Pop %d / %d" % [_current_planet.current_population, _current_planet.max_population]
+	
+	# 2. Update System Planet List (Placeholder)
+	for child in system_planet_list.get_children():
+		child.queue_free()
+	var temp_label = Label.new()
+	temp_label.text = "List of planets in system"
+	system_planet_list.add_child(temp_label)
+	
+	# 3. Update Resource Display (Placeholder)
+	for child in resource_display.get_children():
+		child.queue_free()
+	temp_label = Label.new()
+	temp_label.text = "Resource icons and numbers"
+	resource_display.add_child(temp_label)
+	
+	# 4. Update Population Allocation Display
+	_update_population_display()
+		
+	# 5. Update Construction Display (Placeholder)
+	construction_label.text = "Building: Hydroponics Farm"
+	construction_progress.value = 30
+	
+	# 6. Update Planet Surface
+	surface_background.texture = SURFACE_BACKGROUNDS.get(_current_planet.planet_type)
+	for child in buildings_container.get_children():
+		child.queue_free()
+	temp_label = Label.new()
+	temp_label.text = "Constructed building sprites go here"
+	temp_label.position = Vector2(100, 100)
+	buildings_container.add_child(temp_label)
 
-func _update_bottom_panels(data) -> void:
-	if data:
-		planet_details_label.text = "Details for:\n%s" % data.name
-		population_output_label.text = "Farmers: %s\nWorkers: %s\nScientists: %s" % [data.farmers, data.workers, data.scientists]
-		mini_starmap_label.text = "Showing location for:\n%s" % data.name
-	else:
-		# When nothing is selected, the panels are blank.
-		planet_details_label.text = ""
-		population_output_label.text = ""
-		mini_starmap_label.text = ""
+func _update_population_display() -> void:
+	pop_allocation_display.get_children().map(func(c): c.queue_free())
+	
+	var pop_icon = preload("res://assets/icons/population.png")
+	
+	var farmer_label = Label.new(); farmer_label.text = "Farmers:"
+	pop_allocation_display.add_child(farmer_label)
+	for i in _current_planet.farmers:
+		var icon = TextureRect.new(); icon.texture = pop_icon
+		pop_allocation_display.add_child(icon)
+	
+	var worker_label = Label.new(); worker_label.text = "Workers:"
+	pop_allocation_display.add_child(worker_label)
+	for i in _current_planet.workers:
+		var icon = TextureRect.new(); icon.texture = pop_icon
+		pop_allocation_display.add_child(icon)
+		
+	var scientist_label = Label.new(); scientist_label.text = "Scientists:"
+	pop_allocation_display.add_child(scientist_label)
+	for i in _current_planet.scientists:
+		var icon = TextureRect.new(); icon.texture = pop_icon
+		pop_allocation_display.add_child(icon)
 
 func _on_return_button_pressed() -> void:
 	AudioManager.play_sfx("back")

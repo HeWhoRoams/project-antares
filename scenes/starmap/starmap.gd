@@ -1,10 +1,12 @@
 # /scenes/starmap/starmap.gd
+# Main controller for the starmap view.
 extends Node2D
 
-@onready var camera: Camera2D = %Camera2D
 @export var star_system_view_scene: PackedScene
 @export var ship_view_scene: PackedScene
 @export var system_info_popup_scene: PackedScene
+
+@onready var camera: Camera2D = %Camera2D
 
 var hud_scene: PackedScene = preload("res://ui/hud/hud.tscn")
 var selected_ship_view: ShipView = null
@@ -137,7 +139,9 @@ func _draw_ships_for_system(system_id: StringName, ships: Array) -> void:
 		
 		new_ship_view.position = base_position + top_right_offset + (stacking_offset * i)
 		new_ship_view.set_ship_data(ship_data)
-		if ship_data.owner_id == 1:
+		
+		# UPDATED: Comparing against the player's StringName empire ID instead of the integer 1.
+		if ship_data.owner_id == PlayerManager.player_empire.id:
 			new_ship_view.modulate = Color.CYAN
 		else:
 			new_ship_view.modulate = Color.RED
