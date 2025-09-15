@@ -1,9 +1,10 @@
 # /scenes/system_view_objects/planet_view.gd
 extends Control
 
-# UPDATED: Corrected the node paths to find the nodes inside the VBoxContainer
 @onready var sprite: Sprite2D = $VBoxContainer/Sprite2D
 @onready var label: Label = $VBoxContainer/Label
+
+var _planet_data: PlanetData
 
 # --- Textures ---
 const PLANET_TEXTURES = {
@@ -19,7 +20,7 @@ const BODY_TEXTURES = {
 	CelestialBodyData.BodyType.ASTEROID_BELT: preload("res://assets/images/planets/asteroid_belt.png")
 }
 
-# --- Target pixel sizes for each body type ---
+# --- Target pixel sizes ---
 const PLANET_SIZES = {
 	PlanetData.PlanetType.OCEAN: Vector2(80, 80),
 	PlanetData.PlanetType.TERRAN: Vector2(80, 80),
@@ -33,22 +34,23 @@ const GENERAL_BODY_SIZES = {
 	CelestialBodyData.BodyType.ASTEROID_BELT: Vector2(120, 120)
 }
 
-# Helper for the new naming convention
 const ROMAN_NUMERALS = ["I", "II", "III", "IV", "V", "VI", "VII"]
 
 func set_body_data(body_data: CelestialBodyData, system_name: String) -> void:
+	# Store the data for use in the input handler
+	if body_data is PlanetData:
+		_planet_data = body_data
+
 	var body_type_string: String
 	var target_size := Vector2(100, 100)
 
 	if body_data is PlanetData:
 		var planet_data: PlanetData = body_data
 		body_type_string = PlanetData.PlanetType.keys()[planet_data.planet_type].capitalize()
-		
 		sprite.texture = PLANET_TEXTURES.get(planet_data.planet_type)
 		target_size = PLANET_SIZES.get(planet_data.planet_type, Vector2(80, 80))
 	else:
 		body_type_string = CelestialBodyData.BodyType.keys()[body_data.body_type].capitalize().replace("_", " ")
-		
 		sprite.texture = BODY_TEXTURES.get(body_data.body_type)
 		target_size = GENERAL_BODY_SIZES.get(body_data.body_type, Vector2(100, 100))
 		
@@ -64,3 +66,11 @@ func set_body_data(body_data: CelestialBodyData, system_name: String) -> void:
 			var scale_x = target_size.x / tex_size.x
 			var scale_y = target_size.y / tex_size.y
 			sprite.scale = Vector2(min(scale_x, scale_y), min(scale_x, scale_y))
+
+func _gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
+		# Check if this is a planet and if it's owned by the player
+		if _planet_data and _planet_data.owner_id == PlayerManager.player_empire.id:
+			AudioManager.play_sfx("confirm")
+			# Navigate to the Colonies screen, passing this planet's data as context
+			SceneManager.change_scene("res://ui/screens/colonies_screen.tscn", _planet_data)
