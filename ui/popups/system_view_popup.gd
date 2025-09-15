@@ -7,7 +7,7 @@ const ORBIT_BASE_RADIUS = 150.0
 const ORBIT_RADIUS_STEP = 60.0
 const ORBIT_COLOR = Color(1, 1, 1, 0.3)
 const ORBIT_LINE_WIDTH = 2.0
-const ICON_BUFFER = 100 
+const ICON_BUFFER = 100
 
 @onready var main_panel: PanelContainer = %MainPanel
 @onready var header_panel: PanelContainer = %Header
@@ -17,6 +17,7 @@ const ICON_BUFFER = 100
 @onready var orbits_container: Control = %OrbitsContainer
 @onready var ship_list: VBoxContainer = %ShipList
 @onready var star_sprite: TextureRect = %StarSprite
+@onready var close_button: Button = %CloseButton
 
 var _max_orbit_slot: int = 0
 var _content_scale_factor: float = 1.0
@@ -36,10 +37,8 @@ func _ready() -> void:
 	main_panel.add_theme_stylebox_override("panel", transparent_style)
 	body_panel.add_theme_stylebox_override("panel", transparent_style)
 
-	# The close button is now in the footer, so we get it from there.
-	var close_button = footer_panel.get_node("HBoxContainer/CloseButton")
 	if close_button:
-		close_button.pressed.connect(queue_free)
+		close_button.pressed.connect(_on_close_button_pressed)
 	
 	if orbits_container:
 		orbits_container.draw.connect(_on_orbits_container_draw)
@@ -89,7 +88,6 @@ func populate_system_data(system_data: StarSystem, star_texture: Texture2D) -> v
 			var display_radius = (ORBIT_BASE_RADIUS + (body.orbital_slot * ORBIT_RADIUS_STEP)) * _content_scale_factor
 			var body_pos = center + Vector2.from_angle(current_angle) * display_radius
 			
-			# UPDATED: Simplified the position calculation.
 			planet_view.position = body_pos
 			
 			planet_view.set_body_data(body, system_data.display_name)
@@ -124,9 +122,12 @@ func _find_and_list_ships(system_id: StringName):
 	if not has_ships:
 		_add_ship_to_list("None", Color.GRAY)
 
-
 func _add_ship_to_list(ship_name: String, color: Color) -> void:
 	var label = Label.new()
 	label.text = ship_name
 	label.modulate = color
 	ship_list.add_child(label)
+
+func _on_close_button_pressed() -> void:
+	AudioManager.play_sfx("back")
+	queue_free()

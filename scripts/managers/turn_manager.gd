@@ -18,6 +18,11 @@ func end_turn() -> void:
 	current_turn += 1
 	
 	print("--- Turn %s Ended ---" % previous_turn)
+	
+	# Process colony updates for all empires
+	for empire in EmpireManager.empires.values():
+		ColonyManager.process_turn_for_empire(empire)
+	
 	print("--- Turn %s Began ---" % current_turn)
 	
 	turn_ended.emit(current_turn)

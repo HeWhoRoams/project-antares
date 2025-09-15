@@ -28,6 +28,7 @@ DebugManager="*res://scripts/managers/DebugManager.gd"
 SaveLoadManager="*res://scripts/managers/SaveLoadManager.gd"
 EmpireManager="*res://scripts/managers/EmpireManager.gd"
 AudioManager="*res://scripts/managers/AudioManager.gd"
+ColonyManager="*res://scripts/managers/ColonyManager.gd"
 
 [input]
 
