@@ -1,4 +1,5 @@
 extends Control
 
-func _on_return_button_pressed():
-	SceneManager.change_scene("res://scenes/starmap/starmap.tscn")
+func _on_return_button_pressed() -> void:
+	AudioManager.play_sfx("back")
+	SceneManager.return_to_previous_scene()

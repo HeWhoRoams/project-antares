@@ -1,85 +1,92 @@
-# /scripts/managers/player_manager.gd
+# /scripts/managers/galaxymanager.gd
 extends Node
 
-signal ship_arrived(ship_data: ShipData)
-signal player_won_game
-signal research_points_changed(new_points: int)
+@export var number_of_systems: int = 20
 
-var research_points: int = 50
-var research_per_turn: int = 10
-var owned_ships: Dictionary = {}
-var unlocked_techs: Dictionary = {}
+var star_systems: Dictionary = {}
+var _celestial_body_generator: CelestialBodyGenerator
+var _galaxy_builder: GalaxyBuilder
+var _system_name_generator: SystemNameGenerator
+
+const STAR_COLORS = {
+	"purple": Color(0.6, 0.2, 0.8),
+	"red": Color(1.0, 0.3, 0.3),
+	"blue": Color(0.5, 0.7, 1.0),
+	"yellow": Color(1.0, 1.0, 0.6)
+}
 
 func _ready() -> void:
+	var GalaxyBuilderScript = load("res://scripts/galaxy/GalaxyBuilder.gd")
+	if GalaxyBuilderScript:
+		_galaxy_builder = GalaxyBuilderScript.new()
+	else:
+		printerr("GalaxyManager: Failed to load GalaxyBuilder script!")
+		return
+
+	_celestial_body_generator = CelestialBodyGenerator.new()
+	
+	var name_data = load("res://gamedata/systems/system_names.tres")
+	_system_name_generator = SystemNameGenerator.new(name_data)
+	
 	if SaveLoadManager.is_loading_game:
 		SaveLoadManager.save_data_loaded.connect(_on_save_data_loaded)
 	else:
-		_create_starting_ship()
-	TurnManager.turn_ended.connect(_on_turn_ended)
+		generate_procedural_galaxy()
 
-func _create_starting_ship() -> void:
-	var starting_ship_data = ShipData.new()
-	starting_ship_data.id = "scout_01"
-	starting_ship_data.owner_id = 1
-	starting_ship_data.current_system_id = "sol" # This needs to be a guaranteed system
-	owned_ships[starting_ship_data.id] = starting_ship_data
+func generate_procedural_galaxy() -> void:
+	print("GalaxyManager: Generating galaxy...")
+	star_systems.clear()
 
-func can_research(tech_data: Technology) -> bool:
-	if not tech_data: return false
-	var is_already_unlocked = unlocked_techs.has(tech_data.id)
-	var has_enough_points = research_points >= tech_data.research_cost
-	return not is_already_unlocked and has_enough_points
-
-func unlock_technology(tech_data: Technology) -> bool:
-	if can_research(tech_data):
-		research_points -= tech_data.research_cost
-		unlocked_techs[tech_data.id] = TurnManager.current_turn
+	var system_data_dict = _galaxy_builder.build_galaxy(number_of_systems)
+	
+	for system_id in system_data_dict:
+		var system_data = system_data_dict[system_id]
 		
-		if tech_data.id == &"tech_victory":
-			player_won_game.emit()
-			
-		return true
-	return false
+		var new_system = StarSystem.new()
+		new_system.id = system_id
+		new_system.display_name = _system_name_generator.generate_unique_name()
+		new_system.position = system_data.position
+		new_system.celestial_bodies = _celestial_body_generator.generate_bodies_for_system(system_data.num_celestials)
+		
+		star_systems[system_id] = new_system
 
-func set_ship_destination(ship_id: StringName, target_system_id: StringName):
-	var ship_data: ShipData = owned_ships.get(ship_id)
-	if not ship_data: return
-	var start_system: StarSystem = GalaxyManager.star_systems.get(ship_data.current_system_id)
-	var end_system: StarSystem = GalaxyManager.star_systems.get(target_system_id)
-	if not start_system or not end_system or start_system == end_system: return
-	var distance = start_system.position.distance_to(end_system.position)
-	var turns_required = max(1, int(round(distance / 150.0))) 
-	ship_data.destination_system_id = target_system_id
-	ship_data.turns_to_arrival = turns_required
+	print("GalaxyManager: All systems created.")
 
-func _on_turn_ended(_new_turn_number: int) -> void:
-	research_points += research_per_turn
-	research_points_changed.emit(research_points)
-	_process_ship_movement()
-
-func _process_ship_movement() -> void:
-	for ship_data in owned_ships.values():
-		if ship_data.turns_to_arrival > 0:
-			ship_data.turns_to_arrival -= 1
-			if ship_data.turns_to_arrival == 0:
-				ship_data.current_system_id = ship_data.destination_system_id
-				ship_data.destination_system_id = &""
-				ship_arrived.emit(ship_data)
+func get_star_color(num_celestials: int) -> Color:
+	if num_celestials == 0 or num_celestials == 6:
+		return STAR_COLORS.purple
+	elif num_celestials == 1 or num_celestials == 5:
+		if num_celestials == 5 and randf() < 0.5:
+			return STAR_COLORS.yellow
+		return STAR_COLORS.red
+	elif num_celestials == 2:
+		return STAR_COLORS.blue
+	else:
+		if num_celestials == 3 and randf() < 0.7:
+			return STAR_COLORS.blue
+		return STAR_COLORS.yellow
 
 func _on_save_data_loaded(data: Dictionary) -> void:
-	owned_ships.clear()
-	var player_data = data.get("player", {})
-	research_points = player_data.get("research_points", 50)
-	unlocked_techs = player_data.get("unlocked_techs", {})
-	
-	var loaded_ships = player_data.get("owned_ships", {})
-	for ship_id in loaded_ships:
-		var ship_data = loaded_ships[ship_id]
-		var new_ship = ShipData.new()
-		new_ship.id = ship_data.id
-		new_ship.owner_id = ship_data.owner_id
-		new_ship.current_system_id = ship_data.current_system_id
-		new_ship.destination_system_id = ship_data.destination_system_id
-		new_ship.turns_to_arrival = ship_data.turns_to_arrival
-		owned_ships[ship_id] = new_ship
-	print("PlayerManager: Loaded player state from save.")
+	star_systems.clear()
+	var loaded_galaxy = data.get("galaxy", {})
+	for system_id in loaded_galaxy:
+		var system_data = loaded_galaxy[system_id]
+		var new_system = StarSystem.new()
+		new_system.id = system_data.id
+		new_system.display_name = system_data.display_name
+		new_system.position = Vector2(system_data.position[0], system_data.position[1])
+		
+		for body_data in system_data.celestial_bodies:
+			var new_body
+			if body_data.body_type == CelestialBodyData.BodyType.PLANET:
+				new_body = PlanetData.new()
+				new_body.planet_type = body_data.planet_type
+			else:
+				new_body = CelestialBodyData.new()
+			
+			new_body.orbital_slot = body_data.orbital_slot
+			new_body.body_type = body_data.body_type
+			new_system.celestial_bodies.append(new_body)
+			
+		star_systems[system_id] = new_system
+	print("GalaxyManager: Loaded %d systems from save." % star_systems.size())

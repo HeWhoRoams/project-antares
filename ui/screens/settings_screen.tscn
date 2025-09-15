@@ -7,6 +7,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_script")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
@@ -15,13 +17,75 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="CenterContainer" type="CenterContainer" parent="PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
 layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
 
-[node name="Label" type="Label" parent="PanelContainer/CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
 layout_mode = 2
-text = "SETTINGS SCREEN"
+theme_override_constants/separation = 40
+
+[node name="Title" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "SETTINGS"
 theme_override_font_sizes/font_size = 50
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 2
+
+[node name="MainVolumeLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Main Volume"
+theme_override_font_sizes/font_size = 24
+
+[node name="MainSlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.0001
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="MusicVolumeLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Music Volume"
+theme_override_font_sizes/font_size = 24
+
+[node name="MusicSlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.0001
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="SfxVolumeLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Sound Effects Volume"
+theme_override_font_sizes/font_size = 24
+
+[node name="SfxSlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.0001
+max_value = 1.0
+step = 0.05
+value = 1.0
 
 [node name="ReturnButton" type="Button" parent="."]
 layout_mode = 1
@@ -36,4 +100,7 @@ offset_right = -20.0
 offset_bottom = -20.0
 text = "Return"
 
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/GridContainer/MainSlider" to="." method="_on_main_slider_value_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/GridContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/GridContainer/SfxSlider" to="." method="_on_sfx_slider_value_changed"]
 [connection signal="pressed" from="ReturnButton" to="." method="_on_return_button_pressed"]

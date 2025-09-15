@@ -98,12 +98,13 @@ theme_override_font_sizes/font_size = 24
 text = "Quit"
 
 [connection signal="mouse_entered" from="ButtonVBox/ContinueButton" to="." method="_on_any_button_mouse_entered"]
+[connection signal="pressed" from="ButtonVBox/ContinueButton" to="." method="_on_continue_button_pressed"]
 [connection signal="mouse_entered" from="ButtonVBox/LoadGameButton" to="." method="_on_any_button_mouse_entered"]
 [connection signal="pressed" from="ButtonVBox/LoadGameButton" to="." method="_on_any_button_pressed"]
 [connection signal="mouse_entered" from="ButtonVBox/NewGameButton" to="." method="_on_any_button_mouse_entered"]
 [connection signal="pressed" from="ButtonVBox/NewGameButton" to="." method="_on_new_game_button_pressed"]
 [connection signal="mouse_entered" from="ButtonVBox/SettingsButton" to="." method="_on_any_button_mouse_entered"]
-[connection signal="pressed" from="ButtonVBox/SettingsButton" to="." method="_on_any_button_pressed"]
+[connection signal="pressed" from="ButtonVBox/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="mouse_entered" from="ButtonVBox/MultiPlayerButton" to="." method="_on_any_button_mouse_entered"]
 [connection signal="pressed" from="ButtonVBox/MultiPlayerButton" to="." method="_on_any_button_pressed"]
 [connection signal="mouse_entered" from="ButtonVBox/HallOfFameButton" to="." method="_on_any_button_mouse_entered"]
