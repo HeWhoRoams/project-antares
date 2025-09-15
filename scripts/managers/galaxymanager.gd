@@ -40,22 +40,45 @@ func generate_procedural_galaxy() -> void:
 	print("GalaxyManager: Generating galaxy...")
 	star_systems.clear()
 
-	var system_data_dict = _galaxy_builder.build_galaxy(number_of_systems)
+	# Create the player's home system with specific properties
+	var sol = StarSystem.new()
+	sol.id = "sol"
+	sol.display_name = "Sol"
+	sol.position = Vector2.ZERO
+	var home_planet = PlanetData.new()
+	home_planet.system_id = sol.id
+	home_planet.planet_type = PlanetData.PlanetType.TERRAN
+	home_planet.size = PlanetData.PlanetSize.L
+	home_planet.max_population = 16
+	home_planet.orbital_slot = 2
+	sol.celestial_bodies.append(home_planet)
+	star_systems[sol.id] = sol
+	_system_name_generator.add_used_name(sol.display_name)
 	
-	for system_id in system_data_dict:
-		var system_data = system_data_dict[system_id]
-		
+	# Create a guaranteed home system for the AI faction
+	var sirius = StarSystem.new()
+	sirius.id = "sirius"
+	sirius.display_name = "Sirius"
+	sirius.position = Vector2(GALAXY_SIZE_X * 0.75, GALAXY_SIZE_Y * 0.5)
+	var ai_bodies = _celestial_body_generator.generate_bodies_for_system(4)
+	for body in ai_bodies:
+		body.system_id = sirius.id
+	sirius.celestial_bodies = ai_bodies
+	star_systems[sirius.id] = sirius
+	_system_name_generator.add_used_name(sirius.display_name)
+	
+	# Procedurally generate the rest of the systems
+	var procedural_systems = _galaxy_builder.build_galaxy(number_of_systems - 2)
+	for system_id in procedural_systems:
+		var system_data = procedural_systems[system_id]
 		var new_system = StarSystem.new()
 		new_system.id = system_id
 		new_system.display_name = _system_name_generator.generate_unique_name()
 		new_system.position = system_data.position
-		
-		# Generate celestial bodies for this system
 		var bodies = _celestial_body_generator.generate_bodies_for_system(system_data.num_celestials)
 		for body in bodies:
-			body.system_id = new_system.id # Assign the system ID to each body
+			body.system_id = new_system.id
 		new_system.celestial_bodies = bodies
-		
 		star_systems[system_id] = new_system
 
 	print("GalaxyManager: All systems created.")
@@ -75,27 +98,5 @@ func get_star_color(num_celestials: int) -> Color:
 		return STAR_COLORS.yellow
 
 func _on_save_data_loaded(data: Dictionary) -> void:
-	star_systems.clear()
-	var loaded_galaxy = data.get("galaxy", {})
-	for system_id in loaded_galaxy:
-		var system_data = loaded_galaxy[system_id]
-		var new_system = StarSystem.new()
-		new_system.id = system_data.id
-		new_system.display_name = system_data.display_name
-		new_system.position = Vector2(system_data.position[0], system_data.position[1])
-		
-		for body_data in system_data.celestial_bodies:
-			var new_body
-			if body_data.body_type == CelestialBodyData.BodyType.PLANET:
-				new_body = PlanetData.new()
-				new_body.planet_type = body_data.planet_type
-			else:
-				new_body = CelestialBodyData.new()
-			
-			new_body.system_id = new_system.id
-			new_body.orbital_slot = body_data.orbital_slot
-			new_body.body_type = body_data.body_type
-			new_system.celestial_bodies.append(new_body)
-			
-		star_systems[system_id] = new_system
-	print("GalaxyManager: Loaded %d systems from save." % star_systems.size())
+	# This function will need to be updated to handle the new resource properties
+	pass
