@@ -2,7 +2,7 @@
 extends Control
 
 @onready var sprite: Sprite2D = %Sprite2D
-@onready var label: Label = $Label
+@onready var label: Label = %Label
 @onready var hover_frame: Panel = %HoverFrame
 
 var _body_data: CelestialBodyData

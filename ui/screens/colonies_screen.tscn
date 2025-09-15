@@ -1,6 +1,14 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://bsrduf1ggbi5c"]
 
-[ext_resource type="Script" path="res://ui/screens/colonies_screen.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://cgg3m8lkgmgnl" path="res://ui/screens/colonies_screen.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel_style"]
+bg_color = Color(0, 0, 0, 0.75)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.6, 0.6, 0.7, 0.5)
 
 [node name="ColoniesScreen" type="Control"]
 layout_mode = 3
@@ -19,91 +27,109 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TopBar" type="PanelContainer" parent="VBoxContainer"]
+[node name="TopUI" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="TopBar" type="PanelContainer" parent="VBoxContainer/TopUI"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel_style")
 
-[node name="ColonyNameLabel" type="Label" parent="VBoxContainer/TopBar"]
+[node name="ColonyNameLabel" type="Label" parent="VBoxContainer/TopUI/TopBar"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Colony of Draconis II"
+text = "Colony of Sol III"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PopulationLabel" type="Label" parent="VBoxContainer/TopBar"]
+[node name="PopulationLabel" type="Label" parent="VBoxContainer/TopUI/TopBar"]
 unique_name_in_owner = true
 layout_mode = 2
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -200.0
-offset_right = -10.0
-grow_horizontal = 0
-text = "Pop 8/12 (+73k)"
+text = "Pop 10 / 16"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="MainPanel" type="PanelContainer" parent="VBoxContainer"]
+[node name="MainPanel" type="PanelContainer" parent="VBoxContainer/TopUI"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel_style")
 
-[node name="MainHBox" type="HBoxContainer" parent="VBoxContainer/MainPanel"]
+[node name="MainHBox" type="HBoxContainer" parent="VBoxContainer/TopUI/MainPanel"]
 layout_mode = 2
+theme_override_constants/separation = 10
 
-[node name="SystemPlanetList" type="VBoxContainer" parent="VBoxContainer/MainPanel/MainHBox"]
-unique_name_in_owner = true
+[node name="SystemPlanetListPanel" type="PanelContainer" parent="VBoxContainer/TopUI/MainPanel/MainHBox"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel_style")
 
-[node name="CenterPanel" type="VBoxContainer" parent="VBoxContainer/MainPanel/MainHBox"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="ResourceDisplay" type="GridContainer" parent="VBoxContainer/MainPanel/MainHBox/CenterPanel"]
+[node name="SystemPlanetList" type="VBoxContainer" parent="VBoxContainer/TopUI/MainPanel/MainHBox/SystemPlanetListPanel"]
 unique_name_in_owner = true
 layout_mode = 2
+
+[node name="CenterPanel" type="PanelContainer" parent="VBoxContainer/TopUI/MainPanel/MainHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel_style")
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/TopUI/MainPanel/MainHBox/CenterPanel"]
+layout_mode = 2
+columns = 2
+
+[node name="ResourceDisplay" type="GridContainer" parent="VBoxContainer/TopUI/MainPanel/MainHBox/CenterPanel/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 4
 
-[node name="PopulationAllocation" type="GridContainer" parent="VBoxContainer/MainPanel/MainHBox/CenterPanel"]
+[node name="PopulationAllocation" type="GridContainer" parent="VBoxContainer/TopUI/MainPanel/MainHBox/CenterPanel/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 12
 
-[node name="ConstructionDisplay" type="PanelContainer" parent="VBoxContainer/MainPanel/MainHBox"]
-custom_minimum_size = Vector2(250, 0)
+[node name="ConstructionDisplay" type="PanelContainer" parent="VBoxContainer/TopUI/MainPanel/MainHBox"]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel_style")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TopUI/MainPanel/MainHBox/ConstructionDisplay"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MainPanel/MainHBox/ConstructionDisplay"]
-layout_mode = 2
-
-[node name="ConstructionLabel" type="Label" parent="VBoxContainer/MainPanel/MainHBox/ConstructionDisplay/VBoxContainer"]
+[node name="ConstructionLabel" type="Label" parent="VBoxContainer/TopUI/MainPanel/MainHBox/ConstructionDisplay/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Trade Goods"
 horizontal_alignment = 1
 
-[node name="ConstructionProgress" type="ProgressBar" parent="VBoxContainer/MainPanel/MainHBox/ConstructionDisplay/VBoxContainer"]
+[node name="ConstructionProgress" type="ProgressBar" parent="VBoxContainer/TopUI/MainPanel/MainHBox/ConstructionDisplay/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 value = 50.0
 show_percentage = false
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MainPanel/MainHBox/ConstructionDisplay/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TopUI/MainPanel/MainHBox/ConstructionDisplay/VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="ChangeButton" type="Button" parent="VBoxContainer/MainPanel/MainHBox/ConstructionDisplay/VBoxContainer/HBoxContainer"]
+[node name="ChangeButton" type="Button" parent="VBoxContainer/TopUI/MainPanel/MainHBox/ConstructionDisplay/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Change"
 
-[node name="BuyButton" type="Button" parent="VBoxContainer/MainPanel/MainHBox/ConstructionDisplay/VBoxContainer/HBoxContainer"]
+[node name="BuyButton" type="Button" parent="VBoxContainer/TopUI/MainPanel/MainHBox/ConstructionDisplay/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Buy"
 
 [node name="PlanetSurface" type="PanelContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.75
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel_style")
 
 [node name="Background" type="TextureRect" parent="VBoxContainer/PlanetSurface"]
 unique_name_in_owner = true
@@ -114,32 +140,18 @@ stretch_mode = 6
 [node name="BuildingsContainer" type="Control" parent="VBoxContainer/PlanetSurface"]
 unique_name_in_owner = true
 layout_mode = 2
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
-[node name="FooterButtons" type="HBoxContainer" parent="VBoxContainer/PlanetSurface"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -300.0
-offset_top = -60.0
-offset_right = -10.0
-offset_bottom = -10.0
-grow_horizontal = 0
-grow_vertical = 0
+[node name="FooterButtons" type="VBoxContainer" parent="VBoxContainer/PlanetSurface"]
+layout_mode = 2
 alignment = 2
 
 [node name="NPCsButton" type="Button" parent="VBoxContainer/PlanetSurface/FooterButtons"]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 text = "NPCs"
 
 [node name="ReturnButton" type="Button" parent="VBoxContainer/PlanetSurface/FooterButtons"]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 text = "Return"
 
