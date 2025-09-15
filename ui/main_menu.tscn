@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bbkyup0oqp8ca"]
 
-[ext_resource type="Script" uid="uid://5wuxjcg2ocj" path="res://ui/main_menu.gd" id="1_t7e0r"]
+[ext_resource type="Script" path="res://ui/main_menu.gd" id="1_t7e0r"]
 [ext_resource type="Texture2D" uid="uid://dqoe132k0t31f" path="res://assets/images/backgrounds/main_menu_bckgrnd.png" id="2_0dkrt"]
 
 [node name="MainMenu" type="Control"]
@@ -39,8 +39,8 @@ theme_override_constants/margin_bottom = 50
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-theme_override_font_sizes/font_size = 64
 text = "Project Antares"
+theme_override_font_sizes/font_size = 64
 
 [node name="ButtonVBox" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -57,45 +57,56 @@ theme_override_constants/separation = 12
 [node name="ContinueButton" type="Button" parent="ButtonVBox"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 24
 disabled = true
 text = "Continue"
+theme_override_font_sizes/font_size = 24
 
 [node name="LoadGameButton" type="Button" parent="ButtonVBox"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 24
 text = "Load Game"
+theme_override_font_sizes/font_size = 24
 
 [node name="NewGameButton" type="Button" parent="ButtonVBox"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 24
 text = "New Game"
+theme_override_font_sizes/font_size = 24
 
 [node name="SettingsButton" type="Button" parent="ButtonVBox"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 24
 text = "Settings"
+theme_override_font_sizes/font_size = 24
 
 [node name="MultiPlayerButton" type="Button" parent="ButtonVBox"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 24
 text = "Multi-Player"
+theme_override_font_sizes/font_size = 24
 
 [node name="HallOfFameButton" type="Button" parent="ButtonVBox"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 24
 text = "Hall of Fame"
+theme_override_font_sizes/font_size = 24
 
 [node name="QuitButton" type="Button" parent="ButtonVBox"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 24
 text = "Quit"
+theme_override_font_sizes/font_size = 24
 
+[connection signal="mouse_entered" from="ButtonVBox/ContinueButton" to="." method="_on_any_button_mouse_entered"]
+[connection signal="mouse_entered" from="ButtonVBox/LoadGameButton" to="." method="_on_any_button_mouse_entered"]
+[connection signal="pressed" from="ButtonVBox/LoadGameButton" to="." method="_on_any_button_pressed"]
+[connection signal="mouse_entered" from="ButtonVBox/NewGameButton" to="." method="_on_any_button_mouse_entered"]
 [connection signal="pressed" from="ButtonVBox/NewGameButton" to="." method="_on_new_game_button_pressed"]
+[connection signal="mouse_entered" from="ButtonVBox/SettingsButton" to="." method="_on_any_button_mouse_entered"]
+[connection signal="pressed" from="ButtonVBox/SettingsButton" to="." method="_on_any_button_pressed"]
+[connection signal="mouse_entered" from="ButtonVBox/MultiPlayerButton" to="." method="_on_any_button_mouse_entered"]
+[connection signal="pressed" from="ButtonVBox/MultiPlayerButton" to="." method="_on_any_button_pressed"]
+[connection signal="mouse_entered" from="ButtonVBox/HallOfFameButton" to="." method="_on_any_button_mouse_entered"]
+[connection signal="pressed" from="ButtonVBox/HallOfFameButton" to="." method="_on_any_button_pressed"]
+[connection signal="mouse_entered" from="ButtonVBox/QuitButton" to="." method="_on_any_button_mouse_entered"]
 [connection signal="pressed" from="ButtonVBox/QuitButton" to="." method="_on_quit_button_pressed"]

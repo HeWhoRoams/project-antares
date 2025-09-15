@@ -1,0 +1,30 @@
+# /scripts/managers/EmpireManager.gd
+extends Node
+
+## A dictionary holding all active empires, keyed by their unique ID.
+var empires: Dictionary = {}
+
+## Adds a new empire to the game.
+func register_empire(empire_data: Empire) -> void:
+	if empires.has(empire_data.id):
+		printerr("EmpireManager: An empire with ID '%s' already exists!" % empire_data.id)
+		return
+	
+	empires[empire_data.id] = empire_data
+	print("EmpireManager: Registered new empire '%s'." % empire_data.display_name)
+
+## Retrieves an empire's data using its ID.
+func get_empire_by_id(id: StringName) -> Empire:
+	return empires.get(id)
+
+## Called at the start of a new game to set initial diplomatic states.
+func initialize_diplomacy() -> void:
+	for id1 in empires:
+		for id2 in empires:
+			if id1 == id2:
+				continue
+			
+			var empire1: Empire = empires[id1]
+			# By default, all empires start at peace.
+			if not empire1.diplomatic_statuses.has(id2):
+				empire1.diplomatic_statuses[id2] = Empire.DiplomacyStatus.PEACE

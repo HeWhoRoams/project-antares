@@ -1,23 +1,49 @@
 # /scenes/starmap/starmap.gd
-# Main controller for the starmap view.
 extends Node2D
 
+@onready var camera: Camera2D = %Camera2D
 @export var star_system_view_scene: PackedScene
 @export var ship_view_scene: PackedScene
 @export var system_info_popup_scene: PackedScene
 
 var hud_scene: PackedScene = preload("res://ui/hud/hud.tscn")
 var selected_ship_view: ShipView = null
+var is_panning: bool = false
 
 func _ready() -> void:
+	# This _ready function runs after the managers' _ready functions.
+	if SaveLoadManager.is_loading_game:
+		SaveLoadManager.emit_load_data() # Tell the manager to send out the loaded data
+	
+	# The rest of the setup happens after the data is loaded and the galaxy is drawn.
 	var hud_instance = hud_scene.instantiate()
 	add_child(hud_instance)
 	
 	PlayerManager.ship_arrived.connect(_on_ship_arrived)
+	
+	# The drawing must happen *after* the managers have their data.
+	# We can wait one frame to be sure.
+	await get_tree().process_frame
 	_draw_galaxy()
 	_draw_all_ships()
 
 func _unhandled_input(event: InputEvent) -> void:
+	# --- Panning Logic ---
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.is_pressed():
+			# Start panning only if the click is on empty space
+			if _get_object_at_position(get_global_mouse_position()) == null:
+				is_panning = true
+		else:
+			# Stop panning when the button is released
+			is_panning = false
+	
+	if event is InputEventMouseMotion and is_panning:
+		# Move the camera by the mouse's relative motion, adjusted for zoom
+		camera.position -= event.relative * camera.zoom
+		return # Prevent other inputs while panning
+
+	# --- Selection & Ordering Logic ---
 	if event.is_action_pressed("ui_accept"):
 		var clicked_object = _get_object_at_position(get_global_mouse_position())
 		
@@ -66,7 +92,6 @@ func _draw_galaxy() -> void:
 		new_system_view.position = system_data.position
 		new_system_view.star_system_data = system_data
 		
-		# Apply the star color
 		var star_color = GalaxyManager.get_star_color(system_data.celestial_bodies.size())
 		new_system_view.get_node("Sprite2D").modulate = star_color
 		

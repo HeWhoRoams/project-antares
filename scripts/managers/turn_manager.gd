@@ -1,14 +1,18 @@
 # /scripts/managers/turn_manager.gd
-# A global singleton to manage the game turn and progression.
 extends Node
 
-## Emitted whenever the "End Turn" button is processed.
-## Sends the new turn number as an argument.
 signal turn_ended(new_turn_number: int)
 
 var current_turn: int = 1
 
-## This is the public function the UI will call to advance the game.
+func _ready() -> void:
+	if SaveLoadManager.is_loading_game:
+		SaveLoadManager.save_data_loaded.connect(_on_save_data_loaded)
+
+func _on_save_data_loaded(data: Dictionary) -> void:
+	current_turn = data.get("turn", 1)
+	print("TurnManager: Loaded turn %d from save." % current_turn)
+
 func end_turn() -> void:
 	var previous_turn = current_turn
 	current_turn += 1

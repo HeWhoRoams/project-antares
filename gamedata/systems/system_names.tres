@@ -5,6 +5,12 @@
 [resource]
 script = ExtResource("1_aejr2")
 prefixes = Array[String](["Alpha", "Beta", "Gamma", "Delta", "Epsilon"])
-main_names = Array[String](["Centauri", "Orionis", "Ceti", "Draconis", "Tauri"])
+main_names = Array[String](["Andromeda", "Aquarii", "Arcturus", "Aurigae", "Borealis", "Cancri", "Capella",
+"Carinae", "Cassiopeia", "Cephei", "Cygni", "Deneb", "Eridani", "Fornacis",
+"Geminorum", "Herculis", "Hydrae", "Indi", "Lacertae", "Leonis", "Lupi",
+"Lyrae", "Monocerotis", "Muscae", "Normae", "Pegasi", "Persei", "Phoenicis",
+"Pictoris", "Piscium", "Reticuli", "Sagittarii", "Scorpii", "Scuti", "Serpentis",
+"Sextantis", "Trianguli", "Ursae", "Velorum", "Viridis", "Volantis", "Vulpeculae",
+"Zetari", "Altairis", "Bellatrix", "Rigeli", "Polaris", "Siriadis", "Vegaen"])
 suffixes = Array[String](["Prime", "Major", "Minor", "Sector", "Expanse"])
 metadata/_custom_type_script = "uid://d28b15okirw0b"

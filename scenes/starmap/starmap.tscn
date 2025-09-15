@@ -14,6 +14,7 @@ ship_view_scene = ExtResource("3_i4ucb")
 system_info_popup_scene = ExtResource("4_dbbx8")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+unique_name_in_owner = true
 script = ExtResource("4_k68vw")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

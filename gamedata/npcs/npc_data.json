@@ -1,0 +1,257 @@
+[
+  {
+    "name": "Dr. Selvara Antris",
+    "race": "Zorani",
+    "physical_description": "A tall, slender alien with translucent green skin and faint bioluminescent veins. Her elongated eyes glow pale blue, framed by a narrow face with no visible nose. She wears a sleek silver research robe with faintly glowing glyphs etched into the collar. The portrait is chest-up, with a soft holographic star map behind her.",
+    "background": "Selvara is a xenobiologist renowned for pioneering cross-species adaptation programs. She left her homeworld after uncovering hidden archives of ancient alien DNA.",
+    "passive_traits": {
+      "research_bonus": 0.25,
+      "diplomacy_bonus": 0.1,
+      "production_bonus": 0.15
+    },
+    "quirk": {
+      "condition": "Researching_Population",
+      "condition_value": "100%",
+      "multiplier": 2.0
+    }
+  },
+  {
+    "name": "Professor Orik Venn",
+    "race": "Human",
+    "physical_description": "A middle-aged man with sharp cheekbones, salt-and-pepper hair slicked back, and piercing hazel eyes behind rimless glasses. He wears a high-collared black coat with gold trim, his face stern but curious. The portrait is from the shoulders up, lit by a cool laboratory glow.",
+    "background": "Once a controversial theorist, Orik was exiled for publishing radical ideas about energy manipulation. He now offers his insights to any empire willing to fund his vision.",
+    "passive_traits": {
+      "research_bonus": 0.2,
+      "espionage_bonus": 0.15,
+      "diplomacy_bonus": 0.15
+    },
+    "quirk": {
+      "condition": "Planet_Resource",
+      "condition_value": "Artifacts",
+      "multiplier": 2.0
+    }
+  },
+  {
+    "name": "Xiraen of the Shroud",
+    "race": "Ethereal",
+    "physical_description": "A shimmering, translucent being of shifting purple mist with faint facial contours barely visible within the haze. Two glowing silver eyes hover independently within the form. The portrait frames the cloudy upper torso, with faint tendrils trailing downward like vapor.",
+    "background": "Xiraen’s existence defies physics. Rumors say their people dwell partly outside the material universe. They are fascinated by mortals’ pursuit of knowledge.",
+    "passive_traits": {
+      "research_bonus": 0.3,
+      "morale_bonus": 0.2
+    },
+    "quirk": {
+      "condition": "Planet_Population_Percentage",
+      "condition_value": "90%+",
+      "multiplier": 2.0
+    }
+  },
+  {
+    "name": "Gorrim Stonehide",
+    "race": "Druvak",
+    "physical_description": "A squat, muscular reptilian with mottled gray scales and jagged horns framing his head. His wide-set amber eyes have vertical pupils. He wears a heavy brown tunic patched with burn marks, the portrait close-cropped to emphasize his thick, scaled jawline.",
+    "background": "Gorrim was a miner-turned-engineer who rose from hardship to design starship reactors. His stubborn will makes him both reliable and hard to manage.",
+    "passive_traits": {
+      "research_bonus": 0.15,
+      "production_bonus": 0.2,
+      "defense_bonus": 0.15
+    },
+    "quirk": {
+      "condition": "Ship_Speed",
+      "condition_value": "5+",
+      "multiplier": 2.0
+    }
+  },
+  {
+    "name": "Governor Althea Sol",
+    "race": "Human",
+    "physical_description": "A poised woman in her early forties with dark brown skin and close-cropped hair, wearing a white-and-blue formal tunic with planetary insignias embroidered on the collar. Her confident gaze is directed slightly upward, framed by a starry cityscape backdrop.",
+    "background": "Born into a family of frontier colonists, Althea became a civic planner before rising to govern entire systems. She thrives on efficiency and structure.",
+    "passive_traits": {
+      "production_bonus": 0.25,
+      "farming_bonus": 0.15,
+      "morale_bonus": 0.1
+    },
+    "quirk": {
+      "condition": "Planet_Full",
+      "condition_value": "100%",
+      "multiplier": 2.0
+    }
+  },
+  {
+    "name": "Charrik T’vol",
+    "race": "Skarri",
+    "physical_description": "An insectoid with glossy black carapace and six small red eyes clustered around a central pair of mandibles. His portrait shows him in a metallic sash with embedded data crystals. Antennae curve upward like ornate horns, glowing faintly with bioluminescence.",
+    "background": "Charrik once organized the chaotic hive-fleets of his people, turning scattered clans into an empire. He now lends his hive-logistics expertise to new rulers.",
+    "passive_traits": {
+      "production_bonus": 0.2,
+      "espionage_bonus": 0.1,
+      "research_bonus": 0.2
+    },
+    "quirk": {
+      "condition": "System_Has_Asteroids",
+      "condition_value": "True",
+      "multiplier": 2.0
+    }
+  },
+  {
+    "name": "Veyra Moonshadow",
+    "race": "Half-Elari",
+    "physical_description": "A tall, silver-skinned humanoid with flowing white hair tied into a braid over one shoulder. Her eyes glow softly violet, and she wears ceremonial armor with an etched crescent motif. The portrait focuses on her serene expression against a starfield background.",
+    "background": "Veyra was trained in the Elari priesthood but abandoned ritual life for the challenge of governing new colonies. Her balanced approach makes her widely respected.",
+    "passive_traits": {
+      "morale_bonus": 0.2,
+      "farming_bonus": 0.15,
+      "diplomacy_bonus": 0.15
+    },
+    "quirk": {
+      "condition": "Diplomatic_State",
+      "condition_value": "Only_Peace",
+      "multiplier": 2.0
+    }
+  },
+  {
+    "name": "Rok Marrin",
+    "race": "Human",
+    "physical_description": "A rugged man with tanned skin, short dark beard, and messy brown hair. He wears a heavy leather coat with a steel clasp across the chest, his left eye replaced by a glowing cybernetic implant. His expression is intense, captured in stark lighting.",
+    "background": "A former mercenary commander, Rok built a reputation on taming lawless frontier colonies. His methods are harsh but effective.",
+    "passive_traits": {
+      "defense_bonus": 0.2,
+      "production_bonus": 0.15,
+      "farming_bonus": 0.15
+    },
+    "quirk": {
+      "condition": "Planet_Population_Value",
+      "condition_value": "<20%",
+      "multiplier": 2.0
+    }
+  },
+  {
+    "name": "Captain Jirak Thorn",
+    "race": "Vorran",
+    "physical_description": "A broad-shouldered humanoid with dark crimson skin, sharp tusks protruding from the lower jaw, and a mane of black hair braided with metal rings. His portrait shows him in angular, battle-scarred armor, one tusk chipped, eyes burning with intensity.",
+    "background": "Jirak is a notorious starfighter ace, decorated in dozens of wars across three empires. He now sells his skill to the highest bidder.",
+    "passive_traits": {
+      "attack_bonus": 0.25,
+      "defense_bonus": 0.15,
+      "ship_speed_bonus": 0.1
+    },
+    "quirk": {
+      "condition": "Fleet_Size",
+      "condition_value": "3+",
+      "multiplier": 2.0
+    }
+  },
+  {
+    "name": "Lyssara Veyl",
+    "race": "Human",
+    "physical_description": "A sharp-eyed woman with olive skin and a scar running across her left cheek. Her short black hair is cut in a military style, and she wears a crisp navy officer’s uniform adorned with silver epaulettes. Her portrait has a cool, disciplined intensity.",
+    "background": "Lyssara rose from obscurity to command entire carrier wings, known for her precision tactics. She is both feared and respected among fleet crews.",
+    "passive_traits": {
+      "ship_speed_bonus": 0.25,
+      "defense_bonus": 0.15,
+      "attack_bonus": 0.1
+    },
+    "quirk": {
+      "condition": "Ship_Speed",
+      "condition_value": "6+",
+      "multiplier": 2.0
+    }
+  },
+  {
+    "name": "Threx Voidscar",
+    "race": "Karnathi",
+    "physical_description": "A hulking reptilian humanoid with cracked obsidian scales and glowing yellow eyes. His portrait emphasizes jagged scars across his jawline. He wears spiked void-armor that hums with faint purple energy.",
+    "background": "Once a pirate warlord, Threx turned mercenary after his fleets were scattered. He is unpredictable but a devastating force in ship-to-ship combat.",
+    "passive_traits": {
+      "attack_bonus": 0.2,
+      "espionage_bonus": 0.15,
+      "defense_bonus": 0.15
+    },
+    "quirk": {
+      "condition": "Diplomatic_State",
+      "condition_value": "Only_War",
+      "multiplier": 2.0
+    }
+  },
+  {
+    "name": "Commander Erynn Vale",
+    "race": "Human",
+    "physical_description": "A young, confident officer with fair skin, short blond hair, and piercing blue eyes. He wears a sleek black-and-red naval jacket with a silver command badge. The portrait shows his half-smile of controlled arrogance.",
+    "background": "Erynn grew up in a military academy, excelling in simulations. Now, he’s eager to prove his brilliance in live battles.",
+    "passive_traits": {
+      "ship_speed_bonus": 0.2,
+      "morale_bonus": 0.15,
+      "attack_bonus": 0.15
+    },
+    "quirk": {
+      "condition": "Fleet_Size",
+      "condition_value": "1",
+      "multiplier": 2.0
+    }
+  },
+  {
+    "name": "Ambassador Telys Quorin",
+    "race": "Human",
+    "physical_description": "A refined man with pale skin, silver hair tied in a neat ponytail, and sharp green eyes. He wears an ornate diplomatic robe with embroidered patterns of suns and constellations. The portrait emphasizes his calm, persuasive smile.",
+    "background": "Telys was once a scholar of interstellar law before becoming an ambassador. He excels at negotiating fragile alliances.",
+    "passive_traits": {
+      "diplomacy_bonus": 0.25,
+      "morale_bonus": 0.15,
+      "espionage_bonus": 0.1
+    },
+    "quirk": {
+      "condition": "Diplomatic_State",
+      "condition_value": "2_Peace_1_Alliance",
+      "multiplier": 2.0
+    }
+  },
+  {
+    "name": "Shivara Laan",
+    "race": "Neyari",
+    "physical_description": "A humanoid with metallic bronze skin and crystalline growths sprouting from her temples and shoulders. Her eyes are prismatic, refracting light into shifting colors. She wears a sleek white-and-gold robe. The portrait captures a radiant, unearthly beauty.",
+    "background": "Born of a race intertwined with crystalline matrices, Shivara has always served as a mediator, her presence both soothing and awe-inspiring.",
+    "passive_traits": {
+      "diplomacy_bonus": 0.2,
+      "morale_bonus": 0.2,
+      "research_bonus": 0.1
+    },
+    "quirk": {
+      "condition": "Planet_Resource",
+      "condition_value": "Crystals",
+      "multiplier": 2.0
+    }
+  },
+  {
+    "name": "Zarrek the Whisper",
+    "race": "Silth",
+    "physical_description": "A shadowy, insectoid-humanoid hybrid with dark, chitinous skin and glowing green mandibles. His narrow compound eyes gleam with cunning, and he wears a cloak of woven black fibers that absorbs surrounding light. His portrait emphasizes menace and mystery.",
+    "background": "Zarrek is a master manipulator, known for brokering back-alley deals and sowing discord. Empires whisper his name with both fear and awe.",
+    "passive_traits": {
+      "espionage_bonus": 0.25,
+      "diplomacy_bonus": 0.15,
+      "morale_bonus": 0.1
+    },
+    "quirk": {
+      "condition": "Espionage_State",
+      "condition_value": "Caught_Enemy_Spy",
+      "multiplier": 2.0
+    }
+  },
+  {
+    "name": "Elandra Vos",
+    "race": "Human",
+    "physical_description": "A regal woman with dark auburn hair cascading to her shoulders, warm brown eyes, and golden jewelry worked into a flowing teal gown. Her expression is confident yet compassionate. The portrait frames her upper torso with soft, diplomatic lighting.",
+    "background": "Elandra was raised among nobility and trained in negotiation from youth. She carries herself with grace and authority.",
+    "passive_traits": {
+      "diplomacy_bonus": 0.2,
+      "production_bonus": 0.15,
+      "morale_bonus": 0.15
+    },
+    "quirk": {
+      "condition": "Diplomatic_State",
+      "condition_value": "Only_Alliance",
+      "multiplier": 2.0
+    }
+  }
+]

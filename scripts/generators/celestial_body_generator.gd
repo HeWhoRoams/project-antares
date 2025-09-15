@@ -19,7 +19,6 @@ func _create_weighted_array(weights: Dictionary) -> Array:
 			array.append(key)
 	return array
 
-# UPDATED: This function now accepts the number of bodies to generate.
 func generate_bodies_for_system(num_bodies_to_generate: int) -> Array[CelestialBodyData]:
 	var bodies: Array[CelestialBodyData] = []
 	var available_slots = range(MAX_ORBITAL_SLOTS)
@@ -46,11 +45,31 @@ func generate_bodies_for_system(num_bodies_to_generate: int) -> Array[CelestialB
 	return bodies
 
 func _generate_planet_attributes(planet: PlanetData) -> void:
+	# Assign a random type, size, and other attributes
 	planet.planet_type = PlanetData.PlanetType.values().pick_random()
 	planet.mineral_richness = PlanetData.MineralRichness.values().pick_random()
 	planet.gravity = PlanetData.Gravity.values().pick_random()
 	planet.moons = _weighted_moon_count_array.pick_random()
+	
+	# Assign size and corresponding max population
+	var size_roll = randf()
+	if size_roll < 0.1: # 10% chance
+		planet.size = PlanetData.PlanetSize.XS
+		planet.max_population = 5
+	elif size_roll < 0.25: # 15% chance
+		planet.size = PlanetData.PlanetSize.S
+		planet.max_population = 8
+	elif size_roll < 0.75: # 50% chance
+		planet.size = PlanetData.PlanetSize.M
+		planet.max_population = 12
+	elif size_roll < 0.9: # 15% chance
+		planet.size = PlanetData.PlanetSize.L
+		planet.max_population = 16
+	else: # 10% chance
+		planet.size = PlanetData.PlanetSize.XL
+		planet.max_population = 20
 
+	# 1% chance of being an "Abandoned" world
 	if randf() < 0.01:
 		planet.is_abandoned = true
 		planet.has_artifacts = true
