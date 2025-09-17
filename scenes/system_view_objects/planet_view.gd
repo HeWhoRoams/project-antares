@@ -66,6 +66,7 @@ func set_body_data(body_data: CelestialBodyData, system_name: String) -> void:
 
 func _on_button_pressed() -> void:
 	if _body_data is PlanetData and _body_data.owner_id == PlayerManager.player_empire.id:
+		DebugManager.log_action("System View: Clicked colonized planet '%s'." % label.text.replace("\n", " "))
 		AudioManager.play_sfx("confirm")
 		SceneManager.change_scene("res://ui/screens/colonies_screen.tscn", _body_data)
 

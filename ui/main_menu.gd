@@ -8,18 +8,22 @@ func _ready() -> void:
 	AudioManager.play_music("res://assets/audio/music/main_theme.ogg")
 
 func _on_new_game_button_pressed() -> void:
+	DebugManager.log_action("Main Menu: 'New Game' button pressed.")
 	AudioManager.play_sfx("confirm")
 	SceneManager.change_scene("res://scenes/starmap/starmap.tscn")
 
 func _on_continue_button_pressed() -> void:
+	DebugManager.log_action("Main Menu: 'Continue' button pressed.")
 	AudioManager.play_sfx("confirm")
 	SaveLoadManager.load_game()
 
 func _on_settings_button_pressed() -> void:
+	DebugManager.log_action("Main Menu: 'Settings' button pressed.")
 	AudioManager.play_sfx("confirm")
 	SceneManager.change_scene("res://ui/screens/settings_screen.tscn")
 
 func _on_quit_button_pressed() -> void:
+	DebugManager.log_action("Main Menu: 'Quit' button pressed.")
 	AudioManager.play_sfx("back")
 	get_tree().quit()
 

@@ -1,8 +1,14 @@
 # /scripts/managers/DebugManager.gd
 extends Node
 
-## --- DEFENSIVE CODE FLAG ---
-## Set this to 'true' in the Project Settings to enable extra validation checks.
-## These checks can help find bugs but may have a minor performance cost.
-## We'll default it to 'true' while we're still in development.
-@export var is_debug_mode_enabled: bool = true
+var is_debug_mode_enabled: bool = true
+
+func _ready() -> void:
+	# Read the debug logging setting from the project config. Default to 'true'.
+	is_debug_mode_enabled = ProjectSettings.get_setting("debug/logging/log_user_actions", true)
+	print("DebugManager: User action logging is %s." % ("ENABLED" if is_debug_mode_enabled else "DISABLED"))
+
+## Prints a formatted log message for a user action if logging is enabled.
+func log_action(message: String) -> void:
+	if is_debug_mode_enabled:
+		print("[ACTION] %s" % message)
