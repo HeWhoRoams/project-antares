@@ -3,8 +3,8 @@ extends Control
 @onready var colony_name_label: Label = %ColonyNameLabel
 @onready var population_label: Label = %PopulationLabel
 @onready var system_planet_list: VBoxContainer = %SystemPlanetList
-@onready var resource_display: GridContainer = %ResourceDisplay
-@onready var pop_allocation_display: VBoxContainer = %PopulationAllocation
+@onready var center_grid: GridContainer = %CenterGrid
+@onready var construction_display: PanelContainer = %ConstructionDisplay
 @onready var construction_label: Label = %ConstructionLabel
 @onready var construction_progress: ProgressBar = %ConstructionProgress
 @onready var surface_background: TextureRect = %Background
@@ -35,7 +35,6 @@ const JOB_ICONS = {
 
 const POP_ICON = preload("res://assets/icons/population.png")
 
-
 func _ready() -> void:
 	if SceneManager.next_scene_context is PlanetData:
 		_current_planet = SceneManager.next_scene_context
@@ -44,6 +43,13 @@ func _ready() -> void:
 		printerr("ColoniesScreen: No valid PlanetData provided. Returning to starmap.")
 		SceneManager.change_scene("res://scenes/starmap/starmap.tscn")
 		return
+
+	_make_construction_panel_square()
+
+func _make_construction_panel_square() -> void:
+	await get_tree().process_frame
+	var height = construction_display.size.y
+	construction_display.custom_minimum_size.x = height
 
 func _update_all_displays() -> void:
 	if not is_instance_valid(_current_planet):
@@ -60,8 +66,7 @@ func _update_all_displays() -> void:
 	population_label.text = "Pop %d / %d" % [_current_planet.current_population, _current_planet.max_population]
 	
 	_populate_system_planet_list(home_system)
-	_populate_resource_display()
-	_populate_population_display()
+	_populate_center_grid()
 	
 	construction_label.text = "Building: Hydroponics Farm"
 	construction_progress.value = 30
@@ -75,62 +80,46 @@ func _populate_system_planet_list(system: StarSystem) -> void:
 	for body in system.celestial_bodies:
 		if body is PlanetData:
 			planets_in_system[body.orbital_slot] = body
-
+			
 	for i in range(6):
+		var list_entry_panel = PanelContainer.new()
+		list_entry_panel.add_theme_stylebox_override("panel", StyleBoxEmpty.new())
+		system_planet_list.add_child(list_entry_panel)
+
 		if planets_in_system.has(i):
 			var planet_entry = _planet_list_entry_scene.instantiate()
-			system_planet_list.add_child(planet_entry)
+			list_entry_panel.add_child(planet_entry)
 			planet_entry.set_planet_data(planets_in_system[i], system.display_name)
 		else:
-			var spacer = Label.new()
-			spacer.text = "Orbital Slot %d - Empty" % (i + 1)
+			var spacer = Control.new()
 			spacer.custom_minimum_size.y = 36
-			system_planet_list.add_child(spacer)
+			list_entry_panel.add_child(spacer)
 
-func _populate_resource_display() -> void:
-	for c in resource_display.get_children(): c.queue_free()
-	# This section is a placeholder for actual resource calculation
-	_add_resource_row("credits", 25, 5)
-	_add_resource_row("food", 10, 2)
-	_add_resource_row("production", 10, 0)
-	_add_resource_row("research", 20, 0)
+func _populate_center_grid() -> void:
+	for c in center_grid.get_children(): c.queue_free()
 	
+	_add_resource_row("credits", PlayerManager.player_empire.treasury, PlayerManager.player_empire.income_per_turn)
+	_add_resource_row("food", 0, 0) # Placeholder
+	_add_resource_row("production", 0, 0) # Placeholder
+	_add_resource_row("research", 0, 0) # Placeholder
+
 func _add_resource_row(type: String, total: int, surplus: int) -> void:
+	var hbox = HBoxContainer.new()
 	var icon_rect = TextureRect.new()
 	icon_rect.texture = RESOURCE_ICONS[type]
 	icon_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	icon_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	resource_display.add_child(icon_rect)
+	hbox.add_child(icon_rect)
 	
 	var label = Label.new()
 	label.text = "%d (%+d)" % [total, surplus]
-	resource_display.add_child(label)
+	hbox.add_child(label)
+	
+	center_grid.add_child(hbox)
 
 func _populate_population_display() -> void:
-	for c in pop_allocation_display.get_children(): c.queue_free()
-	
-	_add_population_row("farmer", _current_planet.farmers)
-	_add_population_row("worker", _current_planet.workers)
-	_add_population_row("scientist", _current_planet.scientists)
-
-func _add_population_row(job_type: String, count: int) -> void:
-	var hbox = HBoxContainer.new()
-	var job_icon = TextureRect.new()
-	job_icon.texture = JOB_ICONS[job_type]
-	job_icon.custom_minimum_size = Vector2(32, 32)
-	job_icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	job_icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	hbox.add_child(job_icon)
-	
-	for i in count:
-		var pop_icon_rect = TextureRect.new()
-		pop_icon_rect.texture = POP_ICON
-		pop_icon_rect.custom_minimum_size = Vector2(24, 32)
-		pop_icon_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		pop_icon_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		hbox.add_child(pop_icon_rect)
-		
-	pop_allocation_display.add_child(hbox)
+	# This function will be implemented in the next phase
+	pass
 
 func _on_return_button_pressed() -> void:
 	AudioManager.play_sfx("back")

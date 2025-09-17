@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=2 format=3]
 
 [ext_resource type="Script" path="res://ui/screens/colonies_screen.gd" id="1_script"]
-[ext_resource type="StyleBox" uid="uid://c6y7gq8f7v1j8" path="res://ui/themes/bordered_panel_style.tres" id="2_style"]
 
 [node name="ColoniesScreen" type="Control"]
 layout_mode = 3
@@ -172,7 +171,6 @@ offset_left = -150.0
 offset_top = -60.0
 offset_right = -20.0
 offset_bottom = -20.0
-theme = theme
 text = "Return"
 
 [node name="NPCsButton" type="Button" parent="."]
@@ -186,7 +184,6 @@ offset_left = -150.0
 offset_top = -110.0
 offset_right = -20.0
 offset_bottom = -70.0
-theme = theme
 text = "NPCs"
 
 [connection signal="pressed" from="ReturnButton" to="." method="_on_return_button_pressed"]
