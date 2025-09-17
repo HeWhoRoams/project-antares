@@ -83,9 +83,9 @@ func _update_population_display() -> void:
 	for child in pop_allocation_display.get_children():
 		child.queue_free()
 	
-	var pop_icon = ResourceLoader.load("res://assets/icons/population.png")
+	var pop_icon = ResourceLoader.load("rres://assets/images/icons/population.png")
 	if not pop_icon:
-		printerr("ColoniesScreen: Could not load population icon at 'res://assets/icons/population.png'.")
+		printerr("ColoniesScreen: Could not load population icon at 'res://assets/images/icons/population.png'.")
 		return
 
 	var farmer_label = Label.new()
