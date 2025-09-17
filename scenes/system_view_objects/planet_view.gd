@@ -4,6 +4,7 @@ extends Control
 @onready var sprite: Sprite2D = %Sprite2D
 @onready var label: Label = %Label
 @onready var hover_frame: Panel = %HoverFrame
+@onready var click_button: Button = %ClickButton
 
 var _body_data: CelestialBodyData
 
@@ -63,14 +64,14 @@ func set_body_data(body_data: CelestialBodyData, system_name: String) -> void:
 			var scale_y = target_size.y / tex_size.y
 			sprite.scale = Vector2(min(scale_x, scale_y), min(scale_x, scale_y))
 
-func _on_area_2d_input_event(_viewport, event: InputEvent, _shape_idx):
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
-		if _body_data is PlanetData and _body_data.owner_id == PlayerManager.player_empire.id:
-			AudioManager.play_sfx("confirm")
-			SceneManager.change_scene("res://ui/screens/colonies_screen.tscn", _body_data)
+func _on_button_pressed() -> void:
+	if _body_data is PlanetData and _body_data.owner_id == PlayerManager.player_empire.id:
+		AudioManager.play_sfx("confirm")
+		SceneManager.change_scene("res://ui/screens/colonies_screen.tscn", _body_data)
 
-func _on_area_2d_mouse_entered() -> void:
+func _on_button_mouse_entered() -> void:
 	hover_frame.show()
+	AudioManager.play_sfx("hover")
 
-func _on_area_2d_mouse_exited() -> void:
+func _on_button_mouse_exited() -> void:
 	hover_frame.hide()
