@@ -7,7 +7,6 @@ const BASE_RES_PER_SCIENTIST = 1
 const POP_CONSUMES_FOOD = 1
 const POP_GROWTH_THRESHOLD = 100 # Food surplus needed to grow 1 pop
 
-# This function will be called by the TurnManager for each empire.
 func process_turn_for_empire(empire: Empire) -> void:
 	var all_colonies = _get_colonies_for_empire(empire)
 	
@@ -16,7 +15,6 @@ func process_turn_for_empire(empire: Empire) -> void:
 		_process_population_growth(planet)
 		_process_construction(planet)
 
-# Gathers a list of all planets owned by a specific empire.
 func _get_colonies_for_empire(empire: Empire) -> Array[PlanetData]:
 	var colony_list: Array[PlanetData] = []
 	for system in GalaxyManager.star_systems.values():
@@ -25,14 +23,14 @@ func _get_colonies_for_empire(empire: Empire) -> Array[PlanetData]:
 				colony_list.append(body)
 	return colony_list
 
-func _process_resource_production(planet: PlanetData) -> void:
+func _process_resource_production(_planet: PlanetData) -> void:
 	# Placeholder for resource calculation logic
 	pass
 
-func _process_population_growth(planet: PlanetData) -> void:
+func _process_population_growth(_planet: PlanetData) -> void:
 	# Placeholder for population growth logic
 	pass
 	
-func _process_construction(planet: PlanetData) -> void:
+func _process_construction(_planet: PlanetData) -> void:
 	# Placeholder for construction queue logic
 	pass

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://betan1cr70v0q"
-path="res://.godot/imported/job_scientist.png-b7c2fd1b562fabd1a9498611b8510099.ctex"
+uid="uid://ix8w2wsf1k43"
+path="res://.godot/imported/job_farmer.png-dfd9d84aa9860821f40f7d40ee0bd5f7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/icons/job_scientist.png"
-dest_files=["res://.godot/imported/job_scientist.png-b7c2fd1b562fabd1a9498611b8510099.ctex"]
+source_file="res://assets/icons/job_farmer.png"
+dest_files=["res://.godot/imported/job_farmer.png-dfd9d84aa9860821f40f7d40ee0bd5f7.ctex"]
 
 [params]
 

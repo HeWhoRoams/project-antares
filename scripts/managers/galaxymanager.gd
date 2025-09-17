@@ -40,7 +40,6 @@ func generate_procedural_galaxy() -> void:
 	print("GalaxyManager: Generating galaxy...")
 	star_systems.clear()
 
-	# Create the player's home system with specific properties
 	var sol = StarSystem.new()
 	sol.id = "sol"
 	sol.display_name = "Sol"
@@ -55,7 +54,6 @@ func generate_procedural_galaxy() -> void:
 	star_systems[sol.id] = sol
 	_system_name_generator.add_used_name(sol.display_name)
 	
-	# Create a guaranteed home system for the AI faction
 	var sirius = StarSystem.new()
 	sirius.id = "sirius"
 	sirius.display_name = "Sirius"
@@ -67,7 +65,6 @@ func generate_procedural_galaxy() -> void:
 	star_systems[sirius.id] = sirius
 	_system_name_generator.add_used_name(sirius.display_name)
 	
-	# Procedurally generate the rest of the systems
 	var procedural_systems = _galaxy_builder.build_galaxy(number_of_systems - 2)
 	for system_id in procedural_systems:
 		var system_data = procedural_systems[system_id]
@@ -97,6 +94,5 @@ func get_star_color(num_celestials: int) -> Color:
 			return STAR_COLORS.blue
 		return STAR_COLORS.yellow
 
-func _on_save_data_loaded(data: Dictionary) -> void:
-	# This function will need to be updated to handle the new resource properties
+func _on_save_data_loaded(_data: Dictionary) -> void:
 	pass

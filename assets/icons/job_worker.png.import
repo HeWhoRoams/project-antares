@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ix8w2wsf1k43"
-path="res://.godot/imported/job_farmer.png-3543917fda9da040e8469f0dd3a55c8b.ctex"
+uid="uid://bsy6swm60rvvu"
+path="res://.godot/imported/job_worker.png-49dc2724fb94457b2e4736688ded9739.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/icons/job_farmer.png"
-dest_files=["res://.godot/imported/job_farmer.png-3543917fda9da040e8469f0dd3a55c8b.ctex"]
+source_file="res://assets/icons/job_worker.png"
+dest_files=["res://.godot/imported/job_worker.png-49dc2724fb94457b2e4736688ded9739.ctex"]
 
 [params]
 

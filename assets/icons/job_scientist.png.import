@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btmtc0b8qmqju"
-path="res://.godot/imported/population.png-38cb4602a542e9a323e078909234916d.ctex"
+uid="uid://betan1cr70v0q"
+path="res://.godot/imported/job_scientist.png-2f468774c42372ea6f493a29070c3ae5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/icons/population.png"
-dest_files=["res://.godot/imported/population.png-38cb4602a542e9a323e078909234916d.ctex"]
+source_file="res://assets/icons/job_scientist.png"
+dest_files=["res://.godot/imported/job_scientist.png-2f468774c42372ea6f493a29070c3ae5.ctex"]
 
 [params]
 
