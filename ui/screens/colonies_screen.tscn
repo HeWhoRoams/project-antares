@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bsrduf1ggbi5c"]
+[gd_scene load_steps=3 format=3]
 
-[ext_resource type="Script" uid="uid://cgg3m8lkgmgnl" path="res://ui/screens/colonies_screen.gd" id="1_script"]
+[ext_resource type="Script" path="res://ui/screens/colonies_screen.gd" id="1_script"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel_style"]
 bg_color = Color(0, 0, 0, 0.75)
@@ -39,14 +39,25 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_panel_style")
 
 [node name="ColonyNameLabel" type="Label" parent="VBoxContainer/TopUI/TopBar"]
 unique_name_in_owner = true
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Colony of Sol III"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PopulationLabel" type="Label" parent="VBoxContainer/TopUI/TopBar"]
 unique_name_in_owner = true
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_right = -10.0
+grow_horizontal = 0
 text = "Pop 10 / 16"
 horizontal_alignment = 2
 vertical_alignment = 1
@@ -61,7 +72,7 @@ layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="SystemPlanetListPanel" type="PanelContainer" parent="VBoxContainer/TopUI/MainPanel/MainHBox"]
-custom_minimum_size = Vector2(200, 0)
+custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel_style")
 
@@ -74,55 +85,50 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel_style")
 
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer/TopUI/MainPanel/MainHBox/CenterPanel"]
+[node name="CenterGrid" type="GridContainer" parent="VBoxContainer/TopUI/MainPanel/MainHBox/CenterPanel"]
+unique_name_in_owner = true
 layout_mode = 2
 columns = 2
 
-[node name="ResourceDisplay" type="GridContainer" parent="VBoxContainer/TopUI/MainPanel/MainHBox/CenterPanel/GridContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-columns = 4
-
-[node name="PopulationAllocation" type="GridContainer" parent="VBoxContainer/TopUI/MainPanel/MainHBox/CenterPanel/GridContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-columns = 12
-
 [node name="ConstructionDisplay" type="PanelContainer" parent="VBoxContainer/TopUI/MainPanel/MainHBox"]
-custom_minimum_size = Vector2(250, 250)
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel_style")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TopUI/MainPanel/MainHBox/ConstructionDisplay"]
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer/TopUI/MainPanel/MainHBox/ConstructionDisplay"]
+layout_mode = 2
+ratio = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TopUI/MainPanel/MainHBox/ConstructionDisplay/AspectRatioContainer"]
 layout_mode = 2
 
-[node name="ConstructionLabel" type="Label" parent="VBoxContainer/TopUI/MainPanel/MainHBox/ConstructionDisplay/VBoxContainer"]
+[node name="ConstructionLabel" type="Label" parent="VBoxContainer/TopUI/MainPanel/MainHBox/ConstructionDisplay/AspectRatioContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Trade Goods"
 horizontal_alignment = 1
 
-[node name="ConstructionProgress" type="ProgressBar" parent="VBoxContainer/TopUI/MainPanel/MainHBox/ConstructionDisplay/VBoxContainer"]
+[node name="ConstructionProgress" type="ProgressBar" parent="VBoxContainer/TopUI/MainPanel/MainHBox/ConstructionDisplay/AspectRatioContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 value = 50.0
 show_percentage = false
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TopUI/MainPanel/MainHBox/ConstructionDisplay/VBoxContainer"]
+[node name="Spacer" type="Control" parent="VBoxContainer/TopUI/MainPanel/MainHBox/ConstructionDisplay/AspectRatioContainer/VBoxContainer"]
 layout_mode = 2
-alignment = 1
+size_flags_vertical = 3
 
-[node name="ChangeButton" type="Button" parent="VBoxContainer/TopUI/MainPanel/MainHBox/ConstructionDisplay/VBoxContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TopUI/MainPanel/MainHBox/ConstructionDisplay/AspectRatioContainer/VBoxContainer"]
 layout_mode = 2
+
+[node name="ChangeButton" type="Button" parent="VBoxContainer/TopUI/MainPanel/MainHBox/ConstructionDisplay/AspectRatioContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 text = "Change"
 
-[node name="BuyButton" type="Button" parent="VBoxContainer/TopUI/MainPanel/MainHBox/ConstructionDisplay/VBoxContainer/HBoxContainer"]
+[node name="BuyButton" type="Button" parent="VBoxContainer/TopUI/MainPanel/MainHBox/ConstructionDisplay/AspectRatioContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Buy"
 
 [node name="PlanetSurface" type="PanelContainer" parent="VBoxContainer"]
@@ -133,26 +139,48 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_panel_style")
 
 [node name="Background" type="TextureRect" parent="VBoxContainer/PlanetSurface"]
 unique_name_in_owner = true
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 expand_mode = 1
 stretch_mode = 6
 
 [node name="BuildingsContainer" type="Control" parent="VBoxContainer/PlanetSurface"]
 unique_name_in_owner = true
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="FooterButtons" type="VBoxContainer" parent="VBoxContainer/PlanetSurface"]
-layout_mode = 2
-alignment = 2
-
-[node name="NPCsButton" type="Button" parent="VBoxContainer/PlanetSurface/FooterButtons"]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-text = "NPCs"
-
-[node name="ReturnButton" type="Button" parent="VBoxContainer/PlanetSurface/FooterButtons"]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
+[node name="ReturnButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -60.0
+offset_right = -20.0
+offset_bottom = -20.0
 text = "Return"
 
-[connection signal="pressed" from="VBoxContainer/PlanetSurface/FooterButtons/ReturnButton" to="." method="_on_return_button_pressed"]
+[node name="NPCsButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -110.0
+offset_right = -20.0
+offset_bottom = -70.0
+text = "NPCs"
+
+[connection signal="pressed" from="ReturnButton" to="." method="_on_return_button_pressed"]

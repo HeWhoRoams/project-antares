@@ -47,9 +47,9 @@ func _colonize_home_planet() -> void:
 			if body is PlanetData and body.planet_type == PlanetData.PlanetType.TERRAN:
 				body.owner_id = player_empire.id
 				body.current_population = 10
-				body.workers = 10 # Start with all 10 population as workers
-				body.farmers = 0
-				body.scientists = 0
+				body.farmers = 3
+				body.workers = 3
+				body.scientists = 4
 				print("PlayerManager: Home planet Sol III colonized with 10 population.")
 				return
 
