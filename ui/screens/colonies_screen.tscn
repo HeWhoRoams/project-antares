@@ -22,6 +22,7 @@ grow_vertical = 2
 [node name="TopUI" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
 
 [node name="TopBar" type="PanelContainer" parent="VBoxContainer/TopUI"]
 custom_minimum_size = Vector2(0, 40)
@@ -95,9 +96,7 @@ columns = 2
 
 [node name="ConstructionDisplay" type="PanelContainer" parent="VBoxContainer/TopUI/MainPanel/MainHBox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
-size_flags_horizontal = 0
 
 [node name="ConstructionVBox" type="VBoxContainer" parent="VBoxContainer/TopUI/MainPanel/MainHBox/ConstructionDisplay"]
 layout_mode = 1
@@ -139,6 +138,7 @@ text = "Buy"
 [node name="PlanetSurface" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+size_flags_stretch_ratio = 0.75
 
 [node name="Background" type="TextureRect" parent="VBoxContainer/PlanetSurface"]
 unique_name_in_owner = true

@@ -20,21 +20,6 @@ const SURFACE_BACKGROUNDS = {
 	PlanetData.PlanetType.DESERT: preload("res://assets/images/planet_surfaces/desert_surface.png"),
 }
 
-const RESOURCE_ICONS = {
-	"credits": preload("res://assets/icons/resource_credits.png"),
-	"food": preload("res://assets/icons/resource_food.png"),
-	"production": preload("res://assets/icons/resource_production.png"),
-	"research": preload("res://assets/icons/resource_research.png")
-}
-
-const JOB_ICONS = {
-	"farmer": preload("res://assets/icons/job_farmer.png"),
-	"worker": preload("res://assets/icons/job_worker.png"),
-	"scientist": preload("res://assets/icons/job_scientist.png")
-}
-
-const POP_ICON = preload("res://assets/icons/population.png")
-
 func _ready() -> void:
 	if SceneManager.next_scene_context is PlanetData:
 		_current_planet = SceneManager.next_scene_context
@@ -44,9 +29,11 @@ func _ready() -> void:
 		SceneManager.change_scene("res://scenes/starmap/starmap.tscn")
 		return
 
+	# This coroutine will wait for the layout to calculate its height, then force the width to match.
 	_make_construction_panel_square()
 
 func _make_construction_panel_square() -> void:
+	# Wait for the end of the frame so control nodes have their final sizes calculated.
 	await get_tree().process_frame
 	var height = construction_display.size.y
 	construction_display.custom_minimum_size.x = height
@@ -83,6 +70,7 @@ func _populate_system_planet_list(system: StarSystem) -> void:
 			
 	for i in range(6):
 		var list_entry_panel = PanelContainer.new()
+		# We make this panel transparent so it just acts as a container for the entry
 		list_entry_panel.add_theme_stylebox_override("panel", StyleBoxEmpty.new())
 		system_planet_list.add_child(list_entry_panel)
 
@@ -92,34 +80,37 @@ func _populate_system_planet_list(system: StarSystem) -> void:
 			planet_entry.set_planet_data(planets_in_system[i], system.display_name)
 		else:
 			var spacer = Control.new()
-			spacer.custom_minimum_size.y = 36
+			spacer.custom_minimum_size.y = 36 # approx height of an entry
 			list_entry_panel.add_child(spacer)
 
 func _populate_center_grid() -> void:
-	for c in center_grid.get_children(): c.queue_free()
-	
-	_add_resource_row("credits", PlayerManager.player_empire.treasury, PlayerManager.player_empire.income_per_turn)
-	_add_resource_row("food", 0, 0) # Placeholder
-	_add_resource_row("production", 0, 0) # Placeholder
-	_add_resource_row("research", 0, 0) # Placeholder
+	for child in center_grid.get_children():
+		child.queue_free()
 
-func _add_resource_row(type: String, total: int, surplus: int) -> void:
-	var hbox = HBoxContainer.new()
-	var icon_rect = TextureRect.new()
-	icon_rect.texture = RESOURCE_ICONS[type]
-	icon_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	icon_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	hbox.add_child(icon_rect)
+	var panel_style = get_theme_stylebox("panel", "PanelContainer")
 	
-	var label = Label.new()
-	label.text = "%d (%+d)" % [total, surplus]
-	hbox.add_child(label)
+	var data = [
+		"Credits: %d (+%d)" % [PlayerManager.player_empire.treasury, PlayerManager.player_empire.income_per_turn],
+		"Farmers: %d" % _current_planet.farmers,
+		"Food: TODO",
+		"Workers: %d" % _current_planet.workers,
+		"Production: TODO",
+		"Scientists: %d" % _current_planet.scientists,
+		"Research: TODO",
+		"Total Pop: %d" % _current_planet.current_population
+	]
 	
-	center_grid.add_child(hbox)
-
-func _populate_population_display() -> void:
-	# This function will be implemented in the next phase
-	pass
+	for text in data:
+		var cell_panel = PanelContainer.new()
+		cell_panel.add_theme_stylebox_override("panel", panel_style)
+		
+		var label = Label.new()
+		label.text = text
+		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		
+		cell_panel.add_child(label)
+		center_grid.add_child(cell_panel)
 
 func _on_return_button_pressed() -> void:
 	AudioManager.play_sfx("back")
