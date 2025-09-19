@@ -9,29 +9,18 @@ enum Gravity { LOW, NORMAL, HIGH }
 
 @export var planet_type: PlanetType
 
-@export_group("Colony State")
-## The ID of the empire that owns this planet. Empty if uncolonized.
-@export var owner_id: StringName = &""
-## The current number of population units.
-@export var current_population: int = 0
-## The number of population units assigned to farming.
-@export var farmers: int = 0
-## The number of population units assigned to industry.
-@export var workers: int = 0
-## The number of population units assigned to research.
-@export var scientists: int = 0
-
 @export_group("Planet Attributes")
 @export var size: PlanetSize = PlanetSize.M
 @export var max_population: int = 12
 @export var mineral_richness: MineralRichness = MineralRichness.NORMAL
 @export var gravity: Gravity = Gravity.NORMAL
 @export var moons: int = 0
+@export var food_per_farmer: int = 1
+@export var production_per_worker: int = 1
+@export var research_per_scientist: int = 1
 
-@export_group("Construction")
-## An array of BuildableItem IDs.
-@export var construction_queue: Array[StringName] = []
-@export var current_build_progress: float = 0.0
+## The ID of the empire that owns this planet. Empty if uncolonized.
+@export var owner_id: StringName = &""
 
 @export_group("Special Features")
 @export var has_natives: bool = false

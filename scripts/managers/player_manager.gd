@@ -16,7 +16,7 @@ func _ready() -> void:
 		SaveLoadManager.save_data_loaded.connect(_on_save_data_loaded)
 	else:
 		_initialize_new_game_state()
-	
+
 	TurnManager.turn_ended.connect(_on_turn_ended)
 
 func _initialize_new_game_state() -> void:
@@ -45,12 +45,11 @@ func _colonize_home_planet() -> void:
 	if sol_system:
 		for body in sol_system.celestial_bodies:
 			if body is PlanetData and body.planet_type == PlanetData.PlanetType.TERRAN:
-				body.owner_id = player_empire.id
-				body.current_population = 10
-				body.farmers = 3
-				body.workers = 3
-				body.scientists = 4
-				print("PlayerManager: Home planet Sol III colonized with 10 population.")
+				# Use the ColonyManager to establish the new colony
+				var new_colony = ColonyManager.establish_colony(body, player_empire, 10)
+				new_colony.farmers = 3
+				new_colony.workers = 3
+				new_colony.scientists = 4
 				return
 
 func can_research(tech_data: Technology) -> bool:
@@ -98,7 +97,7 @@ func _on_save_data_loaded(data: Dictionary) -> void:
 	var player_data = data.get("player", {})
 	research_points = player_data.get("research_points", 50)
 	unlocked_techs = player_data.get("unlocked_techs", {})
-	
+
 	var loaded_ships = player_data.get("owned_ships", {})
 	for ship_id in loaded_ships:
 		var ship_data = loaded_ships[ship_id]
