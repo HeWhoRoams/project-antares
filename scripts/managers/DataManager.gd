@@ -3,21 +3,44 @@
 extends Node
 
 ## A dictionary to hold all loaded Technology resources, keyed by their unique 'id'.
-var technologies: Dictionary = {}
+var _technologies: Dictionary = {}
 ## (Future) A dictionary for all ShipPart resources.
 # var ship_parts: Dictionary = {}
 ## (Future) A dictionary for all Faction resources.
 # var factions: Dictionary = {}
 
 ## NEW: A variable to hold our structured tech tree data from the JSON file.
-var tech_tree_data: Dictionary = {}
+var _tech_tree_data: Dictionary = {}
 
 
 func _ready() -> void:
 	print("DataManager: Loading all game data...")
-	_load_resources_from_directory("res://gamedata/technologies/", technologies)
+	_load_resources_from_directory("res://gamedata/technologies/", _technologies)
 	_load_tech_tree_from_json("res://gamedata/technologies/tech_tree.json")
 	print("DataManager: All game data loaded.")
+
+
+#region Public API
+## Returns the Technology resource for the given ID, if it exists.
+func get_technology(id: String): # -> Technology:
+	return _technologies.get(id)
+
+
+## Returns an array of all loaded technology IDs.
+func get_all_technology_ids() -> Array:
+	return _technologies.keys()
+
+
+## Returns an array of all loaded Technology resources.
+func get_all_technologies() -> Array:
+	return _technologies.values()
+
+
+## Returns the entire technology tree structure.
+func get_tech_tree_data() -> Dictionary:
+	return _tech_tree_data
+
+#endregion
 
 
 ## Generic function to scan a directory for .tres files and load them into a dictionary.
@@ -57,5 +80,5 @@ func _load_tech_tree_from_json(path: String) -> void:
 		printerr("DataManager: Failed to parse tech_tree.json. Error: %s" % json.get_error_message())
 		return
 
-	tech_tree_data = json.get_data()
+	_tech_tree_data = json.get_data()
 	print("  -> Loaded tech tree data from JSON.")

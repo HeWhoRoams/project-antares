@@ -11,6 +11,7 @@ extends Control
 @onready var buildings_container: Control = %BuildingsContainer
 
 var _current_planet: PlanetData
+var _current_colony: ColonyData
 var _planet_list_entry_scene = preload("res://ui/components/system_planet_list_entry.tscn")
 
 const ROMAN_NUMERALS = ["I", "II", "III", "IV", "V", "VI", "VII"]
@@ -23,6 +24,11 @@ const SURFACE_BACKGROUNDS = {
 func _ready() -> void:
 	if SceneManager.next_scene_context is PlanetData:
 		_current_planet = SceneManager.next_scene_context
+		_current_colony = ColonyManager.get_colony_for_planet(_current_planet)
+		if not _current_colony:
+			printerr("ColoniesScreen: Could not find ColonyData for the provided planet. Returning.")
+			SceneManager.return_to_previous_scene()
+			return
 		_update_all_displays()
 	else:
 		printerr("ColoniesScreen: No valid PlanetData provided. Returning to starmap.")
@@ -37,7 +43,7 @@ func _make_construction_panel_square() -> void:
 	construction_display.custom_minimum_size.x = height
 
 func _update_all_displays() -> void:
-	if not is_instance_valid(_current_planet):
+	if not is_instance_valid(_current_planet) or not is_instance_valid(_current_colony):
 		return
 
 	var home_system = GalaxyManager.star_systems.get(_current_planet.system_id)
@@ -48,7 +54,7 @@ func _update_all_displays() -> void:
 	var full_planet_name = "%s %s" % [home_system.display_name, roman_numeral]
 
 	colony_name_label.text = "Colony of %s" % full_planet_name
-	population_label.text = "Pop %d / %d" % [_current_planet.current_population, _current_planet.max_population]
+	population_label.text = "Pop %d / %d" % [_current_colony.current_population, _current_planet.max_population]
 
 	_populate_system_planet_list(home_system)
 	_populate_center_grid()
@@ -92,11 +98,11 @@ func _populate_center_grid() -> void:
 		"Credits: %d (+%d)" % [PlayerManager.player_empire.treasury, PlayerManager.player_empire.income_per_turn],
 		"Morale: TODO",
 		"Food: TODO",
-		"Cultivators: %d" % _current_planet.farmers,
+		"Cultivators: %d" % _current_colony.farmers,
 		"Production: TODO",
-		"Workers: %d" % _current_planet.workers,
+		"Workers: %d" % _current_colony.workers,
 		"Research: TODO",
-		"Researchers: %d" % _current_planet.scientists
+		"Researchers: %d" % _current_colony.scientists
 	]
 
 	for text in data:

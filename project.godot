@@ -34,6 +34,10 @@ ColonyManager="*res://scripts/managers/ColonyManager.gd"
 
 logging/log_user_actions=true
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gut/plugin.cfg")
+
 [gui]
 
 theme/custom="res://ui/main_theme.tres"

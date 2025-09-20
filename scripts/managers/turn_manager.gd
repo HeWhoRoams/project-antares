@@ -2,27 +2,24 @@
 extends Node
 
 signal turn_ended(new_turn_number: int)
+signal process_turn(empire: Empire)
 
-var current_turn: int = 1
-
-func _ready() -> void:
-	if SaveLoadManager.is_loading_game:
-		SaveLoadManager.save_data_loaded.connect(_on_save_data_loaded)
-
-func _on_save_data_loaded(data: Dictionary) -> void:
-	current_turn = data.get("turn", 1)
-	print("TurnManager: Loaded turn %d from save." % current_turn)
 
 func end_turn() -> void:
-	var previous_turn = current_turn
-	current_turn += 1
+	var game_data = GameManager.get_current_game_data()
+	if not game_data:
+		printerr("TurnManager: Cannot end turn, no game data available.")
+		return
+
+	var previous_turn = game_data.current_turn
+	game_data.current_turn += 1
 	
 	print("--- Turn %s Ended ---" % previous_turn)
 	
 	# Process colony updates for all empires
 	for empire in EmpireManager.empires.values():
-		ColonyManager.process_turn_for_empire(empire)
+		process_turn.emit(empire)
 	
-	print("--- Turn %s Began ---" % current_turn)
+	print("--- Turn %s Began ---" % game_data.current_turn)
 	
-	turn_ended.emit(current_turn)
+	turn_ended.emit(game_data.current_turn)

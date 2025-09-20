@@ -60,7 +60,7 @@ func _populate_tech_list() -> void:
 	for child in tech_list_container.get_children():
 		child.queue_free()
 
-	for tech in DataManager.technologies.values():
+	for tech in DataManager.get_all_technologies():
 		var new_entry = tech_entry_scene.instantiate()
 		tech_list_container.add_child(new_entry)
 		new_entry.set_technology_data(tech)

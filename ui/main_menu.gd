@@ -10,6 +10,7 @@ func _ready() -> void:
 func _on_new_game_button_pressed() -> void:
 	DebugManager.log_action("Main Menu: 'New Game' button pressed.")
 	AudioManager.play_sfx("confirm")
+	GameManager.start_new_game()
 	SceneManager.change_scene("res://scenes/starmap/starmap.tscn")
 
 func _on_continue_button_pressed() -> void:
