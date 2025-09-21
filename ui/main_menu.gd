@@ -18,6 +18,14 @@ func _on_continue_button_pressed() -> void:
 	AudioManager.play_sfx("confirm")
 	SaveLoadManager.load_game()
 
+func _on_generate_demo_button_pressed() -> void:
+	DebugManager.log_action("Main Menu: 'Generate Demo' button pressed.")
+	AudioManager.play_sfx("confirm")
+	var demo_manager = DemoManager.new()
+	demo_manager.generate_demo_state()
+	SaveLoadManager.save_game()
+	continue_button.disabled = false
+
 func _on_settings_button_pressed() -> void:
 	DebugManager.log_action("Main Menu: 'Settings' button pressed.")
 	AudioManager.play_sfx("confirm")

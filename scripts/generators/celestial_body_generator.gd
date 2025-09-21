@@ -88,3 +88,13 @@ func _generate_planet_attributes(planet: PlanetData) -> void:
 		planet.has_thriving_fauna = true
 	elif fauna_roll < 0.40:
 		planet.has_native_animals = true
+
+func generate_body_from_type(body_type: String) -> CelestialBodyData:
+	if body_type == "terrestrial":
+		var planet = PlanetData.new()
+		_generate_planet_attributes(planet)
+		return planet
+	else:
+		var body = CelestialBodyData.new()
+		body.body_type = CelestialBodyData.BodyType.get(body_type.to_upper())
+		return body

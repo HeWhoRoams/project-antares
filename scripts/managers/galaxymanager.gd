@@ -94,5 +94,28 @@ func get_star_color(num_celestials: int) -> Color:
 			return STAR_COLORS.blue
 		return STAR_COLORS.yellow
 
-func _on_save_data_loaded(_data: Dictionary) -> void:
-	pass
+func _on_save_data_loaded(data: Dictionary) -> void:
+	if not data.has("galaxy"):
+		printerr("GalaxyManager: No galaxy data in save file!")
+		return
+	
+	star_systems.clear()
+	var galaxy_data = data["galaxy"]
+	for system_id in galaxy_data:
+		var system_data = galaxy_data[system_id]
+		var system = StarSystem.new()
+		system.id = system_data["id"]
+		system.display_name = system_data["display_name"]
+		system.position = Vector2(system_data["position"][0], system_data["position"][1])
+		
+		for body_data in system_data["celestial_bodies"]:
+			var body = _celestial_body_generator.generate_body_from_type(body_data["body_type"])
+			body.orbital_slot = body_data["orbital_slot"]
+			body.system_id = system.id
+			if body is PlanetData and body_data.has("owner_id"):
+				body.owner_id = body_data["owner_id"]
+			system.celestial_bodies.append(body)
+		
+		star_systems[system_id] = system
+	
+	print("GalaxyManager: Galaxy loaded from save file.")

@@ -26,7 +26,9 @@ func save_game() -> void:
 			"owned_ships": _serialize_ship_data(AIManager.owned_ships)
 		},
 		# We must save the entire galaxy state
-		"galaxy": _serialize_galaxy_data(GalaxyManager.star_systems)
+		"galaxy": _serialize_galaxy_data(GalaxyManager.star_systems),
+		"empires": _serialize_empires_data(EmpireManager.empires),
+		"colonies": _serialize_colonies_data(ColonyManager.colonies)
 	}
 
 	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
@@ -85,7 +87,10 @@ func _serialize_galaxy_data(systems: Dictionary) -> Dictionary:
 		var celestial_bodies_array = []
 		for body in system.celestial_bodies:
 			# This can be expanded to save more planet details later
-			celestial_bodies_array.append({ "orbital_slot": body.orbital_slot, "body_type": body.body_type })
+			var body_data = { "orbital_slot": body.orbital_slot, "body_type": body.body_type }
+			if body is PlanetData:
+				body_data["owner_id"] = body.owner_id
+			celestial_bodies_array.append(body_data)
 		
 		serialized_systems[system_id] = {
 			"id": system.id,
@@ -94,3 +99,31 @@ func _serialize_galaxy_data(systems: Dictionary) -> Dictionary:
 			"celestial_bodies": celestial_bodies_array
 		}
 	return serialized_systems
+
+func _serialize_empires_data(empires: Dictionary) -> Dictionary:
+	var serialized_empires = {}
+	for empire_id in empires:
+		var empire: Empire = empires[empire_id]
+		serialized_empires[empire_id] = {
+			"id": empire.id,
+			"display_name": empire.display_name,
+			"color": [empire.color.r, empire.color.g, empire.color.b, empire.color.a],
+			"treasury": empire.treasury,
+			"income_per_turn": empire.income_per_turn,
+			"diplomatic_statuses": empire.diplomatic_statuses,
+			"is_ai_controlled": empire.is_ai_controlled
+		}
+	return serialized_empires
+
+func _serialize_colonies_data(colonies: Dictionary) -> Dictionary:
+	var serialized_colonies = {}
+	for colony_key in colonies:
+		var colony: ColonyData = colonies[colony_key]
+		serialized_colonies[colony_key] = {
+			"owner_id": colony.owner_id,
+			"system_id": colony.system_id,
+			"orbital_slot": colony.orbital_slot,
+			"current_population": colony.current_population,
+			"workers": colony.workers
+		}
+	return serialized_colonies

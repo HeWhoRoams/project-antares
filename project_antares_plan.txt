@@ -1,0 +1,62 @@
+# Project Antares Feature Plan & Roadmap
+
+## 1. Core Game Mechanics (20% Complete)
+
+### Requirements
+- [ ] Game State Management (GameManager.gd) - 50%
+- [ ] Turn-based System (turn_manager.gd) - 10%
+- [ ] Save/Load Functionality (SaveLoadManager.gd) - 0%
+- [ ] Player Management (player_manager.gd) - 20%
+
+### Planning Steps
+dcertfgv mjhnebwsra12qe **SaveLoadManager:** Design a data serialization format for saving and loading game state. Implement functionality to write to and read from save files.
+- **PlayerManager:** Expand to handle player-specific data, such as selected empire, owned colonies, and research progress.
+
+## 2. Galaxy Generation & Management (15% Complete)
+
+### Requirements
+- [ ] Procedural Galaxy Generation (galaxymanager.gd) - 20%
+- [ ] Star System Generation (celestial_body_generator.gd) - 10%
+- [ ] Celestial Body Variety (gamedata/celestial_bodies/) - 15%
+
+### Planning Steps
+- **GalaxyManager:** Enhance galaxy generation to create more diverse and interesting galaxy layouts, including different star types and spatial anomalies.
+- **Celestial Body Generator:** Implement logic for generating a wider variety of planets, moons, and other celestial bodies with unique characteristics.
+- **Data:** Define data structures for different planet types, resource distributions, and environmental hazards.
+
+## 3. Empire & Colony Management (10% Complete)
+
+### Requirements
+- [ ] Empire Management (EmpireManager.gd) - 15%
+- [ ] Colony Management (ColonyManager.gd) - 5%
+- [ ] AI Opponents (AIManager.gd) - 10%
+
+### Planning Steps
+- **EmpireManager:** Implement systems for managing empire-wide resources, policies, and diplomatic relations.
+- **ColonyManager:** Develop the core mechanics for colony development, including building construction, population growth, and resource production.
+- **AIManager:** Create a basic AI that can manage its empire, expand to new systems, and interact with the player.
+
+## 4. Technology Tree (15% Complete)
+
+### Requirements
+- [ ] Tech Tree Data Structure (gamedata/technologies/tech_tree.json) - 80%
+- [ ] Research System (ui/screens/research_screen.gd) - 0%
+- [ ] Tech Unlocking and Effects - 0%
+
+### Planning Steps
+- **Data:** The tech tree data is well-structured with detailed descriptions and benefits. Add prerequisites and research costs to complete the data structure.
+- **Research System:** Implement the logic for players to select and research technologies over time, including research queues and progress tracking.
+- **Effects:** Create a system for applying the effects of unlocked technologies to the game state (e.g., new buildings, ship components, empire-wide bonuses).
+
+## 5. User Interface (30% Complete)
+
+### Requirements
+- [ ] Main Menu (ui/main_menu.tscn) - 70%
+- [ ] HUD (ui/hud/hud.tscn) - 20%
+- [ ] Various Game Screens (ui/screens/) - 25%
+- [ ] Popups and Components (ui/popups/, ui/components/) - 25%
+
+### Planning Steps
+- **HUD:** Design and implement a functional in-game HUD that displays key information to the player (e.g., resources, turn number, selected colony).
+- **Screens:** Develop the remaining game screens, ensuring a consistent and intuitive user experience across the entire game.
+- **UX/UI Polish:** Refine the existing UI elements and add visual feedback and animations to improve the overall user experience.

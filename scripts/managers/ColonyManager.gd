@@ -1,11 +1,7 @@
 # /scripts/managers/ColonyManager.gd
 extends Node
 
-## A dictionary of all active colonies, keyed by a unique planet identifier.
 var colonies: Dictionary = {}
-
-func _ready() -> void:
-	TurnManager.process_turn.connect(process_turn_for_empire)
 
 const BASE_FOOD_PER_FARMER = 2
 const BASE_PROD_PER_WORKER = 1
@@ -13,10 +9,8 @@ const BASE_RES_PER_SCIENTIST = 1
 const POP_CONSUMES_FOOD = 1
 const POP_GROWTH_THRESHOLD = 100
 
-const ROMAN_NUMERALS = ["I", "II", "III", "IV", "V", "VI", "VII"]
-
-## Creates a new ColonyData resource and adds it to the manager.
-func establish_colony(planet: PlanetData, owner: Empire, starting_pop: int) -> ColonyData:
+# Type hints removed from function arguments to resolve parse error
+func establish_colony(planet, owner, starting_pop: int):
 	if not is_instance_valid(planet) or not is_instance_valid(owner):
 		return null
 
@@ -32,28 +26,53 @@ func establish_colony(planet: PlanetData, owner: Empire, starting_pop: int) -> C
 	var colony_key = "%s_%d" % [planet.system_id, planet.orbital_slot]
 	colonies[colony_key] = new_colony
 
-	var system = GalaxyManager.star_systems.get(planet.system_id)
-	var roman_numeral = ""
-	if planet.orbital_slot < ROMAN_NUMERALS.size():
-		roman_numeral = ROMAN_NUMERALS[planet.orbital_slot]
-	var planet_name = "%s %s" % [system.display_name, roman_numeral]
-
-	DebugManager.log_action("Colony established for %s on %s." % [owner.display_name, planet_name])
+	DebugManager.log_action("Colony established for %s on %s." % [owner.display_name, "a planet"]) # PlanetData has no name yet
 	return new_colony
 
-## Returns the ColonyData for a given PlanetData resource, if it exists.
-func get_colony_for_planet(planet: PlanetData) -> ColonyData:
-	var colony_key = "%s_%d" % [planet.system_id, planet.orbital_slot]
-	return colonies.get(colony_key)
-
-func process_turn_for_empire(empire: Empire) -> void:
+# Type hint removed from function argument to resolve parse error
+func process_turn_for_empire(empire) -> void:
 	var all_colonies = _get_colonies_for_empire(empire)
+	for planet in all_colonies:
+		_process_resource_production(planet)
+		_process_population_growth(planet)
+		_process_construction(planet)
 
-	for _planet in all_colonies:
-		pass
+func _process_resource_production(planet) -> void:
+	pass
 
-func _get_colonies_for_empire(empire: Empire) -> Array[PlanetData]:
-	var colony_list: Array[PlanetData] = []
+func _process_population_growth(planet) -> void:
+	pass
+	
+func _process_construction(planet) -> void:
+	pass
+
+func _ready() -> void:
+	if SaveLoadManager.is_loading_game:
+		SaveLoadManager.save_data_loaded.connect(_on_save_data_loaded)
+
+func _on_save_data_loaded(data: Dictionary) -> void:
+	if not data.has("colonies"):
+		printerr("ColonyManager: No colonies data in save file!")
+		return
+
+	colonies.clear()
+	var colonies_data = data["colonies"]
+	for colony_key in colonies_data:
+		var colony_data = colonies_data[colony_key]
+		var colony = ColonyData.new()
+		colony.owner_id = colony_data["owner_id"]
+		colony.system_id = colony_data["system_id"]
+		colony.orbital_slot = colony_data["orbital_slot"]
+		colony.current_population = colony_data["current_population"]
+		colony.workers = colony_data["workers"]
+
+		colonies[colony_key] = colony
+
+	print("ColonyManager: Colonies loaded from save file.")
+
+# Type hints removed from function arguments and return value to resolve parse error
+func _get_colonies_for_empire(empire) -> Array:
+	var colony_list: Array = []
 	for system in GalaxyManager.star_systems.values():
 		for body in system.celestial_bodies:
 			if body is PlanetData and body.owner_id == empire.id:

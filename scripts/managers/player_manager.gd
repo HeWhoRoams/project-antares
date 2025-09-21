@@ -10,6 +10,7 @@ var research_per_turn: int = 10
 var owned_ships: Dictionary = {}
 var unlocked_techs: Dictionary = {}
 var player_empire: Empire
+var current_player_empire_id: StringName = &"empire_0"  # Default to first empire (player)
 
 func _ready() -> void:
 	if SaveLoadManager.is_loading_game:
@@ -91,6 +92,19 @@ func _process_ship_movement() -> void:
 				ship_data.current_system_id = ship_data.destination_system_id
 				ship_data.destination_system_id = &""
 				ship_arrived.emit(ship_data)
+
+func get_current_player_empire() -> Empire:
+	return EmpireManager.get_empire_by_id(current_player_empire_id)
+
+func spoof_as_empire(empire_id: StringName) -> void:
+	if EmpireManager.empires.has(empire_id):
+		current_player_empire_id = empire_id
+		print("PlayerManager: Now spoofing as empire: %s" % empire_id)
+	else:
+		printerr("PlayerManager: Empire ID '%s' not found!" % empire_id)
+
+func get_all_empires() -> Array:
+	return EmpireManager.empires.values()
 
 func _on_save_data_loaded(data: Dictionary) -> void:
 	owned_ships.clear()
