@@ -23,6 +23,17 @@ extends Resource
 ## The number of population units assigned to research.
 @export var scientists: int = 0
 
-## An array of BuildableItem IDs.
-@export var construction_queue: Array[StringName] = []
-@export var current_build_progress: float = 0.0
+## Food produced this turn
+@export var food_produced: int = 0
+
+## Production produced this turn
+@export var production_produced: int = 0
+
+## Research produced this turn
+@export var research_produced: int = 0
+
+## Progress towards next population growth
+@export var growth_progress: int = 0
+
+## An array of BuildableItem objects.
+@export var construction_queue: Array[BuildableItem] = []

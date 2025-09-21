@@ -86,26 +86,30 @@ func _process_research(empire: Empire) -> void:
 		_apply_tech_effects(empire, tech)
 
 func _apply_tech_effects(empire: Empire, tech: Technology) -> void:
-	# Find the benefit text from tech tree data
+	# Find the effects array from tech tree data
 	var tech_tree_data = DataManager.get_tech_tree_data()
 	for category_data in tech_tree_data["categories"]:
 		for tier_key in category_data["tiers"]:
 			var tier_techs = category_data["tiers"][tier_key]
 			for tech_data in tier_techs:
 				if tech_data["id"] == tech.id:
-					var benefit = tech_data["benefit"]
-					_apply_benefit(empire, benefit)
-					print("Applied effects for: " + tech.display_name + " - " + benefit)
+					if tech_data.has("effects"):
+						var effects = tech_data["effects"]
+						_apply_effects(empire, effects)
+						print("Applied effects for: " + tech.display_name)
 					return
 
-func _apply_benefit(empire: Empire, benefit: String) -> void:
-	# Parse benefit text and apply effects
-	if "+5% to all income from population and trade." in benefit:
-		empire.income_per_turn = int(empire.income_per_turn * 1.05)
-	elif "Unlocks the 'Automated Research Lab' building" in benefit:
-		# TODO: Add to buildable items
-		pass
-	# Add more parsing as needed
+func _apply_effects(empire: Empire, effects: Array) -> void:
+	for effect in effects:
+		var type = effect["type"]
+		var target = effect["target"]
+		var value = effect["value"]
+		match type:
+			"EMPIRE_MODIFIER":
+				if target == "income_per_turn":
+					empire.income_per_turn = int(empire.income_per_turn * (1.0 + value))
+			_:
+				print("Unknown effect type: " + type)
 
 
 func _on_save_data_loaded(data: Dictionary) -> void:

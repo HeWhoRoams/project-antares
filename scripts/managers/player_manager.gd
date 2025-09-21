@@ -161,4 +161,5 @@ func _is_feature_on_path(start_pos: Vector2, end_pos: Vector2, feature_pos: Vect
 func _on_save_data_loaded(data: Dictionary) -> void:
 	var player_data = data.get("player", {})
 	unlocked_techs = player_data.get("unlocked_techs", {})
+	player_empire = EmpireManager.get_empire_by_id("player_1")
 	print("PlayerManager: Loaded player state from save.")

@@ -40,21 +40,31 @@ func get_current_game_data() -> GameData:
 
 
 func check_conquest_victory() -> bool:
-	for empire_id in active_empires:
-		var empire = EmpireManager.get_empire_by_id(empire_id)
-		if not empire:
+	for empire_a_id in active_empires:
+		var empire_a = EmpireManager.get_empire_by_id(empire_a_id)
+		if not empire_a:
 			continue
-		var home_system = GalaxyManager.star_systems.get(empire.home_system_id)
-		if not home_system:
-			continue
-		var owns_home = false
-		for body in home_system.celestial_bodies:
-			if body is PlanetData and body.owner_id == empire_id:
-				owns_home = true
+		var has_conquered_all = true
+		for empire_b_id in active_empires:
+			if empire_a_id == empire_b_id:
+				continue
+			var empire_b = EmpireManager.get_empire_by_id(empire_b_id)
+			if not empire_b:
+				continue
+			var home_system = GalaxyManager.star_systems.get(empire_b.home_system_id)
+			if not home_system:
+				continue
+			var owns_home = false
+			for body in home_system.celestial_bodies:
+				if body is PlanetData and body.owner_id == empire_a_id:
+					owns_home = true
+					break
+			if not owns_home:
+				has_conquered_all = false
 				break
-		if not owns_home:
-			return false
-	return true
+		if has_conquered_all:
+			return true
+	return false
 
 func check_diplomatic_victory() -> bool:
 	return false

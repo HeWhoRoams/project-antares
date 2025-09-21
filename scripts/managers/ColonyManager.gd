@@ -38,13 +38,59 @@ func process_turn_for_empire(empire) -> void:
 		_process_construction(planet)
 
 func _process_resource_production(planet) -> void:
-	pass
+	var colony = colonies.get("%s_%d" % [planet.system_id, planet.orbital_slot])
+	if not colony:
+		return
+
+	# Calculate food production
+	var food_production = colony.farmers * BASE_FOOD_PER_FARMER
+	colony.food_produced = food_production
+
+	# Calculate production output
+	var production_output = colony.workers * BASE_PROD_PER_WORKER
+	colony.production_produced = production_output
+
+	# Calculate research output
+	var research_output = colony.scientists * BASE_RES_PER_SCIENTIST
+	colony.research_produced = research_output
 
 func _process_population_growth(planet) -> void:
-	pass
-	
+	var colony = colonies.get("%s_%d" % [planet.system_id, planet.orbital_slot])
+	if not colony:
+		return
+
+	var food_consumed = colony.current_population * POP_CONSUMES_FOOD
+	var food_surplus = colony.food_produced - food_consumed
+
+	if food_surplus > 0:
+		colony.growth_progress += food_surplus
+		if colony.growth_progress >= POP_GROWTH_THRESHOLD:
+			colony.current_population += 1
+			colony.growth_progress = 0
+			# Auto-assign new population to workers
+			colony.workers += 1
+
 func _process_construction(planet) -> void:
-	pass
+	var colony = colonies.get("%s_%d" % [planet.system_id, planet.orbital_slot])
+	if not colony:
+		return
+
+	if colony.construction_queue.is_empty():
+		return
+
+	var current_item = colony.construction_queue[0]
+	current_item.progress += colony.production_produced
+
+	if current_item.progress >= current_item.cost:
+		# Item completed
+		colony.construction_queue.pop_front()
+		# Apply effects (e.g., add building, spawn ship)
+		_apply_construction_effect(colony, current_item)
+
+func _apply_construction_effect(colony: ColonyData, item: BuildableItem) -> void:
+	# This would apply the effects of completing the construction item
+	# For now, just print
+	print("Completed construction: %s for colony %s" % [item.display_name, colony.system_id])
 
 func _ready() -> void:
 	if SaveLoadManager.is_loading_game:
@@ -64,7 +110,20 @@ func _on_save_data_loaded(data: Dictionary) -> void:
 		colony.system_id = colony_data["system_id"]
 		colony.orbital_slot = colony_data["orbital_slot"]
 		colony.current_population = colony_data["current_population"]
-		colony.workers = colony_data["workers"]
+		colony.farmers = colony_data.get("farmers", 0)
+		colony.workers = colony_data.get("workers", 0)
+		colony.scientists = colony_data.get("scientists", 0)
+		colony.food_produced = colony_data.get("food_produced", 0)
+		colony.production_produced = colony_data.get("production_produced", 0)
+		colony.research_produced = colony_data.get("research_produced", 0)
+		colony.growth_progress = colony_data.get("growth_progress", 0)
+
+		# Reconstruct construction queue
+		var queue_ids = colony_data.get("construction_queue", [])
+		for item_id in queue_ids:
+			var item = DataManager.get_buildable_item(item_id)
+			if item:
+				colony.construction_queue.append(item)
 
 		colonies[colony_key] = colony
 

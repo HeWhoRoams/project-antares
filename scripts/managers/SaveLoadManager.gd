@@ -4,17 +4,17 @@ extends Node
 ## Emitted after the save file has been read and parsed.
 signal save_data_loaded(data: Dictionary)
 
-const SAVE_PATH = "user://savegame.json"
-
 var is_loading_game: bool = false
+var current_save_slot: String = ""
 
 ## Checks if a save file exists on disk.
-func has_save_file() -> bool:
-	return FileAccess.file_exists(SAVE_PATH)
+func has_save_file(slot_name: String = "default") -> bool:
+	var save_path = "user://savegame_%s.json" % slot_name
+	return FileAccess.file_exists(save_path)
 
 ## Gathers data from all managers and writes it to a JSON file.
-func save_game() -> void:
-	print("SaveLoadManager: Saving game state...")
+func save_game(slot_name: String = "default") -> void:
+	print("SaveLoadManager: Saving game state to slot '%s'..." % slot_name)
 	var save_data = {
 		"turn": TurnManager.current_turn,
 		"turn_order": TurnManager.turn_order,
@@ -34,28 +34,31 @@ func save_game() -> void:
 		"colonies": _serialize_colonies_data(ColonyManager.colonies)
 	}
 
-	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
+	var save_path = "user://savegame_%s.json" % slot_name
+	var file = FileAccess.open(save_path, FileAccess.WRITE)
 	var json_string = JSON.stringify(save_data, "\t")
 	file.store_string(json_string)
 	file.close()
-	print("SaveLoadManager: Game saved successfully to %s" % SAVE_PATH)
+	print("SaveLoadManager: Game saved successfully to %s" % save_path)
 
 ## Sets the flag to load a game and changes to the starmap.
-func load_game() -> void:
-	if not has_save_file():
-		printerr("SaveLoadManager: No save file found to load.")
+func load_game(slot_name: String = "default") -> void:
+	if not has_save_file(slot_name):
+		printerr("SaveLoadManager: No save file found for slot '%s'." % slot_name)
 		return
 	
+	current_save_slot = slot_name
 	is_loading_game = true
 	# The managers will detect this flag in their _ready() functions
 	SceneManager.change_scene("res://scenes/starmap/starmap.tscn")
 
 ## Called by the managers after the starmap scene is loaded.
 func emit_load_data() -> void:
-	var file = FileAccess.open(SAVE_PATH, FileAccess.READ)
+	var save_path = "user://savegame_%s.json" % current_save_slot
+	var file = FileAccess.open(save_path, FileAccess.READ)
 	var json_string = file.get_as_text()
 	file.close()
-	
+
 	var json = JSON.new()
 	var error = json.parse(json_string)
 	if error != OK:
@@ -65,9 +68,10 @@ func emit_load_data() -> void:
 	var loaded_data = json.get_data()
 	save_data_loaded.emit(loaded_data)
 	print("SaveLoadManager: Save data loaded and emitted.")
-	
+
 	# Reset the flag after loading is done
 	is_loading_game = false
+	current_save_slot = ""
 
 ## Helper functions to convert Godot Resources to dictionaries for JSON serialization.
 func _serialize_ship_data(ships: Dictionary) -> Dictionary:
@@ -155,11 +159,21 @@ func _serialize_colonies_data(colonies: Dictionary) -> Dictionary:
 	var serialized_colonies = {}
 	for colony_key in colonies:
 		var colony: ColonyData = colonies[colony_key]
+		var queue_ids = []
+		for item in colony.construction_queue:
+			queue_ids.append(item.id)
 		serialized_colonies[colony_key] = {
 			"owner_id": colony.owner_id,
 			"system_id": colony.system_id,
 			"orbital_slot": colony.orbital_slot,
 			"current_population": colony.current_population,
-			"workers": colony.workers
+			"farmers": colony.farmers,
+			"workers": colony.workers,
+			"scientists": colony.scientists,
+			"food_produced": colony.food_produced,
+			"production_produced": colony.production_produced,
+			"research_produced": colony.research_produced,
+			"growth_progress": colony.growth_progress,
+			"construction_queue": queue_ids
 		}
 	return serialized_colonies
