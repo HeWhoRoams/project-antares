@@ -1,62 +1,243 @@
-# Project Antares Feature Plan & Roadmap
+Project Antares: AI-Actionable Development Roadmap
 
-## 1. Core Game Mechanics (20% Complete)
+This document provides a detailed, step-by-step implementation plan for Project Antares. Each feature is broken down into small, actionable tasks suitable for an AI coding agent.
 
-### Requirements
-- [ ] Game State Management (GameManager.gd) - 50%
-- [ ] Turn-based System (turn_manager.gd) - 10%
-- [ ] Save/Load Functionality (SaveLoadManager.gd) - 0%
-- [ ] Player Management (player_manager.gd) - 20%
+1. Core Game Mechanics (20% Complete)
 
-### Planning Steps
-dcertfgv mjhnebwsra12qe **SaveLoadManager:** Design a data serialization format for saving and loading game state. Implement functionality to write to and read from save files.
-- **PlayerManager:** Expand to handle player-specific data, such as selected empire, owned colonies, and research progress.
+GameManager.gd (50% Complete)
 
-## 2. Galaxy Generation & Management (15% Complete)
+    Feature: Comprehensive game state tracking (e.g., active player, turn number, game phase). Define clear win/loss conditions.
 
-### Requirements
-- [ ] Procedural Galaxy Generation (galaxymanager.gd) - 20%
-- [ ] Star System Generation (celestial_body_generator.gd) - 10%
-- [ ] Celestial Body Variety (gamedata/celestial_bodies/) - 15%
+    Development Steps to 100%:
 
-### Planning Steps
-- **GalaxyManager:** Enhance galaxy generation to create more diverse and interesting galaxy layouts, including different star types and spatial anomalies.
-- **Celestial Body Generator:** Implement logic for generating a wider variety of planets, moons, and other celestial bodies with unique characteristics.
-- **Data:** Define data structures for different planet types, resource distributions, and environmental hazards.
+        In GameManager.gd, define a GamePhase enum with values: SETUP, GALAXY_VIEW, COMBAT, COLONY_VIEW, GAME_OVER.
 
-## 3. Empire & Colony Management (10% Complete)
+        Add a variable current_game_phase of type GamePhase to the GameManager.
 
-### Requirements
-- [ ] Empire Management (EmpireManager.gd) - 15%
-- [ ] Colony Management (ColonyManager.gd) - 5%
-- [ ] AI Opponents (AIManager.gd) - 10%
+        Create a function set_game_phase(new_phase: GamePhase) that updates the current_game_phase and emits a signal game_phase_changed(new_phase).
 
-### Planning Steps
-- **EmpireManager:** Implement systems for managing empire-wide resources, policies, and diplomatic relations.
-- **ColonyManager:** Develop the core mechanics for colony development, including building construction, population growth, and resource production.
-- **AIManager:** Create a basic AI that can manage its empire, expand to new systems, and interact with the player.
+        Implement a function check_conquest_victory() -> bool that iterates through all empires and returns true if one empire owns the home systems of all others.
 
-## 4. Technology Tree (15% Complete)
+        Implement a placeholder function check_diplomatic_victory() -> bool that returns false for now.
 
-### Requirements
-- [ ] Tech Tree Data Structure (gamedata/technologies/tech_tree.json) - 80%
-- [ ] Research System (ui/screens/research_screen.gd) - 0%
-- [ ] Tech Unlocking and Effects - 0%
+        Implement a placeholder function check_score_victory() -> bool that returns false for now.
 
-### Planning Steps
-- **Data:** The tech tree data is well-structured with detailed descriptions and benefits. Add prerequisites and research costs to complete the data structure.
-- **Research System:** Implement the logic for players to select and research technologies over time, including research queues and progress tracking.
-- **Effects:** Create a system for applying the effects of unlocked technologies to the game state (e.g., new buildings, ship components, empire-wide bonuses).
+        Create a function check_for_victory() that calls all check_*_victory() functions and is called at the end of each turn.
 
-## 5. User Interface (30% Complete)
+        Connect to the player_won_game signal from PlayerManager and call a new function _on_victory("player_1", "Technology").
 
-### Requirements
-- [ ] Main Menu (ui/main_menu.tscn) - 70%
-- [ ] HUD (ui/hud/hud.tscn) - 20%
-- [ ] Various Game Screens (ui/screens/) - 25%
-- [ ] Popups and Components (ui/popups/, ui/components/) - 25%
+        Create a function _on_victory(winner_id: StringName, reason: String) that sets the game phase to GAME_OVER and transitions to the victory screen.
 
-### Planning Steps
-- **HUD:** Design and implement a functional in-game HUD that displays key information to the player (e.g., resources, turn number, selected colony).
-- **Screens:** Develop the remaining game screens, ensuring a consistent and intuitive user experience across the entire game.
-- **UX/UI Polish:** Refine the existing UI elements and add visual feedback and animations to improve the overall user experience.
+        Add a variable active_empires: Array[StringName] to track empires that have not been defeated.
+
+        Implement a function eliminate_empire(empire_id: StringName) that removes an empire from the active_empires list.
+
+        Integrate with SaveLoadManager to serialize and deserialize current_game_phase and active_empires.
+
+turn_manager.gd (10% Complete)
+
+    Feature: Develop a robust turn progression system that correctly cycles through players and AI, triggering necessary start-of-turn and end-of-turn events.
+
+    Development Steps to 100%:
+
+        In TurnManager.gd, add a variable turn_order: Array[StringName] to store the IDs of all empires in the game.
+
+        Add a variable current_empire_index: int to track the position in the turn_order array.
+
+        Create a function start_new_game(empires: Dictionary) that populates the turn_order array from the EmpireManager.
+
+        Define two new signals: start_of_turn(empire_id: StringName) and end_of_turn(empire_id: StringName).
+
+        Refactor the end_turn() function.
+
+        Inside end_turn(), first emit end_of_turn(turn_order[current_empire_index]).
+
+        Increment current_empire_index, using the modulo operator (%) to loop back to the start of the array.
+
+        If current_empire_index is 0, it signifies a new round. Increment the current_turn counter.
+
+        After updating the index, emit the start_of_turn(turn_order[current_empire_index]) signal for the new active empire.
+
+        Check if the new active empire is AI-controlled. If so, call a new placeholder function AIManager.take_turn().
+
+        Integrate with SaveLoadManager to serialize turn_order and current_empire_index.
+
+SaveLoadManager.gd (0% Complete)
+
+    Feature: Design a data serialization format for saving and loading game state. Implement functionality to write to and read from save files.
+
+    Development Steps to 100%:
+
+        Implement the _on_save_data_loaded function in GalaxyManager.gd to correctly parse the galaxy dictionary from a save file.
+
+        Implement _on_save_data_loaded in PlayerManager.gd and AIManager.gd to parse ship data.
+
+        Expand _serialize_galaxy_data in SaveLoadManager.gd to include all PlanetData properties (size, minerals, owner, population, etc.).
+
+        Expand _on_save_data_loaded in GalaxyManager.gd to correctly deserialize all PlanetData properties.
+
+        Implement saving and loading for the EmpireManager, storing the treasury, diplomatic_statuses, and other empire-level data.
+
+        Create a "Load Game" screen that reads multiple save files from the user:// directory.
+
+        Add functionality to name and delete save files from the "Load Game" screen.
+
+        Implement a "quick save" function that saves to a default slot.
+
+player_manager.gd (20% Complete)
+
+    Feature: Expand to handle player-specific data, such as selected empire, owned colonies, and research progress.
+
+    Development Steps to 100%:
+
+        Remove the research_points and research_per_turn variables. This data will be moved to the Empire object.
+
+        Modify the unlock_technology function to check and spend research points from player_empire.research_points.
+
+        Create a function calculate_research_per_turn() that sums the research output from all player-owned colonies and updates player_empire.research_per_turn.
+
+        Connect this function to be called at the start of each player turn.
+
+        Remove the owned_ships dictionary. This data will be moved to the Empire object.
+
+        Modify all ship-related functions (set_ship_destination, _process_ship_movement) to operate on player_empire.owned_ships.
+
+        Implement a system to track all player-owned colonies.
+
+        Refactor the save/load logic to serialize and deserialize the player_empire object.
+
+2. Galaxy Generation & Management (15% Complete)
+
+galaxymanager.gd (20% Complete)
+
+    Feature: Enhance galaxy generation to create more diverse and interesting galaxy layouts, including different star types and spatial anomalies.
+
+    Development Steps to 100%:
+
+        Add logic to the GalaxyBuilder to generate regions of the map that are "Nebulae".
+
+        Add logic to the GalaxyBuilder to generate "Black Hole" systems that are impassable.
+
+        Add logic to the GalaxyBuilder to generate pairs of "Wormhole" systems that allow instant travel between them.
+
+        Create NebulaData, BlackHoleData, and WormholeData resources to store their properties.
+
+        Update starmap.gd to visually render these new spatial phenomena.
+
+        Modify the set_ship_destination function in PlayerManager to account for nebula travel penalties.
+
+        Ensure all spatial phenomena data is saved and loaded by the SaveLoadManager.
+
+celestial_body_generator.gd (10% Complete)
+
+    Feature: Implement logic for generating a wider variety of planets, moons, and other celestial bodies with unique characteristics.
+
+    Development Steps to 100%:
+
+        Implement logic for the "Yellow Star" rule: if a system is designated as yellow, increase the probability of generating Terran planets.
+
+        Create a weighted table for generating planet specials (Artifacts, Natives, Hostile Fauna, etc.).
+
+        Add logic to generate moons for planets based on planet size.
+
+        Create a MoonData resource.
+
+        Implement logic to ensure some systems are generated as empty space (no planets).
+
+        Add a "Galaxy Age" parameter that influences the types of planets generated (e.g., "Old" galaxies have more barren worlds).
+
+3. Empire & Colony Management (10% Complete)
+
+ColonyManager.gd (10% Complete)
+
+    Feature: Implement core colony mechanics: colonization, population growth, and resource production.
+
+    Development Steps to 100%:
+
+        Implement the _process_resource_production function to calculate food, production, and research based on assigned population and planet modifiers.
+
+        Implement the _process_population_growth function. Calculate food surplus/deficit and add to a growth_progress variable on the planet. When the threshold is met, add one population unit.
+
+        Implement the _process_construction function. Apply the planet's production output to the current_build_progress of the first item in its construction_queue.
+
+        When an item is complete, remove it from the queue, apply its effect (e.g., add a building to the planet), and start the next item.
+
+        Create a colonize_planet(planet, empire) function that consumes a Colony Ship and establishes a new colony.
+
+        Create a scrap_building(planet, building) function that removes a building and provides credits.
+
+Ship Building (0% Complete)
+
+    Feature: Allow players to build ships from their colonies.
+
+    Development Steps to 100%:
+
+        Create a ShipHull resource for different ship sizes (Frigate, Destroyer, etc.).
+
+        Create a ShipDesigner screen where players can create and save ship templates.
+
+        Add ship templates to the list of BuildableItems.
+
+        When a ship is completed in a colony's construction queue, spawn a new fleet in that star system.
+
+        Create a ShipModule resource for weapons, shields, and special components.
+
+4. Technology Tree (15% Complete)
+
+Research System (0% Complete)
+
+    Feature: Implement the logic for players to select and research technologies over time.
+
+    Development Steps to 100%:
+
+        Create the research_screen.tscn UI, showing the six tech categories and the technologies within each tier.
+
+        Implement logic for the player to select one technology to research at a time.
+
+        Store the ID of the current_researching_tech on the Empire object.
+
+        Each turn, in TurnManager, apply the empire's research output to the research_progress for that technology.
+
+        When a tech is completed, add its ID to the unlocked_techs list on the Empire object and notify the player.
+
+        Implement logic to handle tech prerequisites.
+
+        Create a system to apply the effects of unlocked technologies (e.g., add new buildable items, update empire-wide stats).
+
+5. User Interface (30% Complete)
+
+HUD (20% Complete)
+
+    Feature: Design and implement a functional in-game HUD that displays key information.
+
+    Development Steps to 100%:
+
+        Connect the right-sidebar panels to the live data from the PlayerManager and Empire objects instead of using dummy data.
+
+        The "Fleet" panel should display the total number of military ships.
+
+        The "Food" panel should display the empire-wide food surplus or deficit.
+
+        The "Research" panel should display the current research project and turns until completion.
+
+        The "Credits" panel should display the current treasury and net income.
+
+Colonies Screen (25% Complete)
+
+    Feature: Implement the full functionality of the colony management screen.
+
+    Development Steps to 100%:
+
+        Populate the left-side planet list with all celestial bodies in the current system.
+
+        Implement the resource display grid to show the live output of Food, Production, and Research for the selected colony.
+
+        Implement the population allocation panel with buttons or drag-and-drop icons to move population between jobs (Farmers, Workers, Scientists).
+
+        Connect these controls to update the farmers, workers, and scientists properties on the PlanetData object and refresh the resource display.
+
+        Implement the "Change" button to open a new screen showing the list of available buildings.
+
+        Implement the "Buy" button to spend credits to complete the current construction item.
+
+        Display constructed buildings as icons on the planet surface background.

@@ -43,3 +43,9 @@ func _on_save_data_loaded(data: Dictionary) -> void:
 		new_ship.turns_to_arrival = ship_data.turns_to_arrival
 		owned_ships[ship_id] = new_ship
 	print("AIManager: Loaded AI state from save.")
+
+
+func take_turn(empire_id: StringName) -> void:
+	# Placeholder for AI turn logic
+	print("AIManager: AI empire %s is taking its turn." % empire_id)
+	# TODO: Implement AI decision making

@@ -17,16 +17,19 @@ func save_game() -> void:
 	print("SaveLoadManager: Saving game state...")
 	var save_data = {
 		"turn": TurnManager.current_turn,
+		"turn_order": TurnManager.turn_order,
+		"current_empire_index": TurnManager.current_empire_index,
+		"game_phase": GameManager.current_game_phase,
+		"active_empires": GameManager.active_empires,
 		"player": {
-			"research_points": PlayerManager.research_points,
-			"unlocked_techs": PlayerManager.unlocked_techs,
-			"owned_ships": _serialize_ship_data(PlayerManager.owned_ships)
+			"unlocked_techs": PlayerManager.unlocked_techs
 		},
 		"ai": {
 			"owned_ships": _serialize_ship_data(AIManager.owned_ships)
 		},
 		# We must save the entire galaxy state
 		"galaxy": _serialize_galaxy_data(GalaxyManager.star_systems),
+		"galaxy_features": _serialize_galaxy_features_data(),
 		"empires": _serialize_empires_data(EmpireManager.empires),
 		"colonies": _serialize_colonies_data(ColonyManager.colonies)
 	}
@@ -110,10 +113,43 @@ func _serialize_empires_data(empires: Dictionary) -> Dictionary:
 			"color": [empire.color.r, empire.color.g, empire.color.b, empire.color.a],
 			"treasury": empire.treasury,
 			"income_per_turn": empire.income_per_turn,
+			"research_points": empire.research_points,
+			"research_per_turn": empire.research_per_turn,
 			"diplomatic_statuses": empire.diplomatic_statuses,
-			"is_ai_controlled": empire.is_ai_controlled
+			"is_ai_controlled": empire.is_ai_controlled,
+			"home_system_id": empire.home_system_id,
+			"owned_ships": empire.owned_ships,
+			"owned_colonies": empire.owned_colonies
 		}
 	return serialized_empires
+
+func _serialize_galaxy_features_data() -> Dictionary:
+	var features = {
+		"nebulae": [],
+		"black_holes": [],
+		"wormholes": []
+	}
+
+	for nebula in GalaxyManager.nebulae:
+		features.nebulae.append({
+			"position": [nebula.position.x, nebula.position.y],
+			"size": nebula.size
+		})
+
+	for black_hole in GalaxyManager.black_holes:
+		features.black_holes.append({
+			"position": [black_hole.position.x, black_hole.position.y],
+			"size": black_hole.size
+		})
+
+	for wormhole in GalaxyManager.wormholes:
+		features.wormholes.append({
+			"position": [wormhole.position.x, wormhole.position.y],
+			"size": wormhole.size,
+			"exit_position": [wormhole.exit_position.x, wormhole.exit_position.y]
+		})
+
+	return features
 
 func _serialize_colonies_data(colonies: Dictionary) -> Dictionary:
 	var serialized_colonies = {}

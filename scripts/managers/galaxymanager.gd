@@ -7,6 +7,9 @@ const GALAXY_SIZE_X = 1000.0
 const GALAXY_SIZE_Y = 1000.0
 
 var star_systems: Dictionary = {}
+var nebulae: Array[CelestialBodyData] = []
+var black_holes: Array[CelestialBodyData] = []
+var wormholes: Array[CelestialBodyData] = []
 var _celestial_body_generator: CelestialBodyGenerator
 var _galaxy_builder: GalaxyBuilder
 var _system_name_generator: SystemNameGenerator
@@ -78,7 +81,13 @@ func generate_procedural_galaxy() -> void:
 		new_system.celestial_bodies = bodies
 		star_systems[system_id] = new_system
 
-	print("GalaxyManager: All systems created.")
+	# Generate galaxy features
+	var features = _galaxy_builder.generate_galaxy_features()
+	nebulae = features.nebulae
+	black_holes = features.black_holes
+	wormholes = features.wormholes
+
+	print("GalaxyManager: All systems and features created.")
 
 func get_star_color(num_celestials: int) -> Color:
 	if num_celestials == 0 or num_celestials == 6:
@@ -98,8 +107,12 @@ func _on_save_data_loaded(data: Dictionary) -> void:
 	if not data.has("galaxy"):
 		printerr("GalaxyManager: No galaxy data in save file!")
 		return
-	
+
 	star_systems.clear()
+	nebulae.clear()
+	black_holes.clear()
+	wormholes.clear()
+
 	var galaxy_data = data["galaxy"]
 	for system_id in galaxy_data:
 		var system_data = galaxy_data[system_id]
@@ -107,7 +120,7 @@ func _on_save_data_loaded(data: Dictionary) -> void:
 		system.id = system_data["id"]
 		system.display_name = system_data["display_name"]
 		system.position = Vector2(system_data["position"][0], system_data["position"][1])
-		
+
 		for body_data in system_data["celestial_bodies"]:
 			var body = _celestial_body_generator.generate_body_from_type(body_data["body_type"])
 			body.orbital_slot = body_data["orbital_slot"]
@@ -115,7 +128,33 @@ func _on_save_data_loaded(data: Dictionary) -> void:
 			if body is PlanetData and body_data.has("owner_id"):
 				body.owner_id = body_data["owner_id"]
 			system.celestial_bodies.append(body)
-		
+
 		star_systems[system_id] = system
-	
+
+	# Load galaxy features
+	if data.has("galaxy_features"):
+		var features_data = data["galaxy_features"]
+
+		for nebula_data in features_data.get("nebulae", []):
+			var nebula = CelestialBodyData.new()
+			nebula.body_type = CelestialBodyData.BodyType.NEBULA
+			nebula.position = Vector2(nebula_data["position"][0], nebula_data["position"][1])
+			nebula.size = nebula_data["size"]
+			nebulae.append(nebula)
+
+		for black_hole_data in features_data.get("black_holes", []):
+			var black_hole = CelestialBodyData.new()
+			black_hole.body_type = CelestialBodyData.BodyType.BLACK_HOLE
+			black_hole.position = Vector2(black_hole_data["position"][0], black_hole_data["position"][1])
+			black_hole.size = black_hole_data["size"]
+			black_holes.append(black_hole)
+
+		for wormhole_data in features_data.get("wormholes", []):
+			var wormhole = CelestialBodyData.new()
+			wormhole.body_type = CelestialBodyData.BodyType.WORMHOLE
+			wormhole.position = Vector2(wormhole_data["position"][0], wormhole_data["position"][1])
+			wormhole.size = wormhole_data["size"]
+			wormhole.exit_position = Vector2(wormhole_data["exit_position"][0], wormhole_data["exit_position"][1])
+			wormholes.append(wormhole)
+
 	print("GalaxyManager: Galaxy loaded from save file.")

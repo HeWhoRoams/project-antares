@@ -96,5 +96,9 @@ func generate_body_from_type(body_type: String) -> CelestialBodyData:
 		return planet
 	else:
 		var body = CelestialBodyData.new()
-		body.body_type = CelestialBodyData.BodyType.get(body_type.to_upper())
+		var body_type_enum = CelestialBodyData.BodyType.get(body_type.to_upper())
+		if body_type_enum != null:
+			body.body_type = body_type_enum
+		else:
+			body.body_type = CelestialBodyData.BodyType.PLANET  # Default fallback
 		return body

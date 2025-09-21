@@ -16,11 +16,13 @@ offset_left = -800.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="TechTreePanel"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TechTreePanel"]
 layout_mode = 2
-text = "Technology Tree Goes Here"
-horizontal_alignment = 1
-vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TechTreePanel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="ReturnButton" type="Button" parent="."]
 layout_mode = 1

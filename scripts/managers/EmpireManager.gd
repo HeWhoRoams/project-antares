@@ -48,8 +48,16 @@ func _on_save_data_loaded(data: Dictionary) -> void:
 		empire.color = Color(empire_data["color"][0], empire_data["color"][1], empire_data["color"][2], empire_data["color"][3])
 		empire.treasury = empire_data["treasury"]
 		empire.income_per_turn = empire_data["income_per_turn"]
+		empire.research_points = empire_data.get("research_points", 50)
+		empire.research_per_turn = empire_data.get("research_per_turn", 10)
 		empire.diplomatic_statuses = empire_data["diplomatic_statuses"]
 		empire.is_ai_controlled = empire_data["is_ai_controlled"]
+		if empire_data.has("home_system_id"):
+			empire.home_system_id = empire_data["home_system_id"]
+		if empire_data.has("owned_ships"):
+			empire.owned_ships = empire_data["owned_ships"]
+		if empire_data.has("owned_colonies"):
+			empire.owned_colonies = empire_data["owned_colonies"]
 
 		empires[empire_id] = empire
 
