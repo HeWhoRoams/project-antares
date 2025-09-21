@@ -11,6 +11,9 @@ extends CanvasLayer
 @onready var research_eta_label: Label = %ResearchEtaLabel
 
 func _ready() -> void:
+	# Wait for one frame to ensure all singletons are fully initialized
+	await get_tree().process_frame
+	
 	TurnManager.turn_ended.connect(_on_turn_ended)
 	PlayerManager.research_points_changed.connect(_on_research_points_changed)
 	
