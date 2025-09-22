@@ -2,7 +2,6 @@
 class_name PlanetData
 extends CelestialBodyData
 
-enum PlanetSize { XS, S, M, L, XL }
 enum PlanetType { OCEAN, TERRAN, DESERT, ICE, BARREN }
 enum MineralRichness { VERY_LOW, LOW, NORMAL, HIGH, VERY_HIGH }
 enum Gravity { LOW, NORMAL, HIGH }
@@ -22,7 +21,6 @@ enum Gravity { LOW, NORMAL, HIGH }
 @export var scientists: int = 0
 
 @export_group("Planet Attributes")
-@export var size: PlanetSize = PlanetSize.M
 @export var max_population: int = 12
 @export var mineral_richness: MineralRichness = MineralRichness.NORMAL
 @export var gravity: Gravity = Gravity.NORMAL
@@ -46,6 +44,7 @@ enum Gravity { LOW, NORMAL, HIGH }
 
 func _init():
 	body_type = BodyType.PLANET
+	size = BodySize.M
 
 func get_mineral_modifier() -> float:
 	match mineral_richness:
