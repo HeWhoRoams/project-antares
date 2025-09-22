@@ -114,7 +114,7 @@ func _draw_all_ships() -> void:
 		return
 	
 	var ships_by_system: Dictionary = {}
-	var all_ships = PlayerManager.owned_ships.values() + AIManager.owned_ships.values()
+	var all_ships = PlayerManager.player_empire.owned_ships.values() + AIManager.owned_ships.values()
 	
 	for ship_data in all_ships:
 		var system_id = ship_data.current_system_id

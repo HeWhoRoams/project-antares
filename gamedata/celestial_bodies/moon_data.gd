@@ -3,7 +3,7 @@ extends CelestialBodyData
 
 enum MoonSize { XS, S, M, L, XL }
 
-@export var size: MoonSize = MoonSize.M
+@export var moon_size: MoonSize = MoonSize.M
 @export var mineral_richness: PlanetData.MineralRichness = PlanetData.MineralRichness.NORMAL
 @export var gravity: PlanetData.Gravity = PlanetData.Gravity.NORMAL
 @export var max_population: int = 5

@@ -30,7 +30,7 @@ func _clear_existing_data() -> void:
 	GalaxyManager.star_systems.clear()
 	EmpireManager.empires.clear()
 	ColonyManager.colonies.clear()
-	PlayerManager.owned_ships.clear()
+	PlayerManager.player_empire.owned_ships.clear()
 	AIManager.owned_ships.clear()
 	TurnManager.current_turn = 1
 

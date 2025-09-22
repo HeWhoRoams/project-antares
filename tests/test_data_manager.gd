@@ -23,7 +23,7 @@ func test_get_technology_returns_valid_tech():
 
 func test_get_technology_returns_null_for_invalid_id():
 	var tech = data_manager.get_technology("invalid_tech_id")
-	assert_is_null(tech, "Should return null for an invalid ID.")
+	assert_null(tech, "Should return null for an invalid ID.")
 
 func test_tech_tree_data_is_loaded():
 	var tech_tree = data_manager.get_tech_tree_data()

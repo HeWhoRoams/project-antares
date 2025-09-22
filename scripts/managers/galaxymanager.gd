@@ -9,9 +9,9 @@ const GALAXY_SIZE_X = 1000.0
 const GALAXY_SIZE_Y = 1000.0
 
 var star_systems: Dictionary = {}
-var nebulae: Array[CelestialBodyData] = []
-var black_holes: Array[CelestialBodyData] = []
-var wormholes: Array[CelestialBodyData] = []
+var nebulae: Array = []
+var black_holes: Array = []
+var wormholes: Array = []
 var _celestial_body_generator: CelestialBodyGenerator
 var _galaxy_builder: GalaxyBuilder
 var _system_name_generator: SystemNameGenerator
