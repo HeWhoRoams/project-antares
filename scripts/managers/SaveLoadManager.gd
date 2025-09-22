@@ -93,12 +93,29 @@ func _serialize_galaxy_data(systems: Dictionary) -> Dictionary:
 		var system: StarSystem = systems[system_id]
 		var celestial_bodies_array = []
 		for body in system.celestial_bodies:
-			# This can be expanded to save more planet details later
 			var body_data = { "orbital_slot": body.orbital_slot, "body_type": body.body_type }
 			if body is PlanetData:
-				body_data["owner_id"] = body.owner_id
+				body_data.merge({
+					"planet_type": body.planet_type,
+					"size": body.size,
+					"max_population": body.max_population,
+					"mineral_richness": body.mineral_richness,
+					"gravity": body.gravity,
+					"moons": body.moons,
+					"food_per_farmer": body.food_per_farmer,
+					"production_per_worker": body.production_per_worker,
+					"research_per_scientist": body.research_per_scientist,
+					"owner_id": body.owner_id,
+					"has_natives": body.has_natives,
+					"has_artifacts": body.has_artifacts,
+					"has_crashed_ship": body.has_crashed_ship,
+					"is_abandoned": body.is_abandoned,
+					"has_native_animals": body.has_native_animals,
+					"has_thriving_fauna": body.has_thriving_fauna,
+					"has_hostile_fauna": body.has_hostile_fauna
+				})
 			celestial_bodies_array.append(body_data)
-		
+
 		serialized_systems[system_id] = {
 			"id": system.id,
 			"display_name": system.display_name,

@@ -19,7 +19,19 @@ func _create_weighted_array(weights: Dictionary) -> Array:
 			array.append(key)
 	return array
 
-func generate_bodies_for_system(num_bodies_to_generate: int) -> Array[CelestialBodyData]:
+func _weighted_pick(options: Array, weights: Array) -> Variant:
+	var total_weight = 0
+	for w in weights:
+		total_weight += w
+	var roll = randf() * total_weight
+	var cumulative = 0
+	for i in range(options.size()):
+		cumulative += weights[i]
+		if roll < cumulative:
+			return options[i]
+	return options.back()
+
+func generate_bodies_for_system(num_bodies_to_generate: int, star_color: String = "") -> Array[CelestialBodyData]:
 	var bodies: Array[CelestialBodyData] = []
 	var available_slots = range(MAX_ORBITAL_SLOTS)
 	available_slots.shuffle()
@@ -33,7 +45,7 @@ func generate_bodies_for_system(num_bodies_to_generate: int) -> Array[CelestialB
 		if randf() < current_planet_chance:
 			var new_planet = PlanetData.new()
 			new_planet.orbital_slot = slot
-			_generate_planet_attributes(new_planet)
+			_generate_planet_attributes(new_planet, star_color)
 			bodies.append(new_planet)
 			planet_count += 1
 		else:
@@ -44,9 +56,20 @@ func generate_bodies_for_system(num_bodies_to_generate: int) -> Array[CelestialB
 			
 	return bodies
 
-func _generate_planet_attributes(planet: PlanetData) -> void:
+func _generate_planet_attributes(planet: PlanetData, star_color: String = "") -> void:
 	# Assign a random type, size, and other attributes
-	planet.planet_type = PlanetData.PlanetType.values().pick_random()
+	if star_color == "yellow":
+		# Yellow Star rule: increase probability of TERRAN
+		var types = PlanetData.PlanetType.values()
+		var weights = []
+		for type in types:
+			if type == PlanetData.PlanetType.TERRAN:
+				weights.append(3)  # Higher weight for TERRAN
+			else:
+				weights.append(1)
+		planet.planet_type = _weighted_pick(types, weights)
+	else:
+		planet.planet_type = PlanetData.PlanetType.values().pick_random()
 	planet.mineral_richness = PlanetData.MineralRichness.values().pick_random()
 	planet.gravity = PlanetData.Gravity.values().pick_random()
 	planet.moons = _weighted_moon_count_array.pick_random()

@@ -22,6 +22,9 @@ func _on_music_slider_value_changed(value: float) -> void:
 func _on_sfx_slider_value_changed(value: float) -> void:
 	AudioManager.set_sfx_volume(value)
 
+func _on_save_game_button_pressed() -> void:
+	SaveLoadManager.save_game()
+
 func _on_return_button_pressed() -> void:
 	AudioManager.play_sfx("back")
 	SceneManager.return_to_previous_scene()

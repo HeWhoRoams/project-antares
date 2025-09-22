@@ -108,7 +108,7 @@ text = "Quit"
 [connection signal="mouse_entered" from="ButtonVBox/GenerateDemoButton" to="." method="_on_any_button_mouse_entered"]
 [connection signal="pressed" from="ButtonVBox/GenerateDemoButton" to="." method="_on_generate_demo_button_pressed"]
 [connection signal="mouse_entered" from="ButtonVBox/LoadGameButton" to="." method="_on_any_button_mouse_entered"]
-[connection signal="pressed" from="ButtonVBox/LoadGameButton" to="." method="_on_any_button_pressed"]
+[connection signal="pressed" from="ButtonVBox/LoadGameButton" to="." method="_on_load_game_button_pressed"]
 [connection signal="mouse_entered" from="ButtonVBox/NewGameButton" to="." method="_on_any_button_mouse_entered"]
 [connection signal="pressed" from="ButtonVBox/NewGameButton" to="." method="_on_new_game_button_pressed"]
 [connection signal="mouse_entered" from="ButtonVBox/SettingsButton" to="." method="_on_any_button_mouse_entered"]

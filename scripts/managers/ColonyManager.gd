@@ -29,6 +29,9 @@ func establish_colony(planet, owner, starting_pop: int):
 	DebugManager.log_action("Colony established for %s on %s." % [owner.display_name, "a planet"]) # PlanetData has no name yet
 	return new_colony
 
+func colonize_planet(planet, empire) -> void:
+	establish_colony(planet, empire, 1)
+
 # Type hint removed from function argument to resolve parse error
 func process_turn_for_empire(empire) -> void:
 	var all_colonies = _get_colonies_for_empire(empire)

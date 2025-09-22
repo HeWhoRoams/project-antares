@@ -26,6 +26,11 @@ func _on_generate_demo_button_pressed() -> void:
 	SaveLoadManager.save_game()
 	continue_button.disabled = false
 
+func _on_load_game_button_pressed() -> void:
+	DebugManager.log_action("Main Menu: 'Load Game' button pressed.")
+	AudioManager.play_sfx("confirm")
+	SceneManager.change_scene("res://ui/screens/load_game_screen.tscn")
+
 func _on_settings_button_pressed() -> void:
 	DebugManager.log_action("Main Menu: 'Settings' button pressed.")
 	AudioManager.play_sfx("confirm")
