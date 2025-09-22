@@ -10,14 +10,14 @@ const POP_CONSUMES_FOOD = 1
 const POP_GROWTH_THRESHOLD = 100
 
 # Type hints removed from function arguments to resolve parse error
-func establish_colony(planet, owner, starting_pop: int):
-	if not is_instance_valid(planet) or not is_instance_valid(owner):
+func establish_colony(planet, empire, starting_pop: int):
+	if not is_instance_valid(planet) or not is_instance_valid(empire):
 		return null
 
-	planet.owner_id = owner.id
+	planet.owner_id = empire.id
 
 	var new_colony = ColonyData.new()
-	new_colony.owner_id = owner.id
+	new_colony.owner_id = empire.id
 	new_colony.system_id = planet.system_id
 	new_colony.orbital_slot = planet.orbital_slot
 	new_colony.current_population = starting_pop
@@ -26,7 +26,7 @@ func establish_colony(planet, owner, starting_pop: int):
 	var colony_key = "%s_%d" % [planet.system_id, planet.orbital_slot]
 	colonies[colony_key] = new_colony
 
-	DebugManager.log_action("Colony established for %s on %s." % [owner.display_name, "a planet"]) # PlanetData has no name yet
+	DebugManager.log_action("Colony established for %s on %s." % [empire.display_name, "a planet"]) # PlanetData has no name yet
 	return new_colony
 
 func colonize_planet(planet, empire) -> void:

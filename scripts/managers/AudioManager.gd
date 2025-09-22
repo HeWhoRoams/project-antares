@@ -17,8 +17,8 @@ var _sfx_library: Dictionary = {
 	"hover": preload("res://assets/audio/sfx/ui/ui_hover.wav"),
 	"confirm": preload("res://assets/audio/sfx/ui/ui_confirm.wav"),
 	"back": preload("res://assets/audio/sfx/ui/ui_back.wav"),
-	"explosion": preload("res://assets/audio/sfx/gameplay/explosion.wav"),
-	"colonization": preload("res://assets/audio/sfx/gameplay/colonization.wav")
+	"explosion": null,  # Will be loaded dynamically
+	"colonization": null  # Will be loaded dynamically
 }
 
 var _master_bus_idx: int
@@ -58,7 +58,17 @@ func play_music(track_path: String) -> void:
 ## Plays a one-shot sound effect from the preloaded library.
 func play_sfx(sfx_name: String) -> void:
 	if _sfx_library.has(sfx_name):
-		_sfx_player.stream = _sfx_library[sfx_name]
+		var sfx_stream = _sfx_library[sfx_name]
+		# Load dynamically if not preloaded (for missing assets)
+		if sfx_stream == null:
+			match sfx_name:
+				"explosion":
+					sfx_stream = AssetLoader.load_audio("res://assets/audio/sfx/gameplay/explosion.wav")
+					_sfx_library[sfx_name] = sfx_stream
+				"colonization":
+					sfx_stream = AssetLoader.load_audio("res://assets/audio/sfx/gameplay/colonization.wav")
+					_sfx_library[sfx_name] = sfx_stream
+		_sfx_player.stream = sfx_stream
 		_sfx_player.play()
 
 ## Sets the master volume from a linear value (0.0 to 1.0).

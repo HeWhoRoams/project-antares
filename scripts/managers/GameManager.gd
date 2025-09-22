@@ -85,7 +85,7 @@ func check_for_victory() -> void:
 func eliminate_empire(empire_id: StringName) -> void:
 	active_empires.erase(empire_id)
 
-func _on_victory(winner_id: StringName, reason: String) -> void:
+func _on_victory(_winner_id: StringName, _reason: String) -> void:
 	set_game_phase(GamePhase.GAME_OVER)
 	# Transition to victory screen
 	SceneManager.change_scene("res://ui/screens/victory_screen.tscn")

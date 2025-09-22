@@ -1,5 +1,7 @@
 extends Node
 
+const AssetLoader = preload("res://scripts/utils/AssetLoader.gd")
+
 ## Generates a demo game state with 5 races, random systems, colonized planets, and turn 50.
 func generate_demo_state() -> void:
 	print("DemoManager: Generating demo game state...")
@@ -35,12 +37,16 @@ func _clear_existing_data() -> void:
 func _generate_galaxy() -> void:
 	var galaxy_builder = GalaxyBuilder.new()
 	var systems_data = galaxy_builder.build_galaxy(50)  # 50 systems
-	
+
+	# Initialize system name generator
+	var name_data = AssetLoader.load_resource("res://gamedata/systems/system_names.tres")
+	var system_name_generator = SystemNameGenerator.new(name_data)
+
 	for system_id in systems_data:
 		var system_data = systems_data[system_id]
 		var star_system = StarSystem.new()
 		star_system.id = system_id
-		star_system.display_name = SystemNameGenerator.generate_name()
+		star_system.display_name = system_name_generator.generate_unique_name()
 		star_system.position = system_data.position
 		
 		# Generate celestial bodies

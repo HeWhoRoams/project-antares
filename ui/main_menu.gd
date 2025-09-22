@@ -1,6 +1,8 @@
 # /ui/main_menu.gd
 extends Control
 
+const DemoManager = preload("res://scripts/managers/DemoManager.gd")
+
 @onready var continue_button: Button = $ButtonVBox/ContinueButton
 
 func _ready() -> void:
