@@ -45,6 +45,7 @@ func end_turn() -> void:
 	if current_empire_index == 0:
 		current_turn += 1
 		turn_ended.emit(current_turn)
+		GameManager.check_for_victory()
 	
 	# Emit start of turn for new current empire
 	var new_empire_id = turn_order[current_empire_index]

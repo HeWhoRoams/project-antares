@@ -31,6 +31,8 @@ func _ready() -> void:
 
 func start_new_game() -> void:
 	current_game_data = GameData.new()
+	active_empires = EmpireManager.empires.keys()
+	TurnManager.start_new_game(EmpireManager.empires)
 	# You can initialize other things here, like generating the galaxy
 	# GalaxyManager.generate_galaxy(current_game_data)
 

@@ -22,11 +22,11 @@ func _ready() -> void:
 	_update_sidebar_dummy_data()
 
 func _update_sidebar_dummy_data() -> void:
-	credits_label.text = "Credits: 250 BC\n(+25 BC/turn)"
-	fleet_label.text = "Fleet Strength:\n1 Scout"
-	food_label.text = "Food: 15\nSurplus: +2"
-	freighters_label.text = "Freighters:\n0 / 10"
-	research_eta_label.text = "Research: 59 RP\nETA: 10 turns"
+	credits_label.text = "Credits: %d\n(+%d/turn)" % [PlayerManager.player_empire.treasury, PlayerManager.player_empire.income_per_turn]
+	fleet_label.text = "Fleet Strength:\n%d ships" % PlayerManager.player_empire.owned_ships.size()
+	food_label.text = "Food: TODO\nSurplus: TODO"
+	freighters_label.text = "Freighters:\nTODO"
+	research_eta_label.text = "Research: %s\nETA: TODO turns" % PlayerManager.player_empire.current_researching_tech
 
 func _on_turn_ended(new_turn_number: int) -> void:
 	_update_turn_label(new_turn_number)

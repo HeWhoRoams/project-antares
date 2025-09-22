@@ -10,6 +10,8 @@
                         "id": "tech_predictive_algorithms",
                         "display_name": "Predictive Algorithms",
                         "description": "By analyzing trillions of data points, our rudimentary logic engines can now forecast market fluctuations and supply chain demands with uncanny accuracy, giving our empire a vital edge in its infancy.",
+                        "research_cost": 10,
+                        "prerequisites": [],
                         "effects": [
                             { "type": "EMPIRE_MODIFIER", "target": "income_per_turn", "value": 0.05 }
                         ]

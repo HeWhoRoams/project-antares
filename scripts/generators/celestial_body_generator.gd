@@ -6,6 +6,15 @@ const MAX_ORBITAL_SLOTS = 7
 const BASE_PLANET_CHANCE = 0.85
 const PLANET_CHANCE_DECAY = 0.20
 const MOON_CHANCE_WEIGHTS = { 0: 50, 1: 40, 2: 8, 3: 2 }
+const PLANET_SPECIALS_WEIGHTS = {
+	"none": 80,
+	"natives": 5,
+	"artifacts": 5,
+	"crashed_ship": 5,
+	"hostile_fauna": 3,
+	"thriving_fauna": 1,
+	"native_animals": 1
+}
 
 var _weighted_moon_count_array: Array
 
@@ -72,7 +81,21 @@ func _generate_planet_attributes(planet: PlanetData, star_color: String = "") ->
 		planet.planet_type = PlanetData.PlanetType.values().pick_random()
 	planet.mineral_richness = PlanetData.MineralRichness.values().pick_random()
 	planet.gravity = PlanetData.Gravity.values().pick_random()
-	planet.moons = _weighted_moon_count_array.pick_random()
+	# Generate moons based on planet size
+	var moon_weights = MOON_CHANCE_WEIGHTS.duplicate()
+	match planet.size:
+		PlanetData.PlanetSize.XS:
+			moon_weights = {0: 90, 1: 10}
+		PlanetData.PlanetSize.S:
+			moon_weights = {0: 70, 1: 25, 2: 5}
+		PlanetData.PlanetSize.M:
+			moon_weights = {0: 50, 1: 35, 2: 10, 3: 5}
+		PlanetData.PlanetSize.L:
+			moon_weights = {0: 30, 1: 30, 2: 25, 3: 15}
+		PlanetData.PlanetSize.XL:
+			moon_weights = {0: 20, 1: 25, 2: 30, 3: 25}
+	var moon_array = _create_weighted_array(moon_weights)
+	planet.moons = moon_array.pick_random()
 	
 	# Assign size and corresponding max population
 	var size_roll = randf()
@@ -100,17 +123,23 @@ func _generate_planet_attributes(planet: PlanetData, star_color: String = "") ->
 		planet.mineral_richness = PlanetData.MineralRichness.VERY_LOW
 		return
 
-	if randf() < 0.05: planet.has_natives = true
-	if randf() < 0.05: planet.has_artifacts = true
-	if randf() < 0.05: planet.has_crashed_ship = true
-	
-	var fauna_roll = randf()
-	if fauna_roll < 0.10:
-		planet.has_hostile_fauna = true
-	elif fauna_roll < 0.25:
-		planet.has_thriving_fauna = true
-	elif fauna_roll < 0.40:
-		planet.has_native_animals = true
+	# Generate planet specials using weighted table
+	var special = _weighted_pick(PLANET_SPECIALS_WEIGHTS.keys(), PLANET_SPECIALS_WEIGHTS.values())
+	match special:
+		"natives":
+			planet.has_natives = true
+		"artifacts":
+			planet.has_artifacts = true
+		"crashed_ship":
+			planet.has_crashed_ship = true
+		"hostile_fauna":
+			planet.has_hostile_fauna = true
+		"thriving_fauna":
+			planet.has_thriving_fauna = true
+		"native_animals":
+			planet.has_native_animals = true
+		"none":
+			pass
 
 func generate_body_from_type(body_type: String) -> CelestialBodyData:
 	if body_type == "terrestrial":
