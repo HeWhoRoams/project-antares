@@ -24,7 +24,8 @@ func set_game_phase(new_phase: GamePhase) -> void:
 
 
 func _ready() -> void:
-	PlayerManager.player_won_game.connect(_on_player_won_game)
+	if not PlayerManager.player_won_game.is_connected(_on_player_won_game):
+		PlayerManager.player_won_game.connect(_on_player_won_game)
 	if SaveLoadManager.is_loading_game:
 		SaveLoadManager.save_data_loaded.connect(_on_save_data_loaded)
 

@@ -5,12 +5,8 @@ var galaxy_manager
 
 func before_all():
 	galaxy_manager = load("res://scripts/managers/galaxymanager.gd").new()
-	add_child(galaxy_manager)
-	# Manually call ready since we are not using the scene tree here
-	galaxy_manager._ready()
 
 func after_all():
-	remove_child(galaxy_manager)
 	galaxy_manager.free()
 
 func test_galaxy_manager_instantiates():
