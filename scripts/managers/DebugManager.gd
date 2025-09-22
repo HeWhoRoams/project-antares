@@ -12,3 +12,8 @@ func _ready() -> void:
 func log_action(message: String) -> void:
 	if is_debug_mode_enabled:
 		print("[ACTION] %s" % message)
+
+## Prints a formatted log message for an error if logging is enabled.
+func log_error(message: String) -> void:
+	if is_debug_mode_enabled:
+		print("[ERROR] %s" % message)

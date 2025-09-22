@@ -1,6 +1,8 @@
 # /scripts/managers/AudioManager.gd
 extends Node
 
+const AssetLoader = preload("res://scripts/utils/AssetLoader.gd")
+
 # We use two separate players to allow SFX to play over music.
 var _music_player: AudioStreamPlayer
 var _sfx_player: AudioStreamPlayer
@@ -48,8 +50,8 @@ func play_music(track_path: String) -> void:
 	if track_path.is_empty():
 		_music_player.stop()
 		return
-		
-	var audio_stream = load(track_path)
+
+	var audio_stream = AssetLoader.load_audio(track_path)
 	_music_player.stream = audio_stream
 	_music_player.play()
 

@@ -2,6 +2,8 @@
 # A global singleton (Autoload) responsible for loading all game data from files.
 extends Node
 
+const AssetLoader = preload("res://scripts/utils/AssetLoader.gd")
+
 ## A dictionary to hold all loaded Technology resources, keyed by their unique 'id'.
 var _technologies: Dictionary = {}
 ## (Future) A dictionary for all ShipPart resources.
@@ -52,7 +54,7 @@ func _load_resources_from_directory(path: String, target_dictionary: Dictionary)
 		while file_name != "":
 			# We only care about .tres files and ignore hidden files/folders.
 			if not dir.current_is_dir() and file_name.ends_with(".tres"):
-				var resource = ResourceLoader.load(dir.get_current_dir() + "/" + file_name)
+				var resource = AssetLoader.load_resource(dir.get_current_dir() + "/" + file_name)
 				if resource and "id" in resource:
 					# Use the resource's unique ID as the key in our dictionary.
 					target_dictionary[resource.id] = resource

@@ -1,6 +1,8 @@
 # /scripts/managers/galaxymanager.gd
 extends Node
 
+const AssetLoader = preload("res://scripts/utils/AssetLoader.gd")
+
 @export var number_of_systems: int = 20
 
 const GALAXY_SIZE_X = 1000.0
@@ -22,7 +24,7 @@ const STAR_COLORS = {
 }
 
 func _ready() -> void:
-	var GalaxyBuilderScript = load("res://scripts/galaxy/GalaxyBuilder.gd")
+	var GalaxyBuilderScript = AssetLoader.load_script("res://scripts/galaxy/GalaxyBuilder.gd")
 	if GalaxyBuilderScript:
 		_galaxy_builder = GalaxyBuilderScript.new()
 	else:
@@ -30,8 +32,8 @@ func _ready() -> void:
 		return
 
 	_celestial_body_generator = CelestialBodyGenerator.new()
-	
-	var name_data = load("res://gamedata/systems/system_names.tres")
+
+	var name_data = AssetLoader.load_resource("res://gamedata/systems/system_names.tres")
 	_system_name_generator = SystemNameGenerator.new(name_data)
 	
 	if SaveLoadManager.is_loading_game:
