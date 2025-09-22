@@ -17,9 +17,9 @@ func test_technologies_are_loaded():
 	assert_true(data_manager.get_all_technologies().size() > 0, "There should be technologies loaded.")
 
 func test_get_technology_returns_valid_tech():
-	var tech = data_manager.get_technology("tech_colonization_1")
-	assert_true(is_instance_of(tech, "Resource"), "Should return a valid resource.")
-	assert_eq(tech.id, "tech_colonization_1", "The ID of the returned tech should be correct.")
+	var tech = data_manager.get_technology("tech_predictive_algorithms")
+	assert_true(is_instance_of(tech, Resource), "Should return a valid resource.")
+	assert_eq(tech.id, "tech_predictive_algorithms", "The ID of the returned tech should be correct.")
 
 func test_get_technology_returns_null_for_invalid_id():
 	var tech = data_manager.get_technology("invalid_tech_id")

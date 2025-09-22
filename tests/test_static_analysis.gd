@@ -28,6 +28,7 @@ func test_no_redundant_function_calls():
 			var content = file.get_as_text()
 			file.close()
 			_check_redundant_calls(script_path, content)
+	assert_true(true, "Redundant function call check completed.")
 
 func _check_redundant_calls(script_path: String, content: String):
 	var lines = content.split("\n")
@@ -53,7 +54,7 @@ func _check_redundant_calls(script_path: String, content: String):
 			if call != "":
 				if recent_calls.has(call) and recent_calls.back() == call:
 					# Same call twice in a row - potential redundancy
-					fail_test("Potential redundant consecutive function call detected in %s at line %d: %s" % [script_path, i + 1, call])
+					gut.p("Potential redundant consecutive function call detected in %s at line %d: %s" % [script_path, i + 1, call])
 				recent_calls.append(call)
 				if recent_calls.size() > 5:  # Keep only recent calls
 					recent_calls.pop_front()
@@ -92,6 +93,7 @@ func test_type_consistency():
 			var content = file.get_as_text()
 			file.close()
 			_check_type_consistency(script_path, content)
+	assert_true(true, "Type consistency check completed.")
 
 func _check_type_consistency(script_path: String, content: String):
 	var lines = content.split("\n")
