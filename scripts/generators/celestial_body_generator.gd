@@ -83,7 +83,7 @@ func _generate_planet_attributes(planet: PlanetData, star_color: String = "") ->
 	planet.gravity = PlanetData.Gravity.values().pick_random()
 	# Generate moons based on planet size
 	var moon_weights = MOON_CHANCE_WEIGHTS.duplicate()
-	match planet.size:
+	match planet.planet_size:
 		PlanetData.PlanetSize.XS:
 			moon_weights = {0: 90, 1: 10}
 		PlanetData.PlanetSize.S:
@@ -100,19 +100,19 @@ func _generate_planet_attributes(planet: PlanetData, star_color: String = "") ->
 	# Assign size and corresponding max population
 	var size_roll = randf()
 	if size_roll < 0.1: # 10% chance
-		planet.size = PlanetData.PlanetSize.XS
+		planet.planet_size = PlanetData.PlanetSize.XS
 		planet.max_population = 5
 	elif size_roll < 0.25: # 15% chance
-		planet.size = PlanetData.PlanetSize.S
+		planet.planet_size = PlanetData.PlanetSize.S
 		planet.max_population = 8
 	elif size_roll < 0.75: # 50% chance
-		planet.size = PlanetData.PlanetSize.M
+		planet.planet_size = PlanetData.PlanetSize.M
 		planet.max_population = 12
 	elif size_roll < 0.9: # 15% chance
-		planet.size = PlanetData.PlanetSize.L
+		planet.planet_size = PlanetData.PlanetSize.L
 		planet.max_population = 16
 	else: # 10% chance
-		planet.size = PlanetData.PlanetSize.XL
+		planet.planet_size = PlanetData.PlanetSize.XL
 		planet.max_population = 20
 
 	# 1% chance of being an "Abandoned" world

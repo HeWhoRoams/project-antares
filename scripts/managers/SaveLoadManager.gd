@@ -97,7 +97,7 @@ func _serialize_galaxy_data(systems: Dictionary) -> Dictionary:
 			if body is PlanetData:
 				body_data.merge({
 					"planet_type": body.planet_type,
-					"size": body.size,
+					"planet_size": body.planet_size,
 					"max_population": body.max_population,
 					"mineral_richness": body.mineral_richness,
 					"gravity": body.gravity,

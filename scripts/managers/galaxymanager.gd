@@ -50,7 +50,7 @@ func generate_procedural_galaxy() -> void:
 	var home_planet = PlanetData.new()
 	home_planet.system_id = sol.id
 	home_planet.planet_type = PlanetData.PlanetType.TERRAN
-	home_planet.size = PlanetData.PlanetSize.L
+	home_planet.planet_size = PlanetData.PlanetSize.L
 	home_planet.max_population = 16
 	home_planet.orbital_slot = 2
 	sol.celestial_bodies.append(home_planet)
@@ -128,7 +128,7 @@ func _on_save_data_loaded(data: Dictionary) -> void:
 			body.system_id = system.id
 			if body is PlanetData:
 				body.planet_type = body_data.get("planet_type", PlanetData.PlanetType.TERRAN)
-				body.size = body_data.get("size", PlanetData.PlanetSize.M)
+				body.planet_size = body_data.get("planet_size", PlanetData.PlanetSize.M)
 				body.max_population = body_data.get("max_population", 12)
 				body.mineral_richness = body_data.get("mineral_richness", PlanetData.MineralRichness.NORMAL)
 				body.gravity = body_data.get("gravity", PlanetData.Gravity.NORMAL)
