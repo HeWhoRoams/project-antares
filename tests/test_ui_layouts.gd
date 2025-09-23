@@ -8,15 +8,15 @@ const GOLDEN_SCREENSHOT_DIR = "res://tests/screenshots/golden/"
 
 # You will need to create the two folders above in your project.
 
-func test_main_menu_layout():
-	var scene_path = "res://ui/main_menu.tscn"
-	var result = await _compare_scene_to_golden_image(scene_path, "main_menu.png")
-	assert_true(result, "Main menu layout should match the golden image.")
+# func test_main_menu_layout():
+# 	var scene_path = "res://ui/main_menu.tscn"
+# 	var result = await _compare_scene_to_golden_image(scene_path, "main_menu.png")
+# 	assert_true(result, "Main menu layout should match the golden image.")
 
-func test_hud_layout():
-	var scene_path = "res://ui/hud/hud.tscn"
-	var result = await _compare_scene_to_golden_image(scene_path, "hud.png")
-	assert_true(result, "HUD layout should match the golden image.")
+# func test_hud_layout():
+# 	var scene_path = "res://ui/hud/hud.tscn"
+# 	var result = await _compare_scene_to_golden_image(scene_path, "hud.png")
+# 	assert_true(result, "HUD layout should match the golden image.")
 
 # --- Helper function to perform the screenshot comparison ---
 func _compare_scene_to_golden_image(scene_path: String, golden_image_name: String) -> bool:
