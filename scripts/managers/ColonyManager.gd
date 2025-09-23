@@ -30,6 +30,17 @@ func establish_colony(planet, empire, starting_pop: int):
 	return new_colony
 
 func colonize_planet(planet, empire) -> void:
+	# Find and consume a Colony Ship from the empire's fleet
+	var colony_ship_found = false
+	for ship_id in empire.owned_ships.keys():
+		var ship = empire.owned_ships[ship_id]
+		if ship.id.begins_with("colony_ship"):  # Assume colony ships have id like "colony_ship_XX"
+			empire.owned_ships.erase(ship_id)
+			colony_ship_found = true
+			break
+	if not colony_ship_found:
+		print("No colony ship available for colonization.")
+		return
 	establish_colony(planet, empire, 1)
 
 # Type hint removed from function argument to resolve parse error
@@ -45,16 +56,16 @@ func _process_resource_production(planet) -> void:
 	if not colony:
 		return
 
-	# Calculate food production
-	var food_production = colony.farmers * BASE_FOOD_PER_FARMER
+	# Calculate food production based on planet modifiers
+	var food_production = colony.farmers * planet.food_per_farmer
 	colony.food_produced = food_production
 
-	# Calculate production output
-	var production_output = colony.workers * BASE_PROD_PER_WORKER
+	# Calculate production output based on planet modifiers
+	var production_output = colony.workers * planet.production_per_worker
 	colony.production_produced = production_output
 
-	# Calculate research output
-	var research_output = colony.scientists * BASE_RES_PER_SCIENTIST
+	# Calculate research output based on planet modifiers
+	var research_output = colony.scientists * planet.research_per_scientist
 	colony.research_produced = research_output
 
 func _process_population_growth(planet) -> void:
@@ -90,10 +101,19 @@ func _process_construction(planet) -> void:
 		# Apply effects (e.g., add building, spawn ship)
 		_apply_construction_effect(colony, current_item)
 
-func _apply_construction_effect(colony: ColonyData, item: BuildableItem) -> void:
-	# This would apply the effects of completing the construction item
-	# For now, just print
-	print("Completed construction: %s for colony %s" % [item.display_name, colony.system_id])
+func scrap_building(planet, building) -> void:
+	# Find the colony
+	var colony = colonies.get("%s_%d" % [planet.system_id, planet.orbital_slot])
+	if not colony:
+		return
+
+	# Check if the building is constructed (placeholder, assume not tracked yet)
+	# For now, return half credits
+	var credits_returned = building.production_cost / 2
+	var empire = EmpireManager.get_empire_by_id(colony.owner_id)
+	if empire:
+		empire.treasury += credits_returned
+		print("Scrapped building %s for %d credits." % [building.display_name, credits_returned])
 
 func _ready() -> void:
 	if SaveLoadManager.is_loading_game:

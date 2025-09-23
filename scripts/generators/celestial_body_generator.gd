@@ -40,7 +40,7 @@ func _weighted_pick(options: Array, weights: Array) -> Variant:
 			return options[i]
 	return options.back()
 
-func generate_bodies_for_system(num_bodies_to_generate: int, star_color: String = "") -> Array[CelestialBodyData]:
+func generate_bodies_for_system(num_bodies_to_generate: int, star_color: String = "", galaxy_age: String = "normal") -> Array[CelestialBodyData]:
 	var bodies: Array[CelestialBodyData] = []
 	var available_slots = range(MAX_ORBITAL_SLOTS)
 	available_slots.shuffle()
@@ -54,7 +54,7 @@ func generate_bodies_for_system(num_bodies_to_generate: int, star_color: String 
 		if randf() < current_planet_chance:
 			var new_planet = PlanetData.new()
 			new_planet.orbital_slot = slot
-			_generate_planet_attributes(new_planet, star_color)
+			_generate_planet_attributes(new_planet, star_color, galaxy_age)
 			bodies.append(new_planet)
 			planet_count += 1
 		else:
@@ -65,7 +65,7 @@ func generate_bodies_for_system(num_bodies_to_generate: int, star_color: String 
 			
 	return bodies
 
-func _generate_planet_attributes(planet: PlanetData, star_color: String = "") -> void:
+func _generate_planet_attributes(planet: PlanetData, star_color: String = "", galaxy_age: String = "normal") -> void:
 	# Assign a random type, size, and other attributes
 	if star_color == "yellow":
 		# Yellow Star rule: increase probability of TERRAN
@@ -99,21 +99,32 @@ func _generate_planet_attributes(planet: PlanetData, star_color: String = "") ->
 	
 	# Assign size and corresponding max population
 	var size_roll = randf()
+	if galaxy_age == "old":
+		# Shift towards smaller, less habitable worlds
+		size_roll = max(size_roll - 0.3, 0.0)
+		# Reduce max population for old galaxies
+		planet.max_population = int(planet.max_population * 0.8)
+	elif galaxy_age == "young":
+		# Shift towards larger, more habitable worlds
+		size_roll = min(size_roll + 0.2, 1.0)
+		# Increase max population for young galaxies
+		planet.max_population = int(planet.max_population * 1.2)
+
 	if size_roll < 0.1: # 10% chance
 		planet.planet_size = PlanetData.PlanetSize.XS
-		planet.max_population = 5
+		planet.max_population = max(5, planet.max_population)
 	elif size_roll < 0.25: # 15% chance
 		planet.planet_size = PlanetData.PlanetSize.S
-		planet.max_population = 8
+		planet.max_population = max(8, int(planet.max_population * 0.9))
 	elif size_roll < 0.75: # 50% chance
 		planet.planet_size = PlanetData.PlanetSize.M
-		planet.max_population = 12
+		planet.max_population = int(planet.max_population * 1.0)
 	elif size_roll < 0.9: # 15% chance
 		planet.planet_size = PlanetData.PlanetSize.L
-		planet.max_population = 16
+		planet.max_population = int(planet.max_population * 1.1)
 	else: # 10% chance
 		planet.planet_size = PlanetData.PlanetSize.XL
-		planet.max_population = 20
+		planet.max_population = int(planet.max_population * 1.2)
 
 	# 1% chance of being an "Abandoned" world
 	if randf() < 0.01:

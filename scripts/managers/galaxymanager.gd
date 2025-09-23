@@ -4,6 +4,7 @@ extends Node
 const AssetLoader = preload("res://scripts/utils/AssetLoader.gd")
 
 @export var number_of_systems: int = 20
+@export var galaxy_age: String = "normal"  # Options: "young", "normal", "old"
 
 const GALAXY_SIZE_X = 1000.0
 const GALAXY_SIZE_Y = 1000.0
@@ -70,7 +71,7 @@ func generate_procedural_galaxy() -> void:
 	star_systems[sirius.id] = sirius
 	_system_name_generator.add_used_name(sirius.display_name)
 	
-	var procedural_systems = _galaxy_builder.build_galaxy(number_of_systems - 2)
+		var procedural_systems = _galaxy_builder.build_galaxy(number_of_systems - 2)
 	for system_id in procedural_systems:
 		var system_data = procedural_systems[system_id]
 		var new_system = StarSystem.new()
@@ -78,7 +79,7 @@ func generate_procedural_galaxy() -> void:
 		new_system.display_name = _system_name_generator.generate_unique_name()
 		new_system.position = system_data.position
 		var star_color = get_star_color(system_data.num_celestials)
-		var bodies = _celestial_body_generator.generate_bodies_for_system(system_data.num_celestials, star_color)
+		var bodies = _celestial_body_generator.generate_bodies_for_system(system_data.num_celestials, star_color, galaxy_age)
 		for body in bodies:
 			body.system_id = new_system.id
 		new_system.celestial_bodies = bodies
