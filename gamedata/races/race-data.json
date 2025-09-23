@@ -1,0 +1,109 @@
+[
+  {
+    "name": "Synari",
+    "appearance": "Tall, bioluminescent beings with crystalline head crests.",
+    "modifiers": {
+      "research": 2,
+      "food": -0.5,
+      "creative": true
+    },
+    "lore_tag": "Masters of knowledge, obsessed with understanding the universe."
+  },
+  {
+    "name": "Vektril",
+    "appearance": "Pill bug-like exoskeletal hive beings with iridescent shells.",
+    "modifiers": {
+      "production": 2,
+      "growth_rate": 1.5,
+      "research": -1
+    },
+    "lore_tag": "Hive-minded industrialists with endless labor capacity."
+  },
+  {
+    "name": "Ursoids",
+    "appearance": "Massive rhino-like humanoids with plated hides.",
+    "modifiers": {
+      "ground_combat": 25,
+      "research": -1
+    },
+    "lore_tag": "Proud warriors who dominate in ground combat."
+  },
+  {
+    "name": "Zherin",
+    "appearance": "Serpentine reptilians with layered scales and hypnotic eyes.",
+    "modifiers": {
+      "growth_rate": 1.5,
+      "ground_combat": 20,
+      "research": -1
+    },
+    "lore_tag": "Rapid breeders and aggressive colonizers."
+  },
+  {
+    "name": "Felyari",
+    "appearance": "Canid predators with sharp fangs and hunter’s instincts.",
+    "modifiers": {
+      "ship_attack": 50,
+      "ship_defense": -20
+    },
+    "lore_tag": "Fearless fleet hunters, excelling in ambushes."
+  },
+  {
+    "name": "Avarii",
+    "appearance": "Graceful butterfly-winged humanoids with delicate frames.",
+    "modifiers": {
+      "ship_defense": 25,
+      "ground_combat": -10
+    },
+    "lore_tag": "Natural pilots with unmatched maneuvering skill."
+  },
+  {
+    "name": "Lithari",
+    "appearance": "Rock-skinned titans, slow but unyielding.",
+    "modifiers": {
+      "lithovore": true,
+      "colonize_all": true,
+      "growth_rate": 0.5,
+      "research": -1
+    },
+    "lore_tag": "Stone-born beings, able to thrive anywhere but slow to expand."
+  },
+  {
+    "name": "Umbrans",
+    "appearance": "Shadowy silhouettes with shifting forms.",
+    "modifiers": {
+      "espionage": 20,
+      "diplomacy": -10,
+      "food": -0.5
+    },
+    "lore_tag": "Masters of secrecy, feared spies and saboteurs."
+  },
+  {
+    "name": "Concordians",
+    "appearance": "Adaptable humanoids with diverse features and unifying symbols.",
+    "modifiers": {
+      "diplomacy": 50,
+      "bc_per_pop": 0.5
+    },
+    "lore_tag": "Traders and diplomats who thrive on unity."
+  },
+  {
+    "name": "Seraphid",
+    "appearance": "Elegant, butterfly-winged mystics with psychic eyes.",
+    "modifiers": {
+      "espionage": 20,
+      "psychic": true,
+      "ship_defense": -20
+    },
+    "lore_tag": "Psychic manipulators, feared in diplomacy and espionage."
+  },
+  {
+    "name": "Pelagians",
+    "appearance": "Jellyfish-like ethereals with translucent forms.",
+    "modifiers": {
+      "aquatic": true,
+      "ship_speed": 2,
+      "growth_rate": 0.5
+    },
+    "lore_tag": "Aquatic wanderers, swift in space but slow to expand."
+  }
+]
