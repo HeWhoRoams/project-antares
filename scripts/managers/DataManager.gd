@@ -2,6 +2,8 @@
 # A global singleton (Autoload) responsible for loading all game data from files.
 extends Node
 
+const AssetLoader = preload("res://scripts/utils/AssetLoader.gd")
+
 ## A dictionary to hold all loaded Technology resources, keyed by their unique 'id'.
 var _technologies: Dictionary = {}
 ## (Future) A dictionary for all ShipPart resources.
@@ -52,7 +54,7 @@ func _load_resources_from_directory(path: String, target_dictionary: Dictionary)
 		while file_name != "":
 			# We only care about .tres files and ignore hidden files/folders.
 			if not dir.current_is_dir() and file_name.ends_with(".tres"):
-				var resource = ResourceLoader.load(dir.get_current_dir() + "/" + file_name)
+				var resource = AssetLoader.load_resource(dir.get_current_dir() + "/" + file_name)
 				if resource and "id" in resource:
 					# Use the resource's unique ID as the key in our dictionary.
 					target_dictionary[resource.id] = resource
@@ -81,4 +83,33 @@ func _load_tech_tree_from_json(path: String) -> void:
 		return
 
 	_tech_tree_data = json.get_data()
+	
+	# Create Technology resources from JSON data
+	for category_data in _tech_tree_data["categories"]:
+		var category_tier_techs = {}  # tier -> [tech_ids]
+		for tier_key in category_data["tiers"]:
+			var tier_techs = category_data["tiers"][tier_key]
+			category_tier_techs[tier_key] = []
+			for tech_data in tier_techs:
+				var tech = Technology.new()
+				tech.id = tech_data["id"]
+				tech.display_name = tech_data["display_name"]
+				tech.description = tech_data["description"]
+				tech.research_cost = 100  # Default
+				category_tier_techs[tier_key].append(tech.id)
+				_technologies[tech.id] = tech
+				print("  -> Created technology: %s" % tech.id)
+		
+		# Set prerequisites: higher tiers require one tech from previous tier
+		var tiers = category_tier_techs.keys()
+		tiers.sort()
+		for i in range(1, tiers.size()):
+			var current_tier = tiers[i]
+			var prev_tier = tiers[i-1]
+			for tech_id in category_tier_techs[current_tier]:
+				var tech = _technologies[tech_id]
+				# Require the first tech from previous tier
+				var prereq_id = category_tier_techs[prev_tier][0]
+				tech.prerequisites.append(_technologies[prereq_id])
+	
 	print("  -> Loaded tech tree data from JSON.")

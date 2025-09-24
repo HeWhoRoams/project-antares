@@ -1,6 +1,8 @@
 # /ui/main_menu.gd
 extends Control
 
+const DemoManager = preload("res://scripts/managers/DemoManager.gd")
+
 @onready var continue_button: Button = $ButtonVBox/ContinueButton
 
 func _ready() -> void:
@@ -17,6 +19,19 @@ func _on_continue_button_pressed() -> void:
 	DebugManager.log_action("Main Menu: 'Continue' button pressed.")
 	AudioManager.play_sfx("confirm")
 	SaveLoadManager.load_game()
+
+func _on_generate_demo_button_pressed() -> void:
+	DebugManager.log_action("Main Menu: 'Generate Demo' button pressed.")
+	AudioManager.play_sfx("confirm")
+	var demo_manager = DemoManager.new()
+	demo_manager.generate_demo_state()
+	SaveLoadManager.save_game()
+	continue_button.disabled = false
+
+func _on_load_game_button_pressed() -> void:
+	DebugManager.log_action("Main Menu: 'Load Game' button pressed.")
+	AudioManager.play_sfx("confirm")
+	SceneManager.change_scene("res://ui/screens/load_game_screen.tscn")
 
 func _on_settings_button_pressed() -> void:
 	DebugManager.log_action("Main Menu: 'Settings' button pressed.")

@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Godot
+      uses: chickensoft-games/setup-godot@v1
+      with:
+        version: 4.4.1
+        include-templates: true
+
+    - name: Run tests
+      run: |
+        if [[ "$RUNNER_OS" == "Windows" ]]; then
+          ./run_ci.bat
+        else
+          chmod +x ./run_ci.sh
+          ./run_ci.sh
+        fi
+
+  build:
+    needs: test
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Godot
+      uses: chickensoft-games/setup-godot@v1
+      with:
+        version: 4.4.1
+        include-templates: true
+
+    - name: Export Windows Build
+      run: godot --headless --export-release "Windows Desktop" build/MyGame.exe
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: windows-build
+        path: build/MyGame.exe

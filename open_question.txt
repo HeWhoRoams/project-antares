@@ -1,0 +1,258 @@
+# Open Questions - Project Antares Gameplay Logic
+# Questions requiring clarification before implementation
+# Last Updated: 2025-09-23
+
+## 1. VICTORY CONDITIONS
+
+### 1.1 Diplomatic Victory
+- ANSWERED: Based on Galactic Council votes (you are voted emperor of the galaxy)
+
+### 1.2 Score-Based Victory
+- REMOVED: Time limit victory removed from game
+
+### 1.3 Conquest Victory
+- ANSWERED: Enough to own all other empires' home systems
+
+### 1.4 Technological Victory
+- REMOVED: Technological victory removed from game
+
+## 2. AI BEHAVIOR & PERSONALITY
+
+### 2.1 AI Personality Types
+- ANSWERED: Expansionist, Militarist, Technologist, Diplomat, Balanced
+
+### 2.2 AI Decision Making
+- ANSWERED: Personality traits defined (Eloquence, Opportunism, Vindictiveness, Respect for Power, Deviousness, Desperation, Pragmatism, Stubbornness, Subtlety, Bureaucracy)
+
+### 2.3 Difficulty Scaling
+- ANSWERED: Based on overall game setting, all AI opponents set to same difficulty, resource bonuses (50% Easy, 100% Normal, 125% Hard, 150% Impossible)
+
+## 3. RESOURCE & ECONOMY SYSTEM
+
+### 3.1 Resource Types
+- What are the core resources?
+  - Food (population growth/sustenance)
+  - Production (building ships/buildings)
+  - Research (technology advancement)
+  - Credits (universal currency)
+- Are there secondary resources (energy, alloys, rare crystals)?
+
+### 3.2 Economic Balance
+- How do different planet types affect resource production?
+  - Terran worlds: Balanced production
+  - Desert worlds: High mineral output, low food
+  - Ice worlds: High research, low production
+- What are the base production values for each job type?
+
+### 3.3 Population Mechanics
+- How does population growth work?
+  - Food surplus required for growth?
+  - Population limits per planet size?
+  - Happiness/morale modifiers?
+- Can population migrate between colonies?
+
+## 4. TECHNOLOGY SYSTEM
+
+### 4.1 Technology Categories
+- What are the 6 technology categories mentioned in the plan?
+  - Construction, Force Fields, Computers, etc. (similar to Master of Orion)
+- How many tiers per category?
+
+### 4.2 Technology Effects
+- How are technology effects applied?
+  - Empire-wide modifiers (e.g., +10% research)
+  - Unlock new buildings/ships
+  - Improve existing mechanics
+- Are effects cumulative or tier-based?
+
+### 4.3 Research Balance
+- How many research points per scientist per turn?
+- Research cost scaling (linear, exponential)?
+- Prerequisites between technologies?
+
+## 5. SHIP DESIGN & COMBAT
+
+### 5.1 Ship Hull Sizes
+- What are the hull size categories?
+  - Frigate, Destroyer, Cruiser, Battleship, Dreadnought, Titan
+- Size limits for different ship roles?
+
+### 5.2 Combat Mechanics
+- How does space combat work?
+  - Turn-based tactical combat?
+  - Real-time with pause?
+  - Range, accuracy, damage calculations?
+- What are shield/armor mechanics?
+
+### 5.3 Special Modules
+- What special ship modules exist?
+  - Cloaking devices, warp dissipators, troop pods
+- How do they affect combat/movement?
+
+## 6. DIPLOMACY SYSTEM
+
+### 6.1 Diplomatic States
+- ANSWERED: War, Peace, Alliance, Truce, Trade Agreement, Non-Aggression Pact, Research Agreement
+
+### 6.2 Diplomatic Actions
+- ANSWERED: Declare War, Propose Alliance, Non-Aggression Pact, Trade Agreement, Research Agreement, Demand Tribute, Offer Gifts
+
+## 7. GALAXY FEATURES
+
+### 7.1 Spatial Anomalies
+- How do nebulae affect movement?
+  - Increased travel time?
+  - Combat penalties?
+  - Resource bonuses?
+
+### 7.2 Wormholes
+- Are wormholes bidirectional?
+- Do they have stability ratings?
+- Can they be destroyed or destabilized?
+
+### 7.3 Black Holes
+- Are they completely impassable?
+- Do they have any effects on nearby systems?
+
+## 8. COLONY MANAGEMENT
+
+### 8.1 Population Jobs
+- What jobs can population perform?
+  - Farmers (food production)
+  - Workers (industrial production)
+  - Scientists (research)
+  - Entertainers (morale)?
+  - Soldiers (defense)?
+
+### 8.2 Building System
+- What building types exist?
+  - Infrastructure (population growth)
+  - Industry (production bonuses)
+  - Research (science bonuses)
+  - Defense (military)
+  - Special (unique effects)
+
+### 8.3 Pollution & Morale
+- How do pollution and morale affect colonies?
+  - Production penalties, growth reduction
+  - Unrest, rebellions
+- How are they reduced/improved?
+
+## 9. GAME BALANCE
+
+### 9.1 Starting Conditions
+- What do empires start with?
+  - Home planet with initial colony
+  - Starting technology
+  - Starting ships/fleets
+  - Starting resources
+
+### 9.2 Turn Structure
+- What happens in each empire's turn?
+  - Resource production/collection
+  - Population growth
+  - Construction completion
+  - Research advancement
+  - Fleet movement
+- Order of operations within a turn?
+
+### 9.3 Win/Loss Conditions
+- What causes empire elimination?
+  - Loss of all colonies?
+  - Loss of home system?
+  - Bankruptcy?
+- Can eliminated empires be revived?
+
+## 10. UI/UX CONSIDERATIONS
+
+### 10.1 Information Display
+- What information should be visible in HUD?
+  - Current resources, turn number
+  - Selected fleet/colony details
+  - Active research, construction queues
+
+### 10.2 Controls
+- What are the primary control schemes?
+  - Mouse + keyboard navigation
+  - Touch controls for mobile
+  - Keyboard shortcuts
+
+### 10.3 Visual Feedback
+- How should game state be communicated?
+  - Colors for diplomatic states
+  - Icons for ship/fleet status
+  - Animations for important events
+
+## 11. MULTIPLAYER CONSIDERATIONS
+
+### 11.1 Network Architecture
+- Will this support multiplayer?
+  - Local multiplayer only?
+  - Online multiplayer?
+  - Turn-based or real-time?
+
+### 11.2 Synchronization
+- How to handle turn synchronization?
+- What state needs to be shared between players?
+
+## 12. PERFORMANCE REQUIREMENTS
+
+### 12.1 Galaxy Size
+- What is the maximum galaxy size?
+  - 50-500 systems as mentioned
+- Performance targets for different galaxy sizes?
+
+### 12.2 AI Complexity
+- How many AI empires can be supported?
+- AI processing time limits per turn?
+
+## 13. CONTENT SCOPE
+
+### 13.1 Race Variety
+- How many unique races?
+  - 5-8 playable races with unique bonuses
+- What makes each race unique?
+
+### 13.2 Technology Depth
+- How many technologies total?
+  - 50-100 technologies across categories
+- Technology tree complexity?
+
+### 13.3 Ship Variety
+- How many ship designs possible?
+- Hull/module combinations?
+
+## 14. SAVE/LOAD CONSIDERATIONS
+
+### 14.1 Save File Structure
+- What data needs to be persisted?
+  - Galaxy state, empire data, research progress
+  - Current turn, game settings
+- Backward compatibility requirements?
+
+### 14.2 Quick Save/Load
+- How many quick save slots?
+- Auto-save frequency?
+
+## 15. AUDIO/GRAPHICS
+
+### 15.1 Audio Design
+- What audio cues are needed?
+  - UI feedback, combat sounds
+  - Dynamic music based on game state
+- Voice acting for races?
+
+### 15.2 Visual Style
+- What is the art direction?
+  - 2D top-down space strategy
+  - Pixel art or vector graphics?
+  - UI theme (sci-fi, clean, etc.)
+
+## PRIORITY QUESTIONS FOR INITIAL IMPLEMENTATION
+
+1. Victory conditions - especially conquest logic
+2. Core resource system (food, production, research, credits)
+3. Technology system structure and effects
+4. Ship combat mechanics basics
+5. AI behavior priorities
+6. Turn structure and order of operations

@@ -110,7 +110,7 @@ func _find_and_list_ships(system_id: StringName):
 		child.queue_free()
 	
 	var has_ships = false
-	for ship in PlayerManager.owned_ships.values():
+	for ship in PlayerManager.player_empire.owned_ships.values():
 		if ship.current_system_id == system_id:
 			_add_ship_to_list(ship.id, Color.CYAN)
 			has_ships = true
