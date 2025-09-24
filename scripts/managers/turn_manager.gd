@@ -15,6 +15,22 @@ signal start_of_turn(empire_id: StringName)
 # Emitted when an empire finishes their turn.
 signal end_of_turn(empire_id: StringName)
 
+# Emitted when a sub-phase starts within an empire's turn.
+signal sub_phase_started(empire_id: StringName, sub_phase: TurnSubPhase)
+
+# Emitted when a sub-phase ends within an empire's turn.
+signal sub_phase_ended(empire_id: StringName, sub_phase: TurnSubPhase)
+
+# Enumeration defining the sub-phases within an empire's turn.
+enum TurnSubPhase {
+	MOVEMENT,           # Fleet movement and exploration
+	PRODUCTION,         # Resource production and collection
+	RESEARCH,           # Research advancement
+	CONSTRUCTION,       # Building and ship construction completion
+	DIPLOMACY,          # Diplomatic actions and council voting
+	COMBAT_RESOLUTION   # Combat resolution
+}
+
 # The sequence of empire IDs determining the order of turns.
 var turn_order: Array[StringName] = []
 
@@ -23,6 +39,12 @@ var current_empire_index: int = 0
 
 # The current global turn number (starts at 1, increments after all empires have played).
 var current_turn: int = 1
+
+# The current sub-phase within the active empire's turn.
+var current_sub_phase: TurnSubPhase = TurnSubPhase.MOVEMENT
+
+# Whether the current empire's turn is paused (e.g., waiting for combat resolution).
+var turn_paused: bool = false
 
 
 # Initializes the turn system for a new game.
@@ -38,9 +60,12 @@ func start_new_game(empires: Dictionary) -> void:
 	# turn_order.shuffle()
 	current_empire_index = 0
 	current_turn = 1
+	current_sub_phase = TurnSubPhase.MOVEMENT
+	turn_paused = false
 	# Emit start of first turn
 	if not turn_order.is_empty():
 		start_of_turn.emit(turn_order[0])
+		_start_sub_phase(turn_order[0], TurnSubPhase.MOVEMENT)
 
 
 # Ends the current empire's turn, processes any end-of-turn logic, and advances to the next empire.
@@ -112,6 +137,9 @@ func _process_research(empire: Empire) -> void:
 		# Apply effects of the unlocked technology
 		_apply_tech_effects(empire, tech)
 
+		# Apply technology effects through the TechnologyEffectManager
+		TechnologyEffectManager.apply_technology_effects(empire)
+
 # Applies the effects of a newly unlocked technology to the empire.
 # Parses the tech tree data to find the effects array for the given tech and applies them via _apply_effects.
 # This is a design-time lookup; in a production system, effects could be cached.
@@ -149,6 +177,118 @@ func _apply_effects(empire: Empire, effects: Array) -> void:
 			_:
 				print("Unknown effect type: " + type)  # Log unsupported effects for debugging
 
+# Starts a new sub-phase for the specified empire.
+# Emits the sub_phase_started signal and processes the sub-phase logic.
+# @param empire_id: The empire whose sub-phase is starting.
+# @param sub_phase: The sub-phase to start.
+func _start_sub_phase(empire_id: StringName, sub_phase: TurnSubPhase) -> void:
+	current_sub_phase = sub_phase
+	sub_phase_started.emit(empire_id, sub_phase)
+	print("TurnManager: Starting sub-phase %s for empire %s" % [TurnSubPhase.keys()[sub_phase], empire_id])
+
+	# Process sub-phase specific logic
+	_process_sub_phase(empire_id, sub_phase)
+
+# Processes the logic for a specific sub-phase.
+# @param empire_id: The empire whose sub-phase is being processed.
+# @param sub_phase: The sub-phase to process.
+func _process_sub_phase(empire_id: StringName, sub_phase: TurnSubPhase) -> void:
+	var empire = EmpireManager.get_empire_by_id(empire_id)
+	if not empire:
+		return
+
+	match sub_phase:
+		TurnSubPhase.MOVEMENT:
+			# Fleet movement and exploration
+			_process_movement_phase(empire)
+		TurnSubPhase.PRODUCTION:
+			# Resource production and collection
+			_process_production_phase(empire)
+		TurnSubPhase.RESEARCH:
+			# Research advancement
+			_process_research_phase(empire)
+		TurnSubPhase.CONSTRUCTION:
+			# Building and ship construction completion
+			_process_construction_phase(empire)
+		TurnSubPhase.DIPLOMACY:
+			# Diplomatic actions and council voting
+			_process_diplomacy_phase(empire)
+		TurnSubPhase.COMBAT_RESOLUTION:
+			# Combat resolution
+			_process_combat_phase(empire)
+
+# Processes the movement phase for an empire.
+# @param empire: The empire whose movement phase is being processed.
+func _process_movement_phase(empire: Empire) -> void:
+	# TODO: Process fleet movement, exploration, etc.
+	print("TurnManager: Processing movement phase for %s" % empire.display_name)
+
+	# For now, auto-advance to next phase
+	_advance_sub_phase(empire.id)
+
+# Processes the production phase for an empire.
+# @param empire: The empire whose production phase is being processed.
+func _process_production_phase(empire: Empire) -> void:
+	# Process colony production
+	ColonyManager.process_turn_for_empire(empire)
+	print("TurnManager: Processing production phase for %s" % empire.display_name)
+
+	# For now, auto-advance to next phase
+	_advance_sub_phase(empire.id)
+
+# Processes the research phase for an empire.
+# @param empire: The empire whose research phase is being processed.
+func _process_research_phase(empire: Empire) -> void:
+	# Process research advancement
+	_process_research(empire)
+	print("TurnManager: Processing research phase for %s" % empire.display_name)
+
+	# For now, auto-advance to next phase
+	_advance_sub_phase(empire.id)
+
+# Processes the construction phase for an empire.
+# @param empire: The empire whose construction phase is being processed.
+func _process_construction_phase(empire: Empire) -> void:
+	# Construction completion is handled in ColonyManager.process_turn_for_empire
+	# which was already called in production phase
+	print("TurnManager: Processing construction phase for %s" % empire.display_name)
+
+	# For now, auto-advance to next phase
+	_advance_sub_phase(empire.id)
+
+# Processes the diplomacy phase for an empire.
+# @param empire: The empire whose diplomacy phase is being processed.
+func _process_diplomacy_phase(empire: Empire) -> void:
+	# Handle diplomatic actions and council voting
+	GameManager.check_diplomatic_victory()
+	print("TurnManager: Processing diplomacy phase for %s" % empire.display_name)
+
+	# For now, auto-advance to next phase
+	_advance_sub_phase(empire.id)
+
+# Processes the combat resolution phase for an empire.
+# @param empire: The empire whose combat phase is being processed.
+func _process_combat_phase(empire: Empire) -> void:
+	# TODO: Process combat resolution
+	print("TurnManager: Processing combat phase for %s" % empire.display_name)
+
+	# For now, auto-advance to next phase (which will end the turn)
+	_advance_sub_phase(empire.id)
+
+# Advances to the next sub-phase or ends the turn if all sub-phases are complete.
+# @param empire_id: The empire whose turn is advancing.
+func _advance_sub_phase(empire_id: StringName) -> void:
+	sub_phase_ended.emit(empire_id, current_sub_phase)
+
+	# Check if this was the last sub-phase
+	if current_sub_phase == TurnSubPhase.COMBAT_RESOLUTION:
+		# End the empire's turn
+		end_turn()
+	else:
+		# Advance to next sub-phase
+		var next_phase = current_sub_phase + 1
+		_start_sub_phase(empire_id, next_phase)
+
 # Restores turn-related state from a loaded game save.
 # Optional fields provide backward compatibility if not present in older saves.
 # @param data: Dictionary containing the saved game data.
@@ -159,3 +299,7 @@ func _on_save_data_loaded(data: Dictionary) -> void:
 		current_empire_index = data["current_empire_index"]
 	if data.has("turn"):
 		current_turn = data["turn"]
+	if data.has("current_sub_phase"):
+		current_sub_phase = data["current_sub_phase"]
+	if data.has("turn_paused"):
+		turn_paused = data["turn_paused"]

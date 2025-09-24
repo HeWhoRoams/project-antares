@@ -56,17 +56,17 @@ func _process_resource_production(planet) -> void:
 	if not colony:
 		return
 
-	# Calculate food production based on planet modifiers
-	var food_production = colony.farmers * planet.food_per_farmer
-	colony.food_produced = food_production
+	var empire = EmpireManager.get_empire_by_id(colony.owner_id)
+	var race_modifiers = _get_race_modifiers(empire)
 
-	# Calculate production output based on planet modifiers
-	var production_output = colony.workers * planet.production_per_worker
-	colony.production_produced = production_output
+	# Calculate food production with race and technology bonuses
+	colony.food_produced = TechnologyEffectManager.calculate_colony_food(colony, empire.id)
 
-	# Calculate research output based on planet modifiers
-	var research_output = colony.scientists * planet.research_per_scientist
-	colony.research_produced = research_output
+	# Calculate production output with race and technology bonuses
+	colony.production_produced = TechnologyEffectManager.calculate_colony_production(colony, empire.id)
+
+	# Calculate research output with race and technology bonuses
+	colony.research_produced = TechnologyEffectManager.calculate_colony_research(colony, empire.id)
 
 func _process_population_growth(planet) -> void:
 	var colony = colonies.get("%s_%d" % [planet.system_id, planet.orbital_slot])
@@ -95,11 +95,77 @@ func _process_construction(planet) -> void:
 	var current_item = colony.construction_queue[0]
 	current_item.progress += colony.production_produced
 
-	if current_item.progress >= current_item.cost:
+	if current_item.progress >= current_item.production_cost:
 		# Item completed
 		colony.construction_queue.pop_front()
 		# Apply effects (e.g., add building, spawn ship)
 		_apply_construction_effect(colony, current_item)
+
+func assign_population_job(planet: PlanetData, job_type: String, amount: int) -> bool:
+	var colony = colonies.get("%s_%d" % [planet.system_id, planet.orbital_slot])
+	if not colony:
+		return false
+
+	# Validate amount
+	if amount < 0:
+		return false
+
+	# Calculate current total assigned population
+	var total_assigned = colony.farmers + colony.workers + colony.scientists
+	var unassigned = colony.current_population - total_assigned
+
+	# Check if we have enough unassigned population
+	if amount > unassigned:
+		return false
+
+	# Assign based on job type
+	match job_type:
+		"farmer", "farmers":
+			colony.farmers += amount
+		"worker", "workers":
+			colony.workers += amount
+		"scientist", "scientists":
+			colony.scientists += amount
+		_:
+			return false
+
+	return true
+
+func get_population_assignment(planet: PlanetData) -> Dictionary:
+	var colony = colonies.get("%s_%d" % [planet.system_id, planet.orbital_slot])
+	if not colony:
+		return {}
+
+	var total_assigned = colony.farmers + colony.workers + colony.scientists
+	var unassigned = colony.current_population - total_assigned
+
+	return {
+		"farmers": colony.farmers,
+		"workers": colony.workers,
+		"scientists": colony.scientists,
+		"unassigned": unassigned,
+		"total_population": colony.current_population
+	}
+
+func _apply_construction_effect(colony: ColonyData, item: BuildableItem) -> void:
+	if item is BuildingData:
+		# Add building to colony and apply its effects
+		colony.buildings.append(item)
+		colony.pollution += item.pollution_generated
+		colony.morale += item.morale_modifier
+		print("ColonyManager: Building %s completed in colony at %s:%d" % [item.display_name, colony.system_id, colony.orbital_slot])
+
+	elif item.id.begins_with("ship_"):
+		# Spawn ship in the system
+		var empire = EmpireManager.get_empire_by_id(colony.owner_id)
+		if empire:
+			var ship_data = ShipData.new()
+			ship_data.id = "%s_%d" % [item.id, Time.get_unix_time_from_system()]
+			ship_data.owner_id = empire.id
+			ship_data.current_system_id = colony.system_id
+
+			empire.owned_ships[ship_data.id] = ship_data
+			print("ColonyManager: Ship %s completed and added to fleet at %s" % [item.display_name, colony.system_id])
 
 func scrap_building(planet, building) -> void:
 	# Find the colony
@@ -160,3 +226,14 @@ func _get_colonies_for_empire(empire) -> Array:
 			if body is PlanetData and body.owner_id == empire.id:
 				colony_list.append(body)
 	return colony_list
+
+# Gets race modifiers for an empire, returning default values if no race preset exists.
+# @param empire: The Empire object to get modifiers for.
+# @return: A RacePreset object with modifier values (or default RacePreset if none exists).
+func _get_race_modifiers(empire) -> RacePreset:
+	if empire and empire.race_preset:
+		return empire.race_preset
+	else:
+		# Return default modifiers (all 1.0)
+		var default_race = RacePreset.new()
+		return default_race

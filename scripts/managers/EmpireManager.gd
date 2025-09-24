@@ -16,6 +16,11 @@ func register_empire(empire_data: Empire) -> void:
 		return
 
 	empires[empire_data.id] = empire_data
+
+	# Apply race bonuses if race preset exists
+	if empire_data.race_preset:
+		_apply_race_bonuses(empire_data)
+
 	print("EmpireManager: Registered new empire '%s'." % empire_data.display_name)
 
 # Retrieves an empire object by its unique ID.
@@ -81,3 +86,20 @@ func _on_save_data_loaded(data: Dictionary) -> void:
 		empires[empire_id] = empire
 
 	print("EmpireManager: Empires loaded from save file.")
+
+# Applies race-specific bonuses to an empire based on its race preset.
+# Modifies starting resources, modifiers, and other empire attributes.
+# @param empire: The Empire object to apply bonuses to.
+func _apply_race_bonuses(empire: Empire) -> void:
+	if not empire.race_preset:
+		return
+
+	var race = empire.race_preset
+
+	# Apply starting bonuses
+	empire.treasury = int(empire.treasury * race.starting_credits)
+	empire.research_points = int(empire.research_points * race.starting_research)
+
+	# Store race modifiers for later application (applied during colony/ship calculations)
+	# The actual modifier application happens in ColonyManager and other systems
+	print("EmpireManager: Applied race bonuses for %s (%s)" % [empire.display_name, race.display_name])

@@ -1,1034 +1,371 @@
-1. Core Game Mechanics (20% Complete)
-
-GameManager.gd (30% Complete)
-
-    Feature: Comprehensive game state tracking (e.g., active player, turn number, game phase). Define clear win/loss conditions.
-
-    Development Steps to 100%:
-
-        [Existing] In GameManager.gd, define a GamePhase enum: SETUP, GALAXY_VIEW, COMBAT, COLONY_VIEW, GAME_OVER, DIPLOMACY, RESEARCH, SHIP_DESIGN, FLEET_MANAGEMENT.
-
-        [Existing] Add a variable current_game_phase of type GamePhase.
-
-        [Existing] Create a function set_game_phase(new_phase: GamePhase) that updates current_game_phase and emits a signal game_phase_changed(new_phase).
-
-        [Existing] Implement check_conquest_victory() -> bool that iterates through EmpireManager.empires and returns true if one empire owns all other home systems.
-
-        [Expansion] Implement check_diplomatic_victory() -> bool (requires DiplomacyManager and vote tracking).
-
-        [Expansion] Implement check_technological_victory() -> bool (requires TechnologyManager to track specific "ultimate" technologies).
-
-        [Expansion] Implement check_time_limit_victory() -> bool based on turn limits and score.
-
-        [Existing] Create check_for_victory() that calls all check_*_victory() functions at the end of each turn.
-
-        [Existing] Create _on_victory(winner_id: StringName, reason: String) that sets current_game_phase to GAME_OVER and transitions to the victory screen.
-
-        [Existing] Add active_empires: Array[StringName] to track empires that have not been defeated.
-
-        [Existing] Implement eliminate_empire(empire_id: StringName) that removes an empire from the active_empires list. This should also trigger a check for conquest_victory.
-
-        [Existing] Integrate with SaveLoadManager to serialize and deserialize current_game_phase and active_empires.
-
-        [New] Implement game setup options (galaxy size, difficulty, number of empires, victory conditions) passed from the main menu.
-
-            - Create a GameSetupData resource to store all setup parameters
-            - Implement a function in GameManager.gd to receive setup data from MainMenu.gd
-            - Add validation for setup parameters (e.g., galaxy size must be between 50-500 systems)
-            - Store setup options in a persistent configuration object accessible throughout the game
-            - Create UI elements in the main menu for selecting these options with appropriate constraints
-            - Pass setup data to GalaxyGenerator when initializing a new game
-            - Save setup options in save files for consistency when loading games
-            - Implement default values for all setup options to ensure smooth game initialization
-
-        [New] Manage game speed settings that affect UI updates and AI processing time.
-
-            - Create a GameSpeed enum with values: PAUSED, SLOW, NORMAL, FAST, MAXIMUM
-            - Implement a function set_game_speed(new_speed: GameSpeed) in GameManager.gd
-            - Add a game_speed variable to GameManager.gd to track current speed setting
-            - Create UI controls in the HUD for players to adjust game speed
-            - Implement time scaling logic that affects delta time calculations for UI animations
-            - Add speed multipliers for AI processing (e.g., AI thinks 2x faster at NORMAL speed, 4x at FAST)
-            - Create a signal game_speed_changed(old_speed: GameSpeed, new_speed: GameSpeed) for other systems to react
-            - Save game speed setting in save files to maintain consistency when loading
-            - Implement keyboard shortcuts for quick speed adjustments (e.g., Space for pause, 1-5 for speed levels)
-            - Add visual indicators in the UI to show current game speed
-            - Ensure save/load functionality properly handles game speed transitions
-
-turn_manager.gd (40% Complete)
-
-    Feature: Develop a robust turn progression system that correctly cycles through players and AI, triggering necessary start-of-turn and end-of-turn events.
-
-    Development Steps to 100%:
-
-        [Existing] In TurnManager.gd, add turn_order: Array[StringName] to store the IDs of all empires.
-
-        [Existing] Add current_empire_index: int to track the position in turn_order.
-
-        [Existing] Create start_new_game(empires: Dictionary) that populates turn_order from EmpireManager.
-
-        [Existing] Define two new signals: start_of_turn(empire_id: StringName) and end_of_turn(empire_id: StringName).
-
-        [Existing] Refactor end_turn():
-
-            Emit end_of_turn(turn_order[current_empire_index]).
-
-            Increment current_empire_index (modulo operator %).
-
-            If current_empire_index is 0, increment current_turn counter (new round).
-
-            Emit start_of_turn(turn_order[current_empire_index]) for the new active empire.
-
-        [Existing] Check if the new active empire is AI-controlled. If so, call AIManager.take_turn().
-
-        [Existing] Integrate with SaveLoadManager to serialize turn_order and current_empire_index.
-
-        [New] Implement process_empire_turn(empire_id: StringName) to orchestrate all turn-based calculations (economy, research, construction, fleet movement, diplomacy, combat resolution) for a single empire.
-
-            - Create function process_empire_turn(empire_id: StringName) in TurnManager.gd
-            - Implement economy calculations by calling ColonyManager.process_resource_production() for all empire colonies
-            - Update empire treasury with calculated income from all colonies
-            - Process research points by calling Empire.calculate_research_per_turn() and adding to empire research pool
-            - Process construction queues by calling ColonyManager.process_construction() for all empire colonies
-            - Update fleet positions by calling FleetManager.process_fleet_movement() for all empire fleets
-            - Handle diplomatic relations updates through DiplomacyManager
-            - Resolve any pending combat scenarios through CombatManager
-            - Emit signal empire_turn_processed(empire_id: StringName) when complete
-            - Add error handling for invalid empire IDs
-            - Implement turn processing time tracking for performance monitoring
-            - Add logging for debugging turn processing issues
-            - Ensure all calculations respect the current game speed setting
-
-        [New] Introduce "Sub-phases" within a turn (e.g., "Movement Phase," "Production Phase," "Research Phase") that managers can hook into.
-
-            - Define a TurnSubPhase enum with values: MOVEMENT, PRODUCTION, RESEARCH, CONSTRUCTION, DIPLOMACY, COMBAT_RESOLUTION
-            - Create a current_sub_phase variable in TurnManager.gd to track the current sub-phase
-            - Implement a function advance_sub_phase() that moves to the next sub-phase in sequence
-            - Add signals for each sub-phase (e.g., movement_phase_started, production_phase_started)
-            - Modify process_empire_turn() to iterate through sub-phases rather than executing everything at once
-            - Create hook points in each manager (ColonyManager, FleetManager, etc.) to respond to sub-phase signals
-            - Implement sub-phase specific logic in each manager (e.g., FleetManager only processes movement during MOVEMENT phase)
-            - Add UI updates to show current sub-phase to the player
-            - Create a sub-phase progress bar in the HUD to visualize turn progression
-            - Add the ability to pause/continue at sub-phase boundaries for better control
-            - Implement save/load functionality that correctly handles sub-phase state
-            - Add logging for sub-phase transitions for debugging purposes
-
-        [New] Handle special events that might pause turn progression (e.g., combat initiation, diplomatic proposals).
-
-            - Create a TurnInterruption enum with values: NONE, COMBAT, DIPLOMATIC_PROPOSAL, COUNCIL_SESSION
-            - Add a turn_interruption variable to TurnManager.gd to track if turn progression is paused
-            - Implement function request_turn_interruption(interruption_type: TurnInterruption, data: Dictionary) to pause turn processing
-            - Create a queue system for handling multiple interruptions in order of priority
-            - Add UI elements to display interruption notifications to the player
-            - Implement resume_turn() function to continue processing after interruption is resolved
-            - Create signal turn_interruption_requested(interruption_type: TurnInterruption, data: Dictionary) for other systems to request interruptions
-            - Add logic to detect combat initiation conditions and automatically request COMBAT interruption
-            - Implement diplomatic proposal detection and automatic DIPLOMATIC_PROPOSAL interruption requests
-            - Add Council session triggering logic for COUNCIL_SESSION interruptions
-            - Create a visual indicator in the HUD showing when turn progression is paused
-            - Implement save/load functionality that correctly handles interruption state
-            - Add logging for interruption events for debugging purposes
-            - Ensure interruptions can be resolved through UI interactions or automatic conditions
-
-SaveLoadManager.gd (35% Complete)
-
-    Feature: Design a data serialization format for saving and loading game state. Implement functionality to write to and read from save files.
-
-    Development Steps to 100%:
-
-        [Existing] Implement _on_save_data_loaded in GalaxyManager.gd to correctly parse the galaxy dictionary.
-
-        [Existing] Implement _on_save_data_loaded in PlayerManager.gd and AIManager.gd for basic ship data.
-
-        [Existing] Expand _serialize_galaxy_data in SaveLoadManager.gd to include all PlanetData properties (size, minerals, owner, population, jobs, buildings, construction queue, etc.).
-
-        [Existing] Expand _on_save_data_loaded in GalaxyManager.gd to correctly deserialize all PlanetData properties.
-
-        [Existing] Implement saving and loading for EmpireManager, storing the treasury, diplomatic_statuses, unlocked_techs, current_research_project, ship_designs, etc.
-
-        [Existing] Create a "Load Game" screen that reads multiple save files from the user:// directory.
-
-        [Existing] Add functionality to name and delete save files from the "Load Game" screen.
-
-        [Existing] Implement a "quick save" function that saves to a default slot.
-
-        [New] Implement versioning for save files to allow future game updates without breaking old saves.
-
-            - Add a SAVE_FILE_VERSION constant to SaveLoadManager.gd (e.g., SAVE_FILE_VERSION = 1)
-            - Modify _serialize_game_data() to include a "version" field in the save file dictionary
-            - Update _deserialize_game_data() to check the version field and handle version mismatches
-            - Create a version compatibility matrix to track which versions can be loaded by the current implementation
-            - Implement a function migrate_save_data(data: Dictionary, from_version: int, to_version: int) for handling version upgrades
-            - Add backward compatibility support for at least 2 previous major versions
-            - Create unit tests for version migration functionality
-            - Implement UI notifications when loading older save files that will be upgraded
-            - Add logging for version migration events for debugging purposes
-            - Create a save file validation function that checks version compatibility before loading
-            - Implement save file backup mechanism before migration to prevent data loss
-            - Add version information to save file metadata displayed in the Load Game screen
-            - Create documentation for the versioning scheme and migration process
-
-        [New] Use FileAccess.get_file_as_bytes() and JSON.parse_string() for efficient and robust JSON handling. Consider binary serialization for larger data if performance becomes an issue.
-
-            - Replace existing file reading logic with FileAccess.open() and get_as_text() for better error handling
-            - Implement JSON.parse_string() instead of the older JSON.parse() method for improved performance
-            - Add error checking for file access operations and JSON parsing
-            - Create a fallback mechanism to handle corrupted save files gracefully
-            - Implement performance monitoring for save/load operations to identify bottlenecks
-            - Add compression for save files using gzip or similar algorithms to reduce file size
-            - Create a benchmarking system to compare JSON vs binary serialization performance
-            - Implement binary serialization option for large datasets (e.g., galaxy data, fleet positions)
-            - Add configuration option to toggle between JSON and binary serialization
-            - Create unit tests for both JSON and binary serialization methods
-            - Implement progress indicators for long save/load operations
-            - Add logging for serialization performance metrics
-            - Optimize data structures for serialization (e.g., use arrays instead of dictionaries where appropriate)
-            - Implement chunked loading for very large save files to prevent memory issues
-
-        [New] Create a _get_savable_data() method on all CustomResource and Node types that need to be saved, returning a Dictionary of their serializable properties.
-
-            - Define a standardized interface or base class for all savable game objects
-            - Implement _get_savable_data() method in PlanetData.gd returning Dictionary with all relevant properties
-            - Implement _get_savable_data() method in Empire.gd with treasury, techs, ship designs, etc.
-            - Implement _get_savable_data() method in FleetData.gd with ship positions, destinations, cargo
-            - Implement _get_savable_data() method in ShipData.gd with hull, modules, damage status
-            - Implement _get_savable_data() method in Colony.gd with population, buildings, construction queue
-            - Implement _get_savable_data() method in Technology.gd with research progress and unlock status
-            - Implement _get_savable_data() method in BuildingData.gd with construction status and operational state
-            - Create a registry system to track all savable object types for consistent serialization
-            - Add type information to each serialized object to enable proper deserialization
-            - Implement error handling for missing or invalid properties during serialization
-            - Create unit tests for each _get_savable_data() implementation
-            - Add documentation for the serialization interface and expected Dictionary structure
-            - Implement validation to ensure all required properties are included in the returned Dictionary
-            - Add version information to serialized objects for future compatibility
-            - Create a utility function to recursively serialize nested objects
-            - Implement performance optimization for frequently serialized objects
-
-        [New] Implement a _load_from_data(data: Dictionary) method on these objects to deserialize.
-
-            - Define a standardized interface or base class for all deserializable game objects
-            - Implement _load_from_data() method in PlanetData.gd to restore all properties from Dictionary
-            - Implement _load_from_data() method in Empire.gd to restore treasury, techs, ship designs, etc.
-            - Implement _load_from_data() method in FleetData.gd to restore ship positions, destinations, cargo
-            - Implement _load_from_data() method in ShipData.gd to restore hull, modules, damage status
-            - Implement _load_from_data() method in Colony.gd to restore population, buildings, construction queue
-            - Implement _load_from_data() method in Technology.gd to restore research progress and unlock status
-            - Implement _load_from_data() method in BuildingData.gd to restore construction status and operational state
-            - Create a factory system to instantiate the correct object types based on serialized type information
-            - Implement error handling for missing or invalid properties during deserialization
-            - Add validation to ensure data integrity after deserialization
-            - Create unit tests for each _load_from_data() implementation
-            - Add documentation for the deserialization interface and expected Dictionary structure
-            - Implement version handling in _load_from_data() to support backward compatibility
-            - Create a utility function to recursively deserialize nested objects
-            - Add logging for deserialization events to help with debugging
-            - Implement performance optimization for frequently deserialized objects
-            - Add checksum validation to detect corrupted save data
-
-PlayerManager.gd (30% Complete)
-
-    Feature: Expand to handle player-specific data, such as selected empire, owned colonies, and research progress.
-
-    Development Steps to 100%:
-
-        [Existing] Remove research_points and research_per_turn variables. This data will be managed directly on the Empire object.
-
-        [Existing] Modify unlock_technology function to check and spend research points from player_empire.research_points.
-
-        [Existing] Create calculate_research_per_turn() that sums research output from all player-owned colonies and updates player_empire.research_per_turn.
-
-        [Existing] Connect this function to be called at the start of each player turn.
-
-        [Existing] Remove owned_ships dictionary. This data will be managed directly on the Empire object (via Empire.fleets).
-
-        [Existing] Modify all ship-related functions (set_ship_destination, _process_ship_movement) to operate on player_empire.fleets.
-
-        [Existing] Implement a system to track all player-owned colonies within Empire.colonies.
-
-        [Existing] Refactor the save/load logic to serialize and deserialize the player_empire object correctly.
-
-        [New] Implement select_active_fleet(fleet_id: StringName) and select_active_colony(planet_id: StringName) for UI interaction.
-
-            - Create a selected_fleet_id variable in PlayerManager.gd to track the currently selected fleet
-            - Create a selected_colony_id variable in PlayerManager.gd to track the currently selected colony
-            - Implement select_active_fleet(fleet_id: StringName) function to update selected_fleet_id and emit signal
-            - Implement select_active_colony(planet_id: StringName) function to update selected_colony_id and emit signal
-            - Add validation to ensure fleet/colony belongs to the player before selection
-            - Create signals fleet_selected(fleet_id: StringName) and colony_selected(planet_id: StringName) for UI updates
-            - Implement deselection functionality to clear selected_fleet_id/selected_colony_id when needed
-            - Add visual feedback in the UI to indicate which fleet/colony is currently selected
-            - Create a get_selected_fleet() method that returns the FleetData object for the selected fleet
-            - Create a get_selected_colony() method that returns the PlanetData object for the selected colony
-            - Implement keyboard shortcuts for fleet/colony selection (e.g., arrow keys to cycle through owned fleets/colonies)
-            - Add logging for selection events for debugging purposes
-            - Create unit tests for selection functionality
-            - Implement multi-selection support for future enhancements
-            - Add context menu options that appear when a fleet or colony is selected
-            - Ensure selection state persists correctly through save/load operations
-
-        [New] Handle player input for galaxy map actions (moving fleets, initiating colonization).
-
-            - Implement input handling for fleet movement commands through mouse clicks on the starmap
-            - Add right-click context menu for fleet actions (move, patrol, explore, attack, etc.)
-            - Implement drag-select functionality for selecting multiple fleets at once
-            - Create keyboard shortcuts for common fleet actions (e.g., 'M' for move, 'P' for patrol)
-            - Add visual feedback for valid/invalid fleet movement destinations
-            - Implement path preview visualization when selecting a destination for fleets
-            - Create input handlers for colonization actions (selecting colony ship, choosing target planet)
-            - Add confirmation dialogs for significant actions (e.g., moving fleets through nebulae, attacking enemies)
-            - Implement undo functionality for recent player actions
-            - Add hotkey support for quick access to galaxy map features
-            - Create tutorial tooltips for new players learning the interface
-            - Implement touch-friendly controls for potential mobile adaptation
-            - Add accessibility options for different input methods
-            - Create unit tests for input handling functionality
-            - Implement logging for player actions for analytics and debugging
-            - Add input validation to prevent invalid actions (e.g., moving to occupied enemy systems)
-            - Implement multiplayer input handling for future networked gameplay
-
-        [New] Implement a player_notifications system (e.g., "New technology researched!", "Colony ship built!").
-
-            - Create a NotificationData resource to store notification information (message, type, timestamp, priority)
-            - Implement add_notification(message: String, type: String, priority: int) function in PlayerManager.gd
-            - Create a notifications queue (Array[NotificationData]) to store pending notifications
-            - Implement different notification types (INFO, WARNING, SUCCESS, ERROR) with distinct visual styles
-            - Add a signal notification_added(notification: NotificationData) for UI updates
-            - Create a notification display system in the HUD with fade-in/fade-out animations
-            - Implement notification timeout functionality to automatically dismiss notifications after a set time
-            - Add notification stacking/grouping for multiple similar notifications
-            - Create a notification history system to review past notifications
-            - Implement notification filtering by type or priority
-            - Add sound effects for high-priority notifications
-            - Create a notification center UI panel for viewing all notifications
-            - Implement persistent notifications that require player interaction to dismiss
-            - Add localization support for notification messages
-            - Create unit tests for notification functionality
-            - Implement logging for notifications for debugging purposes
-            - Add visual indicators in the UI when new notifications arrive (e.g., badge counter)
-            - Ensure notifications are properly serialized/deserialized in save/load operations
-
-2. Galaxy Generation & Management (30% Complete)
-
-galaxymanager.gd (40% Complete)
-
-    Feature: Enhance galaxy generation to create more diverse and interesting galaxy layouts, including different star types and spatial anomalies.
-
-    Development Steps to 100%:
-
-        [Existing] Add logic to the GalaxyBuilder to generate regions of the map that are "Nebulae" (affect ship movement).
-
-        [Existing] Add logic to the GalaxyBuilder to generate "Black Hole" systems that are impassable.
-
-        [Existing] Add logic to the GalaxyBuilder to generate pairs of "Wormhole" systems that allow instant travel.
-
-        [Existing] Create NebulaData, BlackHoleData, and WormholeData resources to store their properties.
-
-        [Existing] Update starmap.gd to visually render these new spatial phenomena.
-
-        [Existing] Modify the set_ship_destination function in PlayerManager to account for nebula travel penalties and wormhole jumps.
-
-        [Existing] Ensure all spatial phenomena data is saved and loaded by the SaveLoadManager.
-
-        [New] Implement a more sophisticated pathfinding algorithm (e.g., A* with variable costs) for PlayerManager and AIManager to account for nebulae, black holes, and wormholes.
-
-            - Implement A* pathfinding algorithm in GalaxyManager.gd with weighted node costs
-            - Create a PathNode class to represent star systems in the pathfinding graph
-            - Assign different movement costs to different spatial phenomena (normal space: 1.0, nebulae: 2.0, wormholes: 0.1)
-            - Implement black hole handling by marking them as impassable nodes in the graph
-            - Create a pathfinding heuristic function (e.g., Euclidean distance) for efficient search
-            - Add path caching mechanism to avoid recalculating identical paths
-            - Implement path validation to ensure paths are still valid after galaxy changes
-            - Create a PathfindingResult class to store computed paths and metadata
-            - Add support for multi-step pathfinding through wormhole networks
-            - Implement pathfinding visualization for debugging purposes
-            - Add performance optimization for frequently requested paths
-            - Create unit tests for pathfinding algorithm with various spatial phenomena
-            - Implement pathfinding for both PlayerManager and AIManager with appropriate cost modifiers
-            - Add pathfinding logging for analytics and debugging
-            - Create a pathfinding profiler to monitor performance
-            - Implement fallback pathfinding for cases where A* fails to find a path
-            - Add path smoothing to remove unnecessary waypoints
-            - Ensure pathfinding respects current game speed settings
-
-        [New] Introduce "Deep Space" nodes for pathfinding where no star systems exist, allowing for long-range travel without always jumping between stars.
-
-            - Create a DeepSpaceNode resource to represent empty space regions in the galaxy
-            - Implement logic in GalaxyBuilder to generate DeepSpaceNode instances between star systems
-            - Define a maximum distance threshold for placing DeepSpaceNode instances (e.g., every 50-100 units)
-            - Create connections between star systems and DeepSpaceNode instances in the pathfinding graph
-            - Assign appropriate movement costs to DeepSpaceNode transitions (higher than normal space)
-            - Implement visualization for DeepSpaceNode instances in the starmap
-            - Add DeepSpaceNode data to save/load functionality
-            - Create a DeepSpaceNode generator that ensures reasonable distribution across the galaxy
-            - Implement pathfinding that can utilize DeepSpaceNode instances for more direct routes
-            - Add UI indicators for DeepSpaceNode locations on the galaxy map
-            - Create unit tests for DeepSpaceNode generation and pathfinding integration
-            - Implement performance optimization for DeepSpaceNode pathfinding calculations
-            - Add configuration options for DeepSpaceNode density in GalaxyGenerationSettings
-            - Ensure DeepSpaceNode instances are properly cleaned up during galaxy regeneration
-            - Implement collision detection to prevent DeepSpaceNode overlap with star systems
-            - Add logging for DeepSpaceNode generation and pathfinding events
-            - Create editor tools for visualizing and debugging DeepSpaceNode networks
-            - Implement DeepSpaceNode effects on ship sensors and navigation systems
-
-        [New] Implement GalaxyGenerationSettings (e.g., dense/sparse, cluster/spiral/ring galaxy shapes).
-
-            - Create a GalaxyGenerationSettings resource to store generation parameters (density, shape, size, age)
-            - Implement different galaxy shape algorithms: cluster (centralized), spiral (arms), ring (circular), irregular (random)
-            - Add density settings (sparse, normal, dense) that affect the number of star systems generated
-            - Create a galaxy shape selector in the main menu with preview images
-            - Implement age settings (Young, Mature, Ancient) that influence star types and planet characteristics
-            - Add size options (Small, Medium, Large, Huge) that determine the overall galaxy dimensions
-            - Create visual previews for different galaxy shapes in the settings UI
-            - Implement algorithm for spiral galaxy arm generation with appropriate star density distribution
-            - Add ring galaxy generation with central empty space and outer ring of star systems
-            - Create cluster galaxy generation with high-density core and sparse outer regions
-            - Implement irregular galaxy shape with randomized star placement
-            - Add configuration options for arm count in spiral galaxies (2-6 arms)
-            - Create unit tests for each galaxy shape generation algorithm
-            - Implement performance optimization for large galaxy generation
-            - Add validation to ensure generated galaxies meet minimum gameplay requirements
-            - Create editor tools for fine-tuning galaxy generation parameters
-            - Implement save/load functionality for GalaxyGenerationSettings
-            - Add logging for galaxy generation process and any issues encountered
-            - Ensure galaxy generation respects the current game setup options
-
-        [New] Generate unique names for each star system and spatial anomaly.
-
-            - Create a NameGenerator resource with lists of syllables, prefixes, and suffixes for procedural naming
-            - Implement different naming schemes for different star types (e.g., Greek letters for main sequence, numbers for dwarfs)
-            - Add cultural naming patterns for different empire races (e.g., human, alien, robotic naming conventions)
-            - Create unique naming for spatial anomalies (nebulae, black holes, wormholes) with descriptive prefixes/suffixes
-            - Implement a name uniqueness checker to ensure no duplicate names within the same galaxy
-            - Add a name database to store generated names and prevent duplicates across save/load sessions
-            - Create a fallback mechanism for when name generation fails to produce unique names
-            - Implement name generation for star systems based on their position, type, and surrounding features
-            - Add visual name display on the starmap for all named systems and anomalies
-            - Create a name length limiter to ensure names fit within UI elements
-            - Implement name caching to improve performance for frequently accessed systems
-            - Add configuration options for name generation complexity (simple, moderate, complex)
-            - Create unit tests for name generation algorithms with various inputs
-            - Implement logging for name generation to help debug issues
-            - Add name validation to ensure generated names meet game requirements
-            - Create a name history system to track name changes over time
-            - Implement localization support for generated names
-            - Add name generation for special systems (home systems, capital systems, artifact systems)
-            - Create a name generator profiler to monitor performance
-            - Ensure name generation respects the current GalaxyGenerationSettings
-            - Add name generation for DeepSpaceNode instances with appropriate thematic naming
-
-celestial_body_generator.gd (45% Complete)
-
-    Feature: Implement logic for generating a wider variety of planets, moons, and other celestial bodies with unique characteristics.
-
-    Development Steps to 100%:
-
-        [Existing] Implement logic for the "Yellow Star" rule: if a system is designated as yellow, increase the probability of generating Terran planets.
-
-        [Existing] Create a weighted table for generating planet specials (Artifacts, Natives, Hostile Fauna, Mineral deposits, etc.).
-
-        [Existing] Add logic to generate moons for planets based on planet size.
-
-        [Existing] Create a MoonData resource (inheriting from CelestialBodyData).
-
-        [Existing] Implement logic to ensure some systems are generated as empty space (no planets).
-
-        [Existing] Add a "Galaxy Age" parameter that influences the types of planets generated (e.g., "Old" galaxies have more barren worlds).
-
-        [New] Implement different star types (Red Dwarf, Blue Giant, Neutron Star) and their effects on nearby planets (e.g., radiation, habitable zone adjustments).
-
-            - Create a StarType enum with values: RED_DWARF, YELLOW_STAR, BLUE_GIANT, NEUTRON_STAR
-            - Implement different habitable zone ranges for each star type (Red Dwarf: closer orbits, Blue Giant: farther orbits)
-            - Add radiation effects for Neutron Stars that negatively impact nearby planet habitability
-            - Create a StarData resource to store star type properties (luminosity, temperature, lifetime, radiation levels)
-            - Implement star aging mechanics that change star types over time (e.g., Yellow Star -> Red Giant -> White Dwarf)
-            - Add visual representations for different star types in the starmap and system views
-            - Implement energy output variations that affect planet temperatures based on distance and star type
-            - Create special effects for Neutron Stars (pulsar effects, gravitational lensing visuals)
-            - Add unique resource generation modifiers for planets orbiting different star types
-            - Implement star type restrictions on certain planet types (e.g., gas giants more common around Blue Giants)
-            - Create unit tests for star type generation and planet effect calculations
-            - Add logging for star type generation and any anomalies encountered
-            - Implement performance optimization for star type calculations
-            - Create a star type database with predefined properties for each type
-            - Add configuration options for star type frequency in GalaxyGenerationSettings
-            - Implement save/load functionality for star type data
-            - Create editor tools for visualizing and debugging star type effects
-            - Add star type information to the system information panel
-            - Ensure star type generation respects the current GalaxyAge parameter
-            - Create visual effects that distinguish different star types on the galaxy map
-
-        [New] Introduce different atmospheric compositions and their effects on habitability and colony efficiency.
-
-            - Create an AtmosphericComposition enum with values: BREATHABLE, TOXIC, INERT, CORROSIVE, FLAMMABLE
-            - Implement habitability modifiers for each atmospheric composition (-50% for TOXIC, -75% for CORROSIVE, +25% for BREATHABLE)
-            - Add colony efficiency penalties/bonuses based on atmospheric composition (workers 20% less efficient in TOXIC, 50% less in CORROSIVE)
-            - Create an AtmosphereData resource to store atmospheric properties (composition, pressure, density, toxicity levels)
-            - Implement atmospheric effects on population growth rates (TOXIC atmospheres reduce growth by 30%, CORROSIVE by 60%)
-            - Add specialized building requirements for different atmospheric compositions (Atmospheric Processors for TOXIC, Containment Domes for CORROSIVE)
-            - Create atmospheric filtering technologies that reduce negative effects of harmful atmospheres
-            - Implement visual effects for different atmospheric compositions (color tinting, particle effects)
-            - Add atmospheric scanner module for ships to detect atmospheric composition before colonization
-            - Create unit tests for atmospheric composition effects on habitability and colony efficiency
-            - Implement logging for atmospheric composition generation and any anomalies encountered
-            - Add performance optimization for atmospheric composition calculations
-            - Create an atmospheric composition database with predefined properties for each type
-            - Add configuration options for atmospheric composition frequency in GalaxyGenerationSettings
-            - Implement save/load functionality for atmospheric composition data
-            - Create editor tools for visualizing and debugging atmospheric composition effects
-            - Add atmospheric composition information to the planet information panel
-            - Implement atmospheric composition effects on ship landing and takeoff procedures
-            - Create special atmospheric events (e.g., toxic storms, corrosive rain) that temporarily worsen conditions
-            - Add atmospheric composition research projects that unlock mitigation technologies
-            - Ensure atmospheric composition generation respects the current GalaxyAge parameter
-            - Create visual indicators for atmospheric composition on the galaxy map
-
-        [New] Generate unique names for each celestial body.
-
-            - Create a CelestialBodyNameGenerator resource with lists of prefixes, roots, and suffixes for procedural naming
-            - Implement different naming schemes for different celestial body types (planets, moons, asteroids, comets)
-            - Add cultural naming patterns for different empire races (human, alien, robotic naming conventions)
-            - Create unique naming for special celestial bodies (artifact planets, native homeworlds, resource-rich worlds)
-            - Implement a name uniqueness checker to ensure no duplicate names within the same star system
-            - Add a name database to store generated names and prevent duplicates across save/load sessions
-            - Create a fallback mechanism for when name generation fails to produce unique names
-            - Implement name generation for celestial bodies based on their type, composition, and position in the system
-            - Add visual name display on the system view for all named celestial bodies
-            - Create a name length limiter to ensure names fit within UI elements
-            - Implement name caching to improve performance for frequently accessed bodies
-            - Add configuration options for name generation complexity (simple, moderate, complex)
-            - Create unit tests for name generation algorithms with various inputs
-            - Implement logging for name generation to help debug issues
-            - Add name validation to ensure generated names meet game requirements
-            - Create a name history system to track name changes over time
-            - Implement localization support for generated names
-            - Add name generation for special celestial bodies (home worlds, capital worlds, artifact worlds)
-            - Create a name generator profiler to monitor performance
-            - Ensure name generation respects the current GalaxyGenerationSettings
-            - Add name generation for Gas Giant moons with appropriate thematic naming
-            - Create visual indicators for named celestial bodies on the system view
-            - Implement name generation that considers the parent star's name for contextual naming
-            - Add name generation for asteroid belts and comet clouds with collective naming schemes
-            - Create special naming events for unique discoveries (e.g., "Explorer's Prize", "Scientist's Glory")
-
-        [New] Implement "Gas Giant" moons, allowing for colonies on some.
-
-            - Create a GasGiantMoonData resource inheriting from CelestialBodyData with specialized properties
-            - Implement logic to generate Gas Giant moons with unique characteristics (size, atmosphere, resources)
-            - Add special orbital mechanics for Gas Giant moons (tidal locking, radiation exposure from parent planet)
-            - Implement colony suitability for Gas Giant moons with appropriate habitability modifiers
-            - Create specialized building types for Gas Giant moon colonies (Orbital Habitats, Atmospheric Processors)
-            - Add unique resource generation for Gas Giant moons (exotic gases, rare minerals from atmospheric mining)
-            - Implement visual representation for Gas Giant moons in the system view
-            - Add Gas Giant moon generation to the celestial body generation algorithm
-            - Create unit tests for Gas Giant moon generation and colony mechanics
-            - Implement logging for Gas Giant moon generation and any anomalies encountered
-            - Add performance optimization for Gas Giant moon calculations
-            - Create a Gas Giant moon database with predefined properties for different types
-            - Add configuration options for Gas Giant moon frequency in GalaxyGenerationSettings
-            - Implement save/load functionality for Gas Giant moon data
-            - Create editor tools for visualizing and debugging Gas Giant moon effects
-            - Add Gas Giant moon information to the celestial body information panel
-            - Implement special events that can occur on Gas Giant moons (atmospheric storms, resource booms)
-            - Create unique challenges for Gas Giant moon colonies (gravitational stress, radiation exposure)
-            - Add Gas Giant moon research projects that unlock advanced colonization technologies
-            - Ensure Gas Giant moon generation respects the current GalaxyAge parameter
-            - Create visual effects that distinguish Gas Giant moons on the system view
-            - Implement atmospheric harvesting mechanics specific to Gas Giant moons
-            - Add special transportation requirements for accessing Gas Giant moon colonies
-            - Create unique naming conventions for Gas Giant moons based on their parent planet
-            - Implement orbital path visualization for Gas Giant moons in the system view
-            - Add Gas Giant moon colony events (e.g., "Atmospheric Processor Malfunction", "Rare Gas Discovery")
-            - Create special building prerequisites for Gas Giant moon colonies
-            - Implement population growth modifiers specific to Gas Giant moon environments
-            - Add unique defensive considerations for Gas Giant moon colonies (orbital bombardment vulnerability)
-
-        [New] Generate orbital paths and distances for visual representation in the system view.
-
-            - Create an OrbitalPathData resource to store orbital parameters (semi-major axis, eccentricity, inclination, argument of periapsis, longitude of ascending node)
-            - Implement orbital mechanics calculations using Kepler's laws for realistic elliptical orbits
-            - Add visual orbit path rendering in the system view using Godot's drawing APIs (draw_arc, draw_polyline, etc.)
-            - Implement orbital distance calculations based on star type and habitable zones
-            - Create orbital period calculations based on semi-major axis and parent star mass
-            - Add orbital velocity calculations that vary based on position in the elliptical orbit
-            - Implement visual indicators for different orbital zones (habitable, hot, cold, asteroid belt regions)
-            - Create orbital path generation algorithm that considers gravitational influences from other celestial bodies
-            - Add orbital resonance mechanics for moons and closely spaced planets
-            - Implement orbital decay/growth mechanics over time for dynamic system evolution
-            - Create unit tests for orbital mechanics calculations with various star types and planet configurations
-            - Implement logging for orbital path generation and any anomalies encountered
-            - Add performance optimization for orbital calculations (especially for real-time position updates)
-            - Create an orbital mechanics database with predefined parameters for different star types
-            - Add configuration options for orbital mechanics complexity in GalaxyGenerationSettings
-            - Implement save/load functionality for orbital path data
-            - Create editor tools for visualizing and debugging orbital paths
-            - Add orbital path information to the celestial body information panel
-            - Implement orbital perturbation effects from nearby massive objects (gas giants, stars in binary systems)
-            - Create visual effects for orbital resonances (special animations when moons align)
-            - Add orbital stability calculations to determine long-term viability of orbits
-            - Implement asteroid belt generation with appropriate orbital spacing and density
-            - Create comet orbit generation with highly elliptical paths that occasionally pass through inner system
-            - Add orbital debris fields that can affect ship navigation
-            - Implement tidal force calculations that affect moons and close-orbit planets
-            - Create visual indicators for Lagrange points in orbital systems
-            - Add orbital mechanics that consider relativistic effects for extreme mass objects (neutron stars, black holes)
-            - Implement orbital capture mechanics for rogue planets entering a system
-            - Create special orbital configurations (binary planet systems, co-orbital moons, Trojan asteroids)
-            - Add orbital phase synchronization for tidally locked bodies
-            - Implement orbital mechanics that respect the current GalaxyAge parameter (older systems have more stable orbits)
-            - Create visual effects that distinguish different orbital paths on the system view
-            - Add orbital mechanics for ring systems around gas giants
-            - Implement orbital dynamics for captured asteroids and dwarf planets
-            - Create special orbital events (e.g., "Planetary Alignment", "Solar Eclipse")
-            - Add orbital mechanics for artificial satellites around colonized worlds
-
-3. Empire & Colony Management (25% Complete)
-
-ColonyManager.gd (30% Complete)
-
-    Feature: Implement core colony mechanics: colonization, population growth, and resource production.
-
-    Development Steps to 100%:
-
-        [Existing] Implement _process_resource_production to calculate food, production, and research based on assigned population, planet modifiers, and building effects.
-
-        [Existing] Implement _process_population_growth: calculate food surplus/deficit, add to growth_progress on the planet. When threshold met, add population unit and reset.
-
-        [Existing] Implement _process_construction: apply planet's production output to current_build_progress of first item in construction_queue.
-
-        [Existing] When an item is complete, remove from queue, apply its effect (e.g., add building to planet's buildings array), and start next item.
-
-        [Existing] Create colonize_planet(planet, empire) function that consumes a Colony Ship and establishes a new colony.
-
-        [Existing] Create scrap_building(planet, building_id) function that removes a building and provides credits.
-
-        [New] Implement assign_population_job(planet: PlanetData, job_type: String, amount: int) with checks for current_population.
-
-            - Create a JobType enum with values: FARMER, WORKER, SCIENTIST, UNASSIGNED
-            - Implement assign_population_job function in ColonyManager.gd that takes planet, job_type, and amount parameters
-            - Add validation to ensure amount is not negative and does not exceed current unassigned population
-            - Implement logic to transfer population from UNASSIGNED to the specified job_type
-            - Add checks to ensure job assignments do not exceed maximum capacity for each job type
-            - Create signals for job assignment changes (job_assigned, job_removed) for UI updates
-            - Implement undo functionality for recent job assignments
-            - Add logging for job assignment actions for debugging purposes
-            - Create unit tests for job assignment logic with various edge cases
-            - Implement performance optimization for frequent job assignment operations
-            - Add validation to ensure planet belongs to the player before job assignment
-            - Create a job assignment history system to track changes over time
-            - Implement job assignment batching for assigning multiple jobs in a single operation
-            - Add job assignment recommendations based on current colony needs
-            - Create visual feedback in the UI when job assignments are made
-            - Implement job assignment restrictions based on colony events (e.g., cannot assign during uprising)
-            - Add job assignment modifiers based on building effects (e.g., Academies increase Scientist efficiency)
-            - Implement job assignment persistence through save/load operations
-            - Create job assignment animations for smooth UI transitions
-            - Add job assignment tooltips with efficiency information
-            - Implement job assignment hotkeys for quick access to common assignments
-            - Create job assignment presets for different colony strategies (balanced, industrial, research-focused)
-            - Add job assignment validation to ensure colony stability (minimum Farmer ratio for food security)
-            - Implement job assignment effects on colony happiness and productivity
-            - Create job assignment conflict resolution when trying to assign more than available population
-            - Add job assignment notifications for significant changes
-            - Implement job assignment restrictions based on planet conditions (e.g., low gravity affects Worker efficiency)
-
-        [New] Implement a building_data.gd resource that defines building costs, effects, and prerequisites.
-
-            - Create a BuildingData resource inheriting from Resource with properties for costs (food, production, credits), maintenance costs, and build time
-            - Implement building effects system with modifiers for food, production, research, population growth, and happiness
-            - Add prerequisite system with technology requirements and building dependencies
-            - Create building categories (Infrastructure, Industry, Research, Defense, Special) for organizational purposes
-            - Implement unique building flags (e.g., Capital, Wonder, Unique) that restrict construction to specific conditions
-            - Add building tiers (Basic, Advanced, Elite) that determine availability based on technological progress
-            - Create building limitations based on planet type, size, and atmospheric conditions
-            - Implement building obsolescence system that deactivates buildings when certain technologies are researched
-            - Add building upgrade paths that allow replacing basic buildings with advanced versions
-            - Create building synergy effects that activate when specific combinations of buildings are present
-            - Implement building event triggers that activate special effects under certain conditions
-            - Add building graphical representations for UI display (icons, sprites, 3D models)
-            - Create building flavor text and descriptions for lore integration
-            - Implement building rarity system (Common, Uncommon, Rare, Legendary) that affects discovery and construction
-            - Add building regional effects that benefit adjacent tiles or nearby buildings
-            - Create building global effects that benefit the entire empire when constructed
-            - Implement building maintenance scaling that increases costs based on empire size or building age
-            - Add building demolition system that recovers partial resources when buildings are removed
-            - Create building queue system that allows planning multiple constructions in advance
-            - Implement building construction acceleration options (spending credits for faster completion)
-            - Add building validation system that prevents impossible constructions (e.g., wrong planet type, missing prerequisites)
-            - Create building tooltip system with detailed information about costs, effects, and prerequisites
-            - Implement building discovery system that reveals new building options through exploration or events
-            - Add building specialization system that enhances specific aspects of colony management
-            - Create building automation options that allow buildings to operate without direct player management
-            - Implement building degradation system that reduces effectiveness over time without maintenance
-            - Add building restoration mechanics that can repair degraded buildings
-            - Create building variant system that allows different visual and mechanical versions of the same building
-            - Implement building modularity that allows combining components for custom effects
-            - Add building environmental impact tracking (pollution generation, resource consumption)
-            - Create building worker requirement system that assigns population to operate buildings effectively
-            - Implement building power grid system that requires energy distribution for operation
-            - Add building dependency chains that require supporting infrastructure (e.g., factories need power plants)
-
-        [New] Track pollution and morale on planets, affecting production and growth.
-
-            - Create PollutionData and MoraleData resources to store pollution and morale levels with their respective properties
-            - Implement pollution generation mechanics tied to industrial activities (factories, population, shipbuilding)
-            - Add pollution decay mechanisms that gradually reduce pollution over time through natural processes
-            - Implement pollution reduction buildings (Recycling Centers, Atmospheric Processors, Clean Energy Plants)
-            - Create pollution thresholds that trigger negative effects when exceeded (reduced growth, production penalties)
-            - Implement morale calculation system based on factors (tax rate, pollution levels, events, building effects, leader bonuses)
-            - Add morale modifiers for positive events (new buildings, technology discoveries, victory celebrations)
-            - Create morale modifiers for negative events (uprisings, invasions, economic hardship, high taxes)
-            - Implement visual indicators for pollution and morale levels in the UI (color-coded bars, icons, numerical values)
-            - Add pollution and morale tooltips with detailed breakdowns of contributing factors
-            - Create pollution and morale history tracking for analytics and debugging
-            - Implement pollution and morale notifications for significant changes
-            - Add pollution and morale effects on population growth (high pollution reduces growth, high morale increases it)
-            - Create pollution and morale effects on resource production (both can significantly impact output)
-            - Implement pollution and morale alerts when levels reach critical thresholds
-            - Add pollution and morale modifiers based on planet type and atmospheric composition
-            - Create pollution and morale research projects that unlock mitigation technologies
-            - Implement pollution and morale effects on building efficiency (some buildings become less effective in poor conditions)
-            - Add pollution and morale effects on recruitment (high morale attracts better leaders, low morale causes defections)
-            - Create pollution and morale seasonal variations that change over time
-            - Implement pollution and morale event triggers (e.g., "Industrial Accident" increases pollution, "Festival" boosts morale)
-            - Add pollution and morale synchronization across save/load operations
-            - Create pollution and morale animations for smooth UI transitions
-            - Implement pollution and morale logging for debugging purposes
-            - Add pollution and morale unit tests for various scenarios
-            - Create pollution and morale performance optimization for frequent calculations
-            - Implement pollution and morale effects on ship construction quality
-            - Add pollution and morale effects on research efficiency
-            - Create pollution and morale effects on crime rates (high pollution and low morale increase crime)
-            - Implement pollution and morale effects on tourism (high morale and low pollution attract tourists)
-            - Add pollution and morale effects on trade attractiveness
-            - Create pollution and morale effects on diplomatic relations with other empires
-            - Implement pollution and morale effects on planetary defense effectiveness
-            - Add pollution and morale effects on terraforming project success rates
-            - Create pollution and morale effects on population happiness and potential uprisings
-            - Implement pollution and morale effects on building maintenance costs
-            - Add pollution and morale effects on population health and life expectancy
-            - Create pollution and morale effects on planetary loyalty to the empire
-            - Implement pollution and morale effects on special resource extraction efficiency
-            - Add pollution and morale effects on planetary governor effectiveness
-            - Create pollution and morale effects on planetary resilience to disasters
-            - Implement pollution and morale effects on planetary attractiveness for immigration
-            - Add pollution and morale effects on planetary prestige and cultural influence
-            - Create pollution and morale effects on planetary susceptibility to espionage
-            - Implement pollution and morale effects on planetary resistance to invasion
-            - Add pollution and morale effects on planetary ability to host large populations
-            - Create pollution and morale effects on planetary scientific research breakthrough chances
-            - Implement pollution and morale effects on planetary military recruitment quality
-            - Add pollution and morale effects on planetary economic stability
-            - Create pollution and morale effects on planetary technological advancement speed
-
-        [New] Implement terraforming projects (requires research) that change planet types and attributes.
-
-        [New] Implement planetary defenses (ground batteries, missile bases) that can be built.
-
-        [New] Manage tax_rate and its impact on treasury and morale.
-
-        [New] Add colony_events (e.g., native uprisings, resource booms).
-
-Ship Building (5% Complete)
-
-    Feature: Allow players to design and build ships from their colonies.
-
-    Development Steps to 100%:
-
-        [Existing] Create a ShipHull resource for different ship sizes (Frigate, Destroyer, Cruiser, Battleship, Titan, Dreadnought).
-
-        [New] Create a ShipModule resource for weapons (phasers, fusion beams, missiles), shields (deflector, heavy), armor (heavy, reinforced), engines, computers, special components (troop pods, warp dissipators, cloaking devices).
-
-        [New] Develop a ShipDesignData resource to store player-created ship templates (hull, modules, name).
-
-        [New] Create a ShipDesigner screen (UI) where players can create, save, and modify ship templates using available hulls and modules (requires technology unlocks).
-
-        [Existing] Add ship templates to the list of BuildableItems in colonies.
-
-        [Existing] When a ship is completed in a colony's construction_queue, spawn a new FleetData in that star system, containing the newly built ship.
-
-        [New] Implement fleet_data.gd to manage groups of ships, their destination, and movement.
-
-        [New] Implement ship_combat_stats calculation based on modules and tech.
-
-        [New] Add refit_ship_design functionality in colonies to upgrade existing ships to new designs.
-
-4. Technology Tree (30% Complete)
-
-Research System (40% Complete)
-
-    Feature: Implement the logic for players to select and research technologies over time.
-
-    Development Steps to 100%:
-
-        [Existing] Create the research_screen.tscn UI, showing the six tech categories (Construction, Force Fields, Computers, etc.) and technologies within each tier.
-
-        [Existing] Implement logic for the player to select one technology to research at a time.
-
-        [Existing] Store the ID of the current_researching_tech on the Empire object.
-
-        [Existing] Each turn, in TurnManager, apply the empire's research output to the research_progress for that technology.
-
-        [Existing] When a tech is completed, add its ID to the unlocked_techs list on the Empire object and notify the player.
-
-        [Existing] Implement logic to handle tech prerequisites (a tech can only be researched if all its prerequisites are met).
-
-        [Existing] Create a system to apply the effects of unlocked technologies (e.g., add new buildable items to colonies, update empire-wide stats, unlock new ship modules).
-
-        [New] Implement "Tech Trading" as a diplomatic option, allowing empires to exchange technologies.
-
-        [New] Implement tech_discovery_events (e.g., finding ancient artifacts grants a free tech).
-
-        [New] Add random_tech_bonuses at the start of a game based on race traits.
-
-        [New] Integrate LeaderManager to assign science leaders who provide research bonuses.
-
-5. User Interface (35% Complete)
-
-HUD (45% Complete)
-
-    Feature: Design and implement a functional in-game HUD that displays key information.
-
-    Development Steps to 100%:
-
-        [Existing] Connect the right-sidebar panels to the live data from the PlayerManager and Empire objects.
-
-        [Existing] The "Fleet" panel should display the total number of military ships and colony ships.
-
-        [Existing] The "Food" panel should display the empire-wide food surplus or deficit, and potentially total population.
-
-        [Existing] The "Research" panel should display the current_research_project, turns_until_completion, and current research production.
-
-        [Existing] The "Credits" panel should display the current treasury and net_income_per_turn.
-
-        [New] Implement a turn button to advance the game to the next turn, with visual feedback.
-
-        [New] Add "End Turn" confirmation dialogs if there are unassigned populations or fleets.
-
-        [New] Implement a mini-map/galaxy overview panel showing fleet positions and owned systems.
-
-        [New] Add a "Current System" display showing the name of the star system currently in view.
-
-        [New] Integrate a notifications_log for important game events.
-
-Colonies Screen (50% Complete)
-
-    Feature: Implement the full functionality of the colony management screen.
-
-    Development Steps to 100%:
-
-        [Existing] Populate the left-side planet list with all celestial bodies in the current system, highlighting owned colonies.
-
-        [Existing] Implement the resource display grid to show the live output of Food, Production, and Research for the selected colony, including modifiers.
-
-        [Existing] Implement the population allocation panel with buttons to move population between jobs (Farmers, Workers, Scientists), and show available population.
-
-        [Existing] Connect these controls to update the farmers, workers, and scientists properties on the PlanetData object and refresh the resource display.
-
-        [Existing] Implement the "Change" button to open a new screen showing the list of available buildings and ships to build.
-
-        [Existing] Implement the "Buy" button to spend credits to complete the current construction item instantly.
-
-        [Existing] Display constructed buildings as icons on the planet surface background.
-
-        [New] Implement a "Building Queue" display, allowing players to order, reorder, and cancel construction items.
-
-        [New] Add a "Scrap Building" option to remove existing buildings and recover some production/credits.
-
-        [New] Display planet attributes (size, richness, gravity, habitability, pollution) and their effects.
-
-        [New] Implement a "Tax Rate" slider for the colony, affecting local morale and empire income.
-
-        [New] Show projected population growth/shrinkage.
-
-        [New] Display ship count and type stationed at the colony.
-
-        [New] Implement an "Evacuate Colony" option.
-
-6. AI Opponents (0% Complete)
-
-AIManager.gd (0% Complete)
-
-    Feature: Develop a robust AI that can manage its empire, fleets, and diplomacy, providing a challenging opponent.
-
-    Development Steps to 100%:
-
-        [New] Implement AIManager.take_turn() to orchestrate all AI decisions for an empire.
-
-        [New] AI Colony Management: Develop logic for AI to:
-
-            Allocate population to jobs based on empire needs (food, production, research).
-
-            Choose buildings and ships to construct based on strategic goals (expansion, defense, military buildup).
-
-            Colonize new planets, prioritizing habitable and rich worlds.
-
-            Manage planetary defenses and pollution.
-
-        [New] AI Research Management: Develop logic for AI to:
-
-            Select technologies to research based on current strategic goals.
-
-            Prioritize techs that unlock key buildings, ship components, or strategic advantages.
-
-        [New] AI Fleet Management: Develop logic for AI to:
-
-            Design ships using available modules, balancing cost and effectiveness.
-
-            Move fleets for exploration, colonization, invasion, and defense.
-
-            Patrol key systems and establish choke points.
-
-            Initiate combat with enemy fleets or colonies.
-
-        [New] AI Diplomatic Management: Develop logic for AI to:
-
-            Evaluate relationships with other empires (trust, fear, war, peace).
-
-            Propose treaties (alliance, trade, non-aggression).
-
-            Issue demands or declarations of war.
-
-            Respond to diplomatic overtures from other empires.
-
-        [New] AI Strategic Goals: Implement a system for AI empires to have overarching goals (e.g., conqueror, researcher, builder, peaceful expansionist) that influence all their decisions.
-
-        [New] Difficulty Scaling: Adjust AI intelligence, resource bonuses, and aggression based on selected difficulty.
-
-7. Diplomacy (0% Complete)
-
-DiplomacyManager.gd (0% Complete)
-
-    Feature: Implement a comprehensive diplomacy system for interactions between empires.
-
-    Development Steps to 100%:
-
-        [New] Create DiplomacyManager to manage inter-empire relations.
-
-        [New] Implement attitude tracking (e.g., friendly, neutral, hostile) for each empire towards every other empire.
-
-        [New] Implement diplomatic_actions:
-
-            Propose Alliance, Non-Aggression Pact, Trade Treaty.
-
-            Declare War, Offer Peace.
-
-            Demand Tribute, Offer Gifts.
-
-            Share Technology, Exchange Star Charts.
-
-            Vote on Galactic Council resolutions.
-
-        [New] Develop a DiplomacyScreen.tscn UI for player-initiated diplomatic interactions.
-
-        [New] Implement reputation system (e.g., trustworthiness) based on past actions.
-
-        [New] Connect to AIManager for AI responses to diplomatic proposals.
-
-8. Tactical Combat (0% Complete)
-
-CombatManager.gd (0% Complete)
-
-    Feature: Implement a turn-based tactical combat system for fleet engagements.
-
-    Development Steps to 100%:
-
-        [New] Create CombatManager to handle all combat scenarios.
-
-        [New] Design a CombatScene.tscn for tactical battles (separate from the galaxy map).
-
-        [New] Implement initiative system to determine turn order in combat.
-
-        [New] Implement ship_movement on a tactical grid, respecting engine speed and maneuverability.
-
-        [New] Implement weapon_fire mechanics (range, accuracy, damage, targeting).
-
-        [New] Implement shield and armor absorption/mitigation of damage.
-
-        [New] Implement special_module_effects (e.g., cloaking, warp dissipators, tractor beams).
-
-        [New] Implement boarding_actions and ground combat if attacking a planet.
-
-        [New] Track ship_damage, destroyed_ships, and retreat conditions.
-
-        [New] Integrate with FleetManager to update fleet compositions after combat.
-
-9. Galactic Council (0% Complete)
-
-CouncilManager.gd (0% Complete)
-
-    Feature: Implement the Galactic Council, where empires vote on leaders and resolutions.
-
-    Development Steps to 100%:
-
-        [New] Create CouncilManager to handle all Council-related events.
-
-        [New] Implement CouncilElection logic for choosing the Galactic Leader.
-
-        [New] Implement Resolution voting mechanics (e.g., sanctions, resource sharing, universal peace).
-
-        [New] Develop a GalacticCouncilScreen.tscn UI for displaying candidates and resolutions, and for casting votes.
-
-        [New] Connect with DiplomacyManager for AI voting behavior.
-
-        [New] Trigger Council sessions at specific turn intervals.
-
-10. Leaders (0% Complete)
-
-LeaderManager.gd (0% Complete)
-
-    Feature: Implement a system for recruiting and managing leaders who provide bonuses.
-
-    Development Steps to 100%:
-
-        [New] Create LeaderData resource defining leader types (Admiral, Scientist, Governor, Spy) and their bonuses.
-
-        [New] Implement leader_recruitment system (randomly generated leaders appear for hire).
-
-        [New] Implement leader_assignment to fleets, colonies, or research.
-
-        [New] Implement leader_experience and leveling to improve bonuses over time.
-
-        [New] Implement leader_death or retirement events.
-
-        [New] Develop a LeadersScreen.tscn UI for viewing and managing leaders.
-
-11. Espionage (0% Complete)
-
-EspionageManager.gd (0% Complete)
-
-    Feature: Implement a system for spying on and sabotaging other empires.
-
-    Development Steps to 100%:
-
-        [New] Create EspionageManager to handle covert operations.
-
-        [New] Implement spy_action types:
-
-            Steal Technology, Sabotage Production, Assassinate Leader, Incite Rebellion, Gather Intel.
-
-        [New] Implement counter-espionage capabilities and detection chances.
-
-        [New] Track spy_network strength in enemy systems.
-
-        [New] Develop an EspionageScreen.tscn UI for selecting targets and actions.
-
-12. Audio System (70% Complete)
-
-AudioManager.gd (70% Complete)
-
-    Feature: A centralized manager to control all game audio, including background music and sound effects, with volume controls.
-
-    Development Steps to 100%:
-
-        [Existing] Create a function play_music_playlist(tracks: Array[String], shuffle: bool).
-
-        [Existing] Connect to the _music_player.finished signal to automatically play the next track in the playlist.
-
-        [Existing] Implement a fade_out_music(duration: float) function for smooth transitions.
-
-        [Existing] Expand the _sfx_library dictionary to include core gameplay sounds (UI clicks, hovers, colonization confirmation).
-
-        [Existing] Implement a system to save and load the master, music, and SFX volume levels.
+# Project Antares - Refined Implementation Plan
+# 4X Space Strategy Game for Godot 4.x
+# Last Updated: 2025-09-23
+
+## Executive Summary
+Project Antares is a turn-based 4X space strategy game inspired by Master of Orion. Players control space-faring empires competing for galactic dominance through exploration, expansion, exploitation, and extermination. The game features procedural galaxy generation, AI opponents, technology trees, colony management, and tactical combat.
+
+## Core Architecture Overview
+- **Engine**: Godot 4.x with GDScript
+- **Paradigm**: Turn-based strategy with real-time UI
+- **Target Platforms**: Windows, iOS, Android
+- **Testing Framework**: GUT (Godot Unit Test)
+- **Architecture**: Manager pattern with centralized game state
+
+## 1. FOUNDATION SYSTEMS (Priority: Critical)
+
+### 1.1 Game State Management
+**Status**: 70% Complete
+**Files**: GameManager.gd, GameData.gd
+
+**Completed**:
+- Basic game phases (SETUP, GALAXY_VIEW, COMBAT, COLONY_VIEW, GAME_OVER)
+- Victory condition checking (conquest, diplomatic, score)
+- Game phase transitions
+- Empire elimination tracking
+
+**Remaining Tasks**:
+- [x] Implement diplomatic victory (Galactic Council votes)
+- [x] Create GameSetupData resource for initial game configuration
+- [x] Add game setup validation (galaxy size: Small 50, Medium 100, Large 150, Huge 250 systems)
+- [x] Add difficulty levels (Easy, Normal, Hard, Impossible)
+- [x] Add empire count selection (2-10 empires)
+- [x] Add victory condition selection (Conquest, Diplomatic)
+
+### 1.2 Save/Load System
+**Status**: 35% Complete
+**Files**: SaveLoadManager.gd
+
+**Completed**:
+- Basic JSON serialization for galaxy data
+- Empire data persistence
+- Ship data saving/loading
+- Colony data serialization
+
+**Remaining Tasks**:
+- [x] Implement save file versioning system
+- [x] Add migration support for old save files
+- [x] Use FileAccess.get_file_as_bytes() and JSON.parse_string()
+- [x] Consider binary serialization for performance
+- [x] Create _get_savable_data() methods for all game objects
+- [x] Implement _load_from_data() methods for deserialization
+- [x] Add save file compression (gzip)
+- [x] Implement quicksave/quickload functionality
+
+### 1.3 Turn Management
+**Status**: 40% Complete
+**Files**: TurnManager.gd
+
+**Completed**:
+- Basic turn progression system
+- Empire turn order management
+- Research advancement per turn
+- AI turn triggering
+
+**Remaining Tasks**:
+- [x] Implement sub-phases within turns (MOVEMENT, PRODUCTION, RESEARCH, CONSTRUCTION, DIPLOMACY, COMBAT_RESOLUTION)
+- [ ] Add turn interruption system for combat/diplomacy events
+- [ ] Create process_empire_turn() method with full turn orchestration
+- [ ] Add turn processing time tracking
+- [ ] Implement turn pausing at sub-phase boundaries
+
+## 2. GALAXY GENERATION & MANAGEMENT (Priority: High)
+
+### 2.1 Galaxy Generation
+**Status**: 40% Complete
+**Files**: GalaxyManager.gd, GalaxyBuilder.gd, CelestialBodyGenerator.gd
+
+**Completed**:
+- Basic star system generation
+- Planet type distribution
+- Star color determination
+- Galaxy feature placement (nebulae, black holes, wormholes)
+
+**Remaining Tasks**:
+- [ ] Implement GalaxyGenerationSettings resource (dense/sparse, cluster/spiral/ring shapes)
+- [ ] Add galaxy age parameter affecting planet types
+- [ ] Create unique star system naming system
+- [ ] Implement different star types (Red Dwarf, Blue Giant, Neutron Star)
+- [ ] Add atmospheric composition variations
+- [ ] Generate orbital paths and distances for visual representation
+- [ ] Implement Gas Giant moon colonization
+- [ ] Add unique celestial body naming
+
+### 2.2 Pathfinding System
+**Status**: 0% Complete
+**Files**: New file needed
+
+**Required Implementation**:
+- [ ] Implement A* pathfinding algorithm with variable costs
+- [ ] Create PathNode class for star systems
+- [ ] Add movement cost modifiers (nebulae: 2.0x, wormholes: 0.3x, black holes: impassable)
+- [ ] Implement DeepSpaceNode system for long-range travel
+- [ ] Create pathfinding integration with PlayerManager and AIManager
+- [ ] Add path caching for performance
+- [ ] Implement path visualization for debugging
+
+## 3. EMPIRE & COLONY MANAGEMENT (Priority: High)
+
+### 3.1 Empire Management
+**Status**: 30% Complete
+**Files**: EmpireManager.gd, Empire.gd
+
+**Completed**:
+- Basic empire data structure
+- Treasury and research tracking
+- Diplomatic status initialization
+
+**Remaining Tasks**:
+- [x] Implement race presets with unique bonuses
+- [ ] Add empire-wide modifiers from technologies
+- [ ] Create empire statistics tracking
+- [ ] Implement empire color assignment system
+- [ ] Add empire home system assignment
+
+### 3.2 Colony Management
+**Status**: 30% Complete
+**Files**: ColonyManager.gd, ColonyData.gd
+
+**Completed**:
+- Basic colony establishment
+- Population growth mechanics
+- Construction queue system
+- Resource production calculations
+
+**Remaining Tasks**:
+- [x] Implement population job assignment (Farmers, Workers, Scientists)
+- [x] Create BuildingData resource with costs, effects, prerequisites
+- [x] Add pollution and morale systems
+- [ ] Implement terraforming projects
+- [ ] Add planetary defenses (ground batteries, missile bases)
+- [ ] Implement tax rate effects on treasury and morale
+- [ ] Add colony events (native uprisings, resource booms)
+
+## 4. SHIP BUILDING & FLEET MANAGEMENT (Priority: Medium)
+
+### 4.1 Ship Design System
+**Status**: 5% Complete
+**Files**: ShipHull.gd, ShipModule.gd, ShipData.gd
+
+**Completed**:
+- Basic ship data structures
+- Hull and module definitions
+
+**Remaining Tasks**:
+- [ ] Create ShipDesignData resource for player-created templates
+- [ ] Implement ShipDesigner UI screen
+- [ ] Add ship design validation (tech requirements, cost limits)
+- [ ] Create ship statistics calculation system
+- [ ] Implement ship refitting functionality
+- [ ] Add ship design persistence in save files
+
+### 4.2 Fleet Management
+**Status**: 0% Complete
+**Files**: New file needed (FleetData.gd)
+
+**Required Implementation**:
+- [ ] Create FleetData resource for ship groups
+- [ ] Implement fleet movement and destination setting
+- [ ] Add fleet composition tracking
+- [ ] Create fleet combat resolution
+- [ ] Implement fleet disbanding/merging
+- [ ] Add fleet patrol and exploration orders
+
+## 5. TECHNOLOGY SYSTEM (Priority: Medium)
+
+### 5.1 Research Management
+**Status**: 40% Complete
+**Files**: Technology system (JSON-based)
+
+**Completed**:
+- Basic research progression
+- Technology unlocking
+- Research point accumulation
+
+**Remaining Tasks**:
+- [x] Implement technology trading between empires
+- [x] Add random technology discoveries
+- [x] Create race-specific technology bonuses
+- [x] Implement technology prerequisites visualization
+- [x] Add technology effect application system
+- [x] Create technology stealing through espionage
+
+## 6. AI OPPONENT SYSTEM (Priority: Medium)
+
+### 6.1 AI Behavior Framework
+**Status**: 100% Complete
+**Files**: AIManager.gd, test_ai_manager.gd
+
+**Completed**:
+- [x] Define AI personality types (Aggressive, Defensive, Expansionist, Technological, Balanced)
+- [x] Implement AI colony management logic (population assignment, building queues)
+- [x] Create AI research prioritization based on personality
+- [x] Add AI fleet movement and exploration decisions
+- [x] Implement AI diplomatic behavior (council voting)
+- [x] Create AI strategic goal system with weighted decision priorities
+- [x] Add comprehensive unit tests for all AI functionality
+
+## 7. DIPLOMACY SYSTEM (Priority: Low)
+
+### 7.1 Inter-Empire Relations
+**Status**: 0% Complete
+**Files**: DiplomacyManager.gd (placeholder)
+
+**Required Implementation**:
+- [ ] Create diplomatic status tracking (WAR, PEACE, ALLIANCE, TRUCE)
+- [ ] Implement diplomatic actions (declare war, propose alliance, demand tribute)
+- [ ] Add reputation system
+- [ ] Create diplomacy UI screen
+- [ ] Implement treaty negotiation
+- [ ] Add diplomatic events and incidents
+
+## 8. TACTICAL COMBAT SYSTEM (Priority: Low)
+
+### 8.1 Space Combat
+**Status**: 0% Complete
+**Files**: CombatManager.gd (placeholder)
+
+**Required Implementation**:
+- [ ] Create CombatScene for tactical battles
+- [ ] Implement initiative system
+- [ ] Add ship movement on tactical grid
+- [ ] Create weapon firing mechanics (range, accuracy, damage)
+- [ ] Implement shield and armor systems
+- [ ] Add special module effects (cloaking, warp dissipators)
+- [ ] Implement boarding actions
+- [ ] Create damage tracking and ship destruction
+
+## 9. GALACTIC COUNCIL SYSTEM (Priority: Low)
+
+### 9.1 Political Mechanics
+**Status**: 0% Complete
+**Files**: CouncilManager.gd (placeholder)
+
+**Required Implementation**:
+- [ ] Create council election system
+- [ ] Implement resolution voting mechanics
+- [ ] Add council session scheduling
+- [ ] Create council UI screens
+- [ ] Implement voting behavior for AI empires
+
+## 10. LEADERS SYSTEM (Priority: Low)
+
+### 10.1 Hero Units
+**Status**: 0% Complete
+**Files**: LeaderManager.gd (placeholder)
+
+**Required Implementation**:
+- [ ] Create LeaderData resource with types (Admiral, Scientist, Governor, Spy)
+- [ ] Implement leader recruitment system
+- [ ] Add leader assignment mechanics
+- [ ] Create leader experience and leveling
+- [ ] Implement leader death/retirement events
+- [ ] Add leader UI management screen
+
+## 11. ESPIONAGE SYSTEM (Priority: Low)
+
+### 11.1 Covert Operations
+**Status**: 0% Complete
+**Files**: EspionageManager.gd (placeholder)
+
+**Required Implementation**:
+- [ ] Create spy action types (steal tech, sabotage production, assassinate leader)
+- [ ] Implement counter-espionage mechanics
+- [ ] Add spy network strength tracking
+- [ ] Create espionage UI screen
+- [ ] Implement detection chance calculations
+
+## 12. USER INTERFACE SYSTEMS (Priority: High)
+
+### 12.1 Core UI Components
+**Status**: 50% Complete
+**Files**: Various UI scenes and scripts
+
+**Completed**:
+- Basic HUD with resource display
+- Colony management screen with population job assignment
+- Building construction and display system
+- Research screen
+- Main menu and settings
+
+**Remaining Tasks**:
+- [x] Implement turn advancement button with confirmation dialogs
+- [x] Add mini-map/galaxy overview
+- [x] Create notification system for game events
+- [x] Implement context menus for fleet/planet actions
+- [x] Add keyboard shortcuts for common actions
+- [ ] Create tutorial tooltips and help system
+
+### 12.2 UI Polish
+**Status**: 20% Complete
+
+**Remaining Tasks**:
+- [ ] Implement responsive UI scaling for different screen sizes
+- [ ] Add visual feedback for all interactive elements
+- [ ] Create smooth animations for UI transitions
+- [ ] Implement accessibility features (keyboard navigation, screen reader support)
+- [ ] Add UI sound effects and audio feedback
+
+## 13. AUDIO SYSTEM (Priority: Medium)
+
+### 13.1 Sound Management
+**Status**: 70% Complete
+**Files**: AudioManager.gd
+
+**Completed**:
+- Basic audio playback system
+- Volume controls for master, music, SFX
+- Playlist functionality
+
+**Remaining Tasks**:
+- [ ] Implement audio save/load for volume settings
+- [ ] Add more gameplay sound effects
+- [ ] Create dynamic music system based on game state
+- [ ] Implement 3D positional audio for space scenes
+
+## IMPLEMENTATION PRIORITIES
+
+### Phase 1: Core Gameplay Loop (Weeks 1-4)
+1. Complete foundation systems (GameManager, TurnManager, SaveLoadManager)
+2. Finish colony management basics
+3. Implement basic AI behavior
+4. Complete core UI functionality
+
+### Phase 2: Content Expansion (Weeks 5-8)
+1. Implement technology system fully
+2. Add ship design and fleet management
+3. Create diplomacy system
+4. Expand galaxy generation features
+
+### Phase 3: Advanced Features (Weeks 9-12)
+1. Implement tactical combat
+2. Add espionage and leaders systems
+3. Create Galactic Council mechanics
+4. Polish UI/UX and audio
+
+### Phase 4: Balancing & Polish (Weeks 13-16)
+1. Balance gameplay mechanics
+2. Add tutorial and help systems
+3. Implement achievements and statistics
+4. Performance optimization and bug fixing
+
+## DEPENDENCY MATRIX
+
+- GameManager depends on: TurnManager, EmpireManager, GalaxyManager
+- ColonyManager depends on: PlanetData, Empire
+- AIManager depends on: EmpireManager, ColonyManager, FleetManager
+- DiplomacyManager depends on: EmpireManager, AIManager
+- CombatManager depends on: FleetData, ShipData
+- UIManager depends on: All game systems for data display
+
+## TESTING REQUIREMENTS
+
+- Unit tests for all manager classes
+- Integration tests for turn processing
+- UI tests for critical user interactions
+- Performance tests for galaxy generation
+- Save/load compatibility tests
+
+## OPEN QUESTIONS
+
+See open_question.txt for gameplay logic questions requiring clarification.

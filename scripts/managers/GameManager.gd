@@ -18,6 +18,28 @@ enum GamePhase {
 	GAME_OVER
 }
 
+# Enumeration defining galaxy sizes.
+enum GalaxySize {
+	SMALL,    # 50 systems
+	MEDIUM,   # 100 systems
+	LARGE,    # 150 systems
+	HUGE      # 250 systems
+}
+
+# Enumeration defining difficulty levels.
+enum Difficulty {
+	EASY,
+	NORMAL,
+	HARD,
+	IMPOSSIBLE
+}
+
+# Enumeration defining victory conditions.
+enum VictoryCondition {
+	CONQUEST,    # Own all other empires' home systems
+	DIPLOMATIC  # Win Galactic Council votes
+}
+
 # Emitted whenever the game phase changes to notify other parts of the application.
 signal game_phase_changed(new_phase: GamePhase)
 
@@ -30,6 +52,9 @@ var active_empires: Array[StringName] = []
 # The current game data object containing all persistent game state.
 var current_game_data: GameData
 
+# The current game setup configuration.
+var current_game_setup: GameSetupData
+
 
 # Sets the current game phase and emits a signal to notify listeners of the change.
 # Used to transition the game flow between phases like setup, galaxy view, etc.
@@ -37,6 +62,16 @@ var current_game_data: GameData
 func set_game_phase(new_phase: GamePhase) -> void:
 	current_game_phase = new_phase
 	game_phase_changed.emit(new_phase)
+
+# Sets the game setup configuration for a new game.
+# This should be called before start_new_game() to configure the game parameters.
+# @param setup_data: The GameSetupData resource containing game configuration.
+func set_game_setup(setup_data: GameSetupData) -> void:
+	if setup_data and setup_data.validate():
+		current_game_setup = setup_data
+	else:
+		push_error("Invalid game setup data provided")
+		current_game_setup = GameSetupData.create_default()
 
 
 func _ready() -> void:
@@ -96,10 +131,31 @@ func check_conquest_victory() -> bool:
 			return true  # This empire has conquered all others
 	return false  # No empire has achieved conquest victory
 
-# Placeholder for diplomatic victory condition (e.g., when all empires become allies).
-# @return: Always false until diplomacy mechanics are implemented.
+# Check for diplomatic victory through Galactic Council voting.
+# Diplomatic victory occurs when the council votes for an emperor.
+# @return: True if diplomatic victory has been achieved, false otherwise.
 func check_diplomatic_victory() -> bool:
-	return false
+	# Update council membership first
+	CouncilManager.update_council_membership()
+
+	# If there's no active session and we have enough members, start one
+	if CouncilManager.get_session_status().get("active", false) == false:
+		if CouncilManager.council_members.size() >= 2:
+			CouncilManager.start_diplomatic_victory_session()
+
+	# Check if there's an active session
+	var session_status = CouncilManager.get_session_status()
+	if session_status.get("active", false):
+		# For now, auto-vote for AI empires (simple implementation)
+		# TODO: Implement proper AI voting logic
+		for member_id in CouncilManager.council_members:
+			var empire = EmpireManager.get_empire_by_id(member_id)
+			if empire and empire.is_ai_controlled:
+				if session_status.votes[member_id] == null:
+					# AI votes for itself (simple strategy)
+					CouncilManager.cast_vote(member_id, member_id)
+
+	return false  # Victory will be triggered by CouncilManager when voting completes
 
 # Placeholder for score-based victory (e.g., reached a certain score level).
 # @return: Always false until scoring system is implemented.
