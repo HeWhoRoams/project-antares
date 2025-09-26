@@ -1,5 +1,8 @@
 extends Node
 
+const Empire = preload("res://gamedata/empires/empire.gd")
+const ColonyData = preload("res://gamedata/colonies.gd")
+
 # Technology Effect Manager
 # Handles applying technology bonuses to empires and colonies
 

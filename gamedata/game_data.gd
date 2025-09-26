@@ -1,18 +1,10 @@
 # /gamedata/game_data.gd
-# A resource to hold the current state of the game.
-extends Resource
 class_name GameData
+extends Resource
 
-# Player's main resources
-@export var credits: int = 100
-@export var research: int = 0
-
-# Game progression
 @export var current_turn: int = 1
-
-# Player's assets
-# Example: var owned_planets: Array[PlanetData]
-# Example: var owned_ships: Array[ShipData]
-
-# Technologies
-@export var unlocked_technologies: Array[String] # Array of technology IDs
+@export var galaxy_seed: int = 0
+@export var difficulty: int = 1
+@export var victory_condition: int = 0
+@export var player_empire_id: StringName = ""
+@export var ai_empire_ids: Array[StringName] = []

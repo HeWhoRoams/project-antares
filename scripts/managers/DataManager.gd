@@ -83,16 +83,25 @@ func _load_tech_tree_from_json(path: String) -> void:
 		printerr("DataManager: Failed to parse tech_tree.json. Error: %s" % json.get_error_message())
 		return
 
-	_tech_tree_data = json.get_data()
+	var parsed_data = json.get_data()
 	
 	# Check if the parsed data is a valid dictionary and has the required structure
-	if not _tech_tree_data or typeof(_tech_tree_data) != TYPE_DICTIONARY:
+	if not parsed_data or typeof(parsed_data) != TYPE_DICTIONARY:
 		printerr("DataManager: Tech tree data is not a valid dictionary")
 		return
 	
-	if not _tech_tree_data.has("categories"):
+	if not parsed_data.has("categories"):
 		printerr("DataManager: Tech tree data does not contain 'categories' key")
 		return
+	
+	# Safe assignment with null check
+	_tech_tree_data = parsed_data if parsed_data != null else {}
+	
+	# Create Technology resources from JSON data
+	for category_data in _tech_tree_data.get("categories", []):
+		if typeof(category_data) != TYPE_DICTIONARY or not category_data.has("tiers"):
+			printerr("DataManager: Invalid category data structure")
+			continue
 	
 	# Create Technology resources from JSON data
 	for category_data in _tech_tree_data["categories"]:

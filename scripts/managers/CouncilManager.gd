@@ -1,6 +1,8 @@
 # /scripts/managers/CouncilManager.gd
 extends Node
 
+const Empire = preload("res://gamedata/empires/empire.gd")
+
 # Signal emitted when a vote is cast
 signal vote_cast(voter_id: StringName, target_id: StringName)
 

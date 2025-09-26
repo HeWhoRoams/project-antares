@@ -1,6 +1,12 @@
 # /scripts/managers/player_manager.gd
 extends Node
 
+const Empire = preload("res://gamedata/empires/empire.gd")
+const ShipData = preload("res://gamedata/ships/ship_data.gd")
+const Technology = preload("res://gamedata/technologies/technology.gd")
+const PlanetData = preload("res://gamedata/celestial_bodies/planet_data.gd")
+const StarSystem = preload("res://gamedata/systems/star_system.gd")
+
 signal ship_arrived(ship_data: ShipData)
 signal player_won_game
 signal research_points_changed(new_points: int)

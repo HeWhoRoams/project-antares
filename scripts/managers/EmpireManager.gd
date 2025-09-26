@@ -3,6 +3,9 @@
 # Handles loading and saving of empire data, and acts as the central repository for empire objects.
 extends Node
 
+const Empire = preload("res://gamedata/empires/empire.gd")
+const RacePreset = preload("res://gamedata/races/race_preset.gd")
+
 # Dictionary storing all active empires in the game, keyed by their unique StringName ID.
 # Each value is an Empire object containing all empire-specific data and state.
 var empires: Dictionary = {}

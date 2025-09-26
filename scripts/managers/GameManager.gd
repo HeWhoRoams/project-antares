@@ -4,6 +4,11 @@
 # It acts as a central hub for game logic and state persistence.
 extends Node
 
+const GameData = preload("res://gamedata/game_data.gd")
+const GameSetupData = preload("res://gamedata/game_setup_data.gd")
+const Empire = preload("res://gamedata/empires/empire.gd")
+const PlanetData = preload("res://gamedata/celestial_bodies/planet_data.gd")
+
 # Enumeration defining the possible phases of the game flow.
 # SETUP: Initial setup of the game.
 # GALAXY_VIEW: Viewing and interacting with the galaxy map.
