@@ -1,4 +1,4 @@
-# class_name FactionAI
+class_name FactionAI
 extends RefCounted # Since it's not a node, RefCounted is good
 
 var player_id: int

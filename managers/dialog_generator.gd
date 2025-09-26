@@ -1,4 +1,4 @@
-# class_name DialogGenerator
+class_name DialogGenerator
 extends Node
 
 # @onready var data_manager = %DataManager # Assuming DataManager has loaded all DialogPhrasePools
@@ -18,17 +18,15 @@ func _ready():
 	pass
 
 
-static func generate(dialog_type: String, source_faction: FactionAI, target_faction: FactionAI = null) -> String:
-	var instance = DialogGenerator.get_singleton("DialogGenerator") # Access the autoloaded singleton
-
+func generate(dialog_type: String, source_faction: FactionAI, target_faction: FactionAI = null) -> String:
 	var base_phrase = "Placeholder Dialog."
 	# --- Determine the primary attribute for this dialog type ---
 	# This needs a mapping somewhere, e.g., a dictionary in DialogGenerator
 	# `dialog_type_to_primary_attribute = {"DECLARE_WAR": "ELOQUENCE", "ALLIANCE_OFFER": "TRUST"}`
 	var primary_attr_id = "ELOQUENCE" # For "DECLARE_WAR" as an example
 
-	if instance.phrase_pools != null and instance.phrase_pools.has(dialog_type) and instance.phrase_pools[dialog_type].has(primary_attr_id):
-		var pool: DialogPhrasePool = instance.phrase_pools[dialog_type][primary_attr_id]
+	if phrase_pools != null and phrase_pools.has(dialog_type) and phrase_pools[dialog_type].has(primary_attr_id):
+		var pool: DialogPhrasePool = phrase_pools[dialog_type][primary_attr_id]
 		var score = source_faction.get_attribute_value(primary_attr_id)
 		base_phrase = pool.get_phrase_for_score(score)
 
@@ -64,7 +62,7 @@ static func generate(dialog_type: String, source_faction: FactionAI, target_fact
 	return final_dialog
 
 # Helper functions for procedural embellishments
-static func _get_ornamentation_phrase() -> String:
+func _get_ornamentation_phrase() -> String:
 	var phrases = [
 		"a decision forged in the crucible of truth",
 		"a declaration reverberating throughout the cosmos",
@@ -72,7 +70,7 @@ static func _get_ornamentation_phrase() -> String:
 	]
 	return phrases[randi() % phrases.size()]
 
-static func _get_complex_phrase() -> String:
+func _get_complex_phrase() -> String:
 	var phrases = [
 		"after much deliberation",
 		"as the stars bear witness",

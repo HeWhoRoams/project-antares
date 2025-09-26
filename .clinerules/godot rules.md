@@ -6,6 +6,7 @@ This document defines rules and best practices for AI-assisted development in **
 
 ## ⚙️ Code Standards & Quality
 - All scripts must follow Godot’s [GDScript style guide](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html).  
+- All code must adhere to the Godot engine and class documentation [Godot Docs](https://docs.godotengine.org/en/stable/index.html)
 - Functions must be small, single-responsibility, and named descriptively.  
 - Signals and autoloads must be documented at their declaration point.  
 - No “magic numbers”: use constants or configuration files.  

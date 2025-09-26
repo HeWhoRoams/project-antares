@@ -1,9 +1,10 @@
 # GDScript Formatting Configuration for Project Antares
+# Based on Godot GDScript style guide and project requirements
 
 # General formatting
 indent_size: 4                    # 4 spaces for indentation
 indent_type: spaces               # Use spaces, not tabs
-max_line_length: 120              # Maximum line length
+max_line_length: 120              # Maximum line length (standard for most projects)
 newline_style: lf                # Unix line endings
 insert_final_newline: true        # Insert final newline
 

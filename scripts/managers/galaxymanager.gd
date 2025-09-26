@@ -3,7 +3,7 @@ extends Node
 
 const AssetLoader = preload("res://scripts/utils/AssetLoader.gd")
 const CelestialBodyGenerator = preload("res://scripts/generators/celestial_body_generator.gd")
-const GalaxyBuilder = preload("res://scripts/galaxy/GalaxyBuilder.gd")
+const GalaxyBuilder = preload("res://scripts/galaxy/galaxy_builder.gd")
 const SystemNameGenerator = preload("res://scripts/generators/system_name_generator.gd")
 const StarSystem = preload("res://gamedata/systems/star_system.gd")
 const PlanetData = preload("res://gamedata/celestial_bodies/planet_data.gd")
@@ -31,7 +31,7 @@ const STAR_COLORS = {
 }
 
 func _ready() -> void:
-	var GalaxyBuilderScript = AssetLoader.load_script("res://scripts/galaxy/GalaxyBuilder.gd")
+	var GalaxyBuilderScript = AssetLoader.load_script("res://scripts/galaxy/galaxy_builder.gd")
 	if GalaxyBuilderScript:
 		_galaxy_builder = GalaxyBuilderScript.new()
 	else:

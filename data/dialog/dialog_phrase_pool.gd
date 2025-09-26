@@ -1,4 +1,4 @@
-# class_name DialogPhrasePool
+class_name DialogPhrasePool
 extends Resource
 
 @export var dialog_type_id: String # e.g., "DECLARE_WAR", "ALLIANCE_OFFER", "GREETING"

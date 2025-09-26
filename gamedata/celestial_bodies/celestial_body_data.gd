@@ -2,7 +2,7 @@
 class_name CelestialBodyData
 extends Resource
 
-enum BodyType { PLANET, ASTEROID_BELT, GAS_GIANT, NEBULA, BLACK_HOLE, WORMHOLE }
+enum BodyType { PLANET, MOON, ASTEROID_BELT, GAS_GIANT, NEBULA, BLACK_HOLE, WORMHOLE }
 
 @export var system_id: StringName
 @export var body_type: BodyType

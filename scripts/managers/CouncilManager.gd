@@ -1,5 +1,4 @@
 # /scripts/managers/CouncilManager.gd
-class_name CouncilManager
 extends Node
 
 # Signal emitted when a vote is cast
@@ -21,6 +20,13 @@ var session_status: Dictionary = {
 
 # Votes cast in the current session
 var votes: Dictionary = {}
+
+# Council members and leadership
+var council_members: Array[StringName] = []
+var council_president: StringName = ""
+
+# Current session data
+var current_session: Dictionary = {}
 
 # Initialize the CouncilManager
 func _ready() -> void:
@@ -148,4 +154,64 @@ func _on_save_data_loaded(data: Dictionary) -> void:
 	var council_data = data.get("council", {})
 	session_status = council_data.get("session_status", {"active": false})
 	votes = council_data.get("votes", {})
+	council_members = council_data.get("council_members", [])
+	council_president = council_data.get("council_president", "")
 	print("CouncilManager: Loaded council state from save")
+
+# Static functions for public API
+
+# Check if an empire qualifies for council membership
+static func qualifies_for_council(empire_id: StringName) -> bool:
+	var empire = EmpireManager.get_empire_by_id(empire_id)
+	if not empire:
+		return false
+
+	# Qualification criteria (simplified - in a real game this would be more complex)
+	return empire.income_per_turn >= 10 and not empire.is_ai_controlled
+
+# Update council membership based on current empires
+static func update_council_membership() -> void:
+	if not CouncilManager:
+		return
+
+	CouncilManager.council_members.clear()
+
+	for empire_id in EmpireManager.empires.keys():
+		if qualifies_for_council(empire_id):
+			CouncilManager.council_members.append(empire_id)
+
+	# Elect a president if we have members
+	if CouncilManager.council_members.size() > 0:
+		CouncilManager._hold_elections()
+	else:
+		CouncilManager.council_president = ""
+
+	print("CouncilManager: Updated council membership, %d members" % CouncilManager.council_members.size())
+
+# Hold elections for council president
+func _hold_elections() -> void:
+	if council_members.is_empty():
+		council_president = ""
+		return
+
+	# Simple election - just pick the first qualified empire (in a real game this would be more complex)
+	council_president = council_members[0]
+	print("CouncilManager: Elected %s as council president" % council_president)
+
+# Start a diplomatic victory session (used for victory conditions)
+static func start_diplomatic_victory_session() -> void:
+	if not CouncilManager:
+		return
+
+	CouncilManager.start_session("diplomatic_victory")
+
+# Remove a council member
+static func remove_council_member(empire_id: StringName) -> void:
+	if not CouncilManager:
+		return
+
+	CouncilManager.council_members.erase(empire_id)
+	if CouncilManager.council_president == empire_id:
+		CouncilManager._hold_elections()
+
+	print("CouncilManager: Removed %s from council" % empire_id)

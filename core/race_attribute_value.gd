@@ -1,4 +1,4 @@
-# class_name RaceAttributeValue
+class_name RaceAttributeValue
 extends RefCounted # Or Resource if you need to save them as standalone files
 
 @export_range(1, 10, 1) var value: int = 5

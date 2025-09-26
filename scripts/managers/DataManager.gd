@@ -2,7 +2,7 @@
 # A global singleton (Autoload) responsible for loading all game data from files.
 extends Node
 
-const AssetLoader = preload("res://scripts/utils/AssetLoader.gd")
+const AssetLoader = preload("res://scripts/utils/asset_loader.gd")
 const Technology = preload("res://gamedata/technologies/technology.gd")
 
 ## A dictionary to hold all loaded Technology resources, keyed by their unique 'id'.

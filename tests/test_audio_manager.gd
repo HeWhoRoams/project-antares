@@ -4,7 +4,7 @@ extends "res://addons/gut/test.gd"
 var audio_manager
 
 func before_all():
-	audio_manager = load("res://scripts/managers/AudioManager.gd").new()
+	audio_manager = load("res://scripts/managers/audio_manager.gd").new()
 	add_child(audio_manager)
 	# Manually call ready since we are not using the scene tree here
 	audio_manager._ready()

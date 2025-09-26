@@ -19,8 +19,8 @@ func set_building_data(building: BuildingData) -> void:
 	if building.icon_texture:
 		icon_texture.texture = building.icon_texture
 	else:
-		# Use default building icon
-		icon_texture.texture = preload("res://assets/icons/building_generic.png")
+		# No default building icon available
+		icon_texture.texture = null
 
 func _on_mouse_entered() -> void:
 	if _building_data:

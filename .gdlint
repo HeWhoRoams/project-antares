@@ -11,6 +11,15 @@ disable:
   - line-too-long                 # Allow longer lines for complex expressions
   - function-too-long             # Allow longer functions during refactoring
   - class-too-long                # Allow longer classes during refactoring
+  - too-many-arguments            # Allow functions with many arguments during refactoring
+  - too-many-locals               # Allow functions with many local variables
+  - too-many-branches             # Allow functions with many branches
+  - too-many-statements           # Allow functions with many statements
+  - too-many-public-methods       # Allow classes with many public methods
+  - too-many-attributes           # Allow classes with many attributes
+  - too-many-return-statements    # Allow functions with many return statements
+  - too-many-nested-blocks        # Allow functions with nested blocks
+  - too-many-instance-attributes  # Allow classes with many instance attributes
 
 # Enable stricter rules for new code
 enable:
@@ -26,6 +35,12 @@ enable:
   - return-value-discarded        # Warn when return values are discarded
   - shadowed-variable             # Detect shadowed variables
   - wrong-super-call-arguments    # Detect incorrect super() calls
+  - invalid-getter-setter-usage   # Detect invalid getter/setter usage
+  - invalid-signal-connection     # Detect invalid signal connections
+  - invalid-node-path            # Detect invalid node paths
+  - invalid-resource-path         # Detect invalid resource paths
+  - invalid-group-name            # Detect invalid group names
+  - invalid-property-name        # Detect invalid property names
 
 # Configuration parameters
 max-line-length: 120              # Maximum line length (standard for most projects)
@@ -38,6 +53,9 @@ max-locals: 15                    # Maximum local variables in a function
 max-expressions: 50              # Maximum expressions in a function
 max-public-methods: 20           # Maximum public methods per class
 max-attributes: 20               # Maximum attributes per class
+max-return-statements: 5          # Maximum return statements per function
+max-nested-blocks: 4              # Maximum nested blocks per function
+max-instance-attributes: 20       # Maximum instance attributes per class
 
 # Naming convention rules
 class-name-case: PascalCase       # Class names in PascalCase

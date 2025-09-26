@@ -1,7 +1,7 @@
 extends "res://addons/gut/test.gd"
 
 func test_ship_combat_interaction():
-    var ship_class = load("res://scripts/Ship.gd")
+    var ship_class = load("res://scripts/ship.gd")
     var attacker = ship_class.new()
     var defender = ship_class.new()
 

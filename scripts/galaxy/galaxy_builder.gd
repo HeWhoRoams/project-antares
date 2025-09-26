@@ -6,7 +6,10 @@ const GALAXY_SIZE_X = 1000.0
 const GALAXY_SIZE_Y = 1000.0
 const MIN_STAR_DISTANCE = 50.0
 
-func build_galaxy(num_stars: int) -> Dictionary:
+## Generates a galaxy with the specified number of star systems.
+## @param num_stars The number of star systems to generate.
+## @return A dictionary containing the generated systems, or null if generation failed due to excessive attempt cap or insufficient galaxy size/attempts.
+func build_galaxy(num_stars: int) -> Variant:
 	var systems = {}
 	var star_positions = []
 	var attempts = 0
@@ -31,6 +34,11 @@ func build_galaxy(num_stars: int) -> Dictionary:
 				"num_celestials": num_celestials
 			}
 			star_positions.append(new_pos)
+
+	if systems.size() < num_stars:
+		var error_msg = "Galaxy generation failed: requested %d systems, generated %d after %d max_attempts, galaxy size %.0f x %.0f" % [num_stars, systems.size(), max_attempts, GALAXY_SIZE_X, GALAXY_SIZE_Y]
+		push_error(error_msg)
+		return null
 
 	return systems
 

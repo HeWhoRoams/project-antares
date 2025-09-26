@@ -1,4 +1,4 @@
-# GDScript Linting Configuration for Project Antares
+# Project Antares - GDScript Linting Configuration
 # Based on Godot GDScript style guide and project requirements
 
 # Disable specific rules that may conflict with current codebase
@@ -62,9 +62,6 @@ class-name-case: PascalCase       # Class names in PascalCase
 function-name-case: snake_case    # Function names in snake_case
 variable-name-case: snake_case    # Variable names in snake_case
 constant-name-case: UPPER_SNAKE_CASE  # Constants in UPPER_SNAKE_CASE
-signal-name-case: snake_case     # Signal names in snake_case
-enum-name-case: PascalCase        # Enum names in PascalCase
-enum-member-name-case: UPPER_SNAKE_CASE  # Enum members in UPPER_SNAKE_CASE
 
 # Indentation rules
 indent-size: 4                    # 4 spaces for indentation

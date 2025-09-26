@@ -1,4 +1,4 @@
-# /scripts/managers/AIManager.gd
+# /scripts/managers/ai_manager.gd
 extends Node
 
 # AI Personality Types
@@ -183,18 +183,17 @@ func _process_ai_combat_phase(empire: Empire, ai_data: Dictionary) -> void:
 func _manage_colony_population(colony: ColonyData, weights: AIDecisionWeights) -> void:
 	# AI population assignment logic
 	var total_pop = colony.current_population
-	var farmers_needed = maxi(1, total_pop / 3)  # At least 1/3 farmers
-	var workers_needed = maxi(1, total_pop / 3)  # At least 1/3 workers
+	var farmers_needed = max(1, int(total_pop / 3))  # At least 1/3 farmers
+	var workers_needed = max(1, int(total_pop / 3))  # At least 1/3 workers
 	var scientists_needed = total_pop - farmers_needed - workers_needed
 
 	# Adjust based on AI priorities
 	if weights.research_focus > 60:
-		scientists_needed = maxi(scientists_needed, total_pop / 4)
-		farmers_needed = maxi(1, farmers_needed - 1)
+		scientists_needed = max(scientists_needed, int(total_pop / 4))
+		farmers_needed = max(1, farmers_needed - 1)
 	elif weights.economic_growth > 60:
-		workers_needed = maxi(workers_needed, total_pop / 2)
-		farmers_needed = maxi(1, farmers_needed - 1)
-
+		workers_needed = max(workers_needed, int(total_pop / 2))
+		farmers_needed = max(1, farmers_needed - 1)
 	# Apply assignments
 	colony.farmers = clamp(farmers_needed, 0, total_pop)
 	colony.workers = clamp(workers_needed, 0, total_pop - colony.farmers)

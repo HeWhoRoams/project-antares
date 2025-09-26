@@ -1,0 +1,7 @@
+ERROR: Failed to instantiate an autoload, script 'res://scripts/managers/turn_manager.gd' does not inherit from 'Node'.
+ERROR: Failed to instantiate an autoload, script 'res://scripts/managers/GameManager.gd' does not inherit from 'Node'.
+ERROR: Failed to instantiate an autoload, script 'res://scripts/managers/AIManager.gd' does not inherit from 'Node'.
+ERROR: Failed to instantiate an autoload, script 'res://scripts/managers/SaveLoadManager.gd' does not inherit from 'Node'.
+ERROR: Failed to instantiate an autoload, script 'res://scripts/managers/ColonyManager.gd' does not inherit from 'Node'.
+ERROR: Failed to instantiate an autoload, script 'res://scripts/managers/TechnologyEffectManager.gd' does not inherit from 'Node'.
+ERROR: Failed to instantiate an autoload, script 'res://scripts/managers/CouncilManager.gd' does not inherit from 'Node'.

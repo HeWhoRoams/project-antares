@@ -1,4 +1,4 @@
-# GDScript Toolkit Setup Guide for Project Antares
+# Project Antares - GDScript Toolkit Setup Guide
 
 ## Overview
 This guide provides detailed instructions for installing and configuring the GDScript Toolkit (GDToolkit) including GDlint, GDFormat, and GDDoc for Project Antares development.
@@ -273,11 +273,11 @@ jobs:
           
       - name: Run GDScript Lint
         run: |
-          gdlint scripts/**/*.gd gamedata/**/*.gd managers/**/*.gd || exit 1
+          gdlint scripts/**/*.gd gamedata/**/*.gd managers/**/*.gd tests/**/*.gd || exit 1
           
       - name: Check GDScript Formatting
         run: |
-          gdformat --check scripts/**/*.gd gamedata/**/*.gd managers/**/*.gd || exit 1
+          gdformat --check scripts/**/*.gd gamedata/**/*.gd managers/**/*.gd tests/**/*.gd || exit 1
 ```
 
 ### GitLab CI
@@ -293,8 +293,8 @@ gdlint:
   before_script:
     - pip install gdtoolkit
   script:
-    - gdlint scripts/**/*.gd gamedata/**/*.gd managers/**/*.gd
-    - gdformat --check scripts/**/*.gd gamedata/**/*.gd managers/**/*.gd
+    - gdlint scripts/**/*.gd gamedata/**/*.gd managers/**/*.gd tests/**/*.gd
+    - gdformat --check scripts/**/*.gd gamedata/**/*.gd managers/**/*.gd tests/**/*.gd
   only:
     - merge_requests
     - master
@@ -309,8 +309,8 @@ pipeline {
             steps {
                 sh '''
                     pip install gdtoolkit
-                    gdlint scripts/**/*.gd gamedata/**/*.gd managers/**/*.gd
-                    gdformat --check scripts/**/*.gd gamedata/**/*.gd managers/**/*.gd
+                    gdlint scripts/**/*.gd gamedata/**/*.gd managers/**/*.gd tests/**/*.gd
+                    gdformat --check scripts/**/*.gd gamedata/**/*.gd managers/**/*.gd tests/**/*.gd
                 '''
             }
         }
@@ -323,12 +323,12 @@ pipeline {
 ### Basic Linting
 ```bash
 # Lint all GDScript files in project
-gdlint scripts/**/*.gd gamedata/**/*.gd managers/**/*.gd
+gdlint scripts/**/*.gd gamedata/**/*.gd managers/**/*.gd tests/**/*.gd
 
-# Lint with specific configuration
+# Lint with project-specific configuration
 gdlint --config .gdlint scripts/managers/AIManager.gd
 
-# Lint and show detailed output
+# Lint with verbose output
 gdlint --verbose scripts/**/*.gd
 ```
 
@@ -417,7 +417,7 @@ func load_empire_data(empire_id: String) -> Dictionary:
 #### 1. Import Path Issues
 ```bash
 # Ensure all import paths are correct
-gdlint --config .gdlint scripts/managers/*.gd
+gdlint --config .gdlint scripts/**/*.gd
 ```
 
 #### 2. Configuration Conflicts

@@ -1,4 +1,3 @@
-class_name TechnologyEffectManager
 extends Node
 
 # Technology Effect Manager

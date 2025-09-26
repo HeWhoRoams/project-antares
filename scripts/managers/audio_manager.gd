@@ -1,4 +1,4 @@
-# /scripts/managers/AudioManager.gd
+# /scripts/managers/audio_manager.gd
 extends Node
 
 const AssetLoader = preload("res://scripts/utils/AssetLoader.gd")
@@ -95,9 +95,13 @@ func play_music_playlist(tracks: Array, shuffle: bool = false) -> void:
 ## Fades out the music over a duration.
 func fade_out_music(duration: float) -> void:
 	var tween = create_tween()
+	var initial_volume_db := _music_player.volume_db
 	tween.tween_property(_music_player, "volume_db", -80.0, duration)
-	tween.tween_callback(_music_player.stop)
+	tween.tween_callback(Callable(self, "_on_music_fade_out_complete").bind(initial_volume_db))
 
+func _on_music_fade_out_complete(initial_volume_db: float) -> void:
+	_music_player.stop()
+	_music_player.volume_db = initial_volume_db
 func _on_music_finished() -> void:
 	_next_track()
 
