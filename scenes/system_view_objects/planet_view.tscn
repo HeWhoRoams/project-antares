@@ -1,21 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://55q0e5g5mbe1"]
+[gd_scene load_steps=3 format=3 uid="uid://55q0e5g5mbe1"]
 
-[ext_resource type="Script" uid="uid://rjxfsmayqqq5" path="res://scenes/system_view_objects/planet_view.gd" id="1_xs3qu"]
+[ext_resource type="Script" path="res://scenes/system_view_objects/planet_view.gd" id="1_xs3qu"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_outline"]
 color = Color(1, 1, 1, 1)
 thickness = 2
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_transparent"]
-
 [node name="PlanetView" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-mouse_filter = 2
+offset_right = 150.0
+offset_bottom = 120.0
+pivot_offset = Vector2(75, 40)
+mouse_filter = 1
 script = ExtResource("1_xs3qu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 unique_name_in_owner = true
+position = Vector2(75, 40)
 
 [node name="HoverFrame" type="Panel" parent="Sprite2D"]
 unique_name_in_owner = true
@@ -36,41 +38,10 @@ theme_override_styles/panel = SubResource("StyleBoxLine_outline")
 
 [node name="Label" type="Label" parent="."]
 unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -75.0
-offset_top = 45.0
-offset_right = 75.0
-offset_bottom = 85.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 0
+offset_left = 0.0
+offset_top = 85.0
+offset_right = 150.0
+offset_bottom = 125.0
 horizontal_alignment = 1
 autowrap_mode = 2
-
-[node name="ClickButton" type="Button" parent="."]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -42.0
-offset_top = -42.0
-offset_right = 42.0
-offset_bottom = 42.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_transparent")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_transparent")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_transparent")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_transparent")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_transparent")
-
-[connection signal="mouse_entered" from="ClickButton" to="." method="_on_button_mouse_entered"]
-[connection signal="mouse_exited" from="ClickButton" to="." method="_on_button_mouse_exited"]
-[connection signal="pressed" from="ClickButton" to="." method="_on_button_pressed"]

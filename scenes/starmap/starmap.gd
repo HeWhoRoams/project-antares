@@ -93,11 +93,14 @@ func _draw_galaxy() -> void:
 		var new_system_view: StarSystemView = star_system_view_scene.instantiate()
 		new_system_view.position = system_data.position
 		new_system_view.star_system_data = system_data
-		
+
 		var star_color = GalaxyManager.get_star_color(system_data.celestial_bodies.size())
 		new_system_view.get_node("Sprite2D").modulate = star_color
-		
+
 		add_child(new_system_view)
+
+	# Draw galaxy features
+	_draw_galaxy_features()
 
 func _redraw_all_ships() -> void:
 	for child in get_children():
@@ -111,7 +114,7 @@ func _draw_all_ships() -> void:
 		return
 	
 	var ships_by_system: Dictionary = {}
-	var all_ships = PlayerManager.owned_ships.values() + AIManager.owned_ships.values()
+	var all_ships = PlayerManager.player_empire.owned_ships.values() + AIManager.owned_ships.values()
 	
 	for ship_data in all_ships:
 		var system_id = ship_data.current_system_id
@@ -147,3 +150,35 @@ func _draw_ships_for_system(system_id: StringName, ships: Array) -> void:
 			new_ship_view.modulate = Color.RED
 			
 		add_child(new_ship_view)
+
+func _draw_galaxy_features() -> void:
+	# Draw nebulae
+	for nebula in GalaxyManager.nebulae:
+		var nebula_circle = ColorRect.new()
+		nebula_circle.size = Vector2(nebula.size, nebula.size)
+		nebula_circle.position = nebula.position - Vector2(nebula.size/2, nebula.size/2)
+		nebula_circle.color = Color(0.5, 0.5, 1.0, 0.3)  # Semi-transparent blue
+		add_child(nebula_circle)
+
+	# Draw black holes
+	for black_hole in GalaxyManager.black_holes:
+		var bh_circle = ColorRect.new()
+		bh_circle.size = Vector2(black_hole.size, black_hole.size)
+		bh_circle.position = black_hole.position - Vector2(black_hole.size/2, black_hole.size/2)
+		bh_circle.color = Color(0.1, 0.1, 0.1, 0.8)  # Dark
+		add_child(bh_circle)
+
+	# Draw wormholes
+	for wormhole in GalaxyManager.wormholes:
+		var wh_circle = ColorRect.new()
+		wh_circle.size = Vector2(wormhole.size, wormhole.size)
+		wh_circle.position = wormhole.position - Vector2(wormhole.size/2, wormhole.size/2)
+		wh_circle.color = Color(1.0, 0.5, 1.0, 0.6)  # Purple-ish
+		add_child(wh_circle)
+
+		# Draw wormhole connection line
+		var line = Line2D.new()
+		line.points = [wormhole.position, wormhole.exit_position]
+		line.width = 2.0
+		line.default_color = Color(1.0, 0.5, 1.0, 0.4)
+		add_child(line)

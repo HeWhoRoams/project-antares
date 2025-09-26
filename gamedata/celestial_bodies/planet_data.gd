@@ -10,7 +10,7 @@ enum Gravity { LOW, NORMAL, HIGH }
 @export var planet_type: PlanetType
 
 @export_group("Planet Attributes")
-@export var size: PlanetSize = PlanetSize.M
+@export var planet_size: PlanetSize = PlanetSize.M
 @export var max_population: int = 12
 @export var mineral_richness: MineralRichness = MineralRichness.NORMAL
 @export var gravity: Gravity = Gravity.NORMAL

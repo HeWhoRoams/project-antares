@@ -1,0 +1,371 @@
+# Project Antares - Refined Implementation Plan
+# 4X Space Strategy Game for Godot 4.x
+# Last Updated: 2025-09-23
+
+## Executive Summary
+Project Antares is a turn-based 4X space strategy game inspired by Master of Orion. Players control space-faring empires competing for galactic dominance through exploration, expansion, exploitation, and extermination. The game features procedural galaxy generation, AI opponents, technology trees, colony management, and tactical combat.
+
+## Core Architecture Overview
+- **Engine**: Godot 4.x with GDScript
+- **Paradigm**: Turn-based strategy with real-time UI
+- **Target Platforms**: Windows, iOS, Android
+- **Testing Framework**: GUT (Godot Unit Test)
+- **Architecture**: Manager pattern with centralized game state
+
+## 1. FOUNDATION SYSTEMS (Priority: Critical)
+
+### 1.1 Game State Management
+**Status**: 70% Complete
+**Files**: GameManager.gd, GameData.gd
+
+**Completed**:
+- Basic game phases (SETUP, GALAXY_VIEW, COMBAT, COLONY_VIEW, GAME_OVER)
+- Victory condition checking (conquest, diplomatic, score)
+- Game phase transitions
+- Empire elimination tracking
+
+**Remaining Tasks**:
+- [x] Implement diplomatic victory (Galactic Council votes)
+- [x] Create GameSetupData resource for initial game configuration
+- [x] Add game setup validation (galaxy size: Small 50, Medium 100, Large 150, Huge 250 systems)
+- [x] Add difficulty levels (Easy, Normal, Hard, Impossible)
+- [x] Add empire count selection (2-10 empires)
+- [x] Add victory condition selection (Conquest, Diplomatic)
+
+### 1.2 Save/Load System
+**Status**: 35% Complete
+**Files**: SaveLoadManager.gd
+
+**Completed**:
+- Basic JSON serialization for galaxy data
+- Empire data persistence
+- Ship data saving/loading
+- Colony data serialization
+
+**Remaining Tasks**:
+- [x] Implement save file versioning system
+- [x] Add migration support for old save files
+- [x] Use FileAccess.get_file_as_bytes() and JSON.parse_string()
+- [x] Consider binary serialization for performance
+- [x] Create _get_savable_data() methods for all game objects
+- [x] Implement _load_from_data() methods for deserialization
+- [x] Add save file compression (gzip)
+- [x] Implement quicksave/quickload functionality
+
+### 1.3 Turn Management
+**Status**: 40% Complete
+**Files**: TurnManager.gd
+
+**Completed**:
+- Basic turn progression system
+- Empire turn order management
+- Research advancement per turn
+- AI turn triggering
+
+**Remaining Tasks**:
+- [x] Implement sub-phases within turns (MOVEMENT, PRODUCTION, RESEARCH, CONSTRUCTION, DIPLOMACY, COMBAT_RESOLUTION)
+- [ ] Add turn interruption system for combat/diplomacy events
+- [ ] Create process_empire_turn() method with full turn orchestration
+- [ ] Add turn processing time tracking
+- [ ] Implement turn pausing at sub-phase boundaries
+
+## 2. GALAXY GENERATION & MANAGEMENT (Priority: High)
+
+### 2.1 Galaxy Generation
+**Status**: 40% Complete
+**Files**: GalaxyManager.gd, GalaxyBuilder.gd, CelestialBodyGenerator.gd
+
+**Completed**:
+- Basic star system generation
+- Planet type distribution
+- Star color determination
+- Galaxy feature placement (nebulae, black holes, wormholes)
+
+**Remaining Tasks**:
+- [ ] Implement GalaxyGenerationSettings resource (dense/sparse, cluster/spiral/ring shapes)
+- [ ] Add galaxy age parameter affecting planet types
+- [ ] Create unique star system naming system
+- [ ] Implement different star types (Red Dwarf, Blue Giant, Neutron Star)
+- [ ] Add atmospheric composition variations
+- [ ] Generate orbital paths and distances for visual representation
+- [ ] Implement Gas Giant moon colonization
+- [ ] Add unique celestial body naming
+
+### 2.2 Pathfinding System
+**Status**: 0% Complete
+**Files**: New file needed
+
+**Required Implementation**:
+- [ ] Implement A* pathfinding algorithm with variable costs
+- [ ] Create PathNode class for star systems
+- [ ] Add movement cost modifiers (nebulae: 2.0x, wormholes: 0.3x, black holes: impassable)
+- [ ] Implement DeepSpaceNode system for long-range travel
+- [ ] Create pathfinding integration with PlayerManager and AIManager
+- [ ] Add path caching for performance
+- [ ] Implement path visualization for debugging
+
+## 3. EMPIRE & COLONY MANAGEMENT (Priority: High)
+
+### 3.1 Empire Management
+**Status**: 30% Complete
+**Files**: EmpireManager.gd, Empire.gd
+
+**Completed**:
+- Basic empire data structure
+- Treasury and research tracking
+- Diplomatic status initialization
+
+**Remaining Tasks**:
+- [x] Implement race presets with unique bonuses
+- [ ] Add empire-wide modifiers from technologies
+- [ ] Create empire statistics tracking
+- [ ] Implement empire color assignment system
+- [ ] Add empire home system assignment
+
+### 3.2 Colony Management
+**Status**: 30% Complete
+**Files**: ColonyManager.gd, ColonyData.gd
+
+**Completed**:
+- Basic colony establishment
+- Population growth mechanics
+- Construction queue system
+- Resource production calculations
+
+**Remaining Tasks**:
+- [x] Implement population job assignment (Farmers, Workers, Scientists)
+- [x] Create BuildingData resource with costs, effects, prerequisites
+- [x] Add pollution and morale systems
+- [ ] Implement terraforming projects
+- [ ] Add planetary defenses (ground batteries, missile bases)
+- [ ] Implement tax rate effects on treasury and morale
+- [ ] Add colony events (native uprisings, resource booms)
+
+## 4. SHIP BUILDING & FLEET MANAGEMENT (Priority: Medium)
+
+### 4.1 Ship Design System
+**Status**: 5% Complete
+**Files**: ShipHull.gd, ShipModule.gd, ShipData.gd
+
+**Completed**:
+- Basic ship data structures
+- Hull and module definitions
+
+**Remaining Tasks**:
+- [ ] Create ShipDesignData resource for player-created templates
+- [ ] Implement ShipDesigner UI screen
+- [ ] Add ship design validation (tech requirements, cost limits)
+- [ ] Create ship statistics calculation system
+- [ ] Implement ship refitting functionality
+- [ ] Add ship design persistence in save files
+
+### 4.2 Fleet Management
+**Status**: 0% Complete
+**Files**: New file needed (FleetData.gd)
+
+**Required Implementation**:
+- [ ] Create FleetData resource for ship groups
+- [ ] Implement fleet movement and destination setting
+- [ ] Add fleet composition tracking
+- [ ] Create fleet combat resolution
+- [ ] Implement fleet disbanding/merging
+- [ ] Add fleet patrol and exploration orders
+
+## 5. TECHNOLOGY SYSTEM (Priority: Medium)
+
+### 5.1 Research Management
+**Status**: 40% Complete
+**Files**: Technology system (JSON-based)
+
+**Completed**:
+- Basic research progression
+- Technology unlocking
+- Research point accumulation
+
+**Remaining Tasks**:
+- [x] Implement technology trading between empires
+- [x] Add random technology discoveries
+- [x] Create race-specific technology bonuses
+- [x] Implement technology prerequisites visualization
+- [x] Add technology effect application system
+- [x] Create technology stealing through espionage
+
+## 6. AI OPPONENT SYSTEM (Priority: Medium)
+
+### 6.1 AI Behavior Framework
+**Status**: 100% Complete
+**Files**: AIManager.gd, test_ai_manager.gd
+
+**Completed**:
+- [x] Define AI personality types (Aggressive, Defensive, Expansionist, Technological, Balanced)
+- [x] Implement AI colony management logic (population assignment, building queues)
+- [x] Create AI research prioritization based on personality
+- [x] Add AI fleet movement and exploration decisions
+- [x] Implement AI diplomatic behavior (council voting)
+- [x] Create AI strategic goal system with weighted decision priorities
+- [x] Add comprehensive unit tests for all AI functionality
+
+## 7. DIPLOMACY SYSTEM (Priority: Low)
+
+### 7.1 Inter-Empire Relations
+**Status**: 0% Complete
+**Files**: DiplomacyManager.gd (placeholder)
+
+**Required Implementation**:
+- [ ] Create diplomatic status tracking (WAR, PEACE, ALLIANCE, TRUCE)
+- [ ] Implement diplomatic actions (declare war, propose alliance, demand tribute)
+- [ ] Add reputation system
+- [ ] Create diplomacy UI screen
+- [ ] Implement treaty negotiation
+- [ ] Add diplomatic events and incidents
+
+## 8. TACTICAL COMBAT SYSTEM (Priority: Low)
+
+### 8.1 Space Combat
+**Status**: 0% Complete
+**Files**: CombatManager.gd (placeholder)
+
+**Required Implementation**:
+- [ ] Create CombatScene for tactical battles
+- [ ] Implement initiative system
+- [ ] Add ship movement on tactical grid
+- [ ] Create weapon firing mechanics (range, accuracy, damage)
+- [ ] Implement shield and armor systems
+- [ ] Add special module effects (cloaking, warp dissipators)
+- [ ] Implement boarding actions
+- [ ] Create damage tracking and ship destruction
+
+## 9. GALACTIC COUNCIL SYSTEM (Priority: Low)
+
+### 9.1 Political Mechanics
+**Status**: 0% Complete
+**Files**: CouncilManager.gd (placeholder)
+
+**Required Implementation**:
+- [ ] Create council election system
+- [ ] Implement resolution voting mechanics
+- [ ] Add council session scheduling
+- [ ] Create council UI screens
+- [ ] Implement voting behavior for AI empires
+
+## 10. LEADERS SYSTEM (Priority: Low)
+
+### 10.1 Hero Units
+**Status**: 0% Complete
+**Files**: LeaderManager.gd (placeholder)
+
+**Required Implementation**:
+- [ ] Create LeaderData resource with types (Admiral, Scientist, Governor, Spy)
+- [ ] Implement leader recruitment system
+- [ ] Add leader assignment mechanics
+- [ ] Create leader experience and leveling
+- [ ] Implement leader death/retirement events
+- [ ] Add leader UI management screen
+
+## 11. ESPIONAGE SYSTEM (Priority: Low)
+
+### 11.1 Covert Operations
+**Status**: 0% Complete
+**Files**: EspionageManager.gd (placeholder)
+
+**Required Implementation**:
+- [ ] Create spy action types (steal tech, sabotage production, assassinate leader)
+- [ ] Implement counter-espionage mechanics
+- [ ] Add spy network strength tracking
+- [ ] Create espionage UI screen
+- [ ] Implement detection chance calculations
+
+## 12. USER INTERFACE SYSTEMS (Priority: High)
+
+### 12.1 Core UI Components
+**Status**: 50% Complete
+**Files**: Various UI scenes and scripts
+
+**Completed**:
+- Basic HUD with resource display
+- Colony management screen with population job assignment
+- Building construction and display system
+- Research screen
+- Main menu and settings
+
+**Remaining Tasks**:
+- [x] Implement turn advancement button with confirmation dialogs
+- [x] Add mini-map/galaxy overview
+- [x] Create notification system for game events
+- [x] Implement context menus for fleet/planet actions
+- [x] Add keyboard shortcuts for common actions
+- [ ] Create tutorial tooltips and help system
+
+### 12.2 UI Polish
+**Status**: 20% Complete
+
+**Remaining Tasks**:
+- [ ] Implement responsive UI scaling for different screen sizes
+- [ ] Add visual feedback for all interactive elements
+- [ ] Create smooth animations for UI transitions
+- [ ] Implement accessibility features (keyboard navigation, screen reader support)
+- [ ] Add UI sound effects and audio feedback
+
+## 13. AUDIO SYSTEM (Priority: Medium)
+
+### 13.1 Sound Management
+**Status**: 70% Complete
+**Files**: AudioManager.gd
+
+**Completed**:
+- Basic audio playback system
+- Volume controls for master, music, SFX
+- Playlist functionality
+
+**Remaining Tasks**:
+- [ ] Implement audio save/load for volume settings
+- [ ] Add more gameplay sound effects
+- [ ] Create dynamic music system based on game state
+- [ ] Implement 3D positional audio for space scenes
+
+## IMPLEMENTATION PRIORITIES
+
+### Phase 1: Core Gameplay Loop (Weeks 1-4)
+1. Complete foundation systems (GameManager, TurnManager, SaveLoadManager)
+2. Finish colony management basics
+3. Implement basic AI behavior
+4. Complete core UI functionality
+
+### Phase 2: Content Expansion (Weeks 5-8)
+1. Implement technology system fully
+2. Add ship design and fleet management
+3. Create diplomacy system
+4. Expand galaxy generation features
+
+### Phase 3: Advanced Features (Weeks 9-12)
+1. Implement tactical combat
+2. Add espionage and leaders systems
+3. Create Galactic Council mechanics
+4. Polish UI/UX and audio
+
+### Phase 4: Balancing & Polish (Weeks 13-16)
+1. Balance gameplay mechanics
+2. Add tutorial and help systems
+3. Implement achievements and statistics
+4. Performance optimization and bug fixing
+
+## DEPENDENCY MATRIX
+
+- GameManager depends on: TurnManager, EmpireManager, GalaxyManager
+- ColonyManager depends on: PlanetData, Empire
+- AIManager depends on: EmpireManager, ColonyManager, FleetManager
+- DiplomacyManager depends on: EmpireManager, AIManager
+- CombatManager depends on: FleetData, ShipData
+- UIManager depends on: All game systems for data display
+
+## TESTING REQUIREMENTS
+
+- Unit tests for all manager classes
+- Integration tests for turn processing
+- UI tests for critical user interactions
+- Performance tests for galaxy generation
+- Save/load compatibility tests
+
+## OPEN QUESTIONS
+
+See open_question.txt for gameplay logic questions requiring clarification.

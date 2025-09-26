@@ -1,0 +1,124 @@
+Project Antares: Asset Production To-Do List
+
+1. UI Graphics & Icons
+
+General UI Sounds
+
+These are the core sound effects needed for UI interaction, to be placed in assets/audio/sfx/ui/. They should be in .wav format.
+
+    [ ] ui_hover.wav: A subtle sound for when the mouse hovers over a button or interactive element.
+
+    [ ] ui_confirm.wav: A positive, affirmative sound for clicking buttons that proceed.
+
+    [ ] ui_back.wav: A sound for closing windows or going back in a menu.
+
+    [ ] ui_error.wav: A soft negative sound for when an action cannot be performed.
+
+HUD & Colony Screen Icons
+
+These icons are needed for the right-hand sidebar on the starmap and for the colony screen UI. They should be clear and readable at a small size (e.g., 32x32 pixels).
+
+    [ ] resource_credits.png: Icon representing currency/credits.
+
+    [ ] resource_food.png: Icon representing food production.
+
+    [ ] resource_production.png: Icon representing industrial production (like a hammer or cog).
+
+    [ ] resource_research.png: Icon representing research points (like a beaker or atom).
+
+    [ ] population.png: A generic icon representing one unit of population.
+
+    [ ] job_farmer.png: An icon for the farmer/cultivator job.
+
+    [ ] job_worker.png: An icon for the worker/contributor job.
+
+    [ ] job_scientist.png: An icon for the scientist/researcher job.
+
+Technology Icons
+
+A unique icon is needed for every technology in the game to populate the research screen.
+
+    [ ] A unique icon for each of the ~50 technologies defined in gamedata/technologies/tech_tree.json.
+
+        Examples: An icon for "Logic Systems", "Nanoforges", "Deflection Grids", etc.
+
+Race Portraits
+
+High-quality portraits are needed for diplomacy, the research screen, and leader popups.
+
+    [ ] A portrait for each of the main playable races (e.g., Human, Silicoid, Psilon, etc.).
+
+    [ ] A portrait for the scientist representative of each race.
+
+UI Theme & Frames
+
+To match the look of the reference images, we need textures for the UI panels and windows.
+
+    [ ] A 9-Patch style border texture for UI panels, which allows the panel to be resized without stretching or distorting the corners.
+
+    [ ] Custom textures for UI elements like buttons, sliders, and progress bars to match the game's sci-fi aesthetic.
+
+2. In-Game Sprites & Textures
+
+Celestial Bodies
+
+These are the core visual assets for the galaxy map and the system view.
+
+    [ ] star_base.png: The neutral, uncolored star image (already generated, but can be refined).
+
+    [ ] ocean.png: Sprite for Ocean planets.
+
+    [ ] barren.png: Sprite for Barren planets.
+
+    [ ] gas_giant.png: Sprite for Gas Giant planets.
+
+    [ ] asteroid_belt.png: Sprite for Asteroid Belt fields.
+
+    [ ] Sprites for other planet types as they are added (e.g., Tundra, Volcanic, Toxic).
+
+Planet Surfaces
+
+These are the large background images used in the bottom half of the colony screen.
+
+    [ ] terran_surface.png: A landscape for Terran worlds.
+
+    [ ] desert_surface.png: A landscape for Desert worlds.
+
+    [ ] ice_surface.png: A landscape for Ice worlds.
+
+    [ ] ocean_surface.png: A landscape for Ocean worlds.
+
+    [ ] barren_surface.png: A landscape for Barren worlds.
+
+Ship Sprites (Future Feature)
+
+For the ship designer and tactical combat.
+
+    [ ] A unique sprite for each ship hull size (e.g., Frigate, Destroyer, Cruiser, Battleship, Titan).
+
+    [ ] Sprites for weapon projectiles (laser beams, missiles, plasma bolts).
+
+3. Audio Assets
+
+Background Music
+
+    [ ] Convert existing MP3 music tracks to .ogg format for better performance and smaller file size.
+
+    [ ] (Optional) Compose or acquire additional tracks for different game states (e.g., main menu, starmap, combat, diplomacy).
+
+Gameplay Sound Effects
+
+Sounds for in-game events, to be placed in assets/audio/sfx/gameplay/.
+
+    [ ] Ship movement confirmation sound.
+
+    [ ] Colonization success sound.
+
+    [ ] Building completion sound.
+
+    [ ] Research breakthrough sound.
+
+    [ ] Weapon firing sounds (lasers, missiles, etc.).
+
+    [ ] Ship explosion sounds.
+

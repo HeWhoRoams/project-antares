@@ -10,6 +10,20 @@ extends Control
 @onready var surface_background: TextureRect = %Background
 @onready var buildings_container: Control = %BuildingsContainer
 
+# Job assignment buttons
+@onready var farmer_plus_button: Button = %FarmerPlusButton
+@onready var farmer_minus_button: Button = %FarmerMinusButton
+@onready var worker_plus_button: Button = %WorkerPlusButton
+@onready var worker_minus_button: Button = %WorkerMinusButton
+@onready var scientist_plus_button: Button = %ScientistPlusButton
+@onready var scientist_minus_button: Button = %ScientistMinusButton
+
+# Job assignment labels
+@onready var farmer_count_label: Label = %FarmerCountLabel
+@onready var worker_count_label: Label = %WorkerCountLabel
+@onready var scientist_count_label: Label = %ScientistCountLabel
+@onready var unassigned_count_label: Label = %UnassignedCountLabel
+
 var _current_planet: PlanetData
 var _current_colony: ColonyData
 var _planet_list_entry_scene = preload("res://ui/components/system_planet_list_entry.tscn")
@@ -58,9 +72,10 @@ func _update_all_displays() -> void:
 
 	_populate_system_planet_list(home_system)
 	_populate_center_grid()
+	_update_job_assignment_display()
+	_update_construction_display()
+	_update_buildings_display()
 
-	construction_label.text = "Building: Hydroponics Farm"
-	construction_progress.value = 30
 	surface_background.texture = SURFACE_BACKGROUNDS.get(_current_planet.planet_type)
 
 func _populate_system_planet_list(system: StarSystem) -> void:
@@ -96,13 +111,13 @@ func _populate_center_grid() -> void:
 
 	var data = [
 		"Credits: %d (+%d)" % [PlayerManager.player_empire.treasury, PlayerManager.player_empire.income_per_turn],
-		"Morale: TODO",
-		"Food: TODO",
-		"Cultivators: %d" % _current_colony.farmers,
-		"Production: TODO",
+		"Morale: %d" % _current_colony.morale,
+		"Food: %d (+%d)" % [_current_colony.food_produced, _calculate_food_net()],
+		"Farmers: %d" % _current_colony.farmers,
+		"Production: %d" % _current_colony.production_produced,
 		"Workers: %d" % _current_colony.workers,
-		"Research: TODO",
-		"Researchers: %d" % _current_colony.scientists
+		"Research: %d" % _current_colony.research_produced,
+		"Scientists: %d" % _current_colony.scientists
 	]
 
 	for text in data:
@@ -118,6 +133,84 @@ func _populate_center_grid() -> void:
 		cell_panel.add_child(label)
 		center_grid.add_child(cell_panel)
 
+func _calculate_food_net() -> int:
+	var food_consumed = _current_colony.current_population
+	return _current_colony.food_produced - food_consumed
+
+func _update_job_assignment_display() -> void:
+	var assignment = ColonyManager.get_population_assignment(_current_planet)
+
+	farmer_count_label.text = str(assignment["farmers"])
+	worker_count_label.text = str(assignment["workers"])
+	scientist_count_label.text = str(assignment["scientists"])
+	unassigned_count_label.text = str(assignment["unassigned"])
+
+func _update_construction_display() -> void:
+	if _current_colony.construction_queue.is_empty():
+		construction_label.text = "No construction in progress"
+		construction_progress.value = 0
+		return
+
+	var current_item = _current_colony.construction_queue[0]
+	construction_label.text = "Building: %s" % current_item.display_name
+
+	var progress_percent = 0
+	if current_item.production_cost > 0:
+		progress_percent = (current_item.progress / current_item.production_cost) * 100
+
+	construction_progress.value = progress_percent
+
+func _update_buildings_display() -> void:
+	for child in buildings_container.get_children():
+		child.queue_free()
+
+	var building_scene = preload("res://ui/components/building_icon.tscn")
+
+	for building in _current_colony.buildings:
+		var building_icon = building_scene.instantiate()
+		building_icon.set_building_data(building)
+		buildings_container.add_child(building_icon)
+
 func _on_return_button_pressed() -> void:
 	AudioManager.play_sfx("back")
 	SceneManager.return_to_previous_scene()
+
+# Job assignment button handlers
+func _on_farmer_plus_button_pressed() -> void:
+	var assignment = ColonyManager.get_population_assignment(_current_planet)
+	if assignment["unassigned"] > 0:
+		ColonyManager.assign_population_job(_current_planet, "farmer", 1)
+		_update_job_assignment_display()
+		AudioManager.play_sfx("ui_click")
+
+func _on_farmer_minus_button_pressed() -> void:
+	if _current_colony.farmers > 0:
+		ColonyManager.assign_population_job(_current_planet, "farmer", -1)
+		_update_job_assignment_display()
+		AudioManager.play_sfx("ui_click")
+
+func _on_worker_plus_button_pressed() -> void:
+	var assignment = ColonyManager.get_population_assignment(_current_planet)
+	if assignment["unassigned"] > 0:
+		ColonyManager.assign_population_job(_current_planet, "worker", 1)
+		_update_job_assignment_display()
+		AudioManager.play_sfx("ui_click")
+
+func _on_worker_minus_button_pressed() -> void:
+	if _current_colony.workers > 0:
+		ColonyManager.assign_population_job(_current_planet, "worker", -1)
+		_update_job_assignment_display()
+		AudioManager.play_sfx("ui_click")
+
+func _on_scientist_plus_button_pressed() -> void:
+	var assignment = ColonyManager.get_population_assignment(_current_planet)
+	if assignment["unassigned"] > 0:
+		ColonyManager.assign_population_job(_current_planet, "scientist", 1)
+		_update_job_assignment_display()
+		AudioManager.play_sfx("ui_click")
+
+func _on_scientist_minus_button_pressed() -> void:
+	if _current_colony.scientists > 0:
+		ColonyManager.assign_population_job(_current_planet, "scientist", -1)
+		_update_job_assignment_display()
+		AudioManager.play_sfx("ui_click")

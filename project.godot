@@ -32,6 +32,7 @@ ColonyManager="*res://scripts/managers/ColonyManager.gd"
 
 [debug]
 
+file_logging/enable_file_logging=true
 logging/log_user_actions=true
 
 [gui]

@@ -6,6 +6,15 @@ const MAX_ORBITAL_SLOTS = 7
 const BASE_PLANET_CHANCE = 0.85
 const PLANET_CHANCE_DECAY = 0.20
 const MOON_CHANCE_WEIGHTS = { 0: 50, 1: 40, 2: 8, 3: 2 }
+const PLANET_SPECIALS_WEIGHTS = {
+	"none": 80,
+	"natives": 5,
+	"artifacts": 5,
+	"crashed_ship": 5,
+	"hostile_fauna": 3,
+	"thriving_fauna": 1,
+	"native_animals": 1
+}
 
 var _weighted_moon_count_array: Array
 
@@ -19,7 +28,19 @@ func _create_weighted_array(weights: Dictionary) -> Array:
 			array.append(key)
 	return array
 
-func generate_bodies_for_system(num_bodies_to_generate: int) -> Array[CelestialBodyData]:
+func _weighted_pick(options: Array, weights: Array) -> Variant:
+	var total_weight = 0
+	for w in weights:
+		total_weight += w
+	var roll = randf() * total_weight
+	var cumulative = 0
+	for i in range(options.size()):
+		cumulative += weights[i]
+		if roll < cumulative:
+			return options[i]
+	return options.back()
+
+func generate_bodies_for_system(num_bodies_to_generate: int, star_color: String = "", galaxy_age: String = "normal") -> Array[CelestialBodyData]:
 	var bodies: Array[CelestialBodyData] = []
 	var available_slots = range(MAX_ORBITAL_SLOTS)
 	available_slots.shuffle()
@@ -33,7 +54,7 @@ func generate_bodies_for_system(num_bodies_to_generate: int) -> Array[CelestialB
 		if randf() < current_planet_chance:
 			var new_planet = PlanetData.new()
 			new_planet.orbital_slot = slot
-			_generate_planet_attributes(new_planet)
+			_generate_planet_attributes(new_planet, star_color, galaxy_age)
 			bodies.append(new_planet)
 			planet_count += 1
 		else:
@@ -44,30 +65,66 @@ func generate_bodies_for_system(num_bodies_to_generate: int) -> Array[CelestialB
 			
 	return bodies
 
-func _generate_planet_attributes(planet: PlanetData) -> void:
+func _generate_planet_attributes(planet: PlanetData, star_color: String = "", galaxy_age: String = "normal") -> void:
 	# Assign a random type, size, and other attributes
-	planet.planet_type = PlanetData.PlanetType.values().pick_random()
+	if star_color == "yellow":
+		# Yellow Star rule: increase probability of TERRAN
+		var types = PlanetData.PlanetType.values()
+		var weights = []
+		for type in types:
+			if type == PlanetData.PlanetType.TERRAN:
+				weights.append(3)  # Higher weight for TERRAN
+			else:
+				weights.append(1)
+		planet.planet_type = _weighted_pick(types, weights)
+	else:
+		planet.planet_type = PlanetData.PlanetType.values().pick_random()
 	planet.mineral_richness = PlanetData.MineralRichness.values().pick_random()
 	planet.gravity = PlanetData.Gravity.values().pick_random()
-	planet.moons = _weighted_moon_count_array.pick_random()
+	# Generate moons based on planet size
+	var moon_weights = MOON_CHANCE_WEIGHTS.duplicate()
+	match planet.planet_size:
+		PlanetData.PlanetSize.XS:
+			moon_weights = {0: 90, 1: 10}
+		PlanetData.PlanetSize.S:
+			moon_weights = {0: 70, 1: 25, 2: 5}
+		PlanetData.PlanetSize.M:
+			moon_weights = {0: 50, 1: 35, 2: 10, 3: 5}
+		PlanetData.PlanetSize.L:
+			moon_weights = {0: 30, 1: 30, 2: 25, 3: 15}
+		PlanetData.PlanetSize.XL:
+			moon_weights = {0: 20, 1: 25, 2: 30, 3: 25}
+	var moon_array = _create_weighted_array(moon_weights)
+	planet.moons = moon_array.pick_random()
 	
 	# Assign size and corresponding max population
 	var size_roll = randf()
+	if galaxy_age == "old":
+		# Shift towards smaller, less habitable worlds
+		size_roll = max(size_roll - 0.3, 0.0)
+		# Reduce max population for old galaxies
+		planet.max_population = int(planet.max_population * 0.8)
+	elif galaxy_age == "young":
+		# Shift towards larger, more habitable worlds
+		size_roll = min(size_roll + 0.2, 1.0)
+		# Increase max population for young galaxies
+		planet.max_population = int(planet.max_population * 1.2)
+
 	if size_roll < 0.1: # 10% chance
-		planet.size = PlanetData.PlanetSize.XS
-		planet.max_population = 5
+		planet.planet_size = PlanetData.PlanetSize.XS
+		planet.max_population = max(5, planet.max_population)
 	elif size_roll < 0.25: # 15% chance
-		planet.size = PlanetData.PlanetSize.S
-		planet.max_population = 8
+		planet.planet_size = PlanetData.PlanetSize.S
+		planet.max_population = max(8, int(planet.max_population * 0.9))
 	elif size_roll < 0.75: # 50% chance
-		planet.size = PlanetData.PlanetSize.M
-		planet.max_population = 12
+		planet.planet_size = PlanetData.PlanetSize.M
+		planet.max_population = int(planet.max_population * 1.0)
 	elif size_roll < 0.9: # 15% chance
-		planet.size = PlanetData.PlanetSize.L
-		planet.max_population = 16
+		planet.planet_size = PlanetData.PlanetSize.L
+		planet.max_population = int(planet.max_population * 1.1)
 	else: # 10% chance
-		planet.size = PlanetData.PlanetSize.XL
-		planet.max_population = 20
+		planet.planet_size = PlanetData.PlanetSize.XL
+		planet.max_population = int(planet.max_population * 1.2)
 
 	# 1% chance of being an "Abandoned" world
 	if randf() < 0.01:
@@ -77,14 +134,34 @@ func _generate_planet_attributes(planet: PlanetData) -> void:
 		planet.mineral_richness = PlanetData.MineralRichness.VERY_LOW
 		return
 
-	if randf() < 0.05: planet.has_natives = true
-	if randf() < 0.05: planet.has_artifacts = true
-	if randf() < 0.05: planet.has_crashed_ship = true
-	
-	var fauna_roll = randf()
-	if fauna_roll < 0.10:
-		planet.has_hostile_fauna = true
-	elif fauna_roll < 0.25:
-		planet.has_thriving_fauna = true
-	elif fauna_roll < 0.40:
-		planet.has_native_animals = true
+	# Generate planet specials using weighted table
+	var special = _weighted_pick(PLANET_SPECIALS_WEIGHTS.keys(), PLANET_SPECIALS_WEIGHTS.values())
+	match special:
+		"natives":
+			planet.has_natives = true
+		"artifacts":
+			planet.has_artifacts = true
+		"crashed_ship":
+			planet.has_crashed_ship = true
+		"hostile_fauna":
+			planet.has_hostile_fauna = true
+		"thriving_fauna":
+			planet.has_thriving_fauna = true
+		"native_animals":
+			planet.has_native_animals = true
+		"none":
+			pass
+
+func generate_body_from_type(body_type: String) -> CelestialBodyData:
+	if body_type == "terrestrial":
+		var planet = PlanetData.new()
+		_generate_planet_attributes(planet)
+		return planet
+	else:
+		var body = CelestialBodyData.new()
+		var body_type_enum = CelestialBodyData.BodyType.get(body_type.to_upper())
+		if body_type_enum != null:
+			body.body_type = body_type_enum
+		else:
+			body.body_type = CelestialBodyData.BodyType.PLANET  # Default fallback
+		return body
