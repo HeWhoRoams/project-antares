@@ -1,0 +1,51 @@
+# GDScript Formatting Configuration for Project Antares
+
+# General formatting
+indent_size: 4                    # 4 spaces for indentation
+indent_type: spaces               # Use spaces, not tabs
+max_line_length: 120              # Maximum line length
+newline_style: lf                # Unix line endings
+insert_final_newline: true        # Insert final newline
+
+# Line spacing
+blank_lines_after_imports: 1     # Blank lines after imports
+blank_lines_after_class_declaration: 1  # Blank lines after class declaration
+blank_lines_after_function_declaration: 1  # Blank lines after function declaration
+blank_lines_before_function_return: 1  # Blank lines before function return
+blank_lines_between_functions: 1  # Blank lines between functions
+blank_lines_between_classes: 2    # Blank lines between classes
+
+# Parentheses and brackets
+spaces_around_operators: true     # Spaces around operators (=, +, -, etc.)
+spaces_around_delimiters: true    # Spaces around delimiters ([], {}, ())
+spaces_around_comments: true     # Spaces around comments (#)
+spaces_before_colon: false        # No space before colon (:)
+spaces_after_colon: true         # Space after colon (:)
+spaces_before_comma: false        # No space before comma (,)
+spaces_after_comma: true          # Space after comma (,)
+
+# Wrapping
+wrap_line_on_long_call: true      # Wrap long function calls
+wrap_line_on_long_list: true      # Wrap long lists
+wrap_line_on_long_dict: true      # Wrap long dictionaries
+wrap_line_on_long_string: true    # Wrap long strings
+wrap_line_on_long_condition: true  # Wrap long conditions
+
+# Comments
+align_comments: true              # Align comments vertically
+comment_min_spacing: 2            # Minimum spacing for comment alignment
+
+# Sorting
+sort_imports: true                # Sort import statements
+sort_dictionary_keys: false      # Don't sort dictionary keys (preserve order)
+sort_case_sensitive: false         # Case insensitive sorting
+
+# Specific rules for Project Antares
+allow_single_argument_wrapping: true  # Allow wrapping of single arguments
+allow_multiline_dict_trailing_comma: true  # Allow trailing commas in multiline dicts
+allow_multiline_list_trailing_comma: true  # Allow trailing commas in multiline lists
+
+# Preserve specific formatting
+preserve_blank_lines: true        # Preserve existing blank lines
+preserve_line_breaks: true         # Preserve existing line breaks
+preserve_comments: true             # Preserve comment positions

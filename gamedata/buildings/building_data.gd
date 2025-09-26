@@ -57,7 +57,6 @@ enum BuildingTier {
 @export_multiline var strategic_notes: String = ""
 
 func _init():
-	super._init()
 	# Set default production cost if not set
 	if production_cost == 0:
 		production_cost = 50

@@ -3,6 +3,7 @@
 extends Node
 
 const AssetLoader = preload("res://scripts/utils/AssetLoader.gd")
+const Technology = preload("res://gamedata/technologies/technology.gd")
 
 ## A dictionary to hold all loaded Technology resources, keyed by their unique 'id'.
 var _technologies: Dictionary = {}
@@ -84,32 +85,62 @@ func _load_tech_tree_from_json(path: String) -> void:
 
 	_tech_tree_data = json.get_data()
 	
+	# Check if the parsed data is a valid dictionary and has the required structure
+	if not _tech_tree_data or typeof(_tech_tree_data) != TYPE_DICTIONARY:
+		printerr("DataManager: Tech tree data is not a valid dictionary")
+		return
+	
+	if not _tech_tree_data.has("categories"):
+		printerr("DataManager: Tech tree data does not contain 'categories' key")
+		return
+	
 	# Create Technology resources from JSON data
 	for category_data in _tech_tree_data["categories"]:
+		if typeof(category_data) != TYPE_DICTIONARY or not category_data.has("tiers"):
+			printerr("DataManager: Invalid category data structure")
+			continue
+			
 		var category_tier_techs = {}  # tier -> [tech_ids]
 		for tier_key in category_data["tiers"]:
 			var tier_techs = category_data["tiers"][tier_key]
+			if typeof(tier_techs) != TYPE_ARRAY:
+				printerr("DataManager: Invalid tier data structure for tier: %s" % tier_key)
+				continue
+				
 			category_tier_techs[tier_key] = []
 			for tech_data in tier_techs:
+				if typeof(tech_data) != TYPE_DICTIONARY or not tech_data.has("id"):
+					printerr("DataManager: Invalid tech data structure")
+					continue
+					
 				var tech = Technology.new()
 				tech.id = tech_data["id"]
-				tech.display_name = tech_data["display_name"]
-				tech.description = tech_data["description"]
-				tech.research_cost = 100  # Default
+				tech.display_name = tech_data.get("display_name", tech.id)
+				tech.description = tech_data.get("description", "")
+				tech.research_cost = tech_data.get("research_cost", 100)
 				category_tier_techs[tier_key].append(tech.id)
 				_technologies[tech.id] = tech
-				print("  -> Created technology: %s" % tech.id)
+				print(" -> Created technology: %s" % tech.id)
 		
 		# Set prerequisites: higher tiers require one tech from previous tier
 		var tiers = category_tier_techs.keys()
-		tiers.sort()
-		for i in range(1, tiers.size()):
-			var current_tier = tiers[i]
-			var prev_tier = tiers[i-1]
-			for tech_id in category_tier_techs[current_tier]:
-				var tech = _technologies[tech_id]
-				# Require the first tech from previous tier
-				var prereq_id = category_tier_techs[prev_tier][0]
-				tech.prerequisites.append(_technologies[prereq_id])
+		if tiers.size() > 1:
+			tiers.sort()
+			for i in range(1, tiers.size()):
+				var current_tier = tiers[i]
+				var prev_tier = tiers[i-1]
+				var prev_tier_techs = category_tier_techs.get(prev_tier, [])
+				if prev_tier_techs.size() == 0:
+					continue
+					
+				for tech_id in category_tier_techs.get(current_tier, []):
+					var tech = _technologies.get(tech_id)
+					if not tech:
+						continue
+					# Require the first tech from previous tier
+					var prereq_id = prev_tier_techs[0]
+					var prereq_tech = _technologies.get(prereq_id)
+					if prereq_tech:
+						tech.prerequisites.append(prereq_tech)
 	
 	print("  -> Loaded tech tree data from JSON.")

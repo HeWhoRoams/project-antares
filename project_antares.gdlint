@@ -1,0 +1,161 @@
+# GDScript Linting Configuration for Project Antares
+# Based on Godot GDScript style guide and project requirements
+
+# Disable specific rules that may conflict with current codebase
+# These can be re-enabled gradually as code is refactored
+disable:
+  - missing-docstring              # Temporarily allow missing docstrings
+  - unused-argument                # Allow unused arguments in overridden methods
+  - unused-variable                # Allow variables that might be used in derived classes
+  - naming-convention-violation   # Temporarily relax naming conventions
+  - line-too-long                 # Allow longer lines for complex expressions
+  - function-too-long             # Allow longer functions during refactoring
+  - class-too-long                # Allow longer classes during refactoring
+  - too-many-arguments            # Allow functions with many arguments during refactoring
+  - too-many-locals               # Allow functions with many local variables
+  - too-many-branches             # Allow functions with many branches
+  - too-many-statements           # Allow functions with many statements
+  - too-many-public-methods       # Allow classes with many public methods
+  - too-many-attributes           # Allow classes with many attributes
+  - too-many-return-statements    # Allow functions with many return statements
+  - too-many-nested-blocks        # Allow functions with nested blocks
+  - too-many-instance-attributes  # Allow classes with many instance attributes
+
+# Enable stricter rules for new code
+enable:
+  - parse-error                   # Always catch parse errors
+  - duplicate-class-name         # Prevent duplicate class names
+  - duplicate-signal-name         # Prevent duplicate signal names
+  - duplicate-subscription        # Prevent duplicate signal subscriptions
+  - getter-setter-type-mismatch   # Ensure getter/setter type consistency
+  - empty-body                    # Warn about empty function bodies
+  - unreachable-code               # Detect unreachable code
+  - comparison-with-itself        # Detect self-comparison
+  - constant-condition            # Detect constant conditions
+  - return-value-discarded        # Warn when return values are discarded
+  - shadowed-variable             # Detect shadowed variables
+  - wrong-super-call-arguments    # Detect incorrect super() calls
+  - invalid-getter-setter-usage   # Detect invalid getter/setter usage
+  - invalid-signal-connection     # Detect invalid signal connections
+  - invalid-node-path            # Detect invalid node paths
+  - invalid-resource-path         # Detect invalid resource paths
+  - invalid-group-name            # Detect invalid group names
+  - invalid-property-name        # Detect invalid property names
+
+# Configuration parameters for Project Antares
+max-line-length: 120              # Maximum line length (standard for most projects)
+max-function-lines: 50           # Maximum lines per function
+max-class-lines: 500             # Maximum lines per class
+max-file-lines: 1000             # Maximum lines per file
+max-parameters: 8                 # Maximum parameters per function
+max-branches: 12                  # Maximum branches in a function
+max-locals: 15                    # Maximum local variables in a function
+max-expressions: 50              # Maximum expressions in a function
+max-public-methods: 20           # Maximum public methods per class
+max-attributes: 20               # Maximum attributes per class
+max-return-statements: 5          # Maximum return statements per function
+max-nested-blocks: 4              # Maximum nested blocks per function
+max-instance-attributes: 20       # Maximum instance attributes per class
+
+# Naming convention rules for Project Antares
+class-name-case: PascalCase       # Class names in PascalCase
+function-name-case: snake_case    # Function names in snake_case
+variable-name-case: snake_case    # Variable names in snake_case
+constant-name-case: UPPER_SNAKE_CASE  # Constants in UPPER_SNAKE_CASE
+signal-name-case: snake_case     # Signal names in snake_case
+enum-name-case: PascalCase        # Enum names in PascalCase
+enum-member-name-case: UPPER_SNAKE_CASE  # Enum members in UPPER_SNAKE_CASE
+
+# Indentation rules
+indent-size: 4                    # 4 spaces for indentation
+indent-type: spaces               # Use spaces, not tabs
+continuation-indent-size: 4       # Continuation indent size
+
+# Comment rules
+require-leading-space-in-comment: true  # Require leading space in comments
+require-capital-start-in-comment: false  # Don't require capital start in comments
+
+# Import rules
+disallow-wildcard-import: true    # Disallow wildcard imports
+require-import-ordering: true     # Require ordered imports
+
+# Error handling rules
+require-error-handling: false     # Don't require error handling (temporarily)
+require-specific-exception: false # Don't require specific exceptions (temporarily)
+
+# Performance rules
+disallow-global-variables: false  # Allow global variables (temporarily)
+disallow-single-letter-variables: true  # Disallow single letter variables
+require-local-variables-first: true  # Require local variables declared first
+
+# Security rules
+disallow-eval: true               # Disallow eval usage
+disallow-exec: true               # Disallow exec usage
+disallow-system-command: true     # Disallow system command usage
+
+# Project Antares specific rules
+allow-unused-arguments-in-overrides: true  # Allow unused args in overrides
+allow-unused-variables-in-signals: true    # Allow unused vars in signal handlers
+allow-long-lines-in-comments: true         # Allow long lines in comments
+allow-long-lines-in-strings: true          # Allow long lines in strings
+
+# File extension rules
+allowed-file-extensions: [.gd]    # Only allow .gd files
+
+# Exclude patterns for third-party code
+exclude-patterns:
+  - "addons/**"                   # Exclude addon directories
+  - "external/**"                 # Exclude external libraries
+  - "**/node_modules/**"          # Exclude node_modules
+  - "**/__pycache__/**"           # Exclude Python cache
+  - "**/.git/**"                  # Exclude git directories
+  - "**/build/**"                 # Exclude build directories
+  - "**/dist/**"                  # Exclude distribution directories
+
+# Include patterns for project files
+include-patterns:
+  - "scripts/**/*.gd"              # Include all script files
+  - "gamedata/**/*.gd"            # Include all game data files
+  - "managers/**/*.gd"            # Include all manager files
+  - "tests/**/*.gd"               # Include all test files
+  - "ui/**/*.gd"                  # Include all UI files
+  - "scenes/**/*.gd"              # Include all scene files
+
+# Severity levels for different error types
+severity-parse-error: error      # Parse errors are critical
+severity-duplicate-class-name: error  # Duplicate classes are critical
+severity-missing-docstring: warning  # Missing docs are warnings
+severity-unused-argument: warning    # Unused args are warnings
+severity-naming-convention-violation: warning  # Naming issues are warnings
+severity-line-too-long: warning     # Long lines are warnings
+severity-function-too-long: warning # Long functions are warnings
+
+# Custom rules for Project Antares patterns
+custom-rules:
+  # Disallow certain Godot anti-patterns
+  disallow-node-get-node-without-null-check: warning
+  disallow-hardcoded-paths: warning
+  require-resource-preloading: warning
+  disallow-global-state-mutation: warning
+  
+  # Project Antares specific patterns
+  require-manager-naming-convention: warning
+  require-data-class-naming-convention: warning
+  require-test-naming-convention: warning
+  
+  # Performance considerations
+  warn-on-large-loops: warning
+  warn-on-deep-recursion: warning
+  warn-on-excessive-memory-usage: warning
+
+# Output format customization
+output-format: stylish            # Use stylish output format
+color-output: true                # Enable colored output
+show-source: true                 # Show source code in output
+statistics: true                  # Show statistics
+quiet: false                     # Don't suppress output
+
+# Exit behavior
+fail-on-any-violation: false      # Don't fail on any violation (temporarily)
+fail-on-error: true               # Fail on errors
+fail-on-warning: false            # Don't fail on warnings (temporarily)

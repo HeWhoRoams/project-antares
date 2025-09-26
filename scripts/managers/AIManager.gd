@@ -10,13 +10,6 @@ enum AIPersonality {
 	BALANCED        # Mixed strategy approach
 }
 
-# AI Decision Priorities (0-100 scale)
-class AIDecisionWeights:
-	var colony_expansion: int = 50
-	var military_buildup: int = 50
-	var research_focus: int = 50
-	var economic_growth: int = 50
-
 var ai_empires: Dictionary = {}  # empire_id -> AI personality data
 var owned_ships: Dictionary = {}
 

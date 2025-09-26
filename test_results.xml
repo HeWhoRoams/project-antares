@@ -1,89 +1,145 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="GutTests" failures="0" tests="29" >
-  <testsuite name="tests/test_ai_manager.gd" tests="1" failures="0" skipped="0" time="0.000282" >
-      <testcase name="test_ai_manager_instantiates" assertions="1" status="pass" classname="tests/test_ai_manager.gd" time="0.000282" >
+<testsuites name="GutTests" failures="15" tests="50" >
+  <testsuite name="tests/test_audio_manager.gd" tests="4" failures="0" skipped="0" time="0.001033" >
+      <testcase name="test_audio_manager_instantiates" assertions="1" status="pass" classname="tests/test_audio_manager.gd" time="0.000361" >
+      </testcase>
+      <testcase name="test_set_master_volume" assertions="1" status="pass" classname="tests/test_audio_manager.gd" time="0.00024" >
+      </testcase>
+      <testcase name="test_play_sfx" assertions="1" status="pass" classname="tests/test_audio_manager.gd" time="0.000289" >
+      </testcase>
+      <testcase name="test_play_music" assertions="1" status="pass" classname="tests/test_audio_manager.gd" time="0.000143" >
       </testcase>
       </testsuite>
-  <testsuite name="tests/test_audio_manager.gd" tests="4" failures="0" skipped="0" time="0.000662" >
-      <testcase name="test_audio_manager_instantiates" assertions="1" status="pass" classname="tests/test_audio_manager.gd" time="0.00015" >
+  <testsuite name="tests/test_colony_management.gd" tests="6" failures="0" skipped="0" time="0.005005" >
+      <testcase name="test_population_job_assignment" assertions="0" status="no asserts" classname="tests/test_colony_management.gd" time="0.001343" >
       </testcase>
-      <testcase name="test_set_master_volume" assertions="1" status="pass" classname="tests/test_audio_manager.gd" time="0.000184" >
+      <testcase name="test_building_data_creation" assertions="0" status="no asserts" classname="tests/test_colony_management.gd" time="0.000751" >
       </testcase>
-      <testcase name="test_play_sfx" assertions="1" status="pass" classname="tests/test_audio_manager.gd" time="0.000169" >
+      <testcase name="test_building_effect_description" assertions="0" status="no asserts" classname="tests/test_colony_management.gd" time="0.000719" >
       </testcase>
-      <testcase name="test_play_music" assertions="1" status="pass" classname="tests/test_audio_manager.gd" time="0.000159" >
+      <testcase name="test_building_construction" assertions="0" status="no asserts" classname="tests/test_colony_management.gd" time="0.000781" >
       </testcase>
-      </testsuite>
-  <testsuite name="tests/test_colony_manager.gd" tests="2" failures="0" skipped="0" time="0.000207" >
-      <testcase name="test_colony_manager_instantiates" assertions="1" status="pass" classname="tests/test_colony_manager.gd" time="0.000102" >
+      <testcase name="test_colony_resource_production" assertions="0" status="no asserts" classname="tests/test_colony_management.gd" time="0.000706" >
       </testcase>
-      <testcase name="test_colonies_dict_initially_empty" assertions="1" status="pass" classname="tests/test_colony_manager.gd" time="0.000105" >
+      <testcase name="test_population_growth" assertions="0" status="no asserts" classname="tests/test_colony_management.gd" time="0.000705" >
       </testcase>
       </testsuite>
-  <testsuite name="tests/test_combat.gd" tests="1" failures="0" skipped="0" time="0.009435" >
-      <testcase name="test_ship_combat_interaction" assertions="3" status="pass" classname="tests/test_combat.gd" time="0.009435" >
+  <testsuite name="tests/test_colony_manager.gd" tests="2" failures="1" skipped="0" time="0.001052" >
+      <testcase name="test_colony_manager_instantiates" assertions="1" status="fail" classname="tests/test_colony_manager.gd" time="0.000419" >
+      <failure message="failed"><![CDATA[Colony Manager should be a valid instance.
+            at line -1]]></failure></testcase>
+      <testcase name="test_colonies_dict_initially_empty" assertions="0" status="no asserts" classname="tests/test_colony_manager.gd" time="0.000633" >
       </testcase>
       </testsuite>
-  <testsuite name="tests/test_data_manager.gd" tests="4" failures="0" skipped="0" time="0.000569" >
-      <testcase name="test_technologies_are_loaded" assertions="1" status="pass" classname="tests/test_data_manager.gd" time="0.000158" >
-      </testcase>
-      <testcase name="test_get_technology_returns_valid_tech" assertions="2" status="pass" classname="tests/test_data_manager.gd" time="0.000189" >
-      </testcase>
-      <testcase name="test_get_technology_returns_null_for_invalid_id" assertions="1" status="pass" classname="tests/test_data_manager.gd" time="0.000121" >
-      </testcase>
-      <testcase name="test_tech_tree_data_is_loaded" assertions="1" status="pass" classname="tests/test_data_manager.gd" time="0.000101" >
+  <testsuite name="tests/test_combat.gd" tests="1" failures="0" skipped="0" time="0.010409" >
+      <testcase name="test_ship_combat_interaction" assertions="3" status="pass" classname="tests/test_combat.gd" time="0.010409" >
       </testcase>
       </testsuite>
-  <testsuite name="tests/test_debug_manager.gd" tests="2" failures="0" skipped="0" time="0.000272" >
-      <testcase name="test_debug_manager_instantiates" assertions="1" status="pass" classname="tests/test_debug_manager.gd" time="0.000101" >
+  <testsuite name="tests/test_data_manager.gd" tests="4" failures="2" skipped="0" time="0.001778" >
+      <testcase name="test_technologies_are_loaded" assertions="1" status="pass" classname="tests/test_data_manager.gd" time="0.000193" >
       </testcase>
-      <testcase name="test_log_action" assertions="1" status="pass" classname="tests/test_debug_manager.gd" time="0.000171" >
+      <testcase name="test_get_technology_returns_valid_tech" assertions="1" status="fail" classname="tests/test_data_manager.gd" time="0.00086" >
+      <failure message="failed"><![CDATA[Should return a valid resource.
+            at line -1]]></failure></testcase>
+      <testcase name="test_get_technology_returns_null_for_invalid_id" assertions="1" status="pass" classname="tests/test_data_manager.gd" time="0.000158" >
+      </testcase>
+      <testcase name="test_tech_tree_data_is_loaded" assertions="1" status="fail" classname="tests/test_data_manager.gd" time="0.000567" >
+      <failure message="failed"><![CDATA[Tech tree should have categories.
+            at line -1]]></failure></testcase>
+      </testsuite>
+  <testsuite name="tests/test_debug_manager.gd" tests="2" failures="0" skipped="0" time="0.000372" >
+      <testcase name="test_debug_manager_instantiates" assertions="1" status="pass" classname="tests/test_debug_manager.gd" time="0.000152" >
+      </testcase>
+      <testcase name="test_log_action" assertions="1" status="pass" classname="tests/test_debug_manager.gd" time="0.00022" >
       </testcase>
       </testsuite>
-  <testsuite name="tests/test_empire_manager.gd" tests="4" failures="0" skipped="0" time="0.000592" >
-      <testcase name="test_empire_manager_instantiates" assertions="1" status="pass" classname="tests/test_empire_manager.gd" time="0.000111" >
+  <testsuite name="tests/test_empire_manager.gd" tests="4" failures="0" skipped="0" time="0.000926" >
+      <testcase name="test_empire_manager_instantiates" assertions="1" status="pass" classname="tests/test_empire_manager.gd" time="0.000213" >
       </testcase>
-      <testcase name="test_empires_dict_initially_empty" assertions="1" status="pass" classname="tests/test_empire_manager.gd" time="0.000102" >
+      <testcase name="test_empires_dict_initially_empty" assertions="1" status="pass" classname="tests/test_empire_manager.gd" time="0.000198" >
       </testcase>
-      <testcase name="test_register_empire" assertions="1" status="pass" classname="tests/test_empire_manager.gd" time="0.000178" >
+      <testcase name="test_register_empire" assertions="1" status="pass" classname="tests/test_empire_manager.gd" time="0.000264" >
       </testcase>
-      <testcase name="test_get_empire_by_id" assertions="2" status="pass" classname="tests/test_empire_manager.gd" time="0.000201" >
-      </testcase>
-      </testsuite>
-  <testsuite name="tests/test_galaxy.gd" tests="1" failures="0" skipped="0" time="0.005065" >
-      <testcase name="test_galaxy_generation_runs" assertions="2" status="pass" classname="tests/test_galaxy.gd" time="0.005065" >
+      <testcase name="test_get_empire_by_id" assertions="2" status="pass" classname="tests/test_empire_manager.gd" time="0.000251" >
       </testcase>
       </testsuite>
-  <testsuite name="tests/test_galaxy_manager.gd" tests="2" failures="0" skipped="0" time="0.00021" >
-      <testcase name="test_galaxy_manager_instantiates" assertions="1" status="pass" classname="tests/test_galaxy_manager.gd" time="0.000113" >
-      </testcase>
-      <testcase name="test_star_systems_dict_initially_empty" assertions="1" status="pass" classname="tests/test_galaxy_manager.gd" time="0.000097" >
+  <testsuite name="tests/test_galaxy.gd" tests="1" failures="0" skipped="0" time="0.055224" >
+      <testcase name="test_galaxy_generation_runs" assertions="2" status="pass" classname="tests/test_galaxy.gd" time="0.055224" >
       </testcase>
       </testsuite>
-  <testsuite name="tests/test_game_manager.gd" tests="3" failures="0" skipped="0" time="0.000395" >
-      <testcase name="test_game_manager_instantiates" assertions="1" status="pass" classname="tests/test_game_manager.gd" time="0.000111" >
-      </testcase>
-      <testcase name="test_initial_game_phase_is_setup" assertions="1" status="pass" classname="tests/test_game_manager.gd" time="0.000143" >
-      </testcase>
-      <testcase name="test_set_game_phase" assertions="1" status="pass" classname="tests/test_game_manager.gd" time="0.000141" >
-      </testcase>
-      </testsuite>
-  <testsuite name="tests/test_main_menu.gd" tests="1" failures="0" skipped="0" time="0.098242" >
-      <testcase name="test_main_menu_scene_loads" assertions="2" status="pass" classname="tests/test_main_menu.gd" time="0.098242" >
+  <testsuite name="tests/test_galaxy_manager.gd" tests="2" failures="1" skipped="0" time="0.001868" >
+      <testcase name="test_galaxy_manager_instantiates" assertions="1" status="fail" classname="tests/test_galaxy_manager.gd" time="0.00084" >
+      <failure message="failed"><![CDATA[Galaxy Manager should be a valid instance.
+            at line -1]]></failure></testcase>
+      <testcase name="test_star_systems_dict_initially_empty" assertions="0" status="no asserts" classname="tests/test_galaxy_manager.gd" time="0.001028" >
       </testcase>
       </testsuite>
-  <testsuite name="tests/test_scene_validator.gd" tests="1" failures="0" skipped="0" time="0.994472" >
-      <testcase name="test_all_scenes_load_without_errors" assertions="1" status="pass" classname="tests/test_scene_validator.gd" time="0.994472" >
+  <testsuite name="tests/test_game_manager.gd" tests="3" failures="1" skipped="0" time="0.001987" >
+      <testcase name="test_game_manager_instantiates" assertions="1" status="fail" classname="tests/test_game_manager.gd" time="0.00043" >
+      <failure message="failed"><![CDATA[Game Manager should be a valid instance.
+            at line -1]]></failure></testcase>
+      <testcase name="test_initial_game_phase_is_setup" assertions="0" status="no asserts" classname="tests/test_game_manager.gd" time="0.000757" >
+      </testcase>
+      <testcase name="test_set_game_phase" assertions="0" status="no asserts" classname="tests/test_game_manager.gd" time="0.0008" >
       </testcase>
       </testsuite>
-  <testsuite name="tests/test_static_analysis.gd" tests="2" failures="0" skipped="0" time="0.135836" >
-      <testcase name="test_no_redundant_function_calls" assertions="1" status="pass" classname="tests/test_static_analysis.gd" time="0.12115" >
+  <testsuite name="tests/test_game_setup.gd" tests="6" failures="0" skipped="0" time="0.002361" >
+      <testcase name="test_game_setup_data_creation" assertions="1" status="pass" classname="tests/test_game_setup.gd" time="0.000173" >
       </testcase>
-      <testcase name="test_type_consistency" assertions="1" status="pass" classname="tests/test_static_analysis.gd" time="0.014686" >
+      <testcase name="test_game_setup_data_defaults" assertions="4" status="pass" classname="tests/test_game_setup.gd" time="0.000234" >
+      </testcase>
+      <testcase name="test_game_setup_data_validation" assertions="3" status="pass" classname="tests/test_game_setup.gd" time="0.000822" >
+      </testcase>
+      <testcase name="test_system_count_calculation" assertions="4" status="pass" classname="tests/test_game_setup.gd" time="0.000232" >
+      </testcase>
+      <testcase name="test_ai_resource_multiplier" assertions="4" status="pass" classname="tests/test_game_setup.gd" time="0.00063" >
+      </testcase>
+      <testcase name="test_static_creation_methods" assertions="6" status="pass" classname="tests/test_game_setup.gd" time="0.00027" >
       </testcase>
       </testsuite>
-  <testsuite name="tests/test_turns_integration_cycle.gd" tests="1" failures="0" skipped="0" time="0.00162" >
-      <testcase name="test_full_turn_cycle_updates_colony_production" assertions="2" status="pass" classname="tests/test_turns_integration_cycle.gd" time="0.00162" >
+  <testsuite name="tests/test_main_menu.gd" tests="1" failures="0" skipped="0" time="0.124845" >
+      <testcase name="test_main_menu_scene_loads" assertions="2" status="pass" classname="tests/test_main_menu.gd" time="0.124845" >
+      </testcase>
+      </testsuite>
+  <testsuite name="tests/test_scene_validator.gd" tests="1" failures="0" skipped="0" time="0.965828" >
+      <testcase name="test_all_scenes_load_without_errors" assertions="1" status="pass" classname="tests/test_scene_validator.gd" time="0.965828" >
+      </testcase>
+      </testsuite>
+  <testsuite name="tests/test_static_analysis.gd" tests="2" failures="0" skipped="0" time="0.152688" >
+      <testcase name="test_no_redundant_function_calls" assertions="1" status="pass" classname="tests/test_static_analysis.gd" time="0.130588" >
+      </testcase>
+      <testcase name="test_type_consistency" assertions="1" status="pass" classname="tests/test_static_analysis.gd" time="0.0221" >
+      </testcase>
+      </testsuite>
+  <testsuite name="tests/test_technology_effect_manager.gd" tests="11" failures="10" skipped="0" time="0.008849" >
+      <testcase name="test_technology_effect_parsing" assertions="0" status="no asserts" classname="tests/test_technology_effect_manager.gd" time="0.000859" >
+      </testcase>
+      <testcase name="test_technology_effect_application" assertions="3" status="fail" classname="tests/test_technology_effect_manager.gd" time="0.001009" >
+      <failure message="failed"><![CDATA[[0] expected to be > than [0]:  Should have applied some effects
+            at line -1]]></failure></testcase>
+      <testcase name="test_colony_calculations_with_tech" assertions="3" status="fail" classname="tests/test_technology_effect_manager.gd" time="0.001055" >
+      <failure message="failed"><![CDATA[[2] expected to be > than [2]:  Should have bonus research from technology
+            at line -1]]></failure></testcase>
+      <testcase name="test_technology_ability_unlocks" assertions="2" status="fail" classname="tests/test_technology_effect_manager.gd" time="0.000647" >
+      <failure message="failed"><![CDATA[Should have cloaking ability unlocked
+            at line -1]]></failure></testcase>
+      <testcase name="test_ship_bonuses_from_technology" assertions="2" status="fail" classname="tests/test_technology_effect_manager.gd" time="0.001067" >
+      <failure message="failed"><![CDATA[[1.0] expected to be > than [1.0]:  Should have defense multiplier from technology
+            at line -1]]></failure></testcase>
+      <testcase name="test_population_growth_with_technology" assertions="1" status="fail" classname="tests/test_technology_effect_manager.gd" time="0.001101" >
+      <failure message="failed"><![CDATA[[0.1] expected to be > than [0.1]:  Should have increased growth rate from technology
+            at line -1]]></failure></testcase>
+      <testcase name="test_empire_bonuses_accumulation" assertions="1" status="fail" classname="tests/test_technology_effect_manager.gd" time="0.000656" >
+      <failure message="failed"><![CDATA[[0.0] expected to be > than [1.0]:  Should accumulate research bonuses from multiple technologies
+            at line -1]]></failure></testcase>
+      <testcase name="test_unknown_technology_effect" assertions="0" status="no asserts" classname="tests/test_technology_effect_manager.gd" time="0.000883" >
+      </testcase>
+      <testcase name="test_technology_effect_save_load" assertions="2" status="fail" classname="tests/test_technology_effect_manager.gd" time="0.000823" >
+      <failure message="failed"><![CDATA[Should restore effects after loading
+            at line -1]]></failure></testcase>
+      <testcase name="test_empty_technology_list" assertions="2" status="pass" classname="tests/test_technology_effect_manager.gd" time="0.000437" >
+      </testcase>
+      <testcase name="test_invalid_technology_id" assertions="1" status="pass" classname="tests/test_technology_effect_manager.gd" time="0.000312" >
       </testcase>
       </testsuite>
   <testsuite name="tests/test_ui_layouts.gd" tests="0" failures="0" skipped="0" time="0.0" >

@@ -46,8 +46,10 @@ func initialize_diplomacy() -> void:
 
 # Connects to the SaveLoadManager's signal if a game is being loaded.
 func _ready() -> void:
-	if SaveLoadManager.is_loading_game:
+	if SaveLoadManager and SaveLoadManager.is_loading_game:
 		SaveLoadManager.save_data_loaded.connect(_on_save_data_loaded)
+	else:
+		print("EmpireManager: SaveLoadManager not available or not loading game")
 
 # Handles loading empire data from a saved game.
 # Reconstructs Empire objects from the serialized dictionary data,

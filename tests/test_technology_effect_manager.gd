@@ -6,26 +6,26 @@ func test_technology_effect_parsing():
 	# Test research efficiency parsing
 	var research_tech = {"id": "logic_matrix", "effect": "+25% research efficiency"}
 	var research_effect = tech_effect_manager._parse_technology_effect("logic_matrix")
-	assert_eq(research_effect.type, "research_efficiency", "Should parse research efficiency")
-	assert_eq(research_effect.value, 1.25, "Should parse 25% bonus as 1.25 multiplier")
+	assert_eq(research_effect.get("type"), "research_efficiency", "Should parse research efficiency")
+	assert_eq(research_effect.get("value"), 1.25, "Should parse 25% bonus as 1.25 multiplier")
 
 	# Test production bonus parsing
 	var production_tech = {"id": "mechworks", "effect": "+1 production per worker"}
 	var production_effect = tech_effect_manager._parse_technology_effect("mechworks")
-	assert_eq(production_effect.type, "production_per_worker", "Should parse production per worker")
-	assert_eq(production_effect.value, 1.0, "Should parse +1 production bonus")
+	assert_eq(production_effect.get("type"), "production_per_worker", "Should parse production per worker")
+	assert_eq(production_effect.get("value"), 1.0, "Should parse +1 production bonus")
 
 	# Test ship defense parsing
 	var defense_tech = {"id": "barrier_mk_i", "effect": "+25% durability"}
 	var defense_effect = tech_effect_manager._parse_technology_effect("barrier_mk_i")
-	assert_eq(defense_effect.type, "ship_defense_multiplier", "Should parse ship defense")
-	assert_eq(defense_effect.value, 1.25, "Should parse 25% defense bonus")
+	assert_eq(defense_effect.get("type"), "ship_defense_multiplier", "Should parse ship defense")
+	assert_eq(defense_effect.get("value"), 1.25, "Should parse 25% defense bonus")
 
 	# Test economic parsing
 	var economic_tech = {"id": "interstellar_bank", "effect": "+50% empire-wide income"}
 	var economic_effect = tech_effect_manager._parse_technology_effect("interstellar_bank")
-	assert_eq(economic_effect.type, "empire_income_multiplier", "Should parse empire income")
-	assert_eq(economic_effect.value, 1.5, "Should parse 50% income bonus")
+	assert_eq(economic_effect.get("type"), "empire_income_multiplier", "Should parse empire income")
+	assert_eq(economic_effect.get("value"), 1.5, "Should parse 50% income bonus")
 
 func test_technology_effect_application():
 	var tech_effect_manager = TechnologyEffectManager.new()
@@ -146,8 +146,8 @@ func test_unknown_technology_effect():
 	var unknown_tech = {"id": "unknown_tech", "effect": "Does something mysterious"}
 	var unknown_effect = tech_effect_manager._parse_technology_effect("unknown_tech")
 
-	assert_eq(unknown_effect.type, "unknown", "Should handle unknown effects gracefully")
-	assert_eq(unknown_effect.value, 0.0, "Unknown effects should have zero value")
+	assert_eq(unknown_effect.get("type"), "unknown", "Should handle unknown effects gracefully")
+	assert_eq(unknown_effect.get("value"), 0.0, "Unknown effects should have zero value")
 
 func test_technology_effect_save_load():
 	var tech_effect_manager = TechnologyEffectManager.new()

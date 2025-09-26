@@ -5,6 +5,10 @@ extends Resource
 # Defines the bonuses, abilities, and characteristics of different space-faring races
 
 enum RaceType {
+	HUMAN,      # Versatile humans
+	SILICOID,   # Silicon-based life forms
+	MANTIS,     # Insectoid warriors
+	KLACKON,    # Chitinous empire
 	SYNARI,     # Bioluminescent knowledge seekers
 	VEKTRIL,    # Hive-minded industrialists
 	URSOIDS,    # Rhino-like warriors
@@ -79,6 +83,14 @@ enum RaceType {
 func _init():
 	# Set default traits based on race type
 	match race_type:
+		RaceType.HUMAN:
+			_setup_human()
+		RaceType.SILICOID:
+			_setup_silicoid()
+		RaceType.MANTIS:
+			_setup_mantis()
+		RaceType.KLACKON:
+			_setup_klackon()
 		RaceType.SYNARI:
 			_setup_synari()
 		RaceType.VEKTRIL:
@@ -258,6 +270,64 @@ func _setup_pelagians():
 	ai_expansionism = 30
 	ai_technological_focus = 60
 	ai_defensiveness = 70
+
+func _setup_human():
+	display_name = "Human"
+	description = "Versatile and adaptable, humans excel at colonization and diplomacy."
+	plural_name = "Humans"
+	primary_color = Color(1.0, 0.9, 0.8)  # Light tan
+	secondary_color = Color(0.8, 0.7, 0.6)  # Tan
+	credit_income_modifier = 1.0
+	research_modifier = 1.0
+	production_modifier = 1.0
+	traits = ["adaptable", "versatile", "diplomats"]
+	ai_aggression = 50
+	ai_expansionism = 50
+	ai_technological_focus = 50
+	ai_defensiveness = 50
+
+func _setup_silicoid():
+	display_name = "Silicoid"
+	description = "Silicon-based life forms with crystalline structures. Resistant to radiation and extreme environments."
+	plural_name = "Silicoids"
+	primary_color = Color(0.8, 0.8, 0.9)  # Light blue-gray
+	secondary_color = Color(0.6, 0.6, 0.7)  # Blue-gray
+	population_growth_modifier = 0.5
+	food_production_modifier = 0.0  # Don't need food
+	ground_combat_modifier = 1.5  # Strong in combat
+	traits = ["radiation_immune", "no_food", "strong_combat"]
+	ai_aggression = 60
+	ai_expansionism = 40
+	ai_technological_focus = 60
+	ai_defensiveness = 70
+
+func _setup_mantis():
+	display_name = "Mantis"
+	description = "Insectoid warriors with chitinous exoskeletons. Aggressive and highly efficient in combat."
+	plural_name = "Mantis"
+	primary_color = Color(0.4, 0.8, 0.4)  # Green
+	secondary_color = Color(0.2, 0.6, 0.2)  # Dark green
+	population_growth_modifier = 2.0  # Rapid breeding
+	ship_attack_modifier = 1.3  # Strong in combat
+	traits = ["insectoid", "rapid_breeders", "warriors"]
+	ai_aggression = 80
+	ai_expansionism = 70
+	ai_technological_focus = 30
+	ai_defensiveness = 40
+
+func _setup_klackon():
+	display_name = "Klackon"
+	description = "Chitinous empire with hive-like coordination. Efficient and coordinated in all endeavors."
+	plural_name = "Klackons"
+	primary_color = Color(0.6, 0.4, 0.8)  # Purple
+	secondary_color = Color(0.4, 0.2, 0.6)  # Dark purple
+	production_modifier = 1.5  # Good at production
+	population_growth_modifier = 1.2  # Good growth
+	traits = ["hive_mind", "efficient", "coordinated"]
+	ai_aggression = 50
+	ai_expansionism = 60
+	ai_technological_focus = 40
+	ai_defensiveness = 60
 
 # Utility functions
 func get_trait_description(trait: String) -> String:

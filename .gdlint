@@ -1,0 +1,50 @@
+# GDScript Linting Configuration for Project Antares
+# Based on Godot GDScript style guide and project requirements
+
+# Disable specific rules that may conflict with current codebase
+# These can be re-enabled gradually as code is refactored
+disable:
+  - missing-docstring              # Temporarily allow missing docstrings
+  - unused-argument                # Allow unused arguments in overridden methods
+  - unused-variable                # Allow variables that might be used in derived classes
+  - naming-convention-violation   # Temporarily relax naming conventions
+  - line-too-long                 # Allow longer lines for complex expressions
+  - function-too-long             # Allow longer functions during refactoring
+  - class-too-long                # Allow longer classes during refactoring
+
+# Enable stricter rules for new code
+enable:
+  - parse-error                   # Always catch parse errors
+  - duplicate-class-name         # Prevent duplicate class names
+  - duplicate-signal-name         # Prevent duplicate signal names
+  - duplicate-subscription        # Prevent duplicate signal subscriptions
+  - getter-setter-type-mismatch   # Ensure getter/setter type consistency
+  - empty-body                    # Warn about empty function bodies
+  - unreachable-code               # Detect unreachable code
+  - comparison-with-itself        # Detect self-comparison
+  - constant-condition            # Detect constant conditions
+  - return-value-discarded        # Warn when return values are discarded
+  - shadowed-variable             # Detect shadowed variables
+  - wrong-super-call-arguments    # Detect incorrect super() calls
+
+# Configuration parameters
+max-line-length: 120              # Maximum line length (standard for most projects)
+max-function-lines: 50           # Maximum lines per function
+max-class-lines: 500             # Maximum lines per class
+max-file-lines: 1000             # Maximum lines per file
+max-parameters: 8                 # Maximum parameters per function
+max-branches: 12                  # Maximum branches in a function
+max-locals: 15                    # Maximum local variables in a function
+max-expressions: 50              # Maximum expressions in a function
+max-public-methods: 20           # Maximum public methods per class
+max-attributes: 20               # Maximum attributes per class
+
+# Naming convention rules
+class-name-case: PascalCase       # Class names in PascalCase
+function-name-case: snake_case    # Function names in snake_case
+variable-name-case: snake_case    # Variable names in snake_case
+constant-name-case: UPPER_SNAKE_CASE  # Constants in UPPER_SNAKE_CASE
+
+# Indentation rules
+indent-size: 4                    # 4 spaces for indentation
+indent-type: spaces               # Use spaces, not tabs
