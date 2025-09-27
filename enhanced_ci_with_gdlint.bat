@@ -202,7 +202,10 @@ echo [INFO] Running Godot with detailed error capture...
 echo [CMD] %GODOT_EXECUTABLE% --headless --verbose --debug
 
 REM Run Godot with verbose output to capture more detailed information
-%GODOT_EXECUTABLE% --headless --verbose -s res://addons/gut/gut_cmdln.gd -gdir=res://tests -gexit=true -gjunit_xml_file=%TEST_RESULTS_FILE% 2>&1 | findstr /V "VERBOSE DEBUG" > %LOG_FILE%
+%GODOT_EXECUTABLE% --headless --verbose -s res://addons/gut/gut_cmdln.gd -gdir=res://tests -gexit=true -gjunit_xml_file=%TEST_RESULTS_FILE% > temp_full_output.log 2>&1
+
+REM Filter out VERBOSE and DEBUG lines from the output
+findstr /V "VERBOSE DEBUG" temp_full_output.log > %LOG_FILE%
 
 REM Also capture the full verbose output for analysis
 %GODOT_EXECUTABLE% --headless --verbose -s res://addons/gut/gut_cmdln.gd -gdir=res://tests -gexit=true -gjunit_xml_file=%TEST_RESULTS_FILE% > temp_verbose.log 2>&1
