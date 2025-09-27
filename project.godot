@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-DialogGenerator="*res://managers/dialog_generator.gd"
+DialogGenerator="*res://managers/dialog_data_generator.gd"
 DataManager="*res://scripts/managers/DataManager.gd"
 GalaxyManager="*res://scripts/managers/galaxymanager.gd"
 TurnManager="*res://scripts/managers/turn_manager.gd"

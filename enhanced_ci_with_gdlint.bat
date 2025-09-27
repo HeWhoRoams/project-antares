@@ -47,7 +47,7 @@ echo [OK] Godot executable found at C:\Tools\godot.exe
 REM Check for GDScript Toolkit availability and install if needed
 echo [CHECK] Checking GDScript Toolkit availability...
 where gdlint >nul 2>&1
-if %errorlevel% equ 0 (
+if !errorlevel! equ 0 (
     echo [OK] GDlint found - static analysis will be performed
     SET GD_TOOLKIT_AVAILABLE=1
 ) else (
@@ -69,7 +69,7 @@ if %errorlevel% equ 0 (
 )
 
 REM Verify GDToolkit components
-if %GD_TOOLKIT_AVAILABLE% equ 1 (
+if !GD_TOOLKIT_AVAILABLE! equ 1 (
     where gdformat >nul 2>&1
     if !errorlevel! equ 0 (
         echo [OK] GDFormat found
@@ -85,44 +85,14 @@ if %GD_TOOLKIT_AVAILABLE% equ 1 (
     )
 )
 
-REM Check for essential project files
-echo [CHECK] Verifying project structure...
-
-if not exist "project.godot" (
-    echo [ERROR] project.godot file not found - this is not a Godot project directory
-    SET /A ERROR_COUNT+=1
-    SET CRITICAL_ERROR_DETECTED=1
-) else (
-    echo [OK] Project file found
-)
-
-if not exist "scripts\" (
-    echo [WARNING] Scripts directory not found
-    SET /A WARNING_COUNT+=1
-) else (
-    echo [OK] Scripts directory exists
-)
-
-if not exist "gamedata\" (
-    echo [WARNING] Game data directory not found
-    SET /A WARNING_COUNT+=1
-) else (
-    echo [OK] Game data directory exists
-)
-
-if not exist "tests\" (
-    echo [ERROR] Tests directory not found - cannot run unit tests
-    SET /A ERROR_COUNT+=1
-) else (
-    echo [OK] Tests directory exists
-)
+REM Check for essential project files\r\necho [CHECK] Verifying project structure...\r\n\r\nif not exist \"project.godot\" (\r\n    echo [ERROR] project.godot file not found - this is not a Godot project directory\r\n    SET /A ERROR_COUNT+=1\r\n    SET CRITICAL_ERROR_DETECTED=1\r\n) else (\r\n    echo [OK] Project file found\r\n)\r\n\r\nif not exist \"scripts\\\" (\r\n    echo [WARNING] Scripts directory not found\r\n    SET /A WARNING_COUNT+=1\r\n) else (\r\n    echo [OK] Scripts directory exists\r\n)\r\n\r\nif not exist \"gamedata\\\" (\r\n    echo [WARNING] Game data directory not found\r\n    SET /A WARNING_COUNT+=1\r\n) else (\r\n    echo [OK] Game data directory exists\r\n)\r\n\r\nif not exist \"tests\\\" (\r\n    echo [ERROR] Tests directory not found - cannot run unit tests\r\n    SET /A ERROR_COUNT+=1\r\n) else (\r\n    echo [OK] Tests directory exists\r\n)
 
 echo.
 echo [PHASE 2] Static Code Analysis with GDScript Toolkit
 echo ======================================================
 echo.
 
-if %GD_TOOLKIT_AVAILABLE% equ 1 (
+if !GD_TOOLKIT_AVAILABLE! equ 1 (
     echo [STATIC ANALYSIS] Running GDScript linting and formatting checks...
     
     REM Check if configuration files exist
@@ -144,10 +114,10 @@ if %GD_TOOLKIT_AVAILABLE% equ 1 (
     
     REM Run GDlint syntax and style checking
     echo [GDLINT] Running syntax and style analysis...
-    gdlint %GDLINT_CONFIG% scripts/**/*.gd gamedata/**/*.gd managers/**/*.gd tests/**/*.gd 2> gdlint_errors.log
-    SET GDLINT_EXIT_CODE=%ERRORLEVEL%
+    gdlint !GDLINT_CONFIG! scripts/**/*.gd gamedata/**/*.gd managers/**/*.gd tests/**/*.gd 2> gdlint_errors.log
+    SET GDLINT_EXIT_CODE=!ERRORLEVEL!
     
-    if %GDLINT_EXIT_CODE% neq 0 (
+    if !GDLINT_EXIT_CODE! neq 0 (
         echo [WARNING] GDlint found code quality issues
         SET /A WARNING_COUNT+=1
         SET STATIC_ANALYSIS_ERRORS=1
@@ -169,10 +139,10 @@ if %GD_TOOLKIT_AVAILABLE% equ 1 (
     
     REM Run GDFormat formatting validation
     echo [GDFORMAT] Checking code formatting compliance...
-    gdformat %GDFORMAT_CONFIG% --check scripts/**/*.gd gamedata/**/*.gd managers/**/*.gd tests/**/*.gd 2> format_errors.log
-    SET GDFORMAT_EXIT_CODE=%ERRORLEVEL%
+    gdformat !GDFORMAT_CONFIG! --check scripts/**/*.gd gamedata/**/*.gd managers/**/*.gd tests/**/*.gd 2> format_errors.log
+    SET GDFORMAT_EXIT_CODE=!ERRORLEVEL!
     
-    if %GDFORMAT_EXIT_CODE% neq 0 (
+    if !GDFORMAT_EXIT_CODE! neq 0 (
         echo [WARNING] GDFormat found formatting inconsistencies
         SET /A WARNING_COUNT+=1
         SET FORMATTING_ISSUES=1
@@ -216,10 +186,10 @@ for %%f in (
     )
 )
 
-if %ASSET_MISSING_COUNT% equ 0 (
+if !ASSET_MISSING_COUNT! equ 0 (
     echo [OK] All critical assets found
 ) else (
-    echo [WARNING] %ASSET_MISSING_COUNT% critical assets missing
+    echo [WARNING] !ASSET_MISSING_COUNT! critical assets missing
 )
 
 echo.
@@ -259,28 +229,28 @@ findstr /C:"SCRIPT ERROR" %LOG_FILE% > script_errors.log
 for /f %%i in ('type script_errors.log ^| find /c /v ""') do SET SCRIPT_ERROR_COUNT=%%i
 
 echo [RESULTS] Error Analysis Summary:
-echo    - Parse Errors: %PARSE_ERROR_COUNT%
-echo    - Script Load Failures: %SCRIPT_LOAD_FAILURES%  
-echo    - Missing Class Definitions: %MISSING_CLASS_COUNT%
-echo    - Total Script Errors: %SCRIPT_ERROR_COUNT%
+echo    - Parse Errors: !PARSE_ERROR_COUNT!
+echo    - Script Load Failures: !SCRIPT_LOAD_FAILURES!  
+echo    - Missing Class Definitions: !MISSING_CLASS_COUNT!
+echo    - Total Script Errors: !SCRIPT_ERROR_COUNT!
 
 REM Check for critical system failures
 findstr /C:"Failed to instantiate an autoload" %LOG_FILE% > autoload_failures.log
 for /f %%i in ('type autoload_failures.log ^| find /c /v ""') do SET AUTOLOAD_FAILURES=%%i
 
-echo    - Autoload Instantiation Failures: %AUTOLOAD_FAILURES%
+echo    - Autoload Instantiation Failures: !AUTOLOAD_FAILURES!
 
-if %AUTOLOAD_FAILURES% GTR 0 (
+if !AUTOLOAD_FAILURES! GTR 0 (
     echo [CRITICAL] Autoload system failures detected - core game systems not loading!
     SET CRITICAL_ERROR_DETECTED=1
 )
 
-if %SCRIPT_LOAD_FAILURES% GTR 0 (
+if !SCRIPT_LOAD_FAILURES! GTR 0 (
     echo [CRITICAL] Script loading failures detected - dependencies not resolved!
     SET CRITICAL_ERROR_DETECTED=1
 )
 
-if %PARSE_ERROR_COUNT% GTR 0 (
+if !PARSE_ERROR_COUNT! GTR 0 (
     echo [CRITICAL] Parse errors detected - syntax issues in scripts!
     SET CRITICAL_ERROR_DETECTED=1
 )
@@ -292,7 +262,7 @@ echo.
 
 REM Check the actual exit code
 SET EXIT_CODE=%ERRORLEVEL%
-echo [RESULT] Process exited with code: %EXIT_CODE%
+echo [RESULT] Process exited with code: !EXIT_CODE!
 
 REM Analyze test results if they exist
 if exist %TEST_RESULTS_FILE% (
@@ -308,11 +278,11 @@ if exist %TEST_RESULTS_FILE% (
     for /f %%i in ('type test_failures.log ^| find /c /v ""') do SET TEST_FAILURE_COUNT=%%i
     
     echo [TEST SUMMARY] Test Results Analysis:
-    echo    - Test Suites: %TEST_SUITE_COUNT%
-    echo    - Test Cases: %TEST_CASE_COUNT% 
-    echo    - Test Failures: %TEST_FAILURE_COUNT%
+    echo    - Test Suites: !TEST_SUITE_COUNT!
+    echo    - Test Cases: !TEST_CASE_COUNT! 
+    echo    - Test Failures: !TEST_FAILURE_COUNT!
     
-    if %TEST_FAILURE_COUNT% GTR 0 (
+    if !TEST_FAILURE_COUNT! GTR 0 (
         echo [WARNING] Some tests failed - see detailed results
         SET /A WARNING_COUNT+=1
     )
@@ -327,7 +297,7 @@ echo =================================
 echo.
 
 REM Determine overall pipeline status
-if %CRITICAL_ERROR_DETECTED% EQU 1 (
+if !CRITICAL_ERROR_DETECTED! EQU 1 (
     echo [STATUS] ❌ PIPELINE FAILED - Critical errors detected
     echo [REASON] Core systems failed to load - game cannot run properly
     echo [ACTION] Fix critical compilation and loading errors before proceeding
@@ -335,14 +305,14 @@ if %CRITICAL_ERROR_DETECTED% EQU 1 (
     goto :error_summary
 )
 
-if %EXIT_CODE% NEQ 0 (
-    echo [STATUS] ❌ PIPELINE FAILED - Process exited with error code %EXIT_CODE%
+if !EXIT_CODE! NEQ 0 (
+    echo [STATUS] ❌ PIPELINE FAILED - Process exited with error code !EXIT_CODE!
     echo [ACTION] Investigate the cause of non-zero exit code
     SET PIPELINE_STATUS=FAILED
     goto :error_summary
 )
 
-if %TEST_FAILURE_COUNT% GTR 0 (
+if !TEST_FAILURE_COUNT! GTR 0 (
     echo [STATUS] ⚠️  PIPELINE PARTIAL SUCCESS - Tests executed but some failed
     echo [ACTION] Review failed tests and address issues
     SET PIPELINE_STATUS=PARTIAL
@@ -384,13 +354,13 @@ if exist autoload_failures.log (
     echo.
 )
 
-if %STATIC_ANALYSIS_ERRORS% EQU 1 (
+if !STATIC_ANALYSIS_ERRORS! EQU 1 (
     echo [STATIC ANALYSIS ERRORS:]
     type gdlint_errors.log | findstr /C:"error" | head -n 10
     echo.
 )
 
-if %FORMATTING_ISSUES% EQU 1 (
+if !FORMATTING_ISSUES! EQU 1 (
     echo [FORMATTING ISSUES:]
     type format_errors.log | findstr /C:"would reformat" | head -n 10
     echo.
@@ -404,25 +374,25 @@ echo ===========================================================================
 echo Timestamp: %DATE% %TIME%
 echo.
 echo Overall Status: %PIPELINE_STATUS%
-echo Critical Errors: %CRITICAL_ERROR_DETECTED%
-echo Parse Errors: %PARSE_ERROR_COUNT%
-echo Script Load Failures: %SCRIPT_LOAD_FAILURES%
-echo Missing Classes: %MISSING_CLASS_COUNT%
-echo Autoload Failures: %AUTOLOAD_FAILURES%
-echo Test Failures: %TEST_FAILURE_COUNT%
-echo Static Analysis Errors: %STATIC_ANALYSIS_ERRORS%
-echo Formatting Issues: %FORMATTING_ISSUES%
-echo Warnings: %WARNING_COUNT%
-echo Exit Code: %EXIT_CODE%
-echo Static Analysis Performed: %STATIC_ANALYSIS_PERFORMED%
+echo Critical Errors: !CRITICAL_ERROR_DETECTED!
+echo Parse Errors: !PARSE_ERROR_COUNT!
+echo Script Load Failures: !SCRIPT_LOAD_FAILURES!
+echo Missing Classes: !MISSING_CLASS_COUNT!
+echo Autoload Failures: !AUTOLOAD_FAILURES!
+echo Test Failures: !TEST_FAILURE_COUNT!
+echo Static Analysis Errors: !STATIC_ANALYSIS_ERRORS!
+echo Formatting Issues: !FORMATTING_ISSUES!
+echo Warnings: !WARNING_COUNT!
+echo Exit Code: !EXIT_CODE!
+echo Static Analysis Performed: !STATIC_ANALYSIS_PERFORMED!
 echo.
 
-if "%PIPELINE_STATUS%"=="FAILED" (
+if "!PIPELINE_STATUS!"=="FAILED" (
     echo 💥 PIPELINE RESULT: ❌ CRITICAL FAILURE
     echo    The pipeline detected critical errors that prevent proper execution.
     echo    These errors must be fixed before the system can run correctly.
     exit /b 1
-) else if "%PIPELINE_STATUS%"=="PARTIAL" (
+) else if "!PIPELINE_STATUS!"=="PARTIAL" (
     echo ⚠️  PIPELINE RESULT: ⚠️  PARTIAL SUCCESS  
     echo    Tests executed but some failed. Review results and address issues.
     exit /b 0

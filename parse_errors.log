@@ -1,206 +1,167 @@
-SCRIPT ERROR: Parse Error: Cannot call non-static function "apply_technology_effects()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_save_data()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_save_data()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_save_data()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Cannot call non-static function "apply_technology_effects()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Could not parse global class "RacePreset" from "res://gamedata/races/race_preset.gd".
-SCRIPT ERROR: Parse Error: Cannot call non-static function "calculate_colony_food()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Cannot call non-static function "calculate_colony_production()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Cannot call non-static function "calculate_colony_research()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_session_status()" on the class "CouncilManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_session_status()" on the class "CouncilManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-SCRIPT ERROR: Parse Error: Cannot call non-static function "cast_vote()" on the class "CouncilManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Could not parse global class "RacePreset" from "res://gamedata/races/race_preset.gd".
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_session_status()" on the class "CouncilManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Cannot call non-static function "cast_vote()" on the class "CouncilManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Not all code paths return a value.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Class "TechnologyEffectManager" hides an autoload singleton.
-SCRIPT ERROR: Parse Error: Class "CouncilManager" hides an autoload singleton.
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-SCRIPT ERROR: Parse Error: Cannot call non-static function "_hold_elections()" on the class "CouncilManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Cannot find member "council_president" in base "CouncilManager".
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-SCRIPT ERROR: Parse Error: Cannot call non-static function "start_session()" on the class "CouncilManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-SCRIPT ERROR: Parse Error: Cannot find member "council_president" in base "CouncilManager".
-SCRIPT ERROR: Parse Error: Cannot call non-static function "_hold_elections()" on the class "CouncilManager" directly. Make an instance instead.
+SCRIPT ERROR: Parse Error: Could not resolve external class member "race_preset".
+SCRIPT ERROR: Parse Error: Preload file "res://scripts/managers/ai_manager.gd" does not exist.
+SCRIPT ERROR: Parse Error: Cannot find member "is_loading_game" in base "res://scripts/managers/SaveLoadManager.gd".
+SCRIPT ERROR: Parse Error: Cannot find member "save_data_loaded" in base "res://scripts/managers/SaveLoadManager.gd".
+SCRIPT ERROR: Parse Error: Cannot find member "empires" in base "res://scripts/managers/EmpireManager.gd".
+SCRIPT ERROR: Parse Error: Cannot call non-static function "get_empire_by_id()" on the class "res://scripts/managers/EmpireManager.gd" directly. Make an instance instead.
+SCRIPT ERROR: Parse Error: Identifier "ship_arrived" not declared in the current scope.
+SCRIPT ERROR: Parse Error: Cannot call non-static function "process_turn_for_empire()" on the class "res://scripts/managers/ColonyManager.gd" directly. Make an instance instead.
+SCRIPT ERROR: Parse Error: Cannot call non-static function "get_empire_by_id()" on the class "res://scripts/managers/EmpireManager.gd" directly. Make an instance instead.
+SCRIPT ERROR: Parse Error: Identifier "research_points_changed" not declared in the current scope.
+SCRIPT ERROR: Parse Error: Static function "process_construction_for_empire()" not found in base "res://scripts/managers/ColonyManager.gd".
+SCRIPT ERROR: Parse Error: Could not preload resource script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Class "ColonyData" hides a global script class.
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
 SCRIPT ERROR: Parse Error: Function "assert_ge()" not found in base self.
+SCRIPT ERROR: Parse Error: Cannot find member "INDUSTRY" in base "BuildingData.BuildingType".
 SCRIPT ERROR: Parse Error: Function "assert_ge()" not found in base self.
+SCRIPT ERROR: Parse Error: Cannot find member "INFRASTRUCTURE" in base "BuildingData.BuildingType".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Preload file "res://scripts/managers/ai_manager.gd" does not exist.
+SCRIPT ERROR: Parse Error: Cannot find member "is_loading_game" in base "res://scripts/managers/SaveLoadManager.gd".
+SCRIPT ERROR: Parse Error: Cannot find member "save_data_loaded" in base "res://scripts/managers/SaveLoadManager.gd".
+SCRIPT ERROR: Parse Error: Cannot find member "empires" in base "res://scripts/managers/EmpireManager.gd".
+SCRIPT ERROR: Parse Error: Cannot call non-static function "get_empire_by_id()" on the class "res://scripts/managers/EmpireManager.gd" directly. Make an instance instead.
+SCRIPT ERROR: Parse Error: Identifier "ship_arrived" not declared in the current scope.
+SCRIPT ERROR: Parse Error: Cannot call non-static function "process_turn_for_empire()" on the class "res://scripts/managers/ColonyManager.gd" directly. Make an instance instead.
+SCRIPT ERROR: Parse Error: Cannot call non-static function "get_empire_by_id()" on the class "res://scripts/managers/EmpireManager.gd" directly. Make an instance instead.
+SCRIPT ERROR: Parse Error: Identifier "research_points_changed" not declared in the current scope.
+SCRIPT ERROR: Parse Error: Static function "process_construction_for_empire()" not found in base "res://scripts/managers/ColonyManager.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
 SCRIPT ERROR: Parse Error: Could not parse global class "RacePreset" from "res://gamedata/races/race_preset.gd".
-SCRIPT ERROR: Parse Error: Cannot call non-static function "calculate_colony_food()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Cannot call non-static function "calculate_colony_production()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Cannot call non-static function "calculate_colony_research()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-SCRIPT ERROR: Parse Error: Cannot find member "council_president" in base "CouncilManager".
-SCRIPT ERROR: Parse Error: Cannot call non-static function "_hold_elections()" on the class "CouncilManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Cannot find member "council_president" in base "CouncilManager".
-SCRIPT ERROR: Parse Error: Cannot find member "council_president" in base "CouncilManager".
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-SCRIPT ERROR: Parse Error: Cannot find member "current_session" in base "CouncilManager".
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_session_status()" on the class "CouncilManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-SCRIPT ERROR: Parse Error: Cannot call non-static function "cast_vote()" on the class "CouncilManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Cannot call non-static function "cast_vote()" on the class "CouncilManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Cannot call non-static function "cast_vote()" on the class "CouncilManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_session_status()" on the class "CouncilManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-SCRIPT ERROR: Parse Error: Cannot call non-static function "cast_vote()" on the class "CouncilManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Cannot call non-static function "cast_vote()" on the class "CouncilManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-SCRIPT ERROR: Parse Error: Cannot find member "council_president" in base "CouncilManager".
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-SCRIPT ERROR: Parse Error: Cannot find member "council_president" in base "CouncilManager".
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_session_status()" on the class "CouncilManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_session_status()" on the class "CouncilManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_session_status()" on the class "CouncilManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-SCRIPT ERROR: Parse Error: Cannot call non-static function "cast_vote()" on the class "CouncilManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_session_status()" on the class "CouncilManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_session_status()" on the class "CouncilManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-SCRIPT ERROR: Parse Error: Cannot call non-static function "cast_vote()" on the class "CouncilManager" directly. Make an instance instead.
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Preload file "res://scripts/managers/ai_manager.gd" does not exist.
+SCRIPT ERROR: Parse Error: Cannot find member "is_loading_game" in base "res://scripts/managers/SaveLoadManager.gd".
+SCRIPT ERROR: Parse Error: Cannot find member "save_data_loaded" in base "res://scripts/managers/SaveLoadManager.gd".
+SCRIPT ERROR: Parse Error: Cannot find member "empires" in base "res://scripts/managers/EmpireManager.gd".
+SCRIPT ERROR: Parse Error: Cannot call non-static function "get_empire_by_id()" on the class "res://scripts/managers/EmpireManager.gd" directly. Make an instance instead.
+SCRIPT ERROR: Parse Error: Identifier "ship_arrived" not declared in the current scope.
+SCRIPT ERROR: Parse Error: Cannot call non-static function "process_turn_for_empire()" on the class "res://scripts/managers/ColonyManager.gd" directly. Make an instance instead.
+SCRIPT ERROR: Parse Error: Cannot call non-static function "get_empire_by_id()" on the class "res://scripts/managers/EmpireManager.gd" directly. Make an instance instead.
+SCRIPT ERROR: Parse Error: Identifier "research_points_changed" not declared in the current scope.
+SCRIPT ERROR: Parse Error: Static function "process_construction_for_empire()" not found in base "res://scripts/managers/ColonyManager.gd".
 SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
 SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
 SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
 SCRIPT ERROR: Parse Error: Value of type "Array" cannot be assigned to a variable of type "Dictionary".
-SCRIPT ERROR: Parse Error: Cannot find member "applied_effects" in base "TechnologyEffectManager".
 SCRIPT ERROR: Parse Error: Expected statement, found "/" instead.
-SCRIPT ERROR: Parse Error: Class "TechnologyEffectManager" hides an autoload singleton.
-SCRIPT ERROR: Parse Error: Cannot call non-static function "apply_technology_effects()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Cannot call non-static function "apply_technology_effects()" on the class "TechnologyEffectManager" directly. Make an instance instead.
+SCRIPT ERROR: Parse Error: Preload file "res://scripts/managers/ai_manager.gd" does not exist.
+SCRIPT ERROR: Parse Error: Cannot find member "is_loading_game" in base "res://scripts/managers/SaveLoadManager.gd".
+SCRIPT ERROR: Parse Error: Cannot find member "save_data_loaded" in base "res://scripts/managers/SaveLoadManager.gd".
+SCRIPT ERROR: Parse Error: Cannot find member "empires" in base "res://scripts/managers/EmpireManager.gd".
+SCRIPT ERROR: Parse Error: Cannot call non-static function "get_empire_by_id()" on the class "res://scripts/managers/EmpireManager.gd" directly. Make an instance instead.
+SCRIPT ERROR: Parse Error: Identifier "ship_arrived" not declared in the current scope.
+SCRIPT ERROR: Parse Error: Cannot call non-static function "process_turn_for_empire()" on the class "res://scripts/managers/ColonyManager.gd" directly. Make an instance instead.
+SCRIPT ERROR: Parse Error: Cannot call non-static function "get_empire_by_id()" on the class "res://scripts/managers/EmpireManager.gd" directly. Make an instance instead.
+SCRIPT ERROR: Parse Error: Identifier "research_points_changed" not declared in the current scope.
+SCRIPT ERROR: Parse Error: Static function "process_construction_for_empire()" not found in base "res://scripts/managers/ColonyManager.gd".
+SCRIPT ERROR: Parse Error: Preload file "res://scripts/managers/ai_manager.gd" does not exist.
+SCRIPT ERROR: Parse Error: Cannot find member "is_loading_game" in base "res://scripts/managers/SaveLoadManager.gd".
+SCRIPT ERROR: Parse Error: Cannot find member "save_data_loaded" in base "res://scripts/managers/SaveLoadManager.gd".
+SCRIPT ERROR: Parse Error: Cannot find member "empires" in base "res://scripts/managers/EmpireManager.gd".
+SCRIPT ERROR: Parse Error: Cannot call non-static function "get_empire_by_id()" on the class "res://scripts/managers/EmpireManager.gd" directly. Make an instance instead.
+SCRIPT ERROR: Parse Error: Identifier "ship_arrived" not declared in the current scope.
+SCRIPT ERROR: Parse Error: Cannot call non-static function "process_turn_for_empire()" on the class "res://scripts/managers/ColonyManager.gd" directly. Make an instance instead.
+SCRIPT ERROR: Parse Error: Cannot call non-static function "get_empire_by_id()" on the class "res://scripts/managers/EmpireManager.gd" directly. Make an instance instead.
+SCRIPT ERROR: Parse Error: Identifier "research_points_changed" not declared in the current scope.
+SCRIPT ERROR: Parse Error: Static function "process_construction_for_empire()" not found in base "res://scripts/managers/ColonyManager.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
 SCRIPT ERROR: Parse Error: Could not parse global class "RacePreset" from "res://gamedata/races/race_preset.gd".
-SCRIPT ERROR: Parse Error: Cannot call non-static function "calculate_colony_food()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Cannot call non-static function "calculate_colony_production()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Cannot call non-static function "calculate_colony_research()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Cannot call non-static function "apply_technology_effects()" on the class "TechnologyEffectManager" directly. Make an instance instead.
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Preload file "res://scripts/managers/ai_manager.gd" does not exist.
+SCRIPT ERROR: Parse Error: Cannot find member "is_loading_game" in base "res://scripts/managers/SaveLoadManager.gd".
+SCRIPT ERROR: Parse Error: Cannot find member "save_data_loaded" in base "res://scripts/managers/SaveLoadManager.gd".
+SCRIPT ERROR: Parse Error: Cannot find member "empires" in base "res://scripts/managers/EmpireManager.gd".
+SCRIPT ERROR: Parse Error: Cannot call non-static function "get_empire_by_id()" on the class "res://scripts/managers/EmpireManager.gd" directly. Make an instance instead.
+SCRIPT ERROR: Parse Error: Identifier "ship_arrived" not declared in the current scope.
+SCRIPT ERROR: Parse Error: Cannot call non-static function "process_turn_for_empire()" on the class "res://scripts/managers/ColonyManager.gd" directly. Make an instance instead.
+SCRIPT ERROR: Parse Error: Cannot call non-static function "get_empire_by_id()" on the class "res://scripts/managers/EmpireManager.gd" directly. Make an instance instead.
+SCRIPT ERROR: Parse Error: Identifier "research_points_changed" not declared in the current scope.
+SCRIPT ERROR: Parse Error: Static function "process_construction_for_empire()" not found in base "res://scripts/managers/ColonyManager.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
 SCRIPT ERROR: Parse Error: Could not parse global class "RacePreset" from "res://gamedata/races/race_preset.gd".
-SCRIPT ERROR: Parse Error: Cannot call non-static function "calculate_colony_food()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Cannot call non-static function "calculate_colony_production()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Cannot call non-static function "calculate_colony_research()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve class "BuildableItem".
+SCRIPT ERROR: Parse Error: The member "pollution_generated" already exists in parent class BuildableItem.
+SCRIPT ERROR: Parse Error: The member "morale_modifier" already exists in parent class BuildableItem.
+SCRIPT ERROR: Parse Error: Identifier "output_food" not declared in the current scope.
+SCRIPT ERROR: Parse Error: Identifier "output_food" not declared in the current scope.
+SCRIPT ERROR: Parse Error: Identifier "output_production" not declared in the current scope.
+SCRIPT ERROR: Parse Error: Identifier "output_production" not declared in the current scope.
+SCRIPT ERROR: Parse Error: Identifier "output_research" not declared in the current scope.
+SCRIPT ERROR: Parse Error: Identifier "output_research" not declared in the current scope.
+SCRIPT ERROR: Parse Error: Identifier "output_food" not declared in the current scope.
+SCRIPT ERROR: Parse Error: Identifier "output_production" not declared in the current scope.
+SCRIPT ERROR: Parse Error: Identifier "output_research" not declared in the current scope.
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
 SCRIPT ERROR: Parse Error: Could not parse global class "RacePreset" from "res://gamedata/races/race_preset.gd".
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_session_status()" on the class "CouncilManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Cannot call non-static function "cast_vote()" on the class "CouncilManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Not all code paths return a value.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_save_data()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_session_status()" on the class "CouncilManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_session_status()" on the class "CouncilManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-SCRIPT ERROR: Parse Error: Cannot call non-static function "cast_vote()" on the class "CouncilManager" directly. Make an instance instead.
+SCRIPT ERROR: Parse Error: Preload file "res://scripts/managers/ai_manager.gd" does not exist.
+SCRIPT ERROR: Parse Error: Cannot find member "is_loading_game" in base "res://scripts/managers/SaveLoadManager.gd".
+SCRIPT ERROR: Parse Error: Cannot find member "save_data_loaded" in base "res://scripts/managers/SaveLoadManager.gd".
+SCRIPT ERROR: Parse Error: Cannot find member "empires" in base "res://scripts/managers/EmpireManager.gd".
+SCRIPT ERROR: Parse Error: Cannot call non-static function "get_empire_by_id()" on the class "res://scripts/managers/EmpireManager.gd" directly. Make an instance instead.
+SCRIPT ERROR: Parse Error: Identifier "ship_arrived" not declared in the current scope.
+SCRIPT ERROR: Parse Error: Cannot call non-static function "process_turn_for_empire()" on the class "res://scripts/managers/ColonyManager.gd" directly. Make an instance instead.
+SCRIPT ERROR: Parse Error: Cannot call non-static function "get_empire_by_id()" on the class "res://scripts/managers/EmpireManager.gd" directly. Make an instance instead.
+SCRIPT ERROR: Parse Error: Identifier "research_points_changed" not declared in the current scope.
+SCRIPT ERROR: Parse Error: Static function "process_construction_for_empire()" not found in base "res://scripts/managers/ColonyManager.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
 SCRIPT ERROR: Parse Error: Could not parse global class "RacePreset" from "res://gamedata/races/race_preset.gd".
-SCRIPT ERROR: Parse Error: Cannot call non-static function "calculate_colony_food()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Cannot call non-static function "calculate_colony_production()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Cannot call non-static function "calculate_colony_research()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Cannot call non-static function "apply_technology_effects()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Could not parse global class "RacePreset" from "res://gamedata/races/race_preset.gd".
-SCRIPT ERROR: Parse Error: Cannot call non-static function "calculate_colony_food()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Cannot call non-static function "calculate_colony_production()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Cannot call non-static function "calculate_colony_research()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_save_data()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not parse global class "RacePreset" from "res://gamedata/races/race_preset.gd".
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_session_status()" on the class "CouncilManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Cannot call non-static function "cast_vote()" on the class "CouncilManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Not all code paths return a value.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not parse global class "RacePreset" from "res://gamedata/races/race_preset.gd".
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_session_status()" on the class "CouncilManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Cannot call non-static function "cast_vote()" on the class "CouncilManager" directly. Make an instance instead.
-SCRIPT ERROR: Parse Error: Not all code paths return a value.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".

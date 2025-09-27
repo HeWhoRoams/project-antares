@@ -65,6 +65,13 @@ Loading resource: res://addons/gut/stub_params.gd
 Loading resource: res://addons/gut/summary.gd
 Loading resource: res://addons/gut/test.gd
 Loading resource: res://addons/gut/test_collector.gd
+Loading resource: res://managers/dialog_data_generator.gd
+SCRIPT ERROR: Parse Error: Could not resolve external class member "race_preset".
+   at: GDScript::reload (res://managers/dialog_data_generator.gd:43)
+ERROR: Failed to load script "res://managers/dialog_data_generator.gd" with error "Parse error".
+   at: load (modules/gdscript/gdscript.cpp:3022)
+ERROR: Failed to instantiate an autoload, script 'res://managers/dialog_data_generator.gd' does not inherit from 'Node'.
+   at: start (main/main.cpp:4075)
 Loading resource: res://scripts/managers/DataManager.gd
 Loading resource: res://assets/icons/population.png
 Loading resource: res://.godot/imported/population.png-5a549e514419db9a39720c6709f246f8.ctex
@@ -72,184 +79,123 @@ Loading resource: res://assets/audio/sfx/ui/ui_error.wav
 Loading resource: res://.godot/imported/ui_error.wav-f91a3733b679d09fc8dd668ab63ded07.sample
 Loading resource: res://ui/debug/debug_overlay.tscn
 Loading resource: res://ui/debug/debug_overlay.gd
-SCRIPT ERROR: Parse Error: Cannot call non-static function "apply_technology_effects()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/turn_manager.gd:141)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_save_data()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:45)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:268)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:268)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:335)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:337)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:339)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:341)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:343)
-SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
-   at: GDScript::reload (res://scripts/managers/EmpireManager.gd:0)
+SCRIPT ERROR: Parse Error: Preload file "res://scripts/managers/ai_manager.gd" does not exist.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:21)
+SCRIPT ERROR: Parse Error: Cannot find member "is_loading_game" in base "res://scripts/managers/SaveLoadManager.gd".
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:33)
+SCRIPT ERROR: Parse Error: Cannot find member "save_data_loaded" in base "res://scripts/managers/SaveLoadManager.gd".
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:34)
+SCRIPT ERROR: Parse Error: Cannot find member "empires" in base "res://scripts/managers/EmpireManager.gd".
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:40)
+SCRIPT ERROR: Parse Error: Cannot call non-static function "get_empire_by_id()" on the class "res://scripts/managers/EmpireManager.gd" directly. Make an instance instead.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:124)
+SCRIPT ERROR: Parse Error: Identifier "ship_arrived" not declared in the current scope.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:136)
+SCRIPT ERROR: Parse Error: Cannot call non-static function "process_turn_for_empire()" on the class "res://scripts/managers/ColonyManager.gd" directly. Make an instance instead.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:142)
+SCRIPT ERROR: Parse Error: Cannot call non-static function "get_empire_by_id()" on the class "res://scripts/managers/EmpireManager.gd" directly. Make an instance instead.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:148)
+SCRIPT ERROR: Parse Error: Identifier "research_points_changed" not declared in the current scope.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:154)
+SCRIPT ERROR: Parse Error: Static function "process_construction_for_empire()" not found in base "res://scripts/managers/ColonyManager.gd".
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:160)
+SCRIPT ERROR: Parse Error: Could not preload resource script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/EmpireManager.gd:7)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/EmpireManager.gd:7)
 SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
    at: GDScript::reload (res://ui/debug/debug_overlay.gd:0)
 ERROR: Failed to load script "res://ui/debug/debug_overlay.gd" with error "Compilation failed".
    at: load (modules/gdscript/gdscript.cpp:3022)
 Loading resource: res://scripts/managers/galaxymanager.gd
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_save_data()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:45)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:268)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:268)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:335)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:337)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:339)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:341)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:343)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:9)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:275)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:275)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:342)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:344)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:346)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:348)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:350)
 SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
    at: GDScript::reload (res://scripts/managers/galaxymanager.gd:0)
 ERROR: Failed to load script "res://scripts/managers/galaxymanager.gd" with error "Compilation failed".
    at: load (modules/gdscript/gdscript.cpp:3022)
 ERROR: Failed to instantiate an autoload, script 'res://scripts/managers/turn_manager.gd' does not inherit from 'Node'.
    at: start (main/main.cpp:4075)
-Loading resource: res://scripts/managers/player_manager.gd
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_save_data()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:45)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:268)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:268)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:335)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:337)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:339)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:341)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:343)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "apply_technology_effects()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/turn_manager.gd:141)
-SCRIPT ERROR: Parse Error: Could not parse global class "RacePreset" from "res://gamedata/races/race_preset.gd".
-   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:233)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "calculate_colony_food()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:63)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "calculate_colony_production()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:66)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "calculate_colony_research()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:69)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:238)
-SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
-   at: GDScript::reload (res://scripts/managers/player_manager.gd:0)
-ERROR: Failed to load script "res://scripts/managers/player_manager.gd" with error "Compilation failed".
-   at: load (modules/gdscript/gdscript.cpp:3022)
+ERROR: Failed to instantiate an autoload, script 'res://scripts/managers/player_manager.gd' does not inherit from 'Node'.
+   at: start (main/main.cpp:4075)
 Loading resource: res://scripts/managers/SceneManager.gd
-Loading resource: res://scripts/managers/GameManager.gd
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_session_status()" on the class "CouncilManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/GameManager.gd:142)
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-   at: GDScript::reload (res://scripts/managers/GameManager.gd:143)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_session_status()" on the class "CouncilManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/GameManager.gd:147)
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-   at: GDScript::reload (res://scripts/managers/GameManager.gd:151)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "cast_vote()" on the class "CouncilManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/GameManager.gd:156)
-ERROR: Failed to load script "res://scripts/managers/GameManager.gd" with error "Parse error".
-   at: load (modules/gdscript/gdscript.cpp:3022)
 ERROR: Failed to instantiate an autoload, script 'res://scripts/managers/GameManager.gd' does not inherit from 'Node'.
    at: start (main/main.cpp:4075)
-Loading resource: res://scripts/managers/AIManager.gd
-SCRIPT ERROR: Parse Error: Could not parse global class "RacePreset" from "res://gamedata/races/race_preset.gd".
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:325)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_session_status()" on the class "CouncilManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:173)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "cast_vote()" on the class "CouncilManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:176)
-SCRIPT ERROR: Parse Error: Not all code paths return a value.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:245)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:329)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:330)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:334)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:335)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:339)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:340)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:344)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:345)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:349)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:350)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:354)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:355)
-ERROR: Failed to load script "res://scripts/managers/AIManager.gd" with error "Parse error".
-   at: load (modules/gdscript/gdscript.cpp:3022)
-ERROR: Failed to instantiate an autoload, script 'res://scripts/managers/AIManager.gd' does not inherit from 'Node'.
-   at: start (main/main.cpp:4075)
+Loading resource: res://scripts/managers/ai_manager.gd
+ERROR: Attempt to open script 'res://scripts/managers/ai_manager.gd' resulted in error 'File not found'.
+   at: load_source_code (modules/gdscript/gdscript.cpp:1115)
+Failed loading resource: res://scripts/managers/ai_manager.gd
+ERROR: Failed loading resource: res://scripts/managers/ai_manager.gd. Make sure resources have been imported by opening the project in the editor at least once.
+   at: _load (core/io/resource_loader.cpp:343)
+ERROR: Failed to instantiate an autoload, can't load from path: res://scripts/managers/ai_manager.gd.
+   at: start (main/main.cpp:4069)
 ERROR: Failed to instantiate an autoload, script 'res://scripts/managers/SaveLoadManager.gd' does not inherit from 'Node'.
    at: start (main/main.cpp:4075)
+ERROR: Failed to instantiate an autoload, script 'res://scripts/managers/EmpireManager.gd' does not inherit from 'Node'.
+   at: start (main/main.cpp:4075)
 Loading resource: res://scripts/managers/AudioManager.gd
-Loading resource: res://assets/audio/sfx/ui/ui_hover.wav
-Loading resource: res://.godot/imported/ui_hover.wav-b390045db0c0c2b24539ab676cf1d873.sample
-Loading resource: res://assets/audio/sfx/ui/ui_confirm.wav
-Loading resource: res://.godot/imported/ui_confirm.wav-fe4b119c6b5c35e214578bf8a554940c.sample
-Loading resource: res://assets/audio/sfx/ui/ui_back.wav
-Loading resource: res://.godot/imported/ui_back.wav-b19c2ae711b519186f6c934d544cc5f2.sample
 ERROR: Failed to instantiate an autoload, script 'res://scripts/managers/ColonyManager.gd' does not inherit from 'Node'.
    at: start (main/main.cpp:4075)
 Loading resource: res://scripts/managers/TechnologyEffectManager.gd
-SCRIPT ERROR: Parse Error: Class "TechnologyEffectManager" hides an autoload singleton.
-   at: GDScript::reload (res://scripts/managers/TechnologyEffectManager.gd:1)
-ERROR: Failed to load script "res://scripts/managers/TechnologyEffectManager.gd" with error "Parse error".
+SCRIPT ERROR: Parse Error: Class "ColonyData" hides a global script class.
+   at: GDScript::reload (res://gamedata/colonies/colony_data.gd:2)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:9)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:275)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:275)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:342)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:344)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:346)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:348)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:350)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://scripts/managers/TechnologyEffectManager.gd:0)
+ERROR: Failed to load script "res://scripts/managers/TechnologyEffectManager.gd" with error "Compilation failed".
    at: load (modules/gdscript/gdscript.cpp:3022)
-ERROR: Failed to instantiate an autoload, script 'res://scripts/managers/TechnologyEffectManager.gd' does not inherit from 'Node'.
-   at: start (main/main.cpp:4075)
 Loading resource: res://scripts/managers/CouncilManager.gd
-SCRIPT ERROR: Parse Error: Class "CouncilManager" hides an autoload singleton.
-   at: GDScript::reload (res://scripts/managers/CouncilManager.gd:2)
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-   at: GDScript::reload (res://scripts/managers/CouncilManager.gd:178)
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-   at: GDScript::reload (res://scripts/managers/CouncilManager.gd:182)
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-   at: GDScript::reload (res://scripts/managers/CouncilManager.gd:185)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "_hold_elections()" on the class "CouncilManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/CouncilManager.gd:186)
-SCRIPT ERROR: Parse Error: Cannot find member "council_president" in base "CouncilManager".
-   at: GDScript::reload (res://scripts/managers/CouncilManager.gd:188)
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-   at: GDScript::reload (res://scripts/managers/CouncilManager.gd:190)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "start_session()" on the class "CouncilManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/CouncilManager.gd:207)
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-   at: GDScript::reload (res://scripts/managers/CouncilManager.gd:214)
-SCRIPT ERROR: Parse Error: Cannot find member "council_president" in base "CouncilManager".
-   at: GDScript::reload (res://scripts/managers/CouncilManager.gd:215)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "_hold_elections()" on the class "CouncilManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/CouncilManager.gd:216)
-ERROR: Failed to load script "res://scripts/managers/CouncilManager.gd" with error "Parse error".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:9)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:275)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:275)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:342)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:344)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:346)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:348)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:350)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/EmpireManager.gd:7)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://scripts/managers/CouncilManager.gd:0)
+ERROR: Failed to load script "res://scripts/managers/CouncilManager.gd" with error "Compilation failed".
    at: load (modules/gdscript/gdscript.cpp:3022)
-ERROR: Failed to instantiate an autoload, script 'res://scripts/managers/CouncilManager.gd' does not inherit from 'Node'.
-   at: start (main/main.cpp:4075)
 Loaded system CA certificates
 DataManager: Loading all game data...
 Loading resource: res://gamedata/technologies/tech_victory.tres
@@ -259,10 +205,17 @@ DataManager: All game data loaded.
 Loading resource: res://gamedata/systems/system_names.tres
 SCRIPT ERROR: Invalid access to property or key 'is_loading_game' on a base object of type 'Nil'.
    at: _ready (res://scripts/managers/galaxymanager.gd:46)
-SCRIPT ERROR: Invalid access to property or key 'is_loading_game' on a base object of type 'Nil'.
-   at: _ready (res://scripts/managers/player_manager.gd:14)
 DebugManager: User action logging is ENABLED.
-EmpireManager: SaveLoadManager not available or not loading game
+Loading resource: res://assets/audio/sfx/ui/ui_hover.wav
+Loading resource: res://.godot/imported/ui_hover.wav-b390045db0c0c2b24539ab676cf1d873.sample
+Loading resource: res://assets/audio/sfx/ui/ui_confirm.wav
+Loading resource: res://.godot/imported/ui_confirm.wav-fe4b119c6b5c35e214578bf8a554940c.sample
+Loading resource: res://assets/audio/sfx/ui/ui_back.wav
+Loading resource: res://.godot/imported/ui_back.wav-b19c2ae711b519186f6c934d544cc5f2.sample
+SCRIPT ERROR: Invalid access to property or key 'is_loading_game' on a base object of type 'Nil'.
+   at: _ready (res://scripts/managers/TechnologyEffectManager.gd:12)
+SCRIPT ERROR: Invalid access to property or key 'is_loading_game' on a base object of type 'Nil'.
+   at: _ready (res://scripts/managers/CouncilManager.gd:35)
 Loading resource: res://addons/gut/cli/gut_cli.gd
 Loading resource: res://addons/gut/cli/optparse.gd
 Loading resource: res://addons/gut/gui/GutRunner.tscn
@@ -274,6 +227,8 @@ GUT version:  9.4.0
 Loading resource: res://tests/test_ai_manager.gd
 SCRIPT ERROR: Parse Error: Function "assert_ge()" not found in base self.
    at: GDScript::reload (res://tests/test_ai_manager.gd:48)
+SCRIPT ERROR: Parse Error: Cannot find member "INDUSTRY" in base "BuildingData.BuildingType".
+   at: GDScript::reload (res://tests/test_ai_manager.gd:68)
 SCRIPT ERROR: Parse Error: Function "assert_ge()" not found in base self.
    at: GDScript::reload (res://tests/test_ai_manager.gd:162)
 ERROR: Failed to load script "res://tests/test_ai_manager.gd" with error "Parse error".
@@ -281,76 +236,20 @@ ERROR: Failed to load script "res://tests/test_ai_manager.gd" with error "Parse 
 [33m[WARNING]:  [0mIgnoring script res://tests/test_ai_manager.gd because it does not extend GutTest
 Loading resource: res://tests/test_audio_manager.gd
 Loading resource: res://tests/test_colony_management.gd
-SCRIPT ERROR: Parse Error: Could not parse global class "RacePreset" from "res://gamedata/races/race_preset.gd".
-   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:233)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "calculate_colony_food()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:63)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "calculate_colony_production()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:66)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "calculate_colony_research()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:69)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:238)
-SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
-   at: GDScript::reload (res://tests/test_colony_management.gd:0)
-ERROR: Failed to load script "res://tests/test_colony_management.gd" with error "Compilation failed".
+SCRIPT ERROR: Parse Error: Cannot find member "INFRASTRUCTURE" in base "BuildingData.BuildingType".
+   at: GDScript::reload (res://tests/test_colony_management.gd:33)
+ERROR: Failed to load script "res://tests/test_colony_management.gd" with error "Parse error".
    at: load (modules/gdscript/gdscript.cpp:3022)
+[33m[WARNING]:  [0mIgnoring script res://tests/test_colony_management.gd because it does not extend GutTest
 Loading resource: res://tests/test_colony_manager.gd
 Loading resource: res://tests/test_combat.gd
 Loading resource: res://tests/test_council_manager.gd
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-   at: GDScript::reload (res://tests/test_council_manager.gd:37)
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-   at: GDScript::reload (res://tests/test_council_manager.gd:38)
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-   at: GDScript::reload (res://tests/test_council_manager.gd:42)
-SCRIPT ERROR: Parse Error: Cannot find member "council_president" in base "CouncilManager".
-   at: GDScript::reload (res://tests/test_council_manager.gd:43)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "_hold_elections()" on the class "CouncilManager" directly. Make an instance instead.
-   at: GDScript::reload (res://tests/test_council_manager.gd:45)
-SCRIPT ERROR: Parse Error: Cannot find member "council_president" in base "CouncilManager".
-   at: GDScript::reload (res://tests/test_council_manager.gd:46)
-SCRIPT ERROR: Parse Error: Cannot find member "council_president" in base "CouncilManager".
-   at: GDScript::reload (res://tests/test_council_manager.gd:47)
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-   at: GDScript::reload (res://tests/test_council_manager.gd:47)
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-   at: GDScript::reload (res://tests/test_council_manager.gd:50)
-SCRIPT ERROR: Parse Error: Cannot find member "current_session" in base "CouncilManager".
-   at: GDScript::reload (res://tests/test_council_manager.gd:51)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_session_status()" on the class "CouncilManager" directly. Make an instance instead.
-   at: GDScript::reload (res://tests/test_council_manager.gd:55)
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-   at: GDScript::reload (res://tests/test_council_manager.gd:60)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "cast_vote()" on the class "CouncilManager" directly. Make an instance instead.
-   at: GDScript::reload (res://tests/test_council_manager.gd:64)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "cast_vote()" on the class "CouncilManager" directly. Make an instance instead.
-   at: GDScript::reload (res://tests/test_council_manager.gd:65)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "cast_vote()" on the class "CouncilManager" directly. Make an instance instead.
-   at: GDScript::reload (res://tests/test_council_manager.gd:66)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_session_status()" on the class "CouncilManager" directly. Make an instance instead.
-   at: GDScript::reload (res://tests/test_council_manager.gd:69)
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-   at: GDScript::reload (res://tests/test_council_manager.gd:73)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "cast_vote()" on the class "CouncilManager" directly. Make an instance instead.
-   at: GDScript::reload (res://tests/test_council_manager.gd:77)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "cast_vote()" on the class "CouncilManager" directly. Make an instance instead.
-   at: GDScript::reload (res://tests/test_council_manager.gd:78)
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-   at: GDScript::reload (res://tests/test_council_manager.gd:81)
-SCRIPT ERROR: Parse Error: Cannot find member "council_president" in base "CouncilManager".
-   at: GDScript::reload (res://tests/test_council_manager.gd:82)
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-   at: GDScript::reload (res://tests/test_council_manager.gd:85)
-SCRIPT ERROR: Parse Error: Cannot find member "council_president" in base "CouncilManager".
-   at: GDScript::reload (res://tests/test_council_manager.gd:86)
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-   at: GDScript::reload (res://tests/test_council_manager.gd:89)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_session_status()" on the class "CouncilManager" directly. Make an instance instead.
-   at: GDScript::reload (res://tests/test_council_manager.gd:92)
-ERROR: Failed to load script "res://tests/test_council_manager.gd" with error "Parse error".
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/EmpireManager.gd:7)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://tests/test_council_manager.gd:0)
+ERROR: Failed to load script "res://tests/test_council_manager.gd" with error "Compilation failed".
    at: load (modules/gdscript/gdscript.cpp:3022)
-[33m[WARNING]:  [0mIgnoring script res://tests/test_council_manager.gd because it does not extend GutTest
 Loading resource: res://tests/test_data_manager.gd
 Loading resource: res://tests/test_debug_manager.gd
 Loading resource: res://tests/test_empire_manager.gd
@@ -358,28 +257,92 @@ Loading resource: res://tests/test_galaxy.gd
 Loading resource: res://tests/test_galaxy_manager.gd
 Loading resource: res://tests/test_game_manager.gd
 Loading resource: res://tests/test_game_setup.gd
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_session_status()" on the class "CouncilManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/GameManager.gd:142)
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-   at: GDScript::reload (res://scripts/managers/GameManager.gd:143)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_session_status()" on the class "CouncilManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/GameManager.gd:147)
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-   at: GDScript::reload (res://scripts/managers/GameManager.gd:151)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "cast_vote()" on the class "CouncilManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/GameManager.gd:156)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:9)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:275)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:275)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:342)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:344)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:346)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:348)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:350)
+SCRIPT ERROR: Parse Error: Preload file "res://scripts/managers/ai_manager.gd" does not exist.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:21)
+SCRIPT ERROR: Parse Error: Cannot find member "is_loading_game" in base "res://scripts/managers/SaveLoadManager.gd".
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:33)
+SCRIPT ERROR: Parse Error: Cannot find member "save_data_loaded" in base "res://scripts/managers/SaveLoadManager.gd".
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:34)
+SCRIPT ERROR: Parse Error: Cannot find member "empires" in base "res://scripts/managers/EmpireManager.gd".
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:40)
+SCRIPT ERROR: Parse Error: Cannot call non-static function "get_empire_by_id()" on the class "res://scripts/managers/EmpireManager.gd" directly. Make an instance instead.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:124)
+SCRIPT ERROR: Parse Error: Identifier "ship_arrived" not declared in the current scope.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:136)
+SCRIPT ERROR: Parse Error: Cannot call non-static function "process_turn_for_empire()" on the class "res://scripts/managers/ColonyManager.gd" directly. Make an instance instead.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:142)
+SCRIPT ERROR: Parse Error: Cannot call non-static function "get_empire_by_id()" on the class "res://scripts/managers/EmpireManager.gd" directly. Make an instance instead.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:148)
+SCRIPT ERROR: Parse Error: Identifier "research_points_changed" not declared in the current scope.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:154)
+SCRIPT ERROR: Parse Error: Static function "process_construction_for_empire()" not found in base "res://scripts/managers/ColonyManager.gd".
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:160)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/EmpireManager.gd:7)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:9)
+SCRIPT ERROR: Parse Error: Could not parse global class "RacePreset" from "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:241)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://scripts/managers/player_manager.gd:0)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:9)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:275)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:275)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:342)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:344)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:346)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:348)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:350)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/EmpireManager.gd:7)
+SCRIPT ERROR: Parse Error: Preload file "res://scripts/managers/ai_manager.gd" does not exist.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:21)
+SCRIPT ERROR: Parse Error: Cannot find member "is_loading_game" in base "res://scripts/managers/SaveLoadManager.gd".
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:33)
+SCRIPT ERROR: Parse Error: Cannot find member "save_data_loaded" in base "res://scripts/managers/SaveLoadManager.gd".
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:34)
+SCRIPT ERROR: Parse Error: Cannot find member "empires" in base "res://scripts/managers/EmpireManager.gd".
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:40)
+SCRIPT ERROR: Parse Error: Cannot call non-static function "get_empire_by_id()" on the class "res://scripts/managers/EmpireManager.gd" directly. Make an instance instead.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:124)
+SCRIPT ERROR: Parse Error: Identifier "ship_arrived" not declared in the current scope.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:136)
+SCRIPT ERROR: Parse Error: Cannot call non-static function "process_turn_for_empire()" on the class "res://scripts/managers/ColonyManager.gd" directly. Make an instance instead.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:142)
+SCRIPT ERROR: Parse Error: Cannot call non-static function "get_empire_by_id()" on the class "res://scripts/managers/EmpireManager.gd" directly. Make an instance instead.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:148)
+SCRIPT ERROR: Parse Error: Identifier "research_points_changed" not declared in the current scope.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:154)
+SCRIPT ERROR: Parse Error: Static function "process_construction_for_empire()" not found in base "res://scripts/managers/ColonyManager.gd".
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:160)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://scripts/managers/GameManager.gd:0)
 SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
    at: GDScript::reload (res://gamedata/game_setup_data.gd:0)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_session_status()" on the class "CouncilManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/GameManager.gd:142)
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-   at: GDScript::reload (res://scripts/managers/GameManager.gd:143)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_session_status()" on the class "CouncilManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/GameManager.gd:147)
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-   at: GDScript::reload (res://scripts/managers/GameManager.gd:151)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "cast_vote()" on the class "CouncilManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/GameManager.gd:156)
 SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
    at: GDScript::reload (res://tests/test_game_setup.gd:0)
 ERROR: Failed to load script "res://tests/test_game_setup.gd" with error "Compilation failed".
@@ -394,8 +357,6 @@ SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a pa
    at: GDScript::reload (res://tests/test_save_load_versioning.gd:202)
 SCRIPT ERROR: Parse Error: Value of type "Array" cannot be assigned to a variable of type "Dictionary".
    at: GDScript::reload (res://tests/test_save_load_versioning.gd:250)
-SCRIPT ERROR: Parse Error: Cannot find member "applied_effects" in base "TechnologyEffectManager".
-   at: GDScript::reload (res://tests/test_save_load_versioning.gd:263)
 ERROR: Failed to load script "res://tests/test_save_load_versioning.gd" with error "Parse error".
    at: load (modules/gdscript/gdscript.cpp:3022)
 [33m[WARNING]:  [0mIgnoring script res://tests/test_save_load_versioning.gd because it does not extend GutTest
@@ -408,32 +369,58 @@ ERROR: Failed to load script "res://tests/test_ship_fleet_integration.gd" with e
 [33m[WARNING]:  [0mIgnoring script res://tests/test_ship_fleet_integration.gd because it does not extend GutTest
 Loading resource: res://tests/test_static_analysis.gd
 Loading resource: res://tests/test_technology_effect_manager.gd
-SCRIPT ERROR: Parse Error: Class "TechnologyEffectManager" hides an autoload singleton.
-   at: GDScript::reload (res://scripts/managers/TechnologyEffectManager.gd:1)
-SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
-   at: GDScript::reload (res://tests/test_technology_effect_manager.gd:0)
-ERROR: Failed to load script "res://tests/test_technology_effect_manager.gd" with error "Compilation failed".
-   at: load (modules/gdscript/gdscript.cpp:3022)
 Loading resource: res://tests/test_turn_manager.gd
-SCRIPT ERROR: Parse Error: Cannot call non-static function "apply_technology_effects()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/turn_manager.gd:141)
+SCRIPT ERROR: Parse Error: Preload file "res://scripts/managers/ai_manager.gd" does not exist.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:21)
+SCRIPT ERROR: Parse Error: Cannot find member "is_loading_game" in base "res://scripts/managers/SaveLoadManager.gd".
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:33)
+SCRIPT ERROR: Parse Error: Cannot find member "save_data_loaded" in base "res://scripts/managers/SaveLoadManager.gd".
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:34)
+SCRIPT ERROR: Parse Error: Cannot find member "empires" in base "res://scripts/managers/EmpireManager.gd".
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:40)
+SCRIPT ERROR: Parse Error: Cannot call non-static function "get_empire_by_id()" on the class "res://scripts/managers/EmpireManager.gd" directly. Make an instance instead.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:124)
+SCRIPT ERROR: Parse Error: Identifier "ship_arrived" not declared in the current scope.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:136)
+SCRIPT ERROR: Parse Error: Cannot call non-static function "process_turn_for_empire()" on the class "res://scripts/managers/ColonyManager.gd" directly. Make an instance instead.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:142)
+SCRIPT ERROR: Parse Error: Cannot call non-static function "get_empire_by_id()" on the class "res://scripts/managers/EmpireManager.gd" directly. Make an instance instead.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:148)
+SCRIPT ERROR: Parse Error: Identifier "research_points_changed" not declared in the current scope.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:154)
+SCRIPT ERROR: Parse Error: Static function "process_construction_for_empire()" not found in base "res://scripts/managers/ColonyManager.gd".
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:160)
 SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
    at: GDScript::reload (res://tests/test_turn_manager.gd:0)
 ERROR: Failed to load script "res://tests/test_turn_manager.gd" with error "Compilation failed".
    at: load (modules/gdscript/gdscript.cpp:3022)
 Loading resource: res://tests/test_turns_integration_cycle.gd
-SCRIPT ERROR: Parse Error: Cannot call non-static function "apply_technology_effects()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/turn_manager.gd:141)
+SCRIPT ERROR: Parse Error: Preload file "res://scripts/managers/ai_manager.gd" does not exist.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:21)
+SCRIPT ERROR: Parse Error: Cannot find member "is_loading_game" in base "res://scripts/managers/SaveLoadManager.gd".
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:33)
+SCRIPT ERROR: Parse Error: Cannot find member "save_data_loaded" in base "res://scripts/managers/SaveLoadManager.gd".
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:34)
+SCRIPT ERROR: Parse Error: Cannot find member "empires" in base "res://scripts/managers/EmpireManager.gd".
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:40)
+SCRIPT ERROR: Parse Error: Cannot call non-static function "get_empire_by_id()" on the class "res://scripts/managers/EmpireManager.gd" directly. Make an instance instead.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:124)
+SCRIPT ERROR: Parse Error: Identifier "ship_arrived" not declared in the current scope.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:136)
+SCRIPT ERROR: Parse Error: Cannot call non-static function "process_turn_for_empire()" on the class "res://scripts/managers/ColonyManager.gd" directly. Make an instance instead.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:142)
+SCRIPT ERROR: Parse Error: Cannot call non-static function "get_empire_by_id()" on the class "res://scripts/managers/EmpireManager.gd" directly. Make an instance instead.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:148)
+SCRIPT ERROR: Parse Error: Identifier "research_points_changed" not declared in the current scope.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:154)
+SCRIPT ERROR: Parse Error: Static function "process_construction_for_empire()" not found in base "res://scripts/managers/ColonyManager.gd".
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:160)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:9)
 SCRIPT ERROR: Parse Error: Could not parse global class "RacePreset" from "res://gamedata/races/race_preset.gd".
-   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:233)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "calculate_colony_food()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:63)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "calculate_colony_production()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:66)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "calculate_colony_research()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:69)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:238)
+   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:241)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/EmpireManager.gd:7)
 SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
    at: GDScript::reload (res://tests/test_turns_integration_cycle.gd:0)
 ERROR: Failed to load script "res://tests/test_turns_integration_cycle.gd" with error "Compilation failed".
@@ -442,33 +429,34 @@ Loading resource: res://tests/test_ui_layouts.gd
 [4m
 
 res://tests/test_audio_manager.gd
-[0m* test_audio_manager_instantiates
+[0mLoading resource: res://scripts/managers/audio_manager.gd
+ERROR: Attempt to open script 'res://scripts/managers/audio_manager.gd' resulted in error 'File not found'.
+   at: load_source_code (modules/gdscript/gdscript.cpp:1115)
+Failed loading resource: res://scripts/managers/audio_manager.gd
+ERROR: Failed loading resource: res://scripts/managers/audio_manager.gd. Make sure resources have been imported by opening the project in the editor at least once.
+   at: _load (core/io/resource_loader.cpp:343)
+SCRIPT ERROR: Attempt to call function 'new' in base 'null instance' on a null instance.
+   at: before_all (res://tests/test_audio_manager.gd:7)
+* test_audio_manager_instantiates
+[31m    [Failed]:  [0mAudio Manager should be a valid instance.
+      at line -1
 * test_set_master_volume
+SCRIPT ERROR: Invalid call. Nonexistent function 'set_master_volume' in base 'Nil'.
+   at: test_set_master_volume (res://tests/test_audio_manager.gd:20)
+[33m    [Risky]:  [0mtest_set_master_volume did not assert
 * test_play_sfx
+SCRIPT ERROR: Invalid call. Nonexistent function 'play_sfx' in base 'Nil'.
+   at: test_play_sfx (res://tests/test_audio_manager.gd:25)
+[33m    [Risky]:  [0mtest_play_sfx did not assert
 * test_play_music
-[1m4/4 passed.
-[0m[4m
-
-res://tests/test_colony_management.gd
-[0m* test_population_job_assignment
-SCRIPT ERROR: Invalid call. Nonexistent function 'establish_colony' in base 'Nil'.
-   at: test_population_job_assignment (res://tests/test_colony_management.gd:12)
-[33m    [Risky]:  [0mtest_population_job_assignment did not assert
-* test_building_data_creation
-* test_building_effect_description
-* test_building_construction
-SCRIPT ERROR: Invalid call. Nonexistent function 'establish_colony' in base 'Nil'.
-   at: test_building_construction (res://tests/test_colony_management.gd:56)
-[33m    [Risky]:  [0mtest_building_construction did not assert
-* test_colony_resource_production
-SCRIPT ERROR: Invalid call. Nonexistent function 'establish_colony' in base 'Nil'.
-   at: test_colony_resource_production (res://tests/test_colony_management.gd:90)
-[33m    [Risky]:  [0mtest_colony_resource_production did not assert
-* test_population_growth
-SCRIPT ERROR: Invalid call. Nonexistent function 'establish_colony' in base 'Nil'.
-   at: test_population_growth (res://tests/test_colony_management.gd:110)
-[33m    [Risky]:  [0mtest_population_growth did not assert
-[1m2/6 passed.
+SCRIPT ERROR: Invalid call. Nonexistent function 'play_music' in base 'Nil'.
+   at: test_play_music (res://tests/test_audio_manager.gd:30)
+[33m    [Risky]:  [0mtest_play_music did not assert
+ERROR: Parameter "p_child" is null.
+   at: remove_child (scene/main/node.cpp:1685)
+SCRIPT ERROR: Invalid call. Nonexistent function 'free' in base 'Nil'.
+   at: after_all (res://tests/test_audio_manager.gd:14)
+[1m0/4 passed.
 [0m[4m
 
 res://tests/test_colony_manager.gd
@@ -490,8 +478,54 @@ SCRIPT ERROR: Invalid call. Nonexistent function 'free' in base 'Nil'.
 
 res://tests/test_combat.gd
 [0m* test_ship_combat_interaction
-Loading resource: res://scripts/Ship.gd
+Loading resource: res://scripts/ship.gd
 [1m1/1 passed.
+[0m[4m
+
+res://tests/test_council_manager.gd
+[0m* test_council_membership
+SCRIPT ERROR: Invalid call. Nonexistent function 'register_empire' in base 'Nil'.
+   at: test_council_membership (res://tests/test_council_manager.gd:7)
+[33m    [Risky]:  [0mtest_council_membership did not assert
+* test_council_elections
+CouncilManager: Elected empire1 as council president
+* test_diplomatic_victory_session
+SCRIPT ERROR: Invalid access to property or key 'empires' on a base object of type 'Nil'.
+   at: _get_active_empires (res://scripts/managers/CouncilManager.gd:83)
+CouncilManager: Started diplomatic_victory session with 0 participants
+SCRIPT ERROR: Invalid access to property or key 'members' on a base object of type 'Dictionary'.
+   at: test_diplomatic_victory_session (res://tests/test_council_manager.gd:57)
+* test_voting_mechanics
+SCRIPT ERROR: Invalid access to property or key 'empires' on a base object of type 'Nil'.
+   at: _get_active_empires (res://scripts/managers/CouncilManager.gd:83)
+CouncilManager: Started diplomatic_victory session with 0 participants
+CouncilManager: empire1 is not a participant in this session
+[31m    [Failed]:  [0mVote should be accepted
+      at line -1
+CouncilManager: empire2 is not a participant in this session
+[31m    [Failed]:  [0mVote should be accepted
+      at line -1
+CouncilManager: empire3 is not a participant in this session
+[31m    [Failed]:  [0mVote should be accepted
+      at line -1
+[31m    [Failed]:  [0mSession should have ended
+      at line -1
+* test_invalid_votes
+SCRIPT ERROR: Invalid access to property or key 'empires' on a base object of type 'Nil'.
+   at: _get_active_empires (res://scripts/managers/CouncilManager.gd:83)
+CouncilManager: Started diplomatic_victory session with 0 participants
+CouncilManager: non_member is not a participant in this session
+CouncilManager: empire1 is not a participant in this session
+* test_council_member_removal
+CouncilManager: Elected empire2 as council president
+CouncilManager: Removed empire1 from council
+* test_insufficient_members
+SCRIPT ERROR: Invalid access to property or key 'empires' on a base object of type 'Nil'.
+   at: _get_active_empires (res://scripts/managers/CouncilManager.gd:83)
+CouncilManager: Started diplomatic_victory session with 0 participants
+[31m    [Failed]:  [0mSession should not start with insufficient members
+      at line -1
+[1m4/7 passed.
 [0m[4m
 
 res://tests/test_data_manager.gd
@@ -526,19 +560,33 @@ DebugManager: User action logging is ENABLED.
 [0m[4m
 
 res://tests/test_empire_manager.gd
-[0mEmpireManager: SaveLoadManager not available or not loading game
-EmpireManager: SaveLoadManager not available or not loading game
+[0mSCRIPT ERROR: Invalid call. Nonexistent function 'new' in base 'GDScript'.
+   at: before_all (res://tests/test_empire_manager.gd:7)
 * test_empire_manager_instantiates
+[31m    [Failed]:  [0mEmpire Manager should be a valid instance.
+      at line -1
 * test_empires_dict_initially_empty
+SCRIPT ERROR: Invalid access to property or key 'empires' on a base object of type 'Nil'.
+   at: test_empires_dict_initially_empty (res://tests/test_empire_manager.gd:20)
+[33m    [Risky]:  [0mtest_empires_dict_initially_empty did not assert
 * test_register_empire
-EmpireManager: Registered new empire 'Test Empire'.
+SCRIPT ERROR: Invalid call. Nonexistent function 'register_empire' in base 'Nil'.
+   at: test_register_empire (res://tests/test_empire_manager.gd:26)
+[33m    [Risky]:  [0mtest_register_empire did not assert
 * test_get_empire_by_id
-[1m4/4 passed.
+SCRIPT ERROR: Invalid call. Nonexistent function 'get_empire_by_id' in base 'Nil'.
+   at: test_get_empire_by_id (res://tests/test_empire_manager.gd:30)
+[33m    [Risky]:  [0mtest_get_empire_by_id did not assert
+ERROR: Parameter "p_child" is null.
+   at: remove_child (scene/main/node.cpp:1685)
+SCRIPT ERROR: Invalid call. Nonexistent function 'free' in base 'Nil'.
+   at: after_all (res://tests/test_empire_manager.gd:14)
+[1m0/4 passed.
 [0m[4m
 
 res://tests/test_galaxy.gd
 [0m* test_galaxy_generation_runs
-Loading resource: res://scripts/GalaxyGenerator.gd
+Loading resource: res://scripts/galaxy_generator.gd
 [1m1/1 passed.
 [0m[4m
 
@@ -550,24 +598,14 @@ res://tests/test_galaxy_manager.gd
 [0m[4m
 
 res://tests/test_game_manager.gd
-[0mSCRIPT ERROR: Invalid call. Nonexistent function 'new' in base 'GDScript'.
-   at: before_all (res://tests/test_game_manager.gd:7)
+[0mSCRIPT ERROR: Invalid access to property or key 'player_won_game' on a base object of type 'Nil'.
+   at: _ready (res://scripts/managers/GameManager.gd:83)
+SCRIPT ERROR: Invalid access to property or key 'player_won_game' on a base object of type 'Nil'.
+   at: _ready (res://scripts/managers/GameManager.gd:83)
 * test_game_manager_instantiates
-[31m    [Failed]:  [0mGame Manager should be a valid instance.
-      at line -1
 * test_initial_game_phase_is_setup
-SCRIPT ERROR: Invalid access to property or key 'current_game_phase' on a base object of type 'Nil'.
-   at: test_initial_game_phase_is_setup (res://tests/test_game_manager.gd:20)
-[33m    [Risky]:  [0mtest_initial_game_phase_is_setup did not assert
 * test_set_game_phase
-SCRIPT ERROR: Invalid access to property or key 'GamePhase' on a base object of type 'Nil'.
-   at: test_set_game_phase (res://tests/test_game_manager.gd:23)
-[33m    [Risky]:  [0mtest_set_game_phase did not assert
-ERROR: Parameter "p_child" is null.
-   at: remove_child (scene/main/node.cpp:1685)
-SCRIPT ERROR: Invalid call. Nonexistent function 'free' in base 'Nil'.
-   at: after_all (res://tests/test_game_manager.gd:14)
-[1m0/3 passed.
+[1m3/3 passed.
 [0m[4m
 
 res://tests/test_game_setup.gd
@@ -588,78 +626,52 @@ res://tests/test_main_menu.gd
 [0m* test_main_menu_scene_loads
 Loading resource: res://ui/main_menu.tscn
 Loading resource: res://ui/main_menu.gd
-SCRIPT ERROR: Parse Error: Cannot call non-static function "apply_technology_effects()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/turn_manager.gd:141)
+SCRIPT ERROR: Parse Error: Preload file "res://scripts/managers/ai_manager.gd" does not exist.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:21)
+SCRIPT ERROR: Parse Error: Cannot find member "is_loading_game" in base "res://scripts/managers/SaveLoadManager.gd".
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:33)
+SCRIPT ERROR: Parse Error: Cannot find member "save_data_loaded" in base "res://scripts/managers/SaveLoadManager.gd".
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:34)
+SCRIPT ERROR: Parse Error: Cannot find member "empires" in base "res://scripts/managers/EmpireManager.gd".
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:40)
+SCRIPT ERROR: Parse Error: Cannot call non-static function "get_empire_by_id()" on the class "res://scripts/managers/EmpireManager.gd" directly. Make an instance instead.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:124)
+SCRIPT ERROR: Parse Error: Identifier "ship_arrived" not declared in the current scope.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:136)
+SCRIPT ERROR: Parse Error: Cannot call non-static function "process_turn_for_empire()" on the class "res://scripts/managers/ColonyManager.gd" directly. Make an instance instead.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:142)
+SCRIPT ERROR: Parse Error: Cannot call non-static function "get_empire_by_id()" on the class "res://scripts/managers/EmpireManager.gd" directly. Make an instance instead.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:148)
+SCRIPT ERROR: Parse Error: Identifier "research_points_changed" not declared in the current scope.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:154)
+SCRIPT ERROR: Parse Error: Static function "process_construction_for_empire()" not found in base "res://scripts/managers/ColonyManager.gd".
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:160)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/EmpireManager.gd:7)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:9)
 SCRIPT ERROR: Parse Error: Could not parse global class "RacePreset" from "res://gamedata/races/race_preset.gd".
-   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:233)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "calculate_colony_food()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:63)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "calculate_colony_production()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:66)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "calculate_colony_research()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:69)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:238)
-SCRIPT ERROR: Parse Error: Could not parse global class "RacePreset" from "res://gamedata/races/race_preset.gd".
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:325)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_session_status()" on the class "CouncilManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:173)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "cast_vote()" on the class "CouncilManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:176)
-SCRIPT ERROR: Parse Error: Not all code paths return a value.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:245)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:329)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:330)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:334)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:335)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:339)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:340)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:344)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:345)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:349)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:350)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:354)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:355)
+   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:241)
+ERROR: Attempt to open script 'res://scripts/managers/ai_manager.gd' resulted in error 'File not found'.
+   at: load_source_code (modules/gdscript/gdscript.cpp:1115)
 SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
    at: GDScript::reload (res://scripts/managers/DemoManager.gd:0)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_save_data()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:45)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:268)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:268)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:335)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:337)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:339)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:341)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:343)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_session_status()" on the class "CouncilManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/GameManager.gd:142)
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-   at: GDScript::reload (res://scripts/managers/GameManager.gd:143)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_session_status()" on the class "CouncilManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/GameManager.gd:147)
-SCRIPT ERROR: Parse Error: Cannot find member "council_members" in base "CouncilManager".
-   at: GDScript::reload (res://scripts/managers/GameManager.gd:151)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "cast_vote()" on the class "CouncilManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/GameManager.gd:156)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:9)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:275)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:275)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:342)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:344)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:346)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:348)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:350)
 SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
    at: GDScript::reload (res://ui/main_menu.gd:0)
 ERROR: Failed to load script "res://ui/main_menu.gd" with error "Compilation failed".
@@ -694,77 +706,111 @@ Loading resource: res://assets/images/planet_surfaces/desert_surface.png
 Loading resource: res://.godot/imported/desert_surface.png-4ac14060c3828d9d5b563a8841a96125.ctex
 Loading resource: res://ui/components/building_icon.tscn
 Loading resource: res://ui/components/building_icon.gd
+SCRIPT ERROR: Parse Error: Could not resolve class "BuildableItem".
+   at: GDScript::reload (res://gamedata/buildings/building_data.gd:2)
+SCRIPT ERROR: Parse Error: The member "pollution_generated" already exists in parent class BuildableItem.
+   at: GDScript::reload (res://gamedata/buildings/building_data.gd:15)
+SCRIPT ERROR: Parse Error: The member "morale_modifier" already exists in parent class BuildableItem.
+   at: GDScript::reload (res://gamedata/buildings/building_data.gd:16)
+SCRIPT ERROR: Parse Error: Identifier "output_food" not declared in the current scope.
+   at: GDScript::reload (res://gamedata/buildings/building_data.gd:102)
+SCRIPT ERROR: Parse Error: Identifier "output_food" not declared in the current scope.
+   at: GDScript::reload (res://gamedata/buildings/building_data.gd:103)
+SCRIPT ERROR: Parse Error: Identifier "output_production" not declared in the current scope.
+   at: GDScript::reload (res://gamedata/buildings/building_data.gd:104)
+SCRIPT ERROR: Parse Error: Identifier "output_production" not declared in the current scope.
+   at: GDScript::reload (res://gamedata/buildings/building_data.gd:105)
+SCRIPT ERROR: Parse Error: Identifier "output_research" not declared in the current scope.
+   at: GDScript::reload (res://gamedata/buildings/building_data.gd:106)
+SCRIPT ERROR: Parse Error: Identifier "output_research" not declared in the current scope.
+   at: GDScript::reload (res://gamedata/buildings/building_data.gd:107)
+SCRIPT ERROR: Parse Error: Identifier "output_food" not declared in the current scope.
+   at: GDScript::reload (res://gamedata/buildings/building_data.gd:152)
+SCRIPT ERROR: Parse Error: Identifier "output_production" not declared in the current scope.
+   at: GDScript::reload (res://gamedata/buildings/building_data.gd:153)
+SCRIPT ERROR: Parse Error: Identifier "output_research" not declared in the current scope.
+   at: GDScript::reload (res://gamedata/buildings/building_data.gd:154)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://ui/components/building_icon.gd:0)
+ERROR: Failed to load script "res://ui/components/building_icon.gd" with error "Compilation failed".
+   at: load (modules/gdscript/gdscript.cpp:3022)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:9)
 SCRIPT ERROR: Parse Error: Could not parse global class "RacePreset" from "res://gamedata/races/race_preset.gd".
-   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:233)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "calculate_colony_food()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:63)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "calculate_colony_production()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:66)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "calculate_colony_research()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:69)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:238)
+   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:241)
 SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
    at: GDScript::reload (res://ui/screens/colonies_screen.gd:0)
 ERROR: Failed to load script "res://ui/screens/colonies_screen.gd" with error "Compilation failed".
    at: load (modules/gdscript/gdscript.cpp:3022)
-ERROR: Node not found: "%FarmerPlusButton" (relative to "/root/GutRunner/@Node@39/ColoniesScreen").
+ERROR: Node not found: "%FarmerPlusButton" (relative to "/root/GutRunner/@Node@34/ColoniesScreen").
    at: get_node (scene/main/node.cpp:1877)
-ERROR: Node not found: "%FarmerMinusButton" (relative to "/root/GutRunner/@Node@39/ColoniesScreen").
+ERROR: Node not found: "%FarmerMinusButton" (relative to "/root/GutRunner/@Node@34/ColoniesScreen").
    at: get_node (scene/main/node.cpp:1877)
-ERROR: Node not found: "%WorkerPlusButton" (relative to "/root/GutRunner/@Node@39/ColoniesScreen").
+ERROR: Node not found: "%WorkerPlusButton" (relative to "/root/GutRunner/@Node@34/ColoniesScreen").
    at: get_node (scene/main/node.cpp:1877)
-ERROR: Node not found: "%WorkerMinusButton" (relative to "/root/GutRunner/@Node@39/ColoniesScreen").
+ERROR: Node not found: "%WorkerMinusButton" (relative to "/root/GutRunner/@Node@34/ColoniesScreen").
    at: get_node (scene/main/node.cpp:1877)
-ERROR: Node not found: "%ScientistPlusButton" (relative to "/root/GutRunner/@Node@39/ColoniesScreen").
+ERROR: Node not found: "%ScientistPlusButton" (relative to "/root/GutRunner/@Node@34/ColoniesScreen").
    at: get_node (scene/main/node.cpp:1877)
-ERROR: Node not found: "%ScientistMinusButton" (relative to "/root/GutRunner/@Node@39/ColoniesScreen").
+ERROR: Node not found: "%ScientistMinusButton" (relative to "/root/GutRunner/@Node@34/ColoniesScreen").
    at: get_node (scene/main/node.cpp:1877)
-ERROR: Node not found: "%FarmerCountLabel" (relative to "/root/GutRunner/@Node@39/ColoniesScreen").
+ERROR: Node not found: "%FarmerCountLabel" (relative to "/root/GutRunner/@Node@34/ColoniesScreen").
    at: get_node (scene/main/node.cpp:1877)
-ERROR: Node not found: "%WorkerCountLabel" (relative to "/root/GutRunner/@Node@39/ColoniesScreen").
+ERROR: Node not found: "%WorkerCountLabel" (relative to "/root/GutRunner/@Node@34/ColoniesScreen").
    at: get_node (scene/main/node.cpp:1877)
-ERROR: Node not found: "%ScientistCountLabel" (relative to "/root/GutRunner/@Node@39/ColoniesScreen").
+ERROR: Node not found: "%ScientistCountLabel" (relative to "/root/GutRunner/@Node@34/ColoniesScreen").
    at: get_node (scene/main/node.cpp:1877)
-ERROR: Node not found: "%UnassignedCountLabel" (relative to "/root/GutRunner/@Node@39/ColoniesScreen").
+ERROR: Node not found: "%UnassignedCountLabel" (relative to "/root/GutRunner/@Node@34/ColoniesScreen").
    at: get_node (scene/main/node.cpp:1877)
 ColoniesScreen: No valid PlanetData provided. Returning to starmap.
 Loading resource: res://scenes/starmap/starmap.tscn
 Loading resource: res://scenes/starmap/starmap.gd
 Loading resource: res://ui/hud/hud.tscn
 Loading resource: res://ui/hud/hud.gd
-SCRIPT ERROR: Parse Error: Cannot call non-static function "apply_technology_effects()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/turn_manager.gd:141)
+SCRIPT ERROR: Parse Error: Preload file "res://scripts/managers/ai_manager.gd" does not exist.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:21)
+SCRIPT ERROR: Parse Error: Cannot find member "is_loading_game" in base "res://scripts/managers/SaveLoadManager.gd".
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:33)
+SCRIPT ERROR: Parse Error: Cannot find member "save_data_loaded" in base "res://scripts/managers/SaveLoadManager.gd".
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:34)
+SCRIPT ERROR: Parse Error: Cannot find member "empires" in base "res://scripts/managers/EmpireManager.gd".
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:40)
+SCRIPT ERROR: Parse Error: Cannot call non-static function "get_empire_by_id()" on the class "res://scripts/managers/EmpireManager.gd" directly. Make an instance instead.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:124)
+SCRIPT ERROR: Parse Error: Identifier "ship_arrived" not declared in the current scope.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:136)
+SCRIPT ERROR: Parse Error: Cannot call non-static function "process_turn_for_empire()" on the class "res://scripts/managers/ColonyManager.gd" directly. Make an instance instead.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:142)
+SCRIPT ERROR: Parse Error: Cannot call non-static function "get_empire_by_id()" on the class "res://scripts/managers/EmpireManager.gd" directly. Make an instance instead.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:148)
+SCRIPT ERROR: Parse Error: Identifier "research_points_changed" not declared in the current scope.
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:154)
+SCRIPT ERROR: Parse Error: Static function "process_construction_for_empire()" not found in base "res://scripts/managers/ColonyManager.gd".
+   at: GDScript::reload (res://scripts/managers/turn_manager.gd:160)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:9)
 SCRIPT ERROR: Parse Error: Could not parse global class "RacePreset" from "res://gamedata/races/race_preset.gd".
-   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:233)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "calculate_colony_food()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:63)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "calculate_colony_production()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:66)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "calculate_colony_research()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:69)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:238)
+   at: GDScript::reload (res://scripts/managers/ColonyManager.gd:241)
 SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
    at: GDScript::reload (res://ui/hud/hud.gd:0)
 ERROR: Failed to load script "res://ui/hud/hud.gd" with error "Compilation failed".
    at: load (modules/gdscript/gdscript.cpp:3022)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_save_data()" on the class "TechnologyEffectManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:45)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:268)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:268)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:335)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:337)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:339)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:341)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:343)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:9)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:275)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:275)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:342)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:344)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:346)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:348)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://gamedata/races/race_preset.gd".
+   at: GDScript::reload (res://scripts/managers/SaveLoadManager.gd:350)
 Loading resource: res://ui/components/system_summary_tooltip.tscn
 Loading resource: res://ui/components/system_summary_tooltip.gd
 Loading resource: res://ui/popups/system_view_popup.tscn
@@ -775,38 +821,8 @@ Loading resource: res://assets/images/planets/gas_giant.png
 Loading resource: res://.godot/imported/gas_giant.png-cbf0cb798614cd51defccfb046fa5855.ctex
 Loading resource: res://assets/images/planets/asteroid_belt.png
 Loading resource: res://.godot/imported/asteroid_belt.png-476c859ee842880c86a7e601b5e71b88.ctex
-SCRIPT ERROR: Parse Error: Could not parse global class "RacePreset" from "res://gamedata/races/race_preset.gd".
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:325)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_session_status()" on the class "CouncilManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:173)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "cast_vote()" on the class "CouncilManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:176)
-SCRIPT ERROR: Parse Error: Not all code paths return a value.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:245)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:329)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:330)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:334)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:335)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:339)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:340)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:344)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:345)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:349)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:350)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:354)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:355)
+ERROR: Attempt to open script 'res://scripts/managers/ai_manager.gd' resulted in error 'File not found'.
+   at: load_source_code (modules/gdscript/gdscript.cpp:1115)
 SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
    at: GDScript::reload (res://ui/popups/system_view_popup.gd:0)
 ERROR: Failed to load script "res://ui/popups/system_view_popup.gd" with error "Compilation failed".
@@ -815,38 +831,8 @@ Loading resource: res://assets/images/backgrounds/starscape.png
 Loading resource: res://.godot/imported/starscape.png-f2f65bd629aa56eb5c9ad501bcd3989b.ctex
 Loading resource: res://assets/images/stars/star_base.png
 Loading resource: res://.godot/imported/star_base.png-c4054b78387cf423840f6774a78f3937.ctex
-SCRIPT ERROR: Parse Error: Could not parse global class "RacePreset" from "res://gamedata/races/race_preset.gd".
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:325)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "get_session_status()" on the class "CouncilManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:173)
-SCRIPT ERROR: Parse Error: Cannot call non-static function "cast_vote()" on the class "CouncilManager" directly. Make an instance instead.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:176)
-SCRIPT ERROR: Parse Error: Not all code paths return a value.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:245)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:329)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:330)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:334)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:335)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:339)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:340)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:344)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:345)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:349)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:350)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:354)
-SCRIPT ERROR: Parse Error: Could not resolve class "RacePreset", because of a parser error.
-   at: GDScript::reload (res://scripts/managers/AIManager.gd:355)
+ERROR: Attempt to open script 'res://scripts/managers/ai_manager.gd' resulted in error 'File not found'.
+   at: load_source_code (modules/gdscript/gdscript.cpp:1115)
 SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
    at: GDScript::reload (res://scenes/starmap/starmap.gd:0)
 ERROR: Failed to load script "res://scenes/starmap/starmap.gd" with error "Compilation failed".
@@ -870,61 +856,73 @@ SCRIPT ERROR: Invalid call. Nonexistent function 'pass_test' in base 'Node (GutM
 
 res://tests/test_static_analysis.gd
 [0m* test_no_redundant_function_calls
-    Potential redundant consecutive function call detected in res://scripts/GalaxyGenerator.gd at line 16: new
+    Potential redundant consecutive function call detected in res://scripts/galaxy/galaxy_builder.gd at line 39: size
+    Potential redundant consecutive function call detected in res://scripts/galaxy_generator.gd at line 16: new
     Potential redundant consecutive function call detected in res://scripts/generators/celestial_body_generator.gd at line 78: append
     Potential redundant consecutive function call detected in res://scripts/generators/celestial_body_generator.gd at line 82: pick_random
     Potential redundant consecutive function call detected in res://scripts/generators/celestial_body_generator.gd at line 83: pick_random
     Potential redundant consecutive function call detected in res://scripts/generators/celestial_body_generator.gd at line 161: new
     Potential redundant consecutive function call detected in res://scripts/generators/system_name_generator.gd at line 17: pick_random
     Potential redundant consecutive function call detected in res://scripts/generators/system_name_generator.gd at line 22: pick_random
-    Potential redundant consecutive function call detected in res://scripts/managers/AIManager.gd at line 261: has
-    Potential redundant consecutive function call detected in res://scripts/managers/AIManager.gd at line 361: clear
-    Potential redundant consecutive function call detected in res://scripts/managers/AIManager.gd at line 366: get
-    Potential redundant consecutive function call detected in res://scripts/managers/AIManager.gd at line 371: get
-    Potential redundant consecutive function call detected in res://scripts/managers/AudioManager.gd at line 18: wav")
-    Potential redundant consecutive function call detected in res://scripts/managers/AudioManager.gd at line 19: wav")
+    Potential redundant consecutive function call detected in res://scripts/managers/AIManager.gd at line 5: gd")
+    Potential redundant consecutive function call detected in res://scripts/managers/AIManager.gd at line 6: gd")
+    Potential redundant consecutive function call detected in res://scripts/managers/AIManager.gd at line 7: gd")
+    Potential redundant consecutive function call detected in res://scripts/managers/AIManager.gd at line 8: gd")
+    Potential redundant consecutive function call detected in res://scripts/managers/AIManager.gd at line 9: gd")
+    Potential redundant consecutive function call detected in res://scripts/managers/AIManager.gd at line 10: gd")
+    Potential redundant consecutive function call detected in res://scripts/managers/AIManager.gd at line 11: gd")
+    Potential redundant consecutive function call detected in res://scripts/managers/AIManager.gd at line 12: gd")
+    Potential redundant consecutive function call detected in res://scripts/managers/AIManager.gd at line 13: gd")
+    Potential redundant consecutive function call detected in res://scripts/managers/AIManager.gd at line 14: gd")
+    Potential redundant consecutive function call detected in res://scripts/managers/AIManager.gd at line 15: gd")
+    Potential redundant consecutive function call detected in res://scripts/managers/AIManager.gd at line 16: gd")
+    Potential redundant consecutive function call detected in res://scripts/managers/AIManager.gd at line 17: gd")
+    Potential redundant consecutive function call detected in res://scripts/managers/AIManager.gd at line 18: gd")
+    Potential redundant consecutive function call detected in res://scripts/managers/AIManager.gd at line 276: has
+    Potential redundant consecutive function call detected in res://scripts/managers/AIManager.gd at line 376: clear
+    Potential redundant consecutive function call detected in res://scripts/managers/AIManager.gd at line 381: get
+    Potential redundant consecutive function call detected in res://scripts/managers/AIManager.gd at line 386: get
+    Potential redundant consecutive function call detected in res://scripts/managers/AudioManager.gd at line 21: get_bus_index
+    Potential redundant consecutive function call detected in res://scripts/managers/AudioManager.gd at line 22: get_bus_index
     Potential redundant consecutive function call detected in res://scripts/managers/AudioManager.gd at line 33: new
-    Potential redundant consecutive function call detected in res://scripts/managers/AudioManager.gd at line 38: get_bus_index
-    Potential redundant consecutive function call detected in res://scripts/managers/AudioManager.gd at line 39: get_bus_index
-    Potential redundant consecutive function call detected in res://scripts/managers/AudioManager.gd at line 69: wav")
-    Potential redundant consecutive function call detected in res://scripts/managers/AudioManager.gd at line 122: get_bus_volume_db
-    Potential redundant consecutive function call detected in res://scripts/managers/AudioManager.gd at line 123: get_bus_volume_db
-    Potential redundant consecutive function call detected in res://scripts/managers/AudioManager.gd at line 132: 0))
-    Potential redundant consecutive function call detected in res://scripts/managers/AudioManager.gd at line 133: 0))
-    Potential redundant consecutive function call detected in res://scripts/managers/ColonyManager.gd at line 66: id)
-    Potential redundant consecutive function call detected in res://scripts/managers/ColonyManager.gd at line 69: id)
-    Potential redundant consecutive function call detected in res://scripts/managers/ColonyManager.gd at line 203: get
-    Potential redundant consecutive function call detected in res://scripts/managers/ColonyManager.gd at line 204: get
-    Potential redundant consecutive function call detected in res://scripts/managers/ColonyManager.gd at line 205: get
-    Potential redundant consecutive function call detected in res://scripts/managers/ColonyManager.gd at line 206: get
-    Potential redundant consecutive function call detected in res://scripts/managers/ColonyManager.gd at line 207: get
-    Potential redundant consecutive function call detected in res://scripts/managers/ColonyManager.gd at line 208: get
+    Potential redundant consecutive function call detected in res://scripts/managers/AudioManager.gd at line 42: wav")
+    Potential redundant consecutive function call detected in res://scripts/managers/AudioManager.gd at line 43: wav")
+    Potential redundant consecutive function call detected in res://scripts/managers/AudioManager.gd at line 44: wav")
+    Potential redundant consecutive function call detected in res://scripts/managers/ColonyManager.gd at line 5: gd")
+    Potential redundant consecutive function call detected in res://scripts/managers/ColonyManager.gd at line 6: gd")
+    Potential redundant consecutive function call detected in res://scripts/managers/ColonyManager.gd at line 7: gd")
+    Potential redundant consecutive function call detected in res://scripts/managers/ColonyManager.gd at line 8: gd")
+    Potential redundant consecutive function call detected in res://scripts/managers/ColonyManager.gd at line 9: gd")
+    Potential redundant consecutive function call detected in res://scripts/managers/ColonyManager.gd at line 10: gd")
+    Potential redundant consecutive function call detected in res://scripts/managers/ColonyManager.gd at line 74: id)
+    Potential redundant consecutive function call detected in res://scripts/managers/ColonyManager.gd at line 77: id)
     Potential redundant consecutive function call detected in res://scripts/managers/ColonyManager.gd at line 211: get
-    Potential redundant consecutive function call detected in res://scripts/managers/CouncilManager.gd at line 156: get
+    Potential redundant consecutive function call detected in res://scripts/managers/ColonyManager.gd at line 212: get
+    Potential redundant consecutive function call detected in res://scripts/managers/ColonyManager.gd at line 213: get
+    Potential redundant consecutive function call detected in res://scripts/managers/ColonyManager.gd at line 214: get
+    Potential redundant consecutive function call detected in res://scripts/managers/ColonyManager.gd at line 215: get
+    Potential redundant consecutive function call detected in res://scripts/managers/ColonyManager.gd at line 216: get
+    Potential redundant consecutive function call detected in res://scripts/managers/ColonyManager.gd at line 219: get
     Potential redundant consecutive function call detected in res://scripts/managers/CouncilManager.gd at line 157: get
     Potential redundant consecutive function call detected in res://scripts/managers/CouncilManager.gd at line 158: get
     Potential redundant consecutive function call detected in res://scripts/managers/CouncilManager.gd at line 159: get
-    Potential redundant consecutive function call detected in res://scripts/managers/council_manager.gd at line 186: duplicate
-    Potential redundant consecutive function call detected in res://scripts/managers/council_manager.gd at line 217: get
-    Potential redundant consecutive function call detected in res://scripts/managers/council_manager.gd at line 218: get
-    Potential redundant consecutive function call detected in res://scripts/managers/council_manager.gd at line 219: get
-    Potential redundant consecutive function call detected in res://scripts/managers/council_manager.gd at line 220: get
+    Potential redundant consecutive function call detected in res://scripts/managers/CouncilManager.gd at line 160: get
     Potential redundant consecutive function call detected in res://scripts/managers/DataManager.gd at line 6: gd")
-    Potential redundant consecutive function call detected in res://scripts/managers/DataManager.gd at line 99: has
-    Potential redundant consecutive function call detected in res://scripts/managers/DataManager.gd at line 112: has
-    Potential redundant consecutive function call detected in res://scripts/managers/DataManager.gd at line 120: get
-    Potential redundant consecutive function call detected in res://scripts/managers/DataManager.gd at line 123: id)
-    Potential redundant consecutive function call detected in res://scripts/managers/DataManager.gd at line 137: get
-    Potential redundant consecutive function call detected in res://scripts/managers/DataManager.gd at line 142: get
+    Potential redundant consecutive function call detected in res://scripts/managers/DataManager.gd at line 115: has
+    Potential redundant consecutive function call detected in res://scripts/managers/DataManager.gd at line 123: get
+    Potential redundant consecutive function call detected in res://scripts/managers/DataManager.gd at line 126: id)
+    Potential redundant consecutive function call detected in res://scripts/managers/DataManager.gd at line 140: get
+    Potential redundant consecutive function call detected in res://scripts/managers/DataManager.gd at line 145: get
     Potential redundant consecutive function call detected in res://scripts/managers/DemoManager.gd at line 31: clear
     Potential redundant consecutive function call detected in res://scripts/managers/DemoManager.gd at line 32: clear
     Potential redundant consecutive function call detected in res://scripts/managers/DemoManager.gd at line 33: clear
     Potential redundant consecutive function call detected in res://scripts/managers/DemoManager.gd at line 34: clear
     Potential redundant consecutive function call detected in res://scripts/managers/DemoManager.gd at line 47: new
-    Potential redundant consecutive function call detected in res://scripts/managers/EmpireManager.gd at line 15: id)
-    Potential redundant consecutive function call detected in res://scripts/managers/EmpireManager.gd at line 77: get
-    Potential redundant consecutive function call detected in res://scripts/managers/EmpireManager.gd at line 83: has
-    Potential redundant consecutive function call detected in res://scripts/managers/EmpireManager.gd at line 85: has
+    Potential redundant consecutive function call detected in res://scripts/managers/EmpireManager.gd at line 7: gd")
+    Potential redundant consecutive function call detected in res://scripts/managers/EmpireManager.gd at line 18: id)
+    Potential redundant consecutive function call detected in res://scripts/managers/EmpireManager.gd at line 80: get
+    Potential redundant consecutive function call detected in res://scripts/managers/EmpireManager.gd at line 86: has
+    Potential redundant consecutive function call detected in res://scripts/managers/EmpireManager.gd at line 88: has
     Potential redundant consecutive function call detected in res://scripts/managers/galaxymanager.gd at line 5: gd")
     Potential redundant consecutive function call detected in res://scripts/managers/galaxymanager.gd at line 6: gd")
     Potential redundant consecutive function call detected in res://scripts/managers/galaxymanager.gd at line 7: gd")
@@ -947,28 +945,40 @@ res://tests/test_static_analysis.gd
     Potential redundant consecutive function call detected in res://scripts/managers/galaxymanager.gd at line 153: get
     Potential redundant consecutive function call detected in res://scripts/managers/galaxymanager.gd at line 154: get
     Potential redundant consecutive function call detected in res://scripts/managers/galaxymanager.gd at line 155: get
-    Potential redundant consecutive function call detected in res://scripts/managers/GameManager.gd at line 81: connect
-    Potential redundant consecutive function call detected in res://scripts/managers/GameManager.gd at line 116: get_empire_by_id
-    Potential redundant consecutive function call detected in res://scripts/managers/GameManager.gd at line 194: has
+    Potential redundant consecutive function call detected in res://scripts/managers/GameManager.gd at line 8: gd")
+    Potential redundant consecutive function call detected in res://scripts/managers/GameManager.gd at line 9: gd")
+    Potential redundant consecutive function call detected in res://scripts/managers/GameManager.gd at line 10: gd")
+    Potential redundant consecutive function call detected in res://scripts/managers/GameManager.gd at line 86: connect
+    Potential redundant consecutive function call detected in res://scripts/managers/GameManager.gd at line 121: get_empire_by_id
+    Potential redundant consecutive function call detected in res://scripts/managers/GameManager.gd at line 199: has
     Potential redundant consecutive function call detected in res://scripts/managers/player_manager.gd at line 20: connect
     Potential redundant consecutive function call detected in res://scripts/managers/player_manager.gd at line 135: size)
     Potential redundant consecutive function call detected in res://scripts/managers/player_manager.gd at line 163: get
-    Potential redundant consecutive function call detected in res://scripts/managers/SaveLoadManager.gd at line 243: has
-    Potential redundant consecutive function call detected in res://scripts/managers/SaveLoadManager.gd at line 251: get
-    Potential redundant consecutive function call detected in res://scripts/managers/SaveLoadManager.gd at line 259: get
-    Potential redundant consecutive function call detected in res://scripts/managers/SaveLoadManager.gd at line 263: get
+    Potential redundant consecutive function call detected in res://scripts/managers/SaveLoadManager.gd at line 5: gd")
+    Potential redundant consecutive function call detected in res://scripts/managers/SaveLoadManager.gd at line 6: gd")
+    Potential redundant consecutive function call detected in res://scripts/managers/SaveLoadManager.gd at line 7: gd")
+    Potential redundant consecutive function call detected in res://scripts/managers/SaveLoadManager.gd at line 8: gd")
+    Potential redundant consecutive function call detected in res://scripts/managers/SaveLoadManager.gd at line 9: gd")
+    Potential redundant consecutive function call detected in res://scripts/managers/SaveLoadManager.gd at line 250: has
+    Potential redundant consecutive function call detected in res://scripts/managers/SaveLoadManager.gd at line 258: get
+    Potential redundant consecutive function call detected in res://scripts/managers/SaveLoadManager.gd at line 266: get
+    Potential redundant consecutive function call detected in res://scripts/managers/SaveLoadManager.gd at line 270: get
     Potential redundant consecutive function call detected in res://scripts/managers/SceneManager.gd at line 10: get_child_count
-    Potential redundant consecutive function call detected in res://scripts/managers/TechnologyEffectManager.gd at line 221: income_per_turn * value)
+    Potential redundant consecutive function call detected in res://scripts/managers/TechnologyEffectManager.gd at line 4: gd")
     Potential redundant consecutive function call detected in res://scripts/managers/TechnologyEffectManager.gd at line 223: income_per_turn * value)
-    Potential redundant consecutive function call detected in res://scripts/managers/turn_manager.gd at line 128: current_researching_tech)
-    Potential redundant consecutive function call detected in res://scripts/managers/turn_manager.gd at line 298: has
-    Potential redundant consecutive function call detected in res://scripts/managers/turn_manager.gd at line 300: has
-    Potential redundant consecutive function call detected in res://scripts/managers/turn_manager.gd at line 302: has
-    Potential redundant consecutive function call detected in res://scripts/managers/turn_manager.gd at line 304: has
-    Potential redundant consecutive function call detected in res://scripts/utils/AssetLoader.gd at line 19: ")
-    Potential redundant consecutive function call detected in res://scripts/utils/AssetLoader.gd at line 27: ")
-    Potential redundant consecutive function call detected in res://scripts/utils/AssetLoader.gd at line 35: ")
-    Potential redundant consecutive function call detected in res://scripts/utils/AssetLoader.gd at line 51: ")
+    Potential redundant consecutive function call detected in res://scripts/managers/TechnologyEffectManager.gd at line 225: income_per_turn * value)
+    Potential redundant consecutive function call detected in res://scripts/managers/turn_manager.gd at line 20: gd")
+    Potential redundant consecutive function call detected in res://scripts/managers/turn_manager.gd at line 21: gd")
+    Potential redundant consecutive function call detected in res://scripts/managers/turn_manager.gd at line 22: gd")
+    Potential redundant consecutive function call detected in res://scripts/managers/turn_manager.gd at line 23: gd")
+    Potential redundant consecutive function call detected in res://scripts/managers/turn_manager.gd at line 24: gd")
+    Potential redundant consecutive function call detected in res://scripts/managers/turn_manager.gd at line 206: get
+    Potential redundant consecutive function call detected in res://scripts/managers/turn_manager.gd at line 209: get
+    Potential redundant consecutive function call detected in res://scripts/managers/turn_manager.gd at line 210: get
+    Potential redundant consecutive function call detected in res://scripts/utils/AssetLoader.gd at line 20: ")
+    Potential redundant consecutive function call detected in res://scripts/utils/AssetLoader.gd at line 28: ")
+    Potential redundant consecutive function call detected in res://scripts/utils/AssetLoader.gd at line 36: ")
+    Potential redundant consecutive function call detected in res://scripts/utils/AssetLoader.gd at line 52: ")
     Potential redundant consecutive function call detected in res://ui/components/building_icon.gd at line 13: connect
     Potential redundant consecutive function call detected in res://ui/components/system_planet_list_entry.gd at line 8: png")
     Potential redundant consecutive function call detected in res://ui/components/system_planet_list_entry.gd at line 9: png")
@@ -1007,11 +1017,86 @@ res://tests/test_static_analysis.gd
     Potential redundant consecutive function call detected in res://scenes/system_view_objects/planet_view.gd at line 16: png")
     Potential redundant consecutive function call detected in res://scenes/system_view_objects/planet_view.gd at line 20: png")
     Potential redundant consecutive function call detected in res://scenes/system_view_objects/planet_view.gd at line 21: png")
-    Potential redundant consecutive function call detected in res://gamedata/buildings/building_data.gd at line 121: append
-    Potential redundant consecutive function call detected in res://gamedata/buildings/building_data.gd at line 124: append
-    Potential redundant consecutive function call detected in res://gamedata/buildings/building_data.gd at line 151: new
-    Potential redundant consecutive function call detected in res://gamedata/buildings/building_data.gd at line 165: new
-    Potential redundant consecutive function call detected in res://gamedata/buildings/building_data.gd at line 178: new
+    Potential redundant consecutive function call detected in res://gamedata/AIDecisionWeights.gd at line 65: new
+    Potential redundant consecutive function call detected in res://gamedata/AIDecisionWeights.gd at line 73: new
+    Potential redundant consecutive function call detected in res://gamedata/AIDecisionWeights.gd at line 81: new
+    Potential redundant consecutive function call detected in res://gamedata/AIDecisionWeights.gd at line 89: new
+    Potential redundant consecutive function call detected in res://gamedata/buildings/buildable_item.gd at line 178: get
+    Potential redundant consecutive function call detected in res://gamedata/buildings/buildable_item.gd at line 179: get
+    Potential redundant consecutive function call detected in res://gamedata/buildings/buildable_item.gd at line 183: get
+    Potential redundant consecutive function call detected in res://gamedata/buildings/buildable_item.gd at line 184: get
+    Potential redundant consecutive function call detected in res://gamedata/buildings/buildable_item.gd at line 185: get
+    Potential redundant consecutive function call detected in res://gamedata/buildings/buildable_item.gd at line 186: get
+    Potential redundant consecutive function call detected in res://gamedata/buildings/buildable_item.gd at line 187: get
+    Potential redundant consecutive function call detected in res://gamedata/buildings/buildable_item.gd at line 188: get
+    Potential redundant consecutive function call detected in res://gamedata/buildings/buildable_item.gd at line 191: get
+    Potential redundant consecutive function call detected in res://gamedata/buildings/building_data.gd at line 39: new
+    Potential redundant consecutive function call detected in res://gamedata/buildings/building_data.gd at line 53: new
+    Potential redundant consecutive function call detected in res://gamedata/buildings/building_data.gd at line 67: new
+    Potential redundant consecutive function call detected in res://gamedata/buildings/building_data.gd at line 105: append
+    Potential redundant consecutive function call detected in res://gamedata/buildings/building_data.gd at line 107: append
+    Potential redundant consecutive function call detected in res://gamedata/buildings/building_data.gd at line 109: append
+    Potential redundant consecutive function call detected in res://gamedata/buildings/building_data.gd at line 111: append
+    Potential redundant consecutive function call detected in res://gamedata/buildings/building_data.gd at line 113: append
+    Potential redundant consecutive function call detected in res://gamedata/buildings/building_data.gd at line 115: append
+    Potential redundant consecutive function call detected in res://gamedata/buildings/building_data.gd at line 176: get
+    Potential redundant consecutive function call detected in res://gamedata/buildings/building_data.gd at line 177: get
+    Potential redundant consecutive function call detected in res://gamedata/buildings/building_data.gd at line 180: get
+    Potential redundant consecutive function call detected in res://gamedata/buildings/building_data.gd at line 181: get
+    Potential redundant consecutive function call detected in res://gamedata/buildings/building_data.gd at line 182: get
+    Potential redundant consecutive function call detected in res://gamedata/buildings/building_data.gd at line 183: get
+    Potential redundant consecutive function call detected in res://gamedata/buildings/building_data.gd at line 184: get
+    Potential redundant consecutive function call detected in res://gamedata/buildings/building_data.gd at line 185: get
+    Potential redundant consecutive function call detected in res://gamedata/buildings/building_data.gd at line 186: get
+    Potential redundant consecutive function call detected in res://gamedata/buildings/building_data.gd at line 187: get
+    Potential redundant consecutive function call detected in res://gamedata/buildings/building_data.gd at line 190: get
+    Potential redundant consecutive function call detected in res://gamedata/colonies/colony_data.gd at line 151: new
+    Potential redundant consecutive function call detected in res://gamedata/colonies/colony_data.gd at line 153: get
+    Potential redundant consecutive function call detected in res://gamedata/colonies/colony_data.gd at line 154: get
+    Potential redundant consecutive function call detected in res://gamedata/colonies/colony_data.gd at line 155: get
+    Potential redundant consecutive function call detected in res://gamedata/colonies/colony_data.gd at line 156: get
+    Potential redundant consecutive function call detected in res://gamedata/colonies/colony_data.gd at line 157: get
+    Potential redundant consecutive function call detected in res://gamedata/colonies/colony_data.gd at line 158: get
+    Potential redundant consecutive function call detected in res://gamedata/colonies/colony_data.gd at line 159: get
+    Potential redundant consecutive function call detected in res://gamedata/colonies/colony_data.gd at line 160: get
+    Potential redundant consecutive function call detected in res://gamedata/colonies/colony_data.gd at line 161: get
+    Potential redundant consecutive function call detected in res://gamedata/colonies/colony_data.gd at line 162: get
+    Potential redundant consecutive function call detected in res://gamedata/colonies/colony_data.gd at line 163: get
+    Potential redundant consecutive function call detected in res://gamedata/colonies/colony_data.gd at line 164: get
+    Potential redundant consecutive function call detected in res://gamedata/colonies/colony_data.gd at line 165: get
+    Potential redundant consecutive function call detected in res://gamedata/colonies/colony_data.gd at line 166: get
+    Potential redundant consecutive function call detected in res://gamedata/colonies.gd at line 32: new
+    Potential redundant consecutive function call detected in res://gamedata/colonies.gd at line 34: get
+    Potential redundant consecutive function call detected in res://gamedata/colonies.gd at line 35: get
+    Potential redundant consecutive function call detected in res://gamedata/colonies.gd at line 36: get
+    Potential redundant consecutive function call detected in res://gamedata/colonies.gd at line 37: get
+    Potential redundant consecutive function call detected in res://gamedata/colonies.gd at line 38: get
+    Potential redundant consecutive function call detected in res://gamedata/colonies.gd at line 39: get
+    Potential redundant consecutive function call detected in res://gamedata/colonies.gd at line 40: get
+    Potential redundant consecutive function call detected in res://gamedata/colonies.gd at line 41: get
+    Potential redundant consecutive function call detected in res://gamedata/colonies.gd at line 42: get
+    Potential redundant consecutive function call detected in res://gamedata/colonies.gd at line 43: get
+    Potential redundant consecutive function call detected in res://gamedata/colonies.gd at line 44: get
+    Potential redundant consecutive function call detected in res://gamedata/colonies.gd at line 45: get
+    Potential redundant consecutive function call detected in res://gamedata/colonies.gd at line 46: get
+    Potential redundant consecutive function call detected in res://gamedata/colonies.gd at line 47: get
+    Potential redundant consecutive function call detected in res://gamedata/game_data.gd at line 107: get
+    Potential redundant consecutive function call detected in res://gamedata/game_data.gd at line 108: get
+    Potential redundant consecutive function call detected in res://gamedata/game_data.gd at line 109: get
+    Potential redundant consecutive function call detected in res://gamedata/game_data.gd at line 110: get
+    Potential redundant consecutive function call detected in res://gamedata/game_data.gd at line 111: get
+    Potential redundant consecutive function call detected in res://gamedata/game_data.gd at line 112: get
+    Potential redundant consecutive function call detected in res://gamedata/game_data.gd at line 113: get
+    Potential redundant consecutive function call detected in res://gamedata/game_data.gd at line 114: get
+    Potential redundant consecutive function call detected in res://gamedata/game_data.gd at line 115: get
+    Potential redundant consecutive function call detected in res://gamedata/game_data.gd at line 116: get
+    Potential redundant consecutive function call detected in res://gamedata/game_data.gd at line 117: get
+    Potential redundant consecutive function call detected in res://gamedata/game_data.gd at line 118: get
+    Potential redundant consecutive function call detected in res://gamedata/game_data.gd at line 119: get
+    Potential redundant consecutive function call detected in res://gamedata/game_data.gd at line 120: get
+    Potential redundant consecutive function call detected in res://gamedata/game_data.gd at line 121: get
+    Potential redundant consecutive function call detected in res://gamedata/game_data.gd at line 122: get
+    Potential redundant consecutive function call detected in res://gamedata/game_data.gd at line 123: get
     Potential redundant consecutive function call detected in res://gamedata/game_setup_data.gd at line 95: new
 * test_type_consistency
 [1m2/2 passed.
@@ -1019,47 +1104,47 @@ res://tests/test_static_analysis.gd
 
 res://tests/test_technology_effect_manager.gd
 [0m* test_technology_effect_parsing
-SCRIPT ERROR: Cannot call method 'new' on a null value.
+SCRIPT ERROR: Invalid call. Nonexistent function 'new' in base 'Node (TechnologyEffectManager.gd)'.
    at: test_technology_effect_parsing (res://tests/test_technology_effect_manager.gd:4)
 [33m    [Risky]:  [0mtest_technology_effect_parsing did not assert
 * test_technology_effect_application
-SCRIPT ERROR: Cannot call method 'new' on a null value.
+SCRIPT ERROR: Invalid call. Nonexistent function 'new' in base 'Node (TechnologyEffectManager.gd)'.
    at: test_technology_effect_application (res://tests/test_technology_effect_manager.gd:31)
 [33m    [Risky]:  [0mtest_technology_effect_application did not assert
 * test_colony_calculations_with_tech
-SCRIPT ERROR: Cannot call method 'new' on a null value.
+SCRIPT ERROR: Invalid call. Nonexistent function 'new' in base 'Node (TechnologyEffectManager.gd)'.
    at: test_colony_calculations_with_tech (res://tests/test_technology_effect_manager.gd:54)
 [33m    [Risky]:  [0mtest_colony_calculations_with_tech did not assert
 * test_technology_ability_unlocks
-SCRIPT ERROR: Cannot call method 'new' on a null value.
+SCRIPT ERROR: Invalid call. Nonexistent function 'new' in base 'Node (TechnologyEffectManager.gd)'.
    at: test_technology_ability_unlocks (res://tests/test_technology_effect_manager.gd:80)
 [33m    [Risky]:  [0mtest_technology_ability_unlocks did not assert
 * test_ship_bonuses_from_technology
-SCRIPT ERROR: Cannot call method 'new' on a null value.
+SCRIPT ERROR: Invalid call. Nonexistent function 'new' in base 'Node (TechnologyEffectManager.gd)'.
    at: test_ship_bonuses_from_technology (res://tests/test_technology_effect_manager.gd:97)
 [33m    [Risky]:  [0mtest_ship_bonuses_from_technology did not assert
 * test_population_growth_with_technology
-SCRIPT ERROR: Cannot call method 'new' on a null value.
+SCRIPT ERROR: Invalid call. Nonexistent function 'new' in base 'Node (TechnologyEffectManager.gd)'.
    at: test_population_growth_with_technology (res://tests/test_technology_effect_manager.gd:114)
 [33m    [Risky]:  [0mtest_population_growth_with_technology did not assert
 * test_empire_bonuses_accumulation
-SCRIPT ERROR: Cannot call method 'new' on a null value.
+SCRIPT ERROR: Invalid call. Nonexistent function 'new' in base 'Node (TechnologyEffectManager.gd)'.
    at: test_empire_bonuses_accumulation (res://tests/test_technology_effect_manager.gd:130)
 [33m    [Risky]:  [0mtest_empire_bonuses_accumulation did not assert
 * test_unknown_technology_effect
-SCRIPT ERROR: Cannot call method 'new' on a null value.
+SCRIPT ERROR: Invalid call. Nonexistent function 'new' in base 'Node (TechnologyEffectManager.gd)'.
    at: test_unknown_technology_effect (res://tests/test_technology_effect_manager.gd:143)
 [33m    [Risky]:  [0mtest_unknown_technology_effect did not assert
 * test_technology_effect_save_load
-SCRIPT ERROR: Cannot call method 'new' on a null value.
+SCRIPT ERROR: Invalid call. Nonexistent function 'new' in base 'Node (TechnologyEffectManager.gd)'.
    at: test_technology_effect_save_load (res://tests/test_technology_effect_manager.gd:153)
 [33m    [Risky]:  [0mtest_technology_effect_save_load did not assert
 * test_empty_technology_list
-SCRIPT ERROR: Cannot call method 'new' on a null value.
+SCRIPT ERROR: Invalid call. Nonexistent function 'new' in base 'Node (TechnologyEffectManager.gd)'.
    at: test_empty_technology_list (res://tests/test_technology_effect_manager.gd:172)
 [33m    [Risky]:  [0mtest_empty_technology_list did not assert
 * test_invalid_technology_id
-SCRIPT ERROR: Cannot call method 'new' on a null value.
+SCRIPT ERROR: Invalid call. Nonexistent function 'new' in base 'Node (TechnologyEffectManager.gd)'.
    at: test_invalid_technology_id (res://tests/test_technology_effect_manager.gd:185)
 [33m    [Risky]:  [0mtest_invalid_technology_id did not assert
 [4m
@@ -1088,30 +1173,35 @@ SCRIPT ERROR: Invalid access to property or key 'sub_phase_started' on a base ob
 [4m
 
 res://tests/test_turns_integration_cycle.gd
-[0mERROR: Node not found: "/root/TurnManager" (absolute path attempted from "/root/GutRunner/@Node@47").
+[0mERROR: Node not found: "/root/PlayerManager" (absolute path attempted from "/root/GutRunner/@Node@42").
    at: get_node (scene/main/node.cpp:1874)
-ERROR: Node not found: "/root/ColonyManager" (absolute path attempted from "/root/GutRunner/@Node@47").
+ERROR: Node not found: "/root/TurnManager" (absolute path attempted from "/root/GutRunner/@Node@42").
+   at: get_node (scene/main/node.cpp:1874)
+ERROR: Node not found: "/root/ColonyManager" (absolute path attempted from "/root/GutRunner/@Node@42").
+   at: get_node (scene/main/node.cpp:1874)
+ERROR: Node not found: "/root/EmpireManager" (absolute path attempted from "/root/GutRunner/@Node@42").
    at: get_node (scene/main/node.cpp:1874)
 * test_full_turn_cycle_updates_colony_production
-[31m    [Failed]:  [0m[<null>] expected to not equal [<null>]:  Player empire should exist.
-      at line -1
-SCRIPT ERROR: Attempt to call function '_get_colonies_for_empire' in base 'null instance' on a null instance.
-   at: test_full_turn_cycle_updates_colony_production (res://tests/test_turns_integration_cycle.gd:22)
-[1m0/1 passed.
-[0m
+SCRIPT ERROR: Attempt to call function 'get_empire_by_id' in base 'null instance' on a null instance.
+   at: test_full_turn_cycle_updates_colony_production (res://tests/test_turns_integration_cycle.gd:19)
+[33m    [Risky]:  [0mtest_full_turn_cycle_updates_colony_production did not assert
+
 
 
 
 [33m==============================================
 [0m[33m= Run Summary
 [0m[33m==============================================
-[0m- test_population_job_assignment
+[0m[4m
+res://tests/test_audio_manager.gd
+[0m- test_audio_manager_instantiates
+[31m    [Failed]:  [0mAudio Manager should be a valid instance.
+          at line -1
+- test_set_master_volume
 [33m    [Risky]:  [0mDid not assert
-- test_building_construction
+- test_play_sfx
 [33m    [Risky]:  [0mDid not assert
-- test_colony_resource_production
-[33m    [Risky]:  [0mDid not assert
-- test_population_growth
+- test_play_music
 [33m    [Risky]:  [0mDid not assert
 [4m
 res://tests/test_colony_manager.gd
@@ -1121,6 +1211,22 @@ res://tests/test_colony_manager.gd
 - test_colonies_dict_initially_empty
 [33m    [Risky]:  [0mDid not assert
 [4m
+res://tests/test_council_manager.gd
+[0m- test_council_membership
+[33m    [Risky]:  [0mDid not assert
+- test_voting_mechanics
+[31m    [Failed]:  [0mVote should be accepted
+          at line -1
+[31m    [Failed]:  [0mVote should be accepted
+          at line -1
+[31m    [Failed]:  [0mVote should be accepted
+          at line -1
+[31m    [Failed]:  [0mSession should have ended
+          at line -1
+- test_insufficient_members
+[31m    [Failed]:  [0mSession should not start with insufficient members
+          at line -1
+[4m
 res://tests/test_data_manager.gd
 [0m- test_get_technology_returns_valid_tech
 [31m    [Failed]:  [0mShould return a valid resource.
@@ -1129,13 +1235,15 @@ res://tests/test_data_manager.gd
 [31m    [Failed]:  [0mTech tree should have categories.
           at line -1
 [4m
-res://tests/test_game_manager.gd
-[0m- test_game_manager_instantiates
-[31m    [Failed]:  [0mGame Manager should be a valid instance.
+res://tests/test_empire_manager.gd
+[0m- test_empire_manager_instantiates
+[31m    [Failed]:  [0mEmpire Manager should be a valid instance.
           at line -1
-- test_initial_game_phase_is_setup
+- test_empires_dict_initially_empty
 [33m    [Risky]:  [0mDid not assert
-- test_set_game_phase
+- test_register_empire
+[33m    [Risky]:  [0mDid not assert
+- test_get_empire_by_id
 [33m    [Risky]:  [0mDid not assert
 - test_technology_effect_parsing
 [33m    [Risky]:  [0mDid not assert
@@ -1169,31 +1277,28 @@ res://tests/test_game_manager.gd
 [33m    [Risky]:  [0mDid not assert
 - test_turn_signals
 [33m    [Risky]:  [0mDid not assert
-[4m
-res://tests/test_turns_integration_cycle.gd
-[0m- test_full_turn_cycle_updates_colony_production
-[31m    [Failed]:  [0m[<null>] expected to not equal [<null>]:  Player empire should exist.
-          at line -1
+- test_full_turn_cycle_updates_colony_production
+[33m    [Risky]:  [0mDid not assert
 
 ---- Totals ----
 Warnings          4
 
 Scripts           18
-Tests             56
-  Passing         28
-  Failing         5
-  Risky/Pending   23
-Asserts           59
-Time              1.5s
+Tests             57
+  Passing         25
+  Failing         7
+  Risky/Pending   25
+Asserts           58
+Time              0.999s
 
 
-[33m[Orphans]:  [0mTotal orphans in run 18.0
+[33m[Orphans]:  [0mTotal orphans in run 13.0
 Note:  This count does not include GUT objects that will be freed upon exit.
        It also does not include any orphans created by global scripts
        loaded before tests were ran.
-Total orphans = 36.0
+Total orphans = 31.0
 
-[31m---- 5 failing tests ----
+[31m---- 7 failing tests ----
 [0m
 Results saved to test_results.xml
 XR: Clearing primary interface
@@ -1218,73 +1323,73 @@ Leaked instance: StyleBoxFlat:9223372061433398561 - Resource path:
 Leaked instance: StyleBoxFlat:9223372061450175778 - Resource path: 
 Leaked instance: StyleBoxEmpty:9223372061668279599 - Resource path: 
 Leaked instance: StyleBoxFlat:9223372062993679742 - Resource path: 
-Leaked instance: GDScript:9223372088511825412 - Resource path: res://gamedata/technologies/technology.gd
-Leaked instance: Image:9223372117922285317 - Resource path: 
+Leaked instance: GDScript:9223372089099027973 - Resource path: res://gamedata/technologies/technology.gd
+Leaked instance: Image:9223372114801723144 - Resource path: 
 ERROR: Cannot get path of node as it is not in a scene tree.
    at: get_path (scene/main/node.cpp:2345)
-Leaked instance: Control:126785423436 - Node path: 
-Leaked instance: Object:126802200653
+Leaked instance: Control:129671104605 - Node path: 
+Leaked instance: Object:129687881822
 ERROR: Cannot get path of node as it is not in a scene tree.
    at: get_path (scene/main/node.cpp:2345)
-Leaked instance: TextureRect:126818977870 - Node path: 
-Leaked instance: GDScript:9223372153573869647 - Resource path: res://ui/main_menu.gd
-Leaked instance: CompressedTexture2D:9223372163438872658 - Resource path: res://assets/images/backgrounds/main_menu_bckgrnd.png
-Leaked instance: Object:126835755091
+Leaked instance: TextureRect:129704659039 - Node path: 
+Leaked instance: GDScript:9223372158003054688 - Resource path: res://ui/main_menu.gd
+Leaked instance: CompressedTexture2D:9223372166324553827 - Resource path: res://assets/images/backgrounds/main_menu_bckgrnd.png
+Leaked instance: Object:129721436260
 ERROR: Cannot get path of node as it is not in a scene tree.
    at: get_path (scene/main/node.cpp:2345)
-Leaked instance: MarginContainer:126852532309 - Node path: 
-Leaked instance: Image:9223372163522758742 - Resource path: 
-Leaked instance: Object:126902863959
-Leaked instance: Object:127070636120
-Leaked instance: Object:127020304473
-Leaked instance: Object:126936418394
-Leaked instance: Object:126869309531
+Leaked instance: MarginContainer:129738213478 - Node path: 
+Leaked instance: Image:9223372166408439911 - Resource path: 
+Leaked instance: TextParagraph:9223372166827870312
 ERROR: Cannot get path of node as it is not in a scene tree.
    at: get_path (scene/main/node.cpp:2345)
-Leaked instance: Button:126953195612 - Node path: 
+Leaked instance: Button:129889208425 - Node path: 
+Leaked instance: Object:129905985642
 ERROR: Cannot get path of node as it is not in a scene tree.
    at: get_path (scene/main/node.cpp:2345)
-Leaked instance: VBoxContainer:126919641181 - Node path: 
-Leaked instance: TextParagraph:9223372163841525854
+Leaked instance: Button:129939540075 - Node path: 
+Leaked instance: Object:129822099564
+Leaked instance: Object:129754990701
+Leaked instance: Object:129855653998
+Leaked instance: TextParagraph:9223372166777538671
+Leaked instance: TextParagraph:9223372166727207024
 ERROR: Cannot get path of node as it is not in a scene tree.
    at: get_path (scene/main/node.cpp:2345)
-Leaked instance: Label:126886086751 - Node path: 
-Leaked instance: TextParagraph:9223372163891857504
+Leaked instance: VBoxContainer:129805322353 - Node path: 
+Leaked instance: Object:129956317298
 ERROR: Cannot get path of node as it is not in a scene tree.
    at: get_path (scene/main/node.cpp:2345)
-Leaked instance: Button:127104190561 - Node path: 
+Leaked instance: Button:129838876787 - Node path: 
 ERROR: Cannot get path of node as it is not in a scene tree.
    at: get_path (scene/main/node.cpp:2345)
-Leaked instance: Button:127053858914 - Node path: 
+Leaked instance: Label:129771767924 - Node path: 
+Leaked instance: Object:129788545141
+Leaked instance: Object:130006648950
+Leaked instance: Object:130056980599
+Leaked instance: TextParagraph:9223372166928533624
 ERROR: Cannot get path of node as it is not in a scene tree.
    at: get_path (scene/main/node.cpp:2345)
-Leaked instance: Button:127003527267 - Node path: 
-Leaked instance: Object:126969972836
-Leaked instance: TextParagraph:9223372163942189157
-Leaked instance: Object:127120967782
-Leaked instance: TextParagraph:9223372164042852455
-Leaked instance: Object:127221631080
-Leaked instance: TextParagraph:9223372163992520809
+Leaked instance: Button:130090535033 - Node path: 
+Leaked instance: Object:130107312250
 ERROR: Cannot get path of node as it is not in a scene tree.
    at: get_path (scene/main/node.cpp:2345)
-Leaked instance: Button:127154522218 - Node path: 
-Leaked instance: Object:127171299435
+Leaked instance: Button:130040203387 - Node path: 
+Leaked instance: TextParagraph:9223372166878201980
 ERROR: Cannot get path of node as it is not in a scene tree.
    at: get_path (scene/main/node.cpp:2345)
-Leaked instance: Button:127204853868 - Node path: 
-Leaked instance: TextParagraph:9223372164093184109
+Leaked instance: Button:129989871741 - Node path: 
+Leaked instance: TextParagraph:9223372166978865278
 ERROR: Cannot get path of node as it is not in a scene tree.
    at: get_path (scene/main/node.cpp:2345)
-Leaked instance: Button:127255185518 - Node path: 
-Leaked instance: Object:127271962735
-Leaked instance: TextParagraph:9223372164143515760
+Leaked instance: Button:130140866687 - Node path: 
+Leaked instance: Object:130157643904
+Leaked instance: TextParagraph:9223372167029196929
 ERROR: Cannot get path of node as it is not in a scene tree.
    at: get_path (scene/main/node.cpp:2345)
-Leaked instance: Button:127305517169 - Node path: 
-Leaked instance: Object:127322294386
-Leaked instance: TextParagraph:9223372164193847411
-Leaked instance: Image:9223372189191899305 - Resource path: 
-Leaked instance: ImageTexture:9223372189175122095 - Resource path: 
+Leaked instance: Button:130191198338 - Node path: 
+Leaked instance: Object:130207975555
+Leaked instance: TextParagraph:9223372167079528580
+Leaked instance: ImageTexture:9223372190332750018 - Resource path: 
+Leaked instance: Image:9223372190349527240 - Resource path: 
 Hint: Leaked instances typically happen when nodes are removed from the scene tree (with `remove_child()`) but not freed (with `free()` or `queue_free()`).
 ERROR: 3 resources still in use at exit.
    at: clear (core/io/resource.cpp:609)
