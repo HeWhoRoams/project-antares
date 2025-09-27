@@ -2,7 +2,7 @@
 # A global singleton (Autoload) responsible for loading all game data from files.
 extends Node
 
-const AssetLoader = preload("res://scripts/utils/asset_loader.gd")
+const AssetLoader = preload("res://scripts/utils/AssetLoader.gd")
 const Technology = preload("res://gamedata/technologies/technology.gd")
 
 ## A dictionary to hold all loaded Technology resources, keyed by their unique 'id'.
@@ -99,12 +99,6 @@ func _load_tech_tree_from_json(path: String) -> void:
 	
 	# Create Technology resources from JSON data
 	for category_data in _tech_tree_data.get("categories", []):
-		if typeof(category_data) != TYPE_DICTIONARY or not category_data.has("tiers"):
-			printerr("DataManager: Invalid category data structure")
-			continue
-	
-	# Create Technology resources from JSON data
-	for category_data in _tech_tree_data["categories"]:
 		if typeof(category_data) != TYPE_DICTIONARY or not category_data.has("tiers"):
 			printerr("DataManager: Invalid category data structure")
 			continue

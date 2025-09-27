@@ -2,7 +2,7 @@
 extends Node
 
 const Empire = preload("res://gamedata/empires/empire.gd")
-const ColonyData = preload("res://gamedata/colonies.gd")
+const ColonyData = preload("res://gamedata/colonies/colony_data.gd")
 const BuildableItem = preload("res://gamedata/buildings/buildable_item.gd")
 const BuildingData = preload("res://gamedata/buildings/building_data.gd")
 const ShipData = preload("res://gamedata/ships/ship_data.gd")

@@ -5,7 +5,7 @@ const ShipData = preload("res://gamedata/ships/ship_data.gd")
 const StarSystem = preload("res://gamedata/systems/star_system.gd")
 const PlanetData = preload("res://gamedata/celestial_bodies/planet_data.gd")
 const Empire = preload("res://gamedata/empires/empire.gd")
-const ColonyData = preload("res://gamedata/colonies.gd")
+const ColonyData = preload("res://gamedata/colonies/colony_data.gd")
 const RacePreset = preload("res://gamedata/races/race_preset.gd")
 
 ## Emitted after the save file has been read and parsed.

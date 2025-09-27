@@ -9,7 +9,7 @@ var ShipDesign = load("res://gamedata/ships/ship_design.gd")
 var Fleet = load("res://gamedata/ships/fleet.gd")
 var Empire = load("res://gamedata/empires/empire.gd")
 var PlanetData = load("res://gamedata/celestial_bodies/planet_data.gd")
-var ColonyData = load("res://gamedata/colonies.gd")
+var ColonyData = load("res://gamedata/colonies/colony_data.gd")
 var BuildingData = load("res://gamedata/buildings/building_data.gd")
 
 func test_ship_manager_integration():

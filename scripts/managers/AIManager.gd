@@ -5,6 +5,17 @@ const Empire = preload("res://gamedata/empires/empire.gd")
 const ShipData = preload("res://gamedata/ships/ship_data.gd")
 const AIDecisionWeights = preload("res://gamedata/AIDecisionWeights.gd")
 const RacePreset = preload("res://gamedata/races/race_preset.gd")
+const ColonyData = preload("res://gamedata/colonies.gd")
+const BuildingData = preload("res://gamedata/buildings/building_data.gd")
+const PlanetData = preload("res://gamedata/celestial_bodies/planet_data.gd")
+const StarSystem = preload("res://gamedata/celestial_bodies/star_system.gd")
+const GalaxyManager = preload("res://scripts/managers/galaxymanager.gd")
+const EmpireManager = preload("res://scripts/managers/EmpireManager.gd")
+const ColonyManager = preload("res://scripts/managers/ColonyManager.gd")
+const TurnManager = preload("res://scripts/managers/turn_manager.gd")
+const CouncilManager = preload("res://scripts/managers/council_manager.gd")
+const TechnologyEffectManager = preload("res://scripts/managers/TechnologyEffectManager.gd")
+const SaveLoadManager = preload("res://scripts/managers/SaveLoadManager.gd")
 
 # AI Personality Types
 enum AIPersonality {
